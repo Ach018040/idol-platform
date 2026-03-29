@@ -43,7 +43,7 @@ type Insights = {
 
 // ── Data loader（只在 build time 執行）────────────────────────────
 function loadJSON<T>(filename: string): T {
-  const p = path.join(process.cwd(), "..", "public", "data", filename);
+  const p = path.join(process.cwd(), "public", "data", filename);
   return JSON.parse(fs.readFileSync(p, "utf-8")) as T;
 }
 
