@@ -101,7 +101,7 @@
     "growth_momentum": 0.08,
     "stability": 0.75,
     "momentum_acceleration": 0.02,
-    "v7_index": 54.64
+    "v7_index": 54.3
   },
   {
     "date": "2026-03-22",
@@ -205,7 +205,7 @@
     "growth_momentum": 0.01,
     "stability": 0.4,
     "momentum_acceleration": 0.0,
-    "v7_index": 20.13
+    "v7_index": 19.95
   },
   {
     "date": "2026-03-22",
@@ -309,7 +309,7 @@
     "growth_momentum": 0.05,
     "stability": 0.6,
     "momentum_acceleration": 0.0,
-    "v7_index": 37.52
+    "v7_index": 37.5
   },
   {
     "date": "2026-03-22",
@@ -413,7 +413,7 @@
     "growth_momentum": 0.01,
     "stability": 0.4,
     "momentum_acceleration": 0.0,
-    "v7_index": 20.17
+    "v7_index": 19.95
   },
   {
     "date": "2026-03-22",
@@ -517,7 +517,7 @@
     "growth_momentum": 0.07,
     "stability": 0.72,
     "momentum_acceleration": 0.01,
-    "v7_index": 51.73
+    "v7_index": 52.15
   },
   {
     "date": "2026-03-22",
@@ -621,7 +621,7 @@
     "growth_momentum": 0.14,
     "stability": 0.88,
     "momentum_acceleration": 0.05,
-    "v7_index": 69.49
+    "v7_index": 69.1
   },
   {
     "date": "2026-03-22",
@@ -725,7 +725,7 @@
     "growth_momentum": 0.04,
     "stability": 0.58,
     "momentum_acceleration": 0.01,
-    "v7_index": 40.02
+    "v7_index": 39.85
   },
   {
     "date": "2026-03-22",
@@ -829,7 +829,7 @@
     "growth_momentum": 0.04,
     "stability": 0.58,
     "momentum_acceleration": 0.01,
-    "v7_index": 39.9
+    "v7_index": 39.85
   },
   {
     "date": "2026-03-22",
@@ -933,7 +933,7 @@
     "growth_momentum": 0.1,
     "stability": 0.82,
     "momentum_acceleration": 0.03,
-    "v7_index": 58.41
+    "v7_index": 58.6
   },
   {
     "date": "2026-03-22",
@@ -1037,6 +1037,6 @@
     "growth_momentum": 0.04,
     "stability": 0.57,
     "momentum_acceleration": 0.01,
-    "v7_index": 39.88
+    "v7_index": 39.7
   }
 ]
