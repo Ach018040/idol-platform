@@ -1,0 +1,11 @@
+{
+  "name": "idol-platform",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "seed":     "python pipeline/seed_data.py",
+    "pipeline": "python pipeline/run_pipeline.py",
+    "dev":      "cd frontend-next && npm run dev",
+    "build":    "cd frontend-next && npm run build"
+  }
+}

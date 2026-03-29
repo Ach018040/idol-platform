@@ -1,0 +1,79 @@
+# .github/workflows/pipeline.yml
+#
+# 每天台灣時間 04:00 自動執行：
+#   1. 跑 Python pipeline（snapshots → forecast → insights）
+#   2. commit 更新的 JSON 回 repo
+#   3. Vercel 偵測到 push 後自動重新部署
+#
+# 需要在 GitHub repo Settings > Secrets 設定：
+#   VERCEL_TOKEN   — Vercel 帳號 > Settings > Tokens
+#   VERCEL_ORG_ID  — .vercel/project.json 裡的 orgId（可選）
+#   VERCEL_PROJECT_ID — .vercel/project.json 裡的 projectId（可選）
+#
+# 如果你只想讓 Vercel 自動偵測 push 部署，
+# 可以刪掉最後的 "Deploy to Vercel" step，只保留 commit push。
+
+name: Idol Platform — Daily Data Pipeline
+
+on:
+  schedule:
+    - cron: "0 20 * * *"   # UTC 20:00 = 台灣 04:00
+  workflow_dispatch:        # 也可以手動在 GitHub 頁面按 "Run workflow"
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # 允許 workflow 寫入 repo
+
+    steps:
+      # ── 1. 取得程式碼 ───────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ── 2. 設定 Python ──────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      # ── 3. 安裝相依套件 ─────────────────────────────────────────────
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pandas numpy scikit-learn
+
+      # ── 4. 執行 Pipeline ────────────────────────────────────────────
+      - name: Run data pipeline
+        run: python pipeline/run_pipeline.py
+
+      # ── 5. Commit 更新的 JSON 回 repo ───────────────────────────────
+      - name: Commit updated data
+        run: |
+          git config --global user.name  "idol-bot"
+          git config --global user.email "idol-bot@users.noreply.github.com"
+          git add public/data/
+          # 如果沒有變動就 skip，不產生空 commit
+          git diff --staged --quiet || git commit -m "chore: auto-update data $(date -u +'%Y-%m-%d')"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref_name }}
+
+      # ── 6. (選用) 觸發 Vercel 重新部署 ─────────────────────────────
+      # 如果你的 Vercel 專案已連結 GitHub，push 後 Vercel 會自動部署，
+      # 這個 step 是備用的「強制觸發」，可以刪掉。
+      - name: Trigger Vercel redeploy (optional)
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          curl -s -X POST \
+            "https://api.vercel.com/v1/integrations/deploy/prj_placeholder" \
+            -H "Authorization: Bearer $VERCEL_TOKEN" \
+            || echo "Vercel webhook skipped"
