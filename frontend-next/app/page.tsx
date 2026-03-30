@@ -1,14 +1,17 @@
 import fs from "fs";
 import path from "path";
 
-// ─── Types ───────────────────────────────────────────────────────────────────
+// ─── Types（對應實際 JSON 欄位）─────────────────────────────────────────────
 
 type Group = {
   rank: number;
-  entity_name: string;
+  group: string;           // 團體 id / color code
+  display_name?: string;   // 顯示名稱
   color?: string;
   member_count?: number;
+  member_names?: string;
   social_activity?: number | null;
+  conversion_score?: number | null;
   temperature_index?: number | null;
   v7_index?: number | null;
 };
@@ -44,6 +47,7 @@ function loadJSON<T>(filename: string): T {
   return JSON.parse(fs.readFileSync(filePath, "utf-8")) as T;
 }
 
+/** 安全 toFixed：null / undefined / NaN 全部顯示 "—" */
 function fmt(val: number | null | undefined, decimals = 1): string {
   const n = Number(val ?? 0);
   return Number.isFinite(n) ? n.toFixed(decimals) : "—";
@@ -77,6 +81,16 @@ function clampPercent(value: number): number {
   return Math.max(0, Math.min(100, value));
 }
 
+/** 團體顯示名稱：優先用 display_name，其次 group */
+function groupLabel(g: Group): string {
+  return g.display_name || g.group || "—";
+}
+
+/** 團體主要分數：優先 temperature_index，其次 v7_index */
+function groupScore(g: Group): number {
+  return Number(g.temperature_index ?? g.v7_index ?? 0);
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
@@ -84,7 +98,7 @@ export default function HomePage() {
   const members = loadJSON<Member[]>("member_rankings.json").slice(0, 10);
   const insights = loadJSON<Insights>("insights.json");
 
-  const maxGroupScore  = Math.max(...groups.map((g)  => Number(g.v7_index  ?? 0)), 1);
+  const maxGroupScore  = Math.max(...groups.map(groupScore), 1);
   const maxMemberScore = Math.max(...members.map((m) => Number(m.temperature_index ?? 0)), 1);
 
   const mktTemp    = Number(insights.market_temperature ?? 0);
@@ -202,32 +216,39 @@ export default function HomePage() {
             <div className="mb-5 flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-white">團體排行 Top 10</h2>
-                <p className="mt-1 text-sm text-zinc-400">以 v7 指數顯示目前最熱團體</p>
+                <p className="mt-1 text-sm text-zinc-400">以溫度指數顯示目前最熱團體</p>
               </div>
               <div className="rounded-full border border-pink-400/20 bg-pink-400/10 px-3 py-1 text-xs text-pink-200">Groups</div>
             </div>
             <div className="space-y-3">
               {groups.map((group) => {
-                const score   = Number(group.v7_index ?? 0);
+                const score   = groupScore(group);
                 const percent = clampPercent((score / maxGroupScore) * 100);
                 const sa      = Number(group.social_activity ?? 0);
-                const ti      = Number(group.temperature_index ?? 0);
+                const label   = groupLabel(group);
+                // 嘗試用 group 顏色 code 作為色彩點
+                const dotColor = /^#[0-9a-fA-F]{3,6}$/.test(group.group)
+                  ? group.group
+                  : (group.color || "#888888");
                 return (
-                  <div key={`${group.rank}-${group.entity_name}`}
+                  <div key={`${group.rank}-${group.group}`}
                     className="rounded-2xl border border-white/10 bg-black/20 p-4 transition hover:border-pink-400/30 hover:bg-white/10">
                     <div className="mb-3 flex items-center gap-3">
                       <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold text-white">
                         {getRankBadge(group.rank)}
                       </div>
-                      <div className="h-4 w-4 rounded-full border border-white/20"
-                        style={{ backgroundColor: group.color || "#888888" }} />
+                      <div className="h-4 w-4 flex-shrink-0 rounded-full border border-white/20"
+                        style={{ backgroundColor: dotColor }} />
                       <div className="min-w-0 flex-1">
-                        <div className="truncate text-base font-semibold text-white">{group.entity_name}</div>
-                        <div className="text-xs text-zinc-400">成員數 {group.member_count ?? "—"} 人</div>
+                        <div className="truncate text-base font-semibold text-white">{label}</div>
+                        <div className="truncate text-xs text-zinc-400">
+                          {group.member_count ?? "—"} 人
+                          {group.member_names ? ` · ${group.member_names.split(" / ").slice(0, 2).join("、")}...` : ""}
+                        </div>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right flex-shrink-0">
                         <div className="text-lg font-extrabold text-pink-300">{fmt(score)}</div>
-                        <div className="text-[11px] text-zinc-400">v7 index</div>
+                        <div className="text-[11px] text-zinc-400">溫度指數</div>
                       </div>
                     </div>
                     <div className="mb-2 h-2.5 overflow-hidden rounded-full bg-white/10">
@@ -236,7 +257,7 @@ export default function HomePage() {
                     </div>
                     <div className="flex items-center justify-between text-xs text-zinc-400">
                       <span>社群活躍度 {fmt(sa, 0)}</span>
-                      <span>溫度 {fmt(ti)}</span>
+                      <span>轉換 {fmt(group.conversion_score, 0)}</span>
                     </div>
                   </div>
                 );
@@ -277,9 +298,9 @@ export default function HomePage() {
                         <div className="truncate text-base font-semibold text-white">{member.name}</div>
                         <div className="truncate text-xs text-zinc-400">{member.group || "—"}</div>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right flex-shrink-0">
                         <div className="text-lg font-extrabold text-cyan-300">{fmt(ti)}</div>
-                        <div className="text-[11px] text-zinc-400">temp index</div>
+                        <div className="text-[11px] text-zinc-400">溫度指數</div>
                       </div>
                     </div>
                     <div className="mb-2 h-2.5 overflow-hidden rounded-full bg-white/10">
@@ -288,7 +309,7 @@ export default function HomePage() {
                     </div>
                     <div className="flex items-center justify-between text-xs text-zinc-400">
                       <span>社群活躍度 {fmt(sa, 0)}</span>
-                      <span>{member.instagram ? "Instagram linked" : "No social link"}</span>
+                      <span>{member.instagram ? "✦ Instagram" : "無社群連結"}</span>
                     </div>
                   </div>
                 );
