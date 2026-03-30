@@ -37,7 +37,7 @@ def build():
     )
 
     market_temp = round(v7["v7_index"].mean(), 2) if "v7_index" in v7.columns else 0.0
-    active      = int((v7["social_activity"] > 0).sum()) if "social_activity" in v7.columns else len(v7)
+    active      = int((v7["live_frequency"] > 0).sum()) if "live_frequency" in v7.columns else len(v7)
 
     # ── Rising Star / Heat Drop (from trend snapshots) ───────────────
     rising    = []
@@ -58,10 +58,6 @@ def build():
         rising    = forecast[forecast["direction"] == "up"]["entity_name"].tolist()
         heat_drop = forecast[forecast["direction"] == "down"]["entity_name"].tolist()
 
-    # ── Rank changes ──────────────────────────────────────────────────
-    rank_changes = v7_sorted[["entity_name"]].copy()
-    rank_changes["rank"] = range(1, len(rank_changes) + 1)
-
     result = {
         "generated_at":    date.today().isoformat(),
         "market_temperature": market_temp,
@@ -73,7 +69,6 @@ def build():
         },
         "rising_stars": rising[:5],
         "heat_drop":    heat_drop[:5],
-        "rank_changes": rank_changes.to_dict(orient="records"),
     }
 
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=2))

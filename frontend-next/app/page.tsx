@@ -10,10 +10,10 @@ import path from "path";
 type Group = {
   rank: number;
   entity_name: string;
-  color: string;
+  color?: string;
   member_count: number;
-  social_activity: number;
-  temperature_index: number;
+  social_reach: number;
+  live_frequency: number;
   v7_index: number;
 };
 

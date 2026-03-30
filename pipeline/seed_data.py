@@ -48,23 +48,10 @@ def calc_v7_public(g):
         2,
     )
 
-def calc_v7_internal(g):
-    """v7 Internal 指數（含 Conversion Potential）"""
-    return round(
-        0.25 * g["live_frequency"]
-        + 0.20 * g["social_reach"]
-        + 0.20 * g["growth_momentum"] * 100
-        + 0.10 * g["stability"] * 100
-        + 0.15 * g["momentum_acceleration"] * 100
-        + 0.10 * g["conversion_potential"] * 100,
-        2,
-    )
-
 groups = []
 for g in GROUPS_SEED:
     row = dict(g)
     row["v7_index"] = calc_v7_public(g)
-    row["v7_internal"] = calc_v7_internal(g)
     groups.append(row)
 
 groups.sort(key=lambda x: x["v7_index"], reverse=True)
