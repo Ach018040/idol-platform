@@ -27,9 +27,9 @@ log = logging.getLogger("sync")
 SUPABASE_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co"
 ANON_KEY     = os.environ.get("IDOLMAPS_ANON_KEY", "")
 NOTION_TOKEN = os.environ.get("NOTION_TOKEN", "")
-MEMBERS_DB   = os.environ.get("NOTION_MEMBERS_DB", "2046ee1e-6124-43e6-8c5e-e7fd02ef038e")
-GROUPS_DB    = os.environ.get("NOTION_GROUPS_DB",  "250a50df-827b-40d0-a753-73466d15b72b")
-LOG_DB       = os.environ.get("NOTION_LOG_DB",     "129ac173-e7bb-408e-b2f7-b1aaac56f0e3")
+MEMBERS_DB   = os.environ.get("NOTION_MEMBERS_DB", "70309897460044b0992f542307ca3472")
+GROUPS_DB    = os.environ.get("NOTION_GROUPS_DB",  "d9ef091156d24fb5b64f0ad9b183e11a")
+LOG_DB       = os.environ.get("NOTION_LOG_DB",     "c678a44a36d54fd3a2e97ccb101e3839")
 NOTION_API   = "https://api.notion.com/v1"
 NOTION_VER   = "2022-06-28"
 
