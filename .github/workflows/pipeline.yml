@@ -3,18 +3,21 @@ name: Daily Idol Data Sync
 on:
   schedule:
     - cron: "0 20 * * *"   # 台灣時間每天 04:00
-  workflow_dispatch:        # 允許手動觸發
+  workflow_dispatch:
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -30,9 +33,9 @@ jobs:
           SUPABASE_KEY: ${{ secrets.IDOLMAPS_ANON_KEY }}
         run: |
           if [ -f "pipeline/run_pipeline.py" ]; then
-            python pipeline/run_pipeline.py || echo "Pipeline had errors but continuing"
+            python pipeline/run_pipeline.py || echo "⚠ Pipeline had errors, continuing"
           elif [ -f "pipeline/seed_data.py" ]; then
-            python pipeline/seed_data.py || echo "Seed had errors but continuing"
+            python pipeline/seed_data.py || echo "⚠ Seed had errors, continuing"
           else
             echo "No pipeline script found, skipping"
           fi
@@ -52,10 +55,12 @@ jobs:
         run: |
           git config user.name "idol-bot"
           git config user.email "idol-bot@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git add -A
           if git diff --staged --quiet; then
             echo "No data changes to commit"
           else
             git commit -m "chore: auto-update data $(date +%Y-%m-%d)"
-            git push
+            git push origin HEAD:main
           fi
+        continue-on-error: true
