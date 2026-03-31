@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 import httpx
 
 SUPABASE_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co"
-ANON_KEY = os.environ.get("IDOLMAPS_ANON_KEY", "")
+ANON_KEY = os.environ.get("IDOLMAPS_ANON_KEY", "") or "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv"
 
 REPO_ROOT  = pathlib.Path(__file__).parent.parent
 DATA_DIR   = REPO_ROOT / "frontend-next" / "public" / "data"
@@ -45,8 +45,8 @@ def score_member(m: dict) -> dict:
 
 def main():
     if not ANON_KEY:
-        print("⚠ IDOLMAPS_ANON_KEY not set — skipping fetch_members")
-        sys.exit(0)
+        ANON_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv"
+        print("⚠ Using default publishable key")
 
     print("⬇  Fetching from idolmaps Supabase...")
     members = sb("members", {
