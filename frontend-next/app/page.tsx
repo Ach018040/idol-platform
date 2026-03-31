@@ -121,14 +121,14 @@ export default function HomePage() {
                 Idol Temperature Platform v3.7
               </div>
               <h1 className="text-3xl font-black tracking-tight text-white md:text-5xl">
-                台灣地下偶像市場
+                台灣地下偶像
                 <span className="block bg-gradient-to-r from-pink-400 via-violet-300 to-cyan-300 bg-clip-text text-transparent">
-                  即時溫度儀表板
+                  數據情報平台
                 </span>
               </h1>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-300 md:text-base">
-                聚合團體排行、成員熱度、社群活躍度與每週市場亮點，
-                用更接近產品級 SaaS 的方式看地下偶像資料。
+     
+                整合團體排行、成員熱度、社群活躍與市場趨勢的地下偶像數據平台。
               </p>
             </div>
             <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-100">
