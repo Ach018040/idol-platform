@@ -141,10 +141,26 @@ def main():
             "conversion_score":  cs,
         })
 
-    # 有成員的排前面，零成員的排後面
-    group_data.sort(key=lambda x: (x["member_count"]==0, -x["temperature_index"]))
-    active = [g for g in group_data if g["member_count"] > 0]
-    inactive = [g for g in group_data if g["member_count"] == 0]
+    # Solo 成員（無所屬團體）以本名加入 v7_rankings
+    for m in member_data:
+        if not m.get("group"):
+            group_data.append({
+                "rank": 0,
+                "group": m["name"],
+                "display_name": m["name"],
+                "color": m.get("color") or "#888888",
+                "member_count": 1,
+                "member_names": m["name"],
+                "social_activity": m["social_activity"],
+                "temperature_index": m["temperature_index"],
+                "conversion_score": m["conversion_score"],
+                "is_solo": True,
+            })
+
+    # 有成員的排前面，零成員的排後面，Solo 視為有成員
+    group_data.sort(key=lambda x: (x["member_count"] == 0 and not x.get("is_solo"), -x["temperature_index"]))
+    active = [g for g in group_data if g["member_count"] > 0 or g.get("is_solo")]
+    inactive = [g for g in group_data if g["member_count"] == 0 and not g.get("is_solo")]
     group_data = active + inactive
     for i, g in enumerate(group_data):
         g["rank"] = i + 1
