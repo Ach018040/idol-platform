@@ -27,10 +27,13 @@ jobs:
       - name: Install dependencies
         run: pip install httpx pandas scikit-learn numpy
 
-      - name: Run data pipeline
+      - name: Fetch members from Supabase -> JSON
         env:
-          SUPABASE_URL: https://ziiagdrrytyrmzoeegjk.supabase.co
-          SUPABASE_KEY: ${{ secrets.IDOLMAPS_ANON_KEY }}
+          IDOLMAPS_ANON_KEY: ${{ secrets.IDOLMAPS_ANON_KEY }}
+        run: python pipeline/fetch_members.py
+        continue-on-error: true
+
+      - name: Run data pipeline
         run: |
           if [ -f "pipeline/run_pipeline.py" ]; then
             python pipeline/run_pipeline.py || echo "⚠ Pipeline had errors, continuing"
