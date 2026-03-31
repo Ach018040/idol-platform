@@ -29,7 +29,7 @@ jobs:
 
       - name: Fetch members from Supabase -> JSON
         env:
-          IDOLMAPS_ANON_KEY: ${{ secrets.IDOLMAPS_ANON_KEY }}
+          IDOLMAPS_ANON_KEY: sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv
         run: python pipeline/fetch_members.py
         continue-on-error: true
 
@@ -44,7 +44,7 @@ jobs:
 
       - name: Sync idolmaps -> Notion
         env:
-          IDOLMAPS_ANON_KEY: ${{ secrets.IDOLMAPS_ANON_KEY }}
+          IDOLMAPS_ANON_KEY: sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv
           SUPABASE_URL: https://ziiagdrrytyrmzoeegjk.supabase.co
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_MEMBERS_DB: 2046ee1e-6124-43e6-8c5e-e7fd02ef038e
