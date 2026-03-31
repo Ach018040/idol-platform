@@ -1,16 +1,30 @@
 {
-  "generated_at": "2026-03-29",
-  "market_temperature": 13.29,
-  "active_groups": 18,
+  "generated_at": "2026-03-31T04:27:13Z",
+  "market_temperature": 48.3,
+  "active_groups": 88,
   "weekly_highlights": {
-    "top_group": "#FFFFFF",
-    "social_king": "#FFFFFF",
-    "market_temperature": 13.29
+    "top_group": "RAISE -きっと、らいせ-",
+    "social_king": "空花茉穗(くうか まほ)",
+    "market_temperature": 48.3
   },
   "rising_stars": [
-    "小浜ゆみな",
-    "小豆 Azuki",
-    "一ノ瀬りら"
+    "追良瀬 桃",
+    "姫野 あいる（ひめの あいる）",
+    "雛菜 Hina",
+    "澄罪クア",
+    "天羽きな(あまはね きな)"
   ],
-  "heat_drop": []
+  "heat_drop": [],
+  "top_members": [
+    "空花茉穗(くうか まほ)",
+    "七瀬円香",
+    "冥月 Runa",
+    "天琴 ドウナ",
+    "天唯陽奈",
+    "優芽 Yuume",
+    "津代舞奈",
+    "矢島愛久",
+    "瀧日灯璃（たきにち あかり）",
+    "小森結菜"
+  ]
 }
