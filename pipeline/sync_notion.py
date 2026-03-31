@@ -55,8 +55,8 @@ def fetch_from_supabase() -> tuple[list, list, list]:
         "order": "updated_at.desc", "limit": 500})
     groups  = sb_fetch("groups",  {"select": "id,name,color,company_id", "order": "name.asc", "limit": 300})
     history = sb_fetch("history", {
-        "select": "member_id,group_id,role,joined_at,stage_name",
-        "order": "joined_at.desc", "limit": 1000})
+        "select": "member_id,group_id,joined_at",
+        "order": "joined_at.desc", "limit": 2000})
     log.info(f"   成員 {len(members)} 位 | 團體 {len(groups)} 個 | 歷程 {len(history)} 筆")
     return members, groups, history
 
