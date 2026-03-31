@@ -44,10 +44,6 @@ def score_member(m: dict) -> dict:
 
 
 def main():
-    if not ANON_KEY:
-        ANON_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv"
-        print("⚠ Using default publishable key")
-
     print("⬇  Fetching from idolmaps Supabase...")
     members = sb("members", {
         "select": "id,name,name_roman,nickname,color,color_name,birthdate,instagram,facebook,x,photo_url",
