@@ -1,30 +1,34 @@
 {
-  "generated_at": "2026-03-31T04:27:13Z",
-  "market_temperature": 48.3,
-  "active_groups": 88,
+  "generated_at": "2026-03-31T04:00:00Z",
+  "market_temperature": 48.2,
+  "active_groups": 89,
   "weekly_highlights": {
-    "top_group": "RAISE -きっと、らいせ-",
-    "social_king": "空花茉穗(くうか まほ)",
-    "market_temperature": 48.3
+    "top_group": "TUKUYOMI IDOL PROJECT",
+    "social_king": "姫川乃愛(ひめかわ のあ)",
+    "market_temperature": 48.2
   },
   "rising_stars": [
-    "追良瀬 桃",
-    "姫野 あいる（ひめの あいる）",
-    "雛菜 Hina",
+    "呪飼久露猫(まがい くろみ)",
+    "有栖栗",
     "澄罪クア",
-    "天羽きな(あまはね きな)"
+    "紫暮幽霊(しぐれ ゆうれい)",
+    "可蔓"
   ],
-  "heat_drop": [],
+  "heat_drop": [
+    "Yumeka",
+    "千夏（ちなつ）",
+    "日向夏（ひなつ）"
+  ],
   "top_members": [
-    "空花茉穗(くうか まほ)",
-    "七瀬円香",
-    "冥月 Runa",
-    "天琴 ドウナ",
-    "天唯陽奈",
-    "優芽 Yuume",
-    "津代舞奈",
-    "矢島愛久",
-    "瀧日灯璃（たきにち あかり）",
-    "小森結菜"
+    "姫川乃愛(ひめかわ のあ)",
+    "天羽きな(あまはね きな)",
+    "鬼塚安娜",
+    "雪見夢楽（ゆきみ むら）",
+    "花瀬未桜(はなせみお)",
+    "紗霧",
+    "羽咲やわら",
+    "花森 璃蛙",
+    "花守 ひの",
+    "水羽綺世花"
   ]
 }
