@@ -227,10 +227,15 @@ export default function HomePage() {
                 const percent = clampPercent((score / maxGroupScore) * 100);
                 const sa      = Number(group.social_activity ?? 0);
                 const label   = groupLabel(group);
-                // 嘗試用 group 顏色 code 作為色彩點
-                const dotColor = /^#[0-9a-fA-F]{3,6}$/.test(group.group)
-                  ? group.group
-                  : (group.color || "#888888");
+                // 用 group.color，預設粉/白/灰 則用名稱 FNV hash 生成唯一色
+                const rawCol = group.color || "#888888";
+                const isDefault = rawCol === "#e879a0" || rawCol === "#888888" || rawCol === "#ffffff";
+                const dotColor = !isDefault ? rawCol : (() => {
+                  let h = 0x811c9dc5;
+                  const name = group.display_name || group.group || "";
+                  for (let i = 0; i < name.length; i++) { h = Math.imul(h ^ name.charCodeAt(i), 0x01000193) >>> 0; }
+                  return `hsl(${h % 360},${55 + (h >> 8) % 30}%,${45 + (h >> 16) % 20}%)`;
+                })()
                 return (
                   <div key={`${group.rank}-${group.group}`}
                     className="rounded-2xl border border-white/10 bg-black/20 p-4 transition hover:border-pink-400/30 hover:bg-white/10">
@@ -241,7 +246,12 @@ export default function HomePage() {
                       <div className="h-4 w-4 flex-shrink-0 rounded-full border border-white/20"
                         style={{ backgroundColor: dotColor }} />
                       <div className="min-w-0 flex-1">
-                        <div className="truncate text-base font-semibold text-white">{label}</div>
+                        <div className="flex items-center gap-2">
+                    <span className="truncate text-base font-semibold text-white">{label}</span>
+                    {(group as any).is_solo && (
+                      <span className="flex-shrink-0 rounded-full bg-violet-500/20 border border-violet-400/30 px-2 py-0.5 text-[10px] font-medium text-violet-300">Solo</span>
+                    )}
+                  </div>
                         <div className="truncate text-xs text-zinc-400">
                           {group.member_count ?? "—"} 人
                           {group.member_names ? ` · ${group.member_names.split(" / ").slice(0, 4).join(" / ")}`  : ""}
