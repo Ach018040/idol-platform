@@ -34,8 +34,6 @@ jobs:
         run: |
           if [ -f "pipeline/run_pipeline.py" ]; then
             python pipeline/run_pipeline.py || echo "⚠ Pipeline had errors, continuing"
-          elif [ -f "pipeline/seed_data.py" ]; then
-            python pipeline/seed_data.py || echo "⚠ Seed had errors, continuing"
           else
             echo "No pipeline script found, skipping"
           fi
@@ -44,10 +42,11 @@ jobs:
       - name: Sync idolmaps -> Notion
         env:
           IDOLMAPS_ANON_KEY: ${{ secrets.IDOLMAPS_ANON_KEY }}
+          SUPABASE_URL: https://ziiagdrrytyrmzoeegjk.supabase.co
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_MEMBERS_DB: 70309897460044b0992f542307ca3472
-          NOTION_GROUPS_DB: d9ef091156d24fb5b64f0ad9b183e11a
-          NOTION_LOG_DB: c678a44a36d54fd3a2e97ccb101e3839
+          NOTION_MEMBERS_DB: 2046ee1e-6124-43e6-8c5e-e7fd02ef038e
+          NOTION_GROUPS_DB: 250a50df-827b-40d0-a753-73466d15b72b
+          NOTION_LOG_DB: 129ac173-e7bb-408e-b2f7-b1aaac56f0e3
         run: python pipeline/sync_notion.py
         continue-on-error: true
 
