@@ -1,34 +1,30 @@
 {
-  "generated_at": "2026-03-31T04:00:00Z",
-  "market_temperature": 48.2,
-  "active_groups": 89,
+  "generated_at": "2026-03-31T10:54:26Z",
+  "market_temperature": 48.5,
+  "active_groups": 88,
   "weekly_highlights": {
-    "top_group": "TUKUYOMI IDOL PROJECT",
-    "social_king": "姫川乃愛(ひめかわ のあ)",
-    "market_temperature": 48.2
+    "top_group": "RAISE -きっと、らいせ-",
+    "social_king": "甘崎紗音",
+    "market_temperature": 48.5
   },
   "rising_stars": [
-    "呪飼久露猫(まがい くろみ)",
-    "有栖栗",
-    "澄罪クア",
-    "紫暮幽霊(しぐれ ゆうれい)",
-    "可蔓"
-  ],
-  "heat_drop": [
-    "Yumeka",
-    "千夏（ちなつ）",
-    "日向夏（ひなつ）"
-  ],
-  "top_members": [
-    "姫川乃愛(ひめかわ のあ)",
-    "天羽きな(あまはね きな)",
-    "鬼塚安娜",
-    "雪見夢楽（ゆきみ むら）",
     "花瀬未桜(はなせみお)",
-    "紗霧",
-    "羽咲やわら",
-    "花森 璃蛙",
-    "花守 ひの",
-    "水羽綺世花"
+    "Ruka Banana",
+    "雪薇 Yukibi",
+    "結城朋子",
+    "Haru"
+  ],
+  "heat_drop": [],
+  "top_members": [
+    "甘崎紗音",
+    "星野 さかな",
+    "澪乃千尋",
+    "霧宮蒼生",
+    "綿空もり",
+    "天羽きな(あまはね きな)",
+    "花京院ゆあ",
+    "真白 レモン",
+    "追良瀬 桃",
+    "綿琉羽音"
   ]
 }
