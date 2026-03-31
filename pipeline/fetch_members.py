@@ -132,7 +132,11 @@ def main():
             "conversion_score":  cs,
         })
 
-    group_data.sort(key=lambda x: x["temperature_index"], reverse=True)
+    # 有成員的排前面，零成員的排後面
+    group_data.sort(key=lambda x: (x["member_count"]==0, -x["temperature_index"]))
+    active = [g for g in group_data if g["member_count"] > 0]
+    inactive = [g for g in group_data if g["member_count"] == 0]
+    group_data = active + inactive
     for i, g in enumerate(group_data):
         g["rank"] = i + 1
 
