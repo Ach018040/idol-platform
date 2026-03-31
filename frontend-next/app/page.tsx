@@ -94,7 +94,8 @@ function groupScore(g: Group): number {
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
-  const groups  = loadJSON<Group[]>("v7_rankings.json").slice(0, 10);
+  const groups  = loadJSON<Group[]>("v7_rankings.json")
+    .filter((g: Group) => (g.member_count ?? 0) > 0).slice(0, 10);
   const members = loadJSON<Member[]>("member_rankings.json").slice(0, 10);
   const insights = loadJSON<Insights>("insights.json");
 
@@ -216,7 +217,7 @@ export default function HomePage() {
             <div className="mb-5 flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold text-white">團體排行 Top 10</h2>
-                <p className="mt-1 text-sm text-zinc-400">以溫度指數顯示目前最熱團體</p>
+                <p className="mt-1 text-sm text-zinc-400">依成員社群活躍度加權計算，僅顯示有成員的活躍團體</p>
               </div>
               <div className="rounded-full border border-pink-400/20 bg-pink-400/10 px-3 py-1 text-xs text-pink-200">Groups</div>
             </div>
@@ -243,7 +244,7 @@ export default function HomePage() {
                         <div className="truncate text-base font-semibold text-white">{label}</div>
                         <div className="truncate text-xs text-zinc-400">
                           {group.member_count ?? "—"} 人
-                          {group.member_names ? ` · ${group.member_names.split(" / ").slice(0, 2).join("、")}...` : ""}
+                          {group.member_names ? ` · ${group.member_names.split(" / ").slice(0, 4).join(" / ")}`  : ""}
                         </div>
                       </div>
                       <div className="text-right flex-shrink-0">
