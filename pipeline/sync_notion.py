@@ -41,7 +41,7 @@ JSON_GROUPS  = REPO_ROOT / "frontend-next" / "public" / "data" / "v7_rankings.js
 # ── Supabase（模式 A）─────────────────────────────────────────────────────────
 def sb_fetch(path: str, params: dict) -> list[dict]:
     h = {"apikey": ANON_KEY, "Authorization": f"Bearer {ANON_KEY}",
-         "Accept": "application/json"}
+         "Accept": "application/json", "Accept-Profile": "public"}
     r = httpx.get(f"{SUPABASE_URL}/rest/v1/{path}", headers=h,
                   params=params, timeout=30)
     r.raise_for_status()
@@ -52,11 +52,11 @@ def fetch_from_supabase() -> tuple[list, list, list]:
     members = sb_fetch("members", {
         "select": "id,name,name_roman,nickname,color,color_name,"
                   "birthdate,instagram,facebook,x,photo_url",
-        "order": "updated_at.desc", "limit": "500"})
-    groups  = sb_fetch("groups",  {"select": "*", "order": "name.asc", "limit": "300"})
+        "order": "updated_at.desc", "limit": 500})
+    groups  = sb_fetch("groups",  {"select": "id,name,color,company_id", "order": "name.asc", "limit": 300})
     history = sb_fetch("history", {
         "select": "member_id,group_id,role,joined_at,stage_name",
-        "order": "joined_at.desc", "limit": "1000"})
+        "order": "joined_at.desc", "limit": 1000})
     log.info(f"   成員 {len(members)} 位 | 團體 {len(groups)} 個 | 歷程 {len(history)} 筆")
     return members, groups, history
 
