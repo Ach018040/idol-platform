@@ -64,6 +64,15 @@ def main():
         if mid and gid and mid not in mg_map:
             mg_map[mid] = g_map.get(gid, {})
 
+    # 手動覆蓋：已離開團體的個人 Solo，強制清空所屬團體
+    # 格式: member_uuid → 原因說明
+    SOLO_OVERRIDES = {
+        "9617d305-12b6-434c-99e9-a31ba8d04f24": "稲妻莉央 — 曾是冥域エレメンタル成員，現個人Solo",
+        "bb1bba00-446c-4d16-a761-ef8a7794eab6": "Ruka Banana — 曾是TUKUYOMI IDOL PROJECT成員，現個人Solo",
+    }
+    for mid in SOLO_OVERRIDES:
+        mg_map[mid] = {}  # 清空所屬團體
+
     # ── 1. member_rankings.json ─────────────────────────────────────────
     member_data = []
     for i, m in enumerate(members):
