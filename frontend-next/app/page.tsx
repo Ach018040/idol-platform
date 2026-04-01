@@ -60,7 +60,7 @@ async function sbFetch(path: string, params: Record<string, string>) {
 
 async function loadData() {
   const [members, groups, history] = await Promise.all([
-    sbFetch("members", { select: "id,name,name_roman,nickname,color,color_name,birthdate,instagram,photo_url", order: "updated_at.desc", limit: "500" }),
+    sbFetch("members", { select: "id,name,name_roman,nickname,color,color_name,birthdate,instagram,facebook,x,photo_url", order: "updated_at.desc", limit: "500" }),
     sbFetch("groups", { select: "id,name,color,instagram,facebook,x,youtube", order: "name.asc", limit: "300" }),
     sbFetch("history", { select: "member_id,group_id,joined_at", order: "joined_at.desc", limit: "2000" }),
   ]);
