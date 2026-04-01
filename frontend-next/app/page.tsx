@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import Image from "next/image";
 
 // ─── Types（對應實際 JSON 欄位）─────────────────────────────────────────────
 
@@ -308,14 +309,18 @@ export default function HomePage() {
                 const percent = clampPercent((ti / maxMemberScore) * 100);
                 return (
                   <div key={`${member.rank}-${member.name}`}
-                    className="rounded-2xl border border-white/10 bg-black/20 p-4 transition hover:border-cyan-400/30 hover:bg-white/10">
+                    className="rounded-2xl border border-white/10 bg-black/20 p-4 transition hover:border-cyan-400/30 hover:bg-white/10"
+                    role="article"
+                    aria-label={`排名第${member.rank} ${member.name}`}>
                     <div className="mb-3 flex items-center gap-3">
                       <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold text-white">
                         {getRankBadge(member.rank)}
                       </div>
                       {member.photo_url ? (
-                        <img src={member.photo_url} alt={member.name}
-                          className="h-11 w-11 rounded-2xl object-cover ring-1 ring-white/10" />
+                        <Image src={member.photo_url} alt={member.name}
+                          width={44} height={44}
+                          className="h-11 w-11 rounded-2xl object-cover ring-1 ring-white/10"
+                          unoptimized />
                       ) : (
                         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/30 to-violet-500/30 text-sm font-bold text-white">
                           {getInitial(member.name)}
