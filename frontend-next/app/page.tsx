@@ -160,8 +160,9 @@ async function loadData() {
   // Calendar events from /api/ical
   let events: CalEvent[] = [];
   try {
-    const cal = await fetch(ICS_API).then(r => r.json());
-    events = (cal.events || []).map((e: Omit<CalEvent,"dtRaw">) => ({ ...e, dtRaw: new Date() }));
+  try {
+    const _icalJson = await fetch(ICS_API).then((_r) => _r.json());
+    events = (_icalJson.events || []).map((e: {date:string;time:string;summary:string;location:string}) => ({...e, dtRaw: new Date()}));
   } catch { events = []; }
   insights.events = events;
 
