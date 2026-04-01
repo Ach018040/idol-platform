@@ -157,22 +157,11 @@ async function loadData() {
     rising_stars: rising, heat_drop: heatDrop,
   };
 
-  // Calendar events
+  // Calendar events — fetch JSON from server-side /api/ical
   let events: CalEvent[] = [];
   try {
-    const icsText = await fetch(ICS_API).then(r => r.text());
-    const today = new Date();
-    const future = new Date(today.getTime() + 60 * 24 * 60 * 60 * 1000);
-    icsText.split("BEGIN:VEVENT").slice(1).forEach(block => {
-      const get = (k: string) => { const m = block.match(new RegExp(k + "[^:]*:([^\r\n]+")); return m ? m[1].trim() : ""; };
-      const dtstart = get("DTSTART"); const summary = get("SUMMARY"); const loc = get("LOCATION");
-      if (!dtstart || !summary) return;
-      const d = dtstart.replace(/[TZ]/g, "");
-      const dt = new Date(`${d.substr(0,4)}-${d.substr(4,2)}-${d.substr(6,2)}T${d.substr(8,2)||"00"}:${d.substr(10,2)||"00"}:00+08:00`);
-      if (dt >= today && dt <= future)
-        events.push({ date: dt.toLocaleDateString("zh-TW",{month:"numeric",day:"numeric",weekday:"short"}), time: dtstart.includes("T") ? dt.toLocaleTimeString("zh-TW",{hour:"2-digit",minute:"2-digit",hour12:false}) : "全天", summary: summary.replace(/\\n/g,"").replace(/\\,/g,","), location: loc.replace(/\\,/g,","), dtRaw: dt });
-    });
-    events.sort((a,b) => a.dtRaw.getTime()-b.dtRaw.getTime());
+    const calData = await fetch(ICS_API).then(r => r.json());
+    events = (calData.events || []).map((e: {date:string;time:string;summary:string;location:string}) => ({...e, dtRaw: new Date()}));
   } catch { events = []; }
   insights.events = events;
 
