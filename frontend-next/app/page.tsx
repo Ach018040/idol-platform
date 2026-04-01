@@ -267,9 +267,25 @@ export default function HomePage() {
                         style={{ width: `${percent}%` }} />
                     </div>
                     <div className="flex items-center justify-between text-xs text-zinc-400">
-                      <span>社群活躍度 {fmt(sa, 0)}</span>
-                      <span>轉換 {fmt(group.conversion_score, 0)}</span>
+                    <span>社群活躍度 {fmt(sa, 0)}</span>
+                    <div className="flex items-center gap-2">
+                      {group.instagram && (
+                        <a href={group.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-pink-300 text-pink-400 font-bold transition-colors" title="Instagram">IG</a>
+                      )}
+                      {group.twitter && (
+                        <a href={group.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-sky-300 text-sky-400 font-bold transition-colors" title="X / Twitter">𝕏</a>
+                      )}
+                      {group.facebook && (
+                        <a href={group.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-blue-300 text-blue-400 font-bold transition-colors" title="Facebook">FB</a>
+                      )}
+                      {group.youtube && (
+                        <a href={group.youtube} target="_blank" rel="noopener noreferrer" className="hover:text-red-300 text-red-400 font-bold transition-colors" title="YouTube">YT</a>
+                      )}
+                      {!group.instagram && !group.twitter && !group.facebook && !group.youtube && (
+                        <span>轉換 {fmt(group.conversion_score, 0)}</span>
+                      )}
                     </div>
+                  </div>
                   </div>
                 );
               })}
