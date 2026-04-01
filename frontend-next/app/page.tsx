@@ -9,8 +9,7 @@ const SB_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co";
 const SB_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
 const SB_H = { apikey: SB_KEY, Accept: "application/json", "Accept-Profile": "public" };
 
-const ICS_URL = "https://calendar.google.com/calendar/ical/mr7kibfjcm3gu52v6t64lreras%40group.calendar.google.com/public/basic.ics";
-const ICS_PROXY = (url: string) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`;
+const ICS_API = "/api/ical";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Group = {
@@ -161,7 +160,7 @@ async function loadData() {
   // Calendar events
   let events: CalEvent[] = [];
   try {
-    const icsText = await fetch(ICS_PROXY(ICS_URL)).then(r => r.text());
+    const icsText = await fetch(ICS_API).then(r => r.text());
     const today = new Date();
     const future = new Date(today.getTime() + 60 * 24 * 60 * 60 * 1000);
     icsText.split("BEGIN:VEVENT").slice(1).forEach(block => {
