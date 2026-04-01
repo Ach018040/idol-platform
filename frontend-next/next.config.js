@@ -7,11 +7,6 @@ const nextConfig = {
         hostname: "ziiagdrrytyrmzoeegjk.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
-      {
-        protocol: "https",
-        hostname: "*.supabase.co",
-        pathname: "/storage/v1/object/public/**",
-      },
     ],
   },
 
@@ -30,18 +25,6 @@ const nextConfig = {
           {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload",
-          },
-          {
-            key: "Content-Security-Policy",
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-              "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https://*.supabase.co https://www.instagram.com",
-              "connect-src 'self' https://*.supabase.co",
-              "font-src 'self'",
-              "frame-ancestors 'self'",
-            ].join("; "),
           },
         ],
       },
