@@ -383,7 +383,10 @@ export default function HomePage() {
                     </div>
                     <div className="flex items-center justify-between text-xs text-zinc-400">
                       <span>社群活躍度 {fmt(sa, 0)}</span>
-                      <span>{m.instagram ? "✦ Instagram" : "無社群連結"}</span>
+                      <div className="flex items-center gap-2">
+                        {m.instagram && <a href={m.instagram} target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 font-bold transition-colors" title="Instagram">IG</a>}
+                        {!m.instagram && <span className="text-zinc-600">無社群</span>}
+                      </div>
                     </div>
                   </div>
                 );
