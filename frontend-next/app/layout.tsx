@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 
 const BASE_URL = "https://idol-platform-git-main-ach018040s-projects.vercel.app";
@@ -56,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-TW">
-      <body>{children}</body>
+      <body>{children}<Analytics /></body>
     </html>
   );
 }
