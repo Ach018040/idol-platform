@@ -1,4 +1,4 @@
-// idol-platform v3.7.3
+// idol-platform v3.7.4
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: { ignoreBuildErrors: true },
