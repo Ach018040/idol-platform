@@ -157,11 +157,11 @@ async function loadData() {
     rising_stars: rising, heat_drop: heatDrop,
   };
 
-  // Calendar events — fetch JSON from server-side /api/ical
+  // Calendar events from /api/ical
   let events: CalEvent[] = [];
   try {
-    const calData = await fetch(ICS_API).then(r => r.json());
-    events = (calData.events || []).map((e: {date:string;time:string;summary:string;location:string}) => ({...e, dtRaw: new Date()}));
+    const cal = await fetch(ICS_API).then(r => r.json());
+    events = (cal.events || []).map((e: Omit<CalEvent,"dtRaw">) => ({ ...e, dtRaw: new Date() }));
   } catch { events = []; }
   insights.events = events;
 
