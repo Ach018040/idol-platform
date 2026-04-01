@@ -174,6 +174,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [visitCount, setVisitCount] = useState<number | null>(null);
 
   const refresh = async () => {
     setLoading(true);
@@ -189,7 +190,17 @@ export default function HomePage() {
     }
   };
 
-  useEffect(() => { refresh(); }, []);
+  useEffect(() => {
+    refresh();
+    // 造訪計數：每次載入 +1，存在 localStorage
+    try {
+      const key = "idol_visit_count";
+      const prev = parseInt(localStorage.getItem(key) || "0", 10);
+      const next = prev + 1;
+      localStorage.setItem(key, String(next));
+      setVisitCount(next);
+    } catch {}
+  }, []);
 
   const fmt_dt = (d: Date) => new Intl.DateTimeFormat("zh-TW", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Taipei" }).format(d);
 
@@ -239,7 +250,10 @@ export default function HomePage() {
             </div>
             <div className="flex flex-col gap-2 items-end">
               <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-100">
-                <div className="text-xs uppercase tracking-[0.2em] text-cyan-300/80">Last Update</div>
+                <div className="flex items-center justify-between gap-4">
+                  <div className="text-xs uppercase tracking-[0.2em] text-cyan-300/80">Last Update</div>
+                  {visitCount !== null && <div className="text-xs text-zinc-400">👁 {visitCount.toLocaleString()} 次</div>}
+                </div>
                 <div className="mt-1 font-semibold">{lastUpdated ? fmt_dt(lastUpdated) : "—"}</div>
               </div>
               <button
