@@ -49,7 +49,7 @@ def main():
         "select": "id,name,name_roman,nickname,color,color_name,birthdate,instagram,facebook,x,photo_url",
         "order": "updated_at.desc", "limit": 500
     })
-    groups = sb("groups", {"select": "id,name,color", "order": "name.asc", "limit": 300})
+    groups = sb("groups", {"select": "id,name,color,instagram,facebook,x,youtube", "order": "name.asc", "limit": 300})
     history = sb("history", {
         "select": "member_id,group_id,joined_at",
         "order": "joined_at.desc", "limit": 2000
@@ -139,6 +139,10 @@ def main():
             "social_activity":  sa,
             "temperature_index": ti,
             "conversion_score":  cs,
+            "instagram":    g.get("instagram") or "",
+            "facebook":     g.get("facebook") or "",
+            "twitter":      g.get("x") or "",
+            "youtube":      g.get("youtube") or "",
         })
 
     # Solo 成員（無所屬團體）以本名加入 v7_rankings
