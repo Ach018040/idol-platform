@@ -9,6 +9,9 @@ const SB_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co";
 const SB_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
 const SB_H = { apikey: SB_KEY, Accept: "application/json", "Accept-Profile": "public" };
 
+const ICS_URL = "https://calendar.google.com/calendar/ical/mr7kibfjcm3gu52v6t64lreras%40group.calendar.google.com/public/basic.ics";
+const ICS_PROXY = (url: string) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`;
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Group = {
   rank: number; group: string; display_name: string; color: string;
@@ -23,6 +26,7 @@ type Member = {
   instagram?: string; photo_url?: string;
   social_activity: number; temperature_index: number; conversion_score: number;
 };
+type CalEvent = { date: string; time: string; summary: string; location: string; dtRaw: Date; };
 type Insights = {
   generated_at: string; market_temperature: number; active_groups: number;
   weekly_highlights: { top_group: string; social_king: string };
@@ -154,6 +158,25 @@ async function loadData() {
     rising_stars: rising, heat_drop: heatDrop,
   };
 
+  // Calendar events
+  let events: CalEvent[] = [];
+  try {
+    const icsText = await fetch(ICS_PROXY(ICS_URL)).then(r => r.text());
+    const today = new Date();
+    const future = new Date(today.getTime() + 60 * 24 * 60 * 60 * 1000);
+    icsText.split("BEGIN:VEVENT").slice(1).forEach(block => {
+      const get = (k: string) => { const m = block.match(new RegExp(k + "[^:]*:([^\r\n]+")); return m ? m[1].trim() : ""; };
+      const dtstart = get("DTSTART"); const summary = get("SUMMARY"); const loc = get("LOCATION");
+      if (!dtstart || !summary) return;
+      const d = dtstart.replace(/[TZ]/g, "");
+      const dt = new Date(`${d.substr(0,4)}-${d.substr(4,2)}-${d.substr(6,2)}T${d.substr(8,2)||"00"}:${d.substr(10,2)||"00"}:00+08:00`);
+      if (dt >= today && dt <= future)
+        events.push({ date: dt.toLocaleDateString("zh-TW",{month:"numeric",day:"numeric",weekday:"short"}), time: dtstart.includes("T") ? dt.toLocaleTimeString("zh-TW",{hour:"2-digit",minute:"2-digit",hour12:false}) : "全天", summary: summary.replace(/\\n/g,"").replace(/\\,/g,","), location: loc.replace(/\\,/g,","), dtRaw: dt });
+    });
+    events.sort((a,b) => a.dtRaw.getTime()-b.dtRaw.getTime());
+  } catch { events = []; }
+  insights.events = events;
+
   return { memberData, groupData, insights };
 }
 
@@ -270,16 +293,22 @@ export default function HomePage() {
               </div>
             ) : <p className="text-sm text-zinc-300">目前沒有上升名單。</p>}
           </div>
-          <div className="rounded-3xl border border-rose-400/20 bg-rose-500/10 p-5 backdrop-blur-xl">
+          <div className="rounded-3xl border border-amber-400/20 bg-amber-500/10 p-5 backdrop-blur-xl">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-rose-200">Heat Drop</h2>
-              <span className="rounded-full border border-rose-300/20 px-2 py-1 text-xs text-rose-200/80">近期降溫</span>
+              <h2 className="text-lg font-bold text-amber-200">近期活動</h2>
+              <span className="rounded-full border border-amber-300/20 px-2 py-1 text-xs text-amber-200/80">未來 60 天</span>
             </div>
-            {insights.heat_drop.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {insights.heat_drop.map(s => <span key={s} className="rounded-full border border-rose-300/20 bg-rose-300/10 px-3 py-1.5 text-sm text-rose-100">{s}</span>)}
+            {insights.events && insights.events.length > 0 ? (
+              <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                {insights.events.slice(0, 15).map((ev, i) => (
+                  <div key={i} className="flex items-start gap-2 text-xs">
+                    <span className="flex-shrink-0 text-amber-300 font-medium w-24">{ev.date}</span>
+                    <span className="flex-shrink-0 text-zinc-400 w-10">{ev.time}</span>
+                    <span className="text-zinc-200 truncate">{ev.summary}</span>
+                  </div>
+                ))}
               </div>
-            ) : <p className="text-sm text-zinc-300">目前沒有降溫名單。</p>}
+            ) : <p className="text-sm text-zinc-300">載入活動中...</p>}
           </div>
           <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
             <div className="mb-3 flex items-center justify-between">
