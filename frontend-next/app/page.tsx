@@ -169,11 +169,14 @@ export default function HomePage() {
 
   useEffect(() => {
     refresh();
+    // 造訪次數：localStorage 計算本機次數，同時 POST 到伺服器累計全域次數
     try {
       const key = "idol_visit_count";
       const next = parseInt(localStorage.getItem(key) || "0", 10) + 1;
       localStorage.setItem(key, String(next));
       setVisitCount(next);
+      // 非同步上報到伺服器（不阻塞頁面載入）
+      fetch("/api/visit", { method: "POST" }).catch(() => {});
     } catch (_) {}
   }, []);
 
