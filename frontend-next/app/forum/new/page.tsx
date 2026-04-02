@@ -92,7 +92,8 @@ export default function NewThreadPage() {
       const res = await fetch("/api/forum/threads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ forum_slug: forum, title: title.trim(), body: body.trim(), tags, author_token: user.token }),
+        body: JSON.stringify({ forum_slug: forum, title: title.trim(), body: body.trim(), tags, author_token: user.token,
+            author_name: user.display_name, }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "發文失敗");
