@@ -6,8 +6,8 @@
  */
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-const SB_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co";
-const SB_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
+const SB_URL = process.env.NEXT_PUBLIC_FORUM_SB_URL || "https://vxmebuygrnynxkepyunh.supabase.co";
+const SB_KEY = process.env.NEXT_PUBLIC_FORUM_SB_ANON || "";
 
 export type ForumUser = {
   id: string;
