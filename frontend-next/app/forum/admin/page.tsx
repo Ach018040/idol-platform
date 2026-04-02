@@ -23,6 +23,7 @@ export default function ForumAdminPage() {
   const [tab, setTab] = useState<"overview"|"threads"|"posts"|"rules">("overview");
   const [threads, setThreads] = useState<ThreadRow[]>([]);
   const [posts, setPosts] = useState<PostRow[]>([]);
+  const [reports, setReports] = useState<{id:string;target_type:string;target_id:string;reason:string;status:string;created_at:string;reporter_id:string}[]>([]);
   const [loading, setLoading] = useState(false);
   const [actionMsg, setActionMsg] = useState("");
 
@@ -69,6 +70,13 @@ export default function ForumAdminPage() {
       ]);
       if (Array.isArray(tr)) setThreads(tr);
       if (Array.isArray(pr)) setPosts(pr);
+      // 取舉報列表
+      if (user?.token) {
+        const rr = await fetch(`${SB_URL}/rest/v1/reports?order=created_at.desc&limit=50`, {
+          headers: { apikey: SB_ANON, Accept: "application/json" }
+        }).then(r2=>r2.json()).catch(()=>[]);
+        if (Array.isArray(rr)) setReports(rr);
+      }
     } catch {}
     setLoading(false);
   };
@@ -93,6 +101,7 @@ export default function ForumAdminPage() {
     { key: "overview", label: "📊 總覽" },
     { key: "threads",  label: "💬 討論串" },
     { key: "posts",    label: "📝 回覆" },
+    { key: "reports",  label: "🚨 舉報" },
     { key: "rules",    label: "📋 管理規範" },
   ] as const;
 
@@ -251,6 +260,54 @@ export default function ForumAdminPage() {
                   className="flex-shrink-0 text-xs px-2.5 py-1.5 rounded-lg border border-white/10 bg-white/5 text-zinc-400 hover:text-rose-300 hover:border-rose-400/30 transition-colors">
                   🗑 刪除
                 </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Reports */}
+        {tab === "reports" && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-base font-bold text-white">舉報列表（{reports.length} 筆）</h2>
+              <button onClick={fetchData} disabled={loading} className="text-xs text-zinc-400 hover:text-white border border-white/10 rounded-lg px-3 py-1.5 hover:bg-white/5 transition-colors">
+                {loading ? "載入中..." : "⟳ 重新整理"}
+              </button>
+            </div>
+            {reports.length === 0 && !loading && (
+              <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-6 text-center text-sm text-emerald-300">
+                ✅ 目前沒有待處理的舉報
+              </div>
+            )}
+            {reports.map(rep => (
+              <div key={rep.id} className={`rounded-2xl border p-4 ${rep.status==='pending' ? 'border-rose-400/20 bg-rose-500/10' : 'border-white/10 bg-black/20 opacity-60'}`}>
+                <div className="flex items-start gap-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className={`text-xs font-semibold rounded-full px-2 py-0.5 ${rep.status==='pending' ? 'text-rose-300 bg-rose-500/20 border border-rose-500/30' : 'text-zinc-500 bg-white/5 border border-white/10'}`}>
+                        {rep.status==='pending' ? '⚠️ 待審核' : rep.status==='reviewed' ? '✅ 已處理' : '🚫 已駁回'}
+                      </span>
+                      <span className="text-xs text-zinc-500">{rep.target_type}</span>
+                      <span className="text-xs text-zinc-600 font-mono">{rep.target_id?.substring(0,8)}...</span>
+                    </div>
+                    <p className="text-sm text-zinc-300">{rep.reason}</p>
+                    <p className="text-xs text-zinc-600 mt-1">{new Date(rep.created_at).toLocaleString("zh-TW")}</p>
+                  </div>
+                  {rep.status === 'pending' && (
+                    <div className="flex gap-1.5 flex-shrink-0">
+                      <button onClick={() => action("del_t", rep.target_id)}
+                        className="text-xs px-2.5 py-1.5 rounded-lg border border-rose-400/30 bg-rose-400/10 text-rose-300 hover:bg-rose-400/20 transition-colors">
+                        刪除內容
+                      </button>
+                      <button onClick={async () => {
+                        await fetch('/api/forum/reports', {method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({report_id:rep.id, status:'dismissed', token:user?.token})});
+                        fetchData();
+                      }} className="text-xs px-2.5 py-1.5 rounded-lg border border-white/10 bg-white/5 text-zinc-400 hover:text-zinc-200 transition-colors">
+                        駁回
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
