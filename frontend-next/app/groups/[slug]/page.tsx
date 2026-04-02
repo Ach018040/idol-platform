@@ -133,8 +133,15 @@ export default function GroupPage({ params }: { params: { slug: string } }) {
         </section>
 
         {/* Back */}
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
           <Link href="/" className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-zinc-300 hover:bg-white/10 transition-colors">← 返回排行榜</Link>
+          {(group.instagram||group.x) && (
+            <a href={`https://idolinfohub.com/performers/${(group.instagram||group.x||'').replace(/.*\/([^/]+)\/?$/, '$1').replace('@','')}`}
+              target="_blank" rel="noopener noreferrer"
+              className="rounded-xl border border-amber-400/20 bg-amber-400/10 px-4 py-2.5 text-sm text-amber-200 hover:bg-amber-400/20 transition-colors">
+              活動紀錄 idolinfohub ↗
+            </a>
+          )}
           <Link href="/forum/groups" className="rounded-xl border border-fuchsia-400/20 bg-fuchsia-400/10 px-4 py-2.5 text-sm text-fuchsia-200 hover:bg-fuchsia-400/20 transition-colors">💬 討論區</Link>
         </div>
       </div>
