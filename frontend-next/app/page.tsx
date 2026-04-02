@@ -259,7 +259,9 @@ export default function HomePage() {
           </div>
           <div className="rounded-3xl border border-amber-400/20 bg-amber-500/10 p-5 backdrop-blur-xl">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-amber-200">近期活動</h2>
+              <h2 className="text-lg font-bold text-amber-200">
+                  <a href="/events" className="hover:text-amber-300 transition-colors">近期活動</a>
+                </h2>
               <span className="text-xs text-amber-300/70 border border-amber-300/20 rounded-full px-2 py-0.5 hover:bg-amber-300/10 cursor-pointer">
                   <a href="https://idolinfohub.com/events" target="_blank" rel="noopener noreferrer" className="text-amber-300/70 hover:text-amber-300 transition-colors">未來 60 天 ↗</a>
             </div>
@@ -403,6 +405,7 @@ export default function HomePage() {
         <span>台灣地下偶像數據情報平台 v3.7</span>
         <div className="flex items-center gap-4">
 <a href="/forum" className="hover:text-zinc-300 transition-colors">💬 討論區</a>
+          <a href="/events" className="hover:text-zinc-300 transition-colors">📅 活動</a>
           <a href="/pricing" className="hover:text-zinc-300 transition-colors">方案</a>
           <a href="https://www.facebook.com/profile.php?id=61573475755166" target="_blank" rel="noopener noreferrer" className="hover:text-blue-300 text-blue-400/70 transition-colors">📘 Facebook</a>
           <a href="/about" className="hover:text-zinc-300 transition-colors">關於 / 隱私政策</a>
