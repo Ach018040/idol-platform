@@ -301,7 +301,7 @@ export default function HomePage() {
                 const pct = clamp((g.temperature_index / maxGS) * 100);
                 const dc = dotColor(g);
                 return (
-                  <div key={`${g.rank}-${g.group}`} className="rounded-2xl border border-white/10 bg-black/20 p-4 hover:border-pink-400/30 hover:bg-white/10 transition-colors">
+                  <Link key={`${g.rank}-${g.group}`} href={`/groups/${encodeURIComponent(g.display_name)}`} className="block rounded-2xl border border-white/10 bg-black/20 p-4 hover:border-pink-400/30 hover:bg-white/10 transition-colors">
                     <div className="mb-3 flex items-center gap-3">
                       <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold">{getRankBadge(g.rank)}</div>
                       <div className="h-4 w-4 flex-shrink-0 rounded-full border border-white/20" style={{ backgroundColor: dc }} />
