@@ -410,6 +410,9 @@ export default function HomePage() {
           <a href="https://www.facebook.com/profile.php?id=61573475755166" target="_blank" rel="noopener noreferrer" className="hover:text-blue-300 text-blue-400/70 transition-colors">📘 Facebook</a>
           <a href="/about" className="hover:text-zinc-300 transition-colors">關於 / 隱私政策</a>
         </div>
+        </div>
+        </div>
+        </div>
       </footer>
     </main>
   );
