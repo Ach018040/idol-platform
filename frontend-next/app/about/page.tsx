@@ -202,13 +202,17 @@ export default function AboutPage() {
           <h2 className="text-lg font-bold text-fuchsia-200">聯絡與回饋</h2>
           <p className="text-sm text-zinc-300">資料更正、合作洽詢、功能建議或其他問題，歡迎透過以下管道聯繫。</p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
-            <a href="https://github.com/Ach018040/idol-platform/issues" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 px-4 py-2 text-sm text-fuchsia-200 hover:bg-fuchsia-400/20 transition-colors">
-              GitHub Issues →
+            <a href="https://www.facebook.com/profile.php?id=61573475755166" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-blue-400/30 bg-blue-400/10 px-4 py-2 text-sm text-blue-200 hover:bg-blue-400/20 transition-colors">
+              <span>📘</span> Facebook 粉絲頁
             </a>
             <Link href="/forum" className="inline-flex items-center gap-2 rounded-xl border border-violet-400/30 bg-violet-400/10 px-4 py-2 text-sm text-violet-200 hover:bg-violet-400/20 transition-colors">
               💬 論壇討論
             </Link>
+            <a href="https://github.com/Ach018040/idol-platform/issues" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10 transition-colors">
+              GitHub Issues
+            </a>
           </div>
         </section>
 
