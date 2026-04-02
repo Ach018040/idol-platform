@@ -104,9 +104,9 @@ export default function ForumPage() {
               <Link href="/forum/forums" className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10 transition-colors">
                 所有版區
               </Link>
-              <button className="rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 px-4 py-2 text-sm text-fuchsia-200 hover:bg-fuchsia-400/20 transition-colors">
+              <Link href="/forum/new" className="rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 px-4 py-2 text-sm text-fuchsia-200 hover:bg-fuchsia-400/20 transition-colors">
                 ✏️ 發文
-              </button>
+              </Link>
             </div>
           </div>
         </header>
