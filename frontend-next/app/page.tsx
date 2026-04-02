@@ -271,7 +271,7 @@ export default function HomePage() {
                   <div key={i} className="flex items-start gap-2 text-xs">
                     <span className="flex-shrink-0 text-amber-300 font-medium w-20">{ev.date}</span>
                     <span className="flex-shrink-0 text-zinc-500 w-10">{ev.time}</span>
-                    {ev.url ? (
+                    {ev.url && ev.url.startsWith('http') ? (
                     <a href={ev.url} target="_blank" rel="noopener noreferrer"
                       className="text-zinc-200 truncate hover:text-amber-300 transition-colors">
                       {ev.summary} ↗
