@@ -7,6 +7,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 const SB_URL = process.env.NEXT_PUBLIC_FORUM_SB_URL || "https://vxmebuygrnynxkepyunh.supabase.co";
+// NEXT_PUBLIC_FORUM_SB_ANON 需要在 Vercel env vars 設定 idolmetrics anon key
 const SB_KEY = process.env.NEXT_PUBLIC_FORUM_SB_ANON || "";
 
 export type ForumUser = {
@@ -52,6 +53,9 @@ export function ForumAuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     try {
+      if (!SB_KEY) {
+        return { error: "論壇服務設定中，請稍後再試（管理員需設定 FORUM_SB_ANON）" };
+      }
       const res = await fetch(`${SB_URL}/auth/v1/token?grant_type=password`, {
         method: "POST",
         headers: { apikey: SB_KEY, "Content-Type": "application/json" },
@@ -90,6 +94,7 @@ export function ForumAuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signInWithGoogle = async () => {
+    if (!SB_KEY) { alert("論壇服務設定中，管理員需設定 Supabase anon key"); return; }
     window.location.href = `${SB_URL}/auth/v1/authorize?provider=google&redirect_to=${window.location.origin}/forum`;
   };
 
