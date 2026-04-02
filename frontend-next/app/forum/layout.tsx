@@ -8,10 +8,7 @@ const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "").split(",").map
 function ForumNavbar() {
   const { user, signOut } = useForumAuth();
   const [showMenu, setShowMenu] = useState(false);
-  const isAdmin = user && (
-    ADMIN_EMAILS.includes(user.email) ||
-    user.display_name?.toLowerCase() === "admin"
-  );
+  const isAdmin = user && ADMIN_EMAILS.includes(user.email);
 
   return (
     <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#070b14]/90 backdrop-blur-xl">
@@ -24,9 +21,9 @@ function ForumNavbar() {
           <div className="hidden sm:flex items-center gap-4 text-xs text-zinc-400">
             <Link href="/forum" className="hover:text-white transition-colors">首頁</Link>
             <Link href="/forum/forums" className="hover:text-white transition-colors">版區</Link>
+            <Link href="/forum/general" className="hover:text-white transition-colors">綜合</Link>
             <Link href="/forum/groups" className="hover:text-white transition-colors">🎤 團體</Link>
             <Link href="/forum/events" className="hover:text-white transition-colors">🎵 活動</Link>
-            <Link href="/forum/goods" className="hover:text-white transition-colors">📸 物販</Link>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -40,11 +37,14 @@ function ForumNavbar() {
                 <div className="w-4 h-4 rounded-full bg-gradient-to-br from-fuchsia-500 to-violet-500 flex items-center justify-center text-[8px] font-bold text-white">
                   {[...user.display_name][0]}
                 </div>
-                <span className="hidden sm:block">{user.display_name}</span>
+                <span className="hidden sm:block max-w-20 truncate">{user.display_name}</span>
                 {isAdmin && <span className="text-amber-400 text-[9px]">★</span>}
               </button>
               {showMenu && (
-                <div className="absolute right-0 top-full mt-1 w-40 rounded-xl border border-white/10 bg-[#0f1624] py-1 shadow-xl z-50">
+                <div className="absolute right-0 top-full mt-1 w-44 rounded-xl border border-white/10 bg-[#0f1624] py-1 shadow-xl z-50">
+                  <div className="px-4 py-2 text-xs text-zinc-500 border-b border-white/5">
+                    {user.is_anonymous ? "🎭 訪客" : "👤 用戶"}：{user.display_name}
+                  </div>
                   {isAdmin && (
                     <Link href="/forum/admin" onClick={() => setShowMenu(false)}
                       className="flex items-center gap-2 w-full px-4 py-2 text-xs text-amber-300 hover:bg-white/5 transition-colors">
@@ -53,15 +53,15 @@ function ForumNavbar() {
                   )}
                   <button onClick={() => { signOut(); setShowMenu(false); }}
                     className="flex items-center gap-2 w-full px-4 py-2 text-xs text-zinc-400 hover:text-rose-300 hover:bg-white/5 transition-colors">
-                    登出
+                    離開 / 換暱稱
                   </button>
                 </div>
               )}
             </div>
           ) : (
             <Link href="/forum/new"
-              className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-zinc-400 hover:text-white hover:bg-white/10 transition-colors">
-              登入
+              className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-zinc-400 hover:text-fuchsia-300 hover:bg-white/10 transition-colors">
+              🎭 加入討論
             </Link>
           )}
           <Link href="/"
