@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { MOCK_FORUMS } from "../../../lib/supabase-forum";
 import { useForumAuth } from "../../../lib/forum-auth";
 import { useRouter } from "next/navigation";
