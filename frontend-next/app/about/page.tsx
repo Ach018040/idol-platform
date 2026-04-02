@@ -24,15 +24,23 @@ export default function AboutPage() {
             </p>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-5 space-y-3">
               <h3 className="text-base font-semibold text-cyan-300">計算公式</h3>
-              <div className="font-mono text-sm bg-black/30 rounded-xl p-4 space-y-1">
-                <p className="text-zinc-300">social_activity = IG存在(+55) + 照片(+15) + 活躍度隨機項(0~30)</p>
-                <p className="text-zinc-300">temperature_index = social_activity × 0.7 + 隨機修正(0~8)</p>
+              <div className="font-mono text-sm bg-black/30 rounded-xl p-4 space-y-2">
+                <p className="text-emerald-300 font-semibold">// 平台覆蓋率（最高 40 分）</p>
+                <p className="text-zinc-300">platform_score = 3平台(40) | 2平台(28) | 1平台(16) | 無(0)</p>
+                <p className="text-amber-300 font-semibold mt-1">// 形象完整度（最高 30 分）</p>
+                <p className="text-zinc-300">image_score = 有公開照片(+20) + 有其他形象連結(+10)</p>
+                <p className="text-cyan-300 font-semibold mt-1">// 資料新鮮度（最高 30 分，指數衰減）</p>
+                <p className="text-zinc-300">freshness = 30 × e^(−距今天數 / 30)</p>
+                <p className="text-pink-300 font-semibold mt-2">// 綜合分數</p>
+                <p className="text-zinc-300">social_activity = platform + image + freshness（上限 100）</p>
+                <p className="text-zinc-300">temperature_index = sa×0.60 + platform×0.20 + freshness×0.20</p>
                 <p className="text-zinc-300">conversion_score = temperature_index × 0.6</p>
               </div>
               <ul className="space-y-2 text-zinc-400 text-xs">
-                <li>📸 <strong className="text-white">Instagram 帳號存在</strong>：+55 分（最高權重，代表主要社群觸及）</li>
-                <li>🖼️ <strong className="text-white">公開照片存在</strong>：+15 分（視覺資料完整度）</li>
-                <li>🎲 <strong className="text-white">活躍度隨機項</strong>：0–30 分（反映資料不完整性的不確定性修正）</li>
+                <li>📱 <strong className="text-white">多平台覆蓋</strong>：同時有 IG + X + FB 最高得 40 分，觸及越廣分數越高</li>
+                <li>🖼️ <strong className="text-white">形象完整度</strong>：有公開照片 +20、其他形象連結 +10</li>
+                <li>⏱️ <strong className="text-white">資料新鮮度</strong>：以指數衰減計算，最近 30 天內更新的資料得分最高</li>
+                <li>● <strong className="text-emerald-300">活躍</strong> = 近 10 天內更新 | <strong className="text-yellow-400">近期</strong> = 10–30 天 | <strong className="text-zinc-400">久未更新</strong> = 超過 30 天</li>
               </ul>
             </div>
             <p className="text-zinc-400 text-xs">
