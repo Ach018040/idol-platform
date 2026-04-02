@@ -2,8 +2,9 @@
 // 使用 idolmaps 的 Supabase（公開唯讀，論壇寫入需要另外設定）
 // TODO: 換成論壇專用 Supabase project + service role key
 
-const SB_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co";
-const SB_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
+// Forum 使用獨立的 idolmetrics Supabase 專案
+const SB_URL = process.env.NEXT_PUBLIC_FORUM_SB_URL || "https://vxmebuygrnynxkepyunh.supabase.co";
+const SB_KEY = process.env.NEXT_PUBLIC_FORUM_SB_ANON || "";
 
 export const SB_HEADERS = {
   apikey: SB_KEY,
