@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const SB_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co";
-const SB_ANON = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
-const SB_SERVICE = process.env.SUPABASE_SERVICE_KEY || SB_ANON;
+const SB_URL = process.env.NEXT_PUBLIC_FORUM_SB_URL || "https://vxmebuygrnynxkepyunh.supabase.co";
+const SB_ANON = process.env.NEXT_PUBLIC_FORUM_SB_ANON || "";
+const SB_SERVICE = process.env.FORUM_SERVICE_KEY || process.env.SUPABASE_SERVICE_KEY || SB_ANON;
 
 // GET /api/forum/posts?thread_id=xxx&page=1
 export async function GET(req: NextRequest) {
