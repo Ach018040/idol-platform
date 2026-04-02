@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
-const ICS_URL =
-  "https://calendar.google.com/calendar/ical/mr7kibfjcm3gu52v6t64lreras%40group.calendar.google.com/public/basic.ics";
+const ICS_URL = "https://calendar.google.com/calendar/ical/mr7kibfjcm3gu52v6t64lreras%40group.calendar.google.com/public/basic.ics";
 
 export async function GET() {
   try {
@@ -10,7 +9,9 @@ export async function GET() {
     const text = await res.text();
     const today = new Date();
     const future = new Date(today.getTime() + 60 * 24 * 60 * 60 * 1000);
-    const events: { date: string; time: string; summary: string; location: string }[] = [];
+
+    const events: { date: string; time: string; summary: string; location: string; url?: string; dtRaw?: string }[] = [];
+
     text.split("BEGIN:VEVENT").slice(1).forEach((block) => {
       const get = (k: string) => {
         const m = block.match(new RegExp(k + "[^:]*:([^\r\n]+)"));
@@ -19,12 +20,15 @@ export async function GET() {
       const dtstart = get("DTSTART");
       const summary = get("SUMMARY");
       const loc = get("LOCATION");
+      const url = get("URL");
+
       if (!dtstart || !summary) return;
       const d = dtstart.replace(/[TZ]/g, "");
       const dt = new Date(
         `${d.substr(0,4)}-${d.substr(4,2)}-${d.substr(6,2)}T${d.substr(8,2)||"00"}:${d.substr(10,2)||"00"}:00+08:00`
       );
       if (isNaN(dt.getTime()) || dt < today || dt > future) return;
+
       events.push({
         date: dt.toLocaleDateString("zh-TW", { month: "numeric", day: "numeric", weekday: "short" }),
         time: dtstart.includes("T")
@@ -32,10 +36,14 @@ export async function GET() {
           : "全天",
         summary: summary.replace(/\\n/g, "").replace(/\\,/g, ","),
         location: loc.replace(/\\,/g, ","),
+        url: url || undefined,
+        dtRaw: dt.toISOString(),
       });
     });
-    events.sort((a, b) => a.date.localeCompare(b.date));
-    return NextResponse.json({ events }, {
+
+    events.sort((a, b) => (a.dtRaw || a.date).localeCompare(b.dtRaw || b.date));
+    const out = events.map(({ dtRaw: _, ...e }) => e);
+    return NextResponse.json({ events: out }, {
       headers: { "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400" },
     });
   } catch (e) {
