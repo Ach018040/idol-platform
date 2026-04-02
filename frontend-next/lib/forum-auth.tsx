@@ -134,7 +134,7 @@ export function ForumAuthProvider({ children }: { children: ReactNode }) {
         headers: { apikey: SB_KEY, "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
-          options: { emailRedirectTo: `${window.location.origin}/forum` }
+          options: { emailRedirectTo: `${typeof window !== "undefined" ? window.location.origin : "https://idol-platform.vercel.app"}/forum` }
         }),
       });
       if (!res.ok) {
@@ -148,7 +148,8 @@ export function ForumAuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signInWithGoogle = async () => {
-    window.location.href = `${SB_URL}/auth/v1/authorize?provider=google&redirect_to=${window.location.origin}/forum`;
+    const origin = typeof window !== "undefined" ? window.location.origin : "https://idol-platform.vercel.app";
+    window.location.href = `${SB_URL}/auth/v1/authorize?provider=google&redirect_to=${origin}/forum`;
   };
 
   const signOut = async () => {
