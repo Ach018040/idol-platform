@@ -323,11 +323,11 @@ export default function HomePage() {
                     <div className="flex items-center justify-between text-xs text-zinc-400">
                       <span>社群活躍度 {fmt(g.social_activity, 0)}</span>
                       <div className="flex items-center gap-2">
-                        {g.instagram && <a href={g.instagram} target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 font-bold" title="Instagram">IG</a>}
-                        {g.twitter && <a href={g.twitter} target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:text-sky-300 font-bold" title="X">𝕏</a>}
-                        {g.facebook && <a href={g.facebook} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 font-bold" title="Facebook">FB</a>}
-                        {g.youtube && <a href={g.youtube} target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 font-bold" title="YouTube">YT</a>}
-                        {!g.instagram && !g.twitter && !g.facebook && !g.youtube && <span>轉換 {fmt(g.conversion_score, 0)}</span>}
+                        {g.instagram && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.instagram,'_blank')}} className="text-pink-400 hover:text-pink-300 font-bold text-xs">IG</button>}
+                    {g.twitter && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.twitter,'_blank')}} className="text-sky-400 hover:text-sky-300 font-bold text-xs">𝕏</button>}
+                    {g.facebook && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.facebook,'_blank')}} className="text-blue-400 hover:text-blue-300 font-bold text-xs">FB</button>}
+                    {g.youtube && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.youtube,'_blank')}} className="text-red-400 hover:text-red-300 font-bold text-xs">YT</button>}
+                    {!g.instagram && !g.twitter && !g.facebook && !g.youtube && <span>轉換 {fmt(g.conversion_score, 0)}</span>}
                       </div>
                     </div>
                   </div>
@@ -348,7 +348,7 @@ export default function HomePage() {
               {members.map(m => {
                 const pct = clamp((m.temperature_index / maxMS) * 100);
                 return (
-                  <div key={`${m.rank}-${m.name}`} className="rounded-2xl border border-white/10 bg-black/20 p-4 hover:border-cyan-400/30 hover:bg-white/10 transition-colors">
+                  <Link key={`${m.rank}-${m.name}`} href={`/members/${encodeURIComponent(m.name)}`} className="block rounded-2xl border border-white/10 bg-black/20 p-4 hover:border-cyan-400/30 hover:bg-white/10 transition-colors">
                     <div className="mb-3 flex items-center gap-3">
                       <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold">{getRankBadge(m.rank)}</div>
                       {m.photo_url ? (
