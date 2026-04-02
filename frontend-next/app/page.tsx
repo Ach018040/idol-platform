@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const SB_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co";
 const SB_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
@@ -223,6 +224,9 @@ export default function HomePage() {
               <button onClick={refresh} disabled={loading} className="rounded-xl border border-pink-400/20 bg-pink-400/10 px-4 py-2 text-xs text-pink-200 hover:bg-pink-400/20 transition-colors disabled:opacity-50">
                 {loading ? "更新中..." : "⟳ 立即更新"}
               </button>
+              <a href="/forum" className="rounded-xl border border-violet-400/20 bg-violet-400/10 px-4 py-2 text-xs text-violet-200 hover:bg-violet-400/20 transition-colors text-center">
+                💬 討論區
+              </a>
             </div>
           </div>
           <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -387,6 +391,7 @@ export default function HomePage() {
       <footer className="mx-auto max-w-7xl px-4 py-6 mt-4 border-t border-white/5 flex items-center justify-between text-xs text-zinc-500">
         <span>台灣地下偶像數據情報平台 v3.7</span>
         <div className="flex items-center gap-4">
+<a href="/forum" className="hover:text-zinc-300 transition-colors">💬 討論區</a>
           <a href="/about" className="hover:text-zinc-300 transition-colors">關於 / 隱私政策</a>
           <a href="https://github.com/Ach018040/idol-platform/issues" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300 transition-colors">回饋</a>
         </div>
