@@ -259,10 +259,10 @@ export default function HomePage() {
           </div>
           <div className="rounded-3xl border border-amber-400/20 bg-amber-500/10 p-5 backdrop-blur-xl">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-amber-200">
-                  <a href="/events" className="hover:text-amber-300 transition-colors">近期活動</a>
-                </h2>
-              <span className="text-xs text-amber-300/70 border border-amber-300/20 rounded-full px-2 py-0.5 hover:bg-amber-300/10 cursor-pointer">
+              <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-lg font-bold text-amber-200">
+                    <a href="/events" className="hover:text-amber-300 transition-colors">近期活動 ↗</a>
+                  </h2>              <span className="text-xs text-amber-300/70 border border-amber-300/20 rounded-full px-2 py-0.5 hover:bg-amber-300/10 cursor-pointer">
                   <a href="https://idolinfohub.com/events" target="_blank" rel="noopener noreferrer" className="text-amber-300/70 hover:text-amber-300 transition-colors">未來 60 天 ↗</a>
             </div>
             {insights.events && insights.events.length > 0 ? (
