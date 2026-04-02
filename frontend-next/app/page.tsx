@@ -376,9 +376,9 @@ export default function HomePage() {
                         {m.freshness_score === 0 && <span className="text-zinc-600">● 久未更新</span>}
                       </div>
                       <div className="flex gap-2">
-                        {m.instagram && <a href={m.instagram} target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 font-bold">IG</a>}
-                        {m.twitter && <a href={m.twitter} target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:text-sky-300 font-bold">𝕏</a>}
-                        {m.facebook && <a href={m.facebook} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 font-bold">FB</a>}
+                        {m.instagram && <button type="button" onClick={e=>{e.stopPropagation();window.open(m.instagram,'_blank')}} className="text-pink-400 hover:text-pink-300 font-bold text-xs">IG</button>}
+                        {m.twitter && <button type="button" onClick={e=>{e.stopPropagation();window.open(m.twitter,'_blank')}} className="text-sky-400 hover:text-sky-300 font-bold text-xs">𝕏</button>}
+                        {m.facebook && <button type="button" onClick={e=>{e.stopPropagation();window.open(m.facebook,'_blank')}} className="text-blue-400 hover:text-blue-300 font-bold text-xs">FB</button>}
                         {!m.instagram && !m.twitter && !m.facebook && <span className="text-zinc-600">無社群</span>}
                       </div>
                     </div>
