@@ -1,4 +1,5 @@
 "use client";
+import ForecastChart from "../../../components/ForecastChart";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -155,6 +156,11 @@ export default function MemberPage({ params }:{params:{slug:string}}) {
             </div>
           )}
         </section>
+
+        {/* TimesFM Forecast */}
+        {member && (
+          <ForecastChart entityName={member.name} entityType="member" color="cyan" />
+        )}
 
         {/* Back */}
         <div className="flex gap-3 flex-wrap">
