@@ -3,14 +3,20 @@ import Link from "next/link";
 import { useState } from "react";
 import { ForumAuthProvider, useForumAuth } from "../../lib/forum-auth";
 
+const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "").split(",").map(e=>e.trim());
+
 function ForumNavbar() {
   const { user, signOut } = useForumAuth();
   const [showMenu, setShowMenu] = useState(false);
+  const isAdmin = user && (
+    ADMIN_EMAILS.includes(user.email) ||
+    user.display_name?.toLowerCase() === "admin"
+  );
 
   return (
     <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#070b14]/90 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5">
           <Link href="/forum" className="flex items-center gap-2 text-sm font-bold text-white hover:text-fuchsia-300 transition-colors">
             <span className="text-lg">💬</span>
             <span>Idol Forum</span>
@@ -31,26 +37,35 @@ function ForumNavbar() {
             <div className="relative">
               <button onClick={() => setShowMenu(!showMenu)}
                 className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-zinc-300 hover:bg-white/10 transition-colors">
-                <div className="w-4 h-4 rounded-full bg-gradient-to-br from-fuchsia-500 to-violet-500 flex items-center justify-center text-white font-bold text-[8px]">
+                <div className="w-4 h-4 rounded-full bg-gradient-to-br from-fuchsia-500 to-violet-500 flex items-center justify-center text-[8px] font-bold text-white">
                   {[...user.display_name][0]}
                 </div>
-                <span>{user.display_name}</span>
+                <span className="hidden sm:block">{user.display_name}</span>
+                {isAdmin && <span className="text-amber-400 text-[9px]">★</span>}
               </button>
               {showMenu && (
-                <div className="absolute right-0 top-full mt-1 w-36 rounded-xl border border-white/10 bg-[#0f1624] py-1 shadow-xl z-50">
+                <div className="absolute right-0 top-full mt-1 w-40 rounded-xl border border-white/10 bg-[#0f1624] py-1 shadow-xl z-50">
+                  {isAdmin && (
+                    <Link href="/forum/admin" onClick={() => setShowMenu(false)}
+                      className="flex items-center gap-2 w-full px-4 py-2 text-xs text-amber-300 hover:bg-white/5 transition-colors">
+                      🛡️ 管理後台
+                    </Link>
+                  )}
                   <button onClick={() => { signOut(); setShowMenu(false); }}
-                    className="w-full px-4 py-2 text-xs text-zinc-400 hover:text-rose-300 hover:bg-white/5 text-left transition-colors">
+                    className="flex items-center gap-2 w-full px-4 py-2 text-xs text-zinc-400 hover:text-rose-300 hover:bg-white/5 transition-colors">
                     登出
                   </button>
                 </div>
               )}
             </div>
           ) : (
-            <Link href="/forum/new" className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-zinc-400 hover:text-white hover:bg-white/10 transition-colors">
+            <Link href="/forum/new"
+              className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-zinc-400 hover:text-white hover:bg-white/10 transition-colors">
               登入
             </Link>
           )}
-          <Link href="/" className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-zinc-400 hover:text-white hover:bg-white/10 transition-colors hidden sm:block">
+          <Link href="/"
+            className="hidden sm:block rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-zinc-400 hover:text-white hover:bg-white/10 transition-colors">
             ← 排行榜
           </Link>
         </div>
