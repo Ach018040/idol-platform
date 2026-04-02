@@ -102,3 +102,58 @@ export function formatRelativeTime(dateStr: string): string {
   if (days < 7) return `${days} 天前`;
   return new Date(dateStr).toLocaleDateString("zh-TW");
 }
+
+
+// ─── 真實 Supabase 查詢函數 ───────────────────────────────────────────────────
+// 當 forum tables 建立後，這些函數會自動取代 Mock 資料
+
+async function sbGet(path: string, params?: Record<string,string>) {
+  const url = new URL(`${SB_URL}/rest/v1/${path}`);
+  if (params) Object.entries(params).forEach(([k,v]) => url.searchParams.set(k,v));
+  const res = await fetch(url.toString(), { headers: SB_HEADERS, cache: "no-store" });
+  if (!res.ok) throw new Error(`Forum DB ${path}: ${res.status}`);
+  return res.json();
+}
+
+export async function fetchForums(): Promise<Forum[]> {
+  try {
+    const data = await sbGet("forums", { select: "id,slug,title,description,icon,sort_order", order: "sort_order.asc", limit: "20" });
+    return data.length > 0 ? data : MOCK_FORUMS;
+  } catch {
+    return MOCK_FORUMS;
+  }
+}
+
+export async function fetchThreads(forumSlug?: string, sort: "trending"|"latest" = "trending"): Promise<Thread[]> {
+  try {
+    const params: Record<string,string> = {
+      select: "id,forum_id,author_id,title,body,tags,likes_count,replies_count,trending_score,is_pinned,is_locked,last_reply_at,created_at",
+      limit: "30",
+    };
+    if (forumSlug) params["forum_slug"] = `eq.${forumSlug}`;
+    if (sort === "trending") params.order = "trending_score.desc";
+    else params.order = "last_reply_at.desc";
+    const data = await sbGet("threads", params);
+    return data.length > 0 ? data : MOCK_THREADS.filter(t => !forumSlug || t.forum_slug === forumSlug);
+  } catch {
+    return MOCK_THREADS.filter(t => !forumSlug || t.forum_slug === forumSlug);
+  }
+}
+
+export async function fetchThread(threadId: string): Promise<Thread | null> {
+  try {
+    const data = await sbGet("threads", { select: "*", "id": `eq.${threadId}`, limit: "1" });
+    return data[0] || MOCK_THREADS.find(t => t.id === threadId) || null;
+  } catch {
+    return MOCK_THREADS.find(t => t.id === threadId) || null;
+  }
+}
+
+export async function fetchPosts(threadId: string): Promise<Post[]> {
+  try {
+    const data = await sbGet("posts", { select: "*", "thread_id": `eq.${threadId}`, order: "created_at.asc", limit: "100" });
+    return data.length > 0 ? data : MOCK_POSTS.filter(p => p.thread_id === threadId);
+  } catch {
+    return MOCK_POSTS.filter(p => p.thread_id === threadId);
+  }
+}
