@@ -349,6 +349,15 @@ export default function HomePage() {
           </div>
         </section>
       </div>
+
+      {/* Footer */}
+      <footer className="mx-auto max-w-7xl px-4 py-6 mt-4 border-t border-white/5 flex items-center justify-between text-xs text-zinc-500">
+        <span>台灣地下偶像數據情報平台 v3.7</span>
+        <div className="flex items-center gap-4">
+          <a href="/about" className="hover:text-zinc-300 transition-colors">關於 / 隱私政策</a>
+          <a href="https://github.com/Ach018040/idol-platform/issues" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300 transition-colors">回饋</a>
+        </div>
+      </footer>
     </main>
   );
 }
