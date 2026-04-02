@@ -34,6 +34,7 @@ function PostCard({ post, index }: { post: Post; index: number }) {
           </div>
         </div>
         <button className="text-xs text-zinc-600 hover:text-zinc-400 px-2 py-1 rounded hover:bg-white/5 transition-colors">引用</button>
+        <button className="text-xs text-zinc-600 hover:text-rose-400 px-2 py-1 rounded hover:bg-white/5 transition-colors">⚑</button>
       </div>
       <p className="text-sm text-zinc-300 leading-7">{post.body}</p>
       <div className="mt-4 flex items-center gap-3 pt-3 border-t border-white/5">
@@ -57,6 +58,22 @@ export default function ThreadPage({ params }: { params: { slug: string; threadI
   const [replyText, setReplyText] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [replyError, setReplyError] = useState("");
+  const [showReport, setShowReport] = useState<{type:string;id:string}|null>(null);
+  const [reportReason, setReportReason] = useState("");
+  const [reportSent, setReportSent] = useState(false);
+
+  const submitReport = async () => {
+    if (!reportReason.trim() || !showReport) return;
+    try {
+      await fetch("/api/forum/reports", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ target_type: showReport.type, target_id: showReport.id, reason: reportReason, author_token: user?.token || "anonymous" }),
+      });
+      setReportSent(true);
+      setTimeout(() => { setShowReport(null); setReportReason(""); setReportSent(false); }, 1500);
+    } catch {}
+  };
 
   if (!forum) notFound();
 
@@ -184,6 +201,40 @@ export default function ThreadPage({ params }: { params: { slug: string; threadI
             </button>
           </div>
         </div>
+
+        {/* Report Modal */}
+        {showReport && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+            <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-[#0f1624] p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-base font-bold text-white">⚑ 舉報內容</h3>
+                <button onClick={() => setShowReport(null)} className="text-zinc-500 hover:text-white text-xl">×</button>
+              </div>
+              {reportSent ? (
+                <div className="text-center py-4">
+                  <div className="text-3xl mb-2">✅</div>
+                  <p className="text-sm text-emerald-300">舉報已送出，管理員將盡快審核</p>
+                </div>
+              ) : (
+                <>
+                  <p className="text-xs text-zinc-400">請說明舉報原因，管理員將在 24 小時內審核。</p>
+                  <div className="space-y-2">
+                    {["違規或騷擾內容","散布個人私隱","垃圾訊息/廣告","未授權演出照片","其他"].map(reason => (
+                      <button key={reason} onClick={() => setReportReason(reason)}
+                        className={`w-full text-left rounded-xl border px-4 py-2.5 text-sm transition-colors ${reportReason===reason ? 'border-rose-400/50 bg-rose-400/15 text-rose-200' : 'border-white/10 bg-white/5 text-zinc-300 hover:border-white/20'}`}>
+                        {reason}
+                      </button>
+                    ))}
+                  </div>
+                  <button onClick={submitReport} disabled={!reportReason}
+                    className="w-full rounded-xl border border-rose-400/30 bg-rose-400/10 py-2.5 text-sm font-semibold text-rose-200 hover:bg-rose-400/20 disabled:opacity-40 transition-colors">
+                    送出舉報
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Related */}
         <div className="mt-6">
