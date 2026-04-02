@@ -139,7 +139,13 @@ export function ForumAuthProvider({ children }: { children: ReactNode }) {
       });
       if (!res.ok) {
         const data = await res.json();
-        return { error: data.error_description || data.message || "Magic Link 發送失敗" };
+        const code = data.error_code || data.code || "";
+        const msg = code === "over_email_send_rate_limit" || String(data.code) === "429"
+          ? "發送次數已達上限，請稍候幾分鐘再試，或改用密碼登入"
+          : code === "user_not_found"
+          ? "找不到此 email，請先註冊帳號"
+          : data.error_description || data.msg || data.message || "Magic Link 發送失敗";
+        return { error: msg };
       }
       return {};
     } catch (e) {
