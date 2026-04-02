@@ -13,7 +13,8 @@ function SignInModal({ onClose }: { onClose: () => void }) {
   const [error, setError] = useState("");
 
   const submit = () => {
-    const res = joinAsGuest(name);
+    if (!name.trim()) { setError("請輸入暱稱"); return; }
+    const res = joinAsGuest(name.trim());
     if (res.error) { setError(res.error); return; }
     onClose();
   };
@@ -25,38 +26,24 @@ function SignInModal({ onClose }: { onClose: () => void }) {
           <h2 className="text-lg font-bold text-white">💬 加入討論</h2>
           <button onClick={onClose} className="text-zinc-500 hover:text-white text-xl leading-none">×</button>
         </div>
-
         <div className="text-center space-y-2 py-2">
           <div className="text-4xl">🎭</div>
           <p className="text-sm font-semibold text-white">選擇你的暱稱</p>
           <p className="text-xs text-zinc-400">無需帳號或 email，輸入暱稱即可開始討論</p>
         </div>
-
         <div className="space-y-3">
-          <input
-            value={name}
-            onChange={e => { setName(e.target.value); setError(""); }}
+          <input value={name} onChange={e => { setName(e.target.value); setError(""); }}
             onKeyDown={e => e.key === "Enter" && submit()}
-            placeholder="輸入暱稱（2-20 字元）"
-            maxLength={20}
-            autoFocus
-            className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50 transition-colors"
-          />
-          {error && (
-            <p className="text-xs text-rose-400 bg-rose-400/10 rounded-lg px-3 py-2">{error}</p>
-          )}
-          <button
-            onClick={submit}
-            disabled={!name.trim()}
-            className="w-full rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 py-2.5 text-sm font-semibold text-fuchsia-200 hover:bg-fuchsia-400/20 disabled:opacity-40 transition-colors"
-          >
+            placeholder="輸入暱稱（2–20 字元）" maxLength={20} autoFocus
+            className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50 transition-colors"/>
+          {error && <p className="text-xs text-rose-400 bg-rose-400/10 rounded-lg px-3 py-2">{error}</p>}
+          <button onClick={submit} disabled={!name.trim()}
+            className="w-full rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 py-2.5 text-sm font-semibold text-fuchsia-200 hover:bg-fuchsia-400/20 disabled:opacity-40 transition-colors">
             開始討論 →
           </button>
         </div>
-
-        <p className="text-[11px] text-zinc-600 text-center leading-5">
-          暱稱僅儲存於你的瀏覽器，不需要 email 或帳號。<br/>
-          下次造訪同一裝置時會自動恢復。
+        <p className="text-xs text-zinc-600 text-center leading-5">
+          暱稱儲存於你的瀏覽器，不需要 email 或帳號
         </p>
       </div>
     </div>
