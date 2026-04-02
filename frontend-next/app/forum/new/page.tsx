@@ -4,67 +4,107 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MOCK_FORUMS } from "../../../lib/supabase-forum";
 import { useForumAuth } from "../../../lib/forum-auth";
+import { useRouter } from "next/navigation";
 
 const TAG_SUGGESTIONS = ["時空Astria","TUKUYOMI","soda shower!","幻獣","悪戯ピエロ","活動心得","物販","拍立得","公演","新成員","排行","解散"];
 
-function SignInModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: () => void }) {
-  const { signIn, signUp, signInWithGoogle } = useForumAuth();
-  const [mode, setMode] = useState<"signin"|"signup">("signin");
+function SignInModal({ onClose }: { onClose: () => void }) {
+  const { signIn, signUp, signInWithMagicLink, signInWithGoogle } = useForumAuth();
+  const [mode, setMode] = useState<"signin"|"signup"|"magic">("magic");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [magicSent, setMagicSent] = useState(false);
 
-  const submit = async () => {
+  const submitMagic = async () => {
+    if (!email.trim()) return;
+    setLoading(true); setError("");
+    const res = await signInWithMagicLink(email.trim());
+    setLoading(false);
+    if (res.error) setError(res.error);
+    else setMagicSent(true);
+  };
+
+  const submitPassword = async () => {
     setLoading(true); setError("");
     const res = mode === "signin"
       ? await signIn(email, password)
       : await signUp(email, password, displayName);
     setLoading(false);
     if (res.error) setError(res.error);
-    else { onSuccess(); onClose(); }
+    else onClose();
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-      <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-[#0f1624] p-6 space-y-5">
+      <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-[#0f1624] p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-white">{mode === "signin" ? "登入討論區" : "註冊帳號"}</h2>
+          <h2 className="text-lg font-bold text-white">🔐 登入討論區</h2>
           <button onClick={onClose} className="text-zinc-500 hover:text-white text-xl leading-none">×</button>
         </div>
 
-        <button onClick={signInWithGoogle}
-          className="w-full rounded-xl border border-white/10 bg-white/5 py-2.5 text-sm text-zinc-300 hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-          <span>🔵</span> 使用 Google 登入
-        </button>
-
-        <div className="flex items-center gap-3">
-          <div className="flex-1 h-px bg-white/10"/>
-          <span className="text-xs text-zinc-600">或</span>
-          <div className="flex-1 h-px bg-white/10"/>
+        {/* Mode tabs */}
+        <div className="flex gap-1 rounded-xl border border-white/10 bg-black/20 p-1">
+          {(["magic","signin","signup"] as const).map(m => (
+            <button key={m} onClick={() => { setMode(m); setError(""); setMagicSent(false); }}
+              className={`flex-1 rounded-lg py-1.5 text-xs font-medium transition-colors ${mode===m ? "bg-fuchsia-500/20 text-fuchsia-200" : "text-zinc-500 hover:text-zinc-300"}`}>
+              {m==="magic" ? "✉️ Magic Link" : m==="signin" ? "密碼登入" : "註冊帳號"}
+            </button>
+          ))}
         </div>
 
-        {mode === "signup" && (
-          <input value={displayName} onChange={e => setDisplayName(e.target.value)}
-            placeholder="顯示名稱" className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50"/>
+        {/* Magic Link */}
+        {mode === "magic" && (
+          magicSent ? (
+            <div className="text-center py-6 space-y-3">
+              <div className="text-4xl">📨</div>
+              <p className="text-sm font-semibold text-white">確認信已寄出！</p>
+              <p className="text-xs text-zinc-400">請檢查 <strong className="text-fuchsia-300">{email}</strong> 的信箱，點擊連結即可登入</p>
+              <button onClick={() => setMagicSent(false)} className="text-xs text-zinc-500 hover:text-zinc-300">重新發送</button>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <p className="text-xs text-zinc-400">輸入 email，我們發送一次性登入連結，無需密碼</p>
+              <input value={email} onChange={e => setEmail(e.target.value)} type="email"
+                placeholder="你的 email" onKeyDown={e => e.key==="Enter" && submitMagic()}
+                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50"/>
+              {error && <p className="text-xs text-rose-400 bg-rose-400/10 rounded-lg px-3 py-2">{error}</p>}
+              <button onClick={submitMagic} disabled={loading || !email.trim()}
+                className="w-full rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 py-2.5 text-sm font-semibold text-fuchsia-200 hover:bg-fuchsia-400/20 disabled:opacity-40 transition-colors">
+                {loading ? "發送中..." : "發送 Magic Link"}
+              </button>
+            </div>
+          )
         )}
-        <input value={email} onChange={e => setEmail(e.target.value)} type="email"
-          placeholder="電子郵件" className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50"/>
-        <input value={password} onChange={e => setPassword(e.target.value)} type="password"
-          placeholder="密碼" onKeyDown={e => e.key==='Enter' && submit()}
-          className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50"/>
 
-        {error && <p className="text-xs text-rose-400 bg-rose-400/10 rounded-lg px-3 py-2">{error}</p>}
+        {/* Password */}
+        {(mode === "signin" || mode === "signup") && (
+          <div className="space-y-3">
+            {mode === "signup" && (
+              <input value={displayName} onChange={e => setDisplayName(e.target.value)}
+                placeholder="顯示名稱（可不填）"
+                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50"/>
+            )}
+            <input value={email} onChange={e => setEmail(e.target.value)} type="email"
+              placeholder="電子郵件"
+              className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50"/>
+            <input value={password} onChange={e => setPassword(e.target.value)} type="password"
+              placeholder="密碼" onKeyDown={e => e.key==="Enter" && submitPassword()}
+              className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50"/>
+            {error && <p className="text-xs text-rose-400 bg-rose-400/10 rounded-lg px-3 py-2">{error}</p>}
+            <button onClick={submitPassword} disabled={loading || !email || !password}
+              className="w-full rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 py-2.5 text-sm font-semibold text-fuchsia-200 hover:bg-fuchsia-400/20 disabled:opacity-40 transition-colors">
+              {loading ? "處理中..." : mode === "signin" ? "登入" : "註冊"}
+            </button>
+          </div>
+        )}
 
-        <button onClick={submit} disabled={loading || !email || !password}
-          className="w-full rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 py-2.5 text-sm font-semibold text-fuchsia-200 hover:bg-fuchsia-400/20 disabled:opacity-40 transition-colors">
-          {loading ? "處理中..." : mode === "signin" ? "登入" : "註冊"}
-        </button>
-
-        <button onClick={() => setMode(m => m === "signin" ? "signup" : "signin")}
-          className="w-full text-xs text-zinc-500 hover:text-zinc-300 transition-colors">
-          {mode === "signin" ? "還沒有帳號？立即註冊" : "已有帳號？登入"}
+        {/* Google */}
+        <button onClick={signInWithGoogle}
+          className="w-full rounded-xl border border-white/10 bg-white/5 py-2 text-xs text-zinc-400 hover:bg-white/10 hover:text-zinc-200 transition-colors flex items-center justify-center gap-2">
+          <span>🔵</span> 使用 Google 帳號登入
         </button>
       </div>
     </div>
@@ -83,6 +123,7 @@ export default function NewThreadPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showAuth, setShowAuth] = useState(false);
+  // 頁面載入時如果是 magic link callback，auth 已在 forum-auth.tsx 處理
 
   const addTag = (tag: string) => {
     const t = tag.trim();
@@ -112,7 +153,7 @@ export default function NewThreadPage() {
 
   return (
     <>
-      {showAuth && <SignInModal onClose={() => setShowAuth(false)} onSuccess={() => {}} />}
+      {showAuth && <SignInModal onClose={() => setShowAuth(false)} />}
       <main className="min-h-screen text-white">
         <div className="mx-auto max-w-3xl px-4 py-8 md:px-6">
           <div className="mb-8 flex items-center justify-between">
