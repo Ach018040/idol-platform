@@ -259,15 +259,15 @@ export default function HomePage() {
           </div>
           <div className="rounded-3xl border border-amber-400/20 bg-amber-500/10 p-5 backdrop-blur-xl">
             <div className="mb-3 flex items-center justify-between">
-              <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-lg font-bold text-amber-200">
-                    <a href="/events" className="hover:text-amber-300 transition-colors">近期活動 ↗</a>
-                  </h2>              <span className="text-xs text-amber-300/70 border border-amber-300/20 rounded-full px-2 py-0.5 hover:bg-amber-300/10 cursor-pointer">
-                  <a href="https://idolinfohub.com/events" target="_blank" rel="noopener noreferrer" className="text-amber-300/70 hover:text-amber-300 transition-colors">未來 60 天 ↗</a>
-            </div>
-            {insights.events && insights.events.length > 0 ? (
-              <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
-                {insights.events.slice(0, 15).map((ev, i) => (
+                  <div className="flex items-center justify-between mb-3">
+                    <h2 className="text-lg font-bold text-amber-200">
+                      <a href="/events" className="hover:text-amber-300 transition-colors">近期活動 ↗</a>
+                    </h2>
+                    <a href="https://idolinfohub.com/events" target="_blank" rel="noopener noreferrer"
+                      className="text-xs text-amber-300/70 border border-amber-300/20 rounded-full px-2 py-0.5 hover:bg-amber-300/10 transition-colors">
+                      未來 60 天 ↗
+                    </a>
+                  </div>
                   <div key={i} className="flex items-start gap-2 text-xs">
                     <span className="flex-shrink-0 text-amber-300 font-medium w-20">{ev.date}</span>
                     <span className="flex-shrink-0 text-zinc-500 w-10">{ev.time}</span>
