@@ -1,12 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 
+// idolmetrics Supabase（論壇資料庫）
 const SB_URL = process.env.NEXT_PUBLIC_FORUM_SB_URL || "https://vxmebuygrnynxkepyunh.supabase.co";
 const SB_ANON = process.env.NEXT_PUBLIC_FORUM_SB_ANON || "";
-// idolmaps anon key 作為 fallback（forum threads 寫入需要 auth）
-const SB_KEY = SB_ANON || "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
 
-const H_R = { apikey: SB_KEY, Accept: "application/json" };
-const H_W = { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, "Content-Type": "application/json", Prefer: "return=representation" };
+// idolmaps Supabase（用戶認證）
+const AUTH_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co";
+const AUTH_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
+
+const H_R = { apikey: SB_ANON, Accept: "application/json" };
+const H_W = {
+  apikey: SB_ANON,
+  Authorization: `Bearer ${SB_ANON}`,
+  "Content-Type": "application/json",
+  Prefer: "return=representation",
+};
 
 // GET /api/forum/threads?forum_slug=general&limit=20
 export async function GET(req: NextRequest) {
@@ -14,6 +22,9 @@ export async function GET(req: NextRequest) {
   const slug = searchParams.get("forum_slug");
   const limit = searchParams.get("limit") || "20";
   const sort = searchParams.get("sort") || "created_at";
+
+  // forum schema 未建立時回傳空列表
+  if (!SB_ANON) return NextResponse.json({ threads: [], note: "forum_anon_key_not_set" });
 
   try {
     let url = `${SB_URL}/rest/v1/threads?select=*&limit=${limit}&order=${sort}.desc`;
@@ -30,58 +41,58 @@ export async function GET(req: NextRequest) {
 // POST /api/forum/threads
 export async function POST(req: NextRequest) {
   try {
-    const { forum_slug, title, body, tags, author_token } = await req.json();
+    const { forum_slug, title, body, tags, author_token, author_name: clientName } = await req.json();
     if (!forum_slug || !title?.trim() || !body?.trim()) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return NextResponse.json({ error: "缺少必填欄位" }, { status: 400 });
     }
 
-    // 驗證用戶
-    const authSB = "https://ziiagdrrytyrmzoeegjk.supabase.co";
-    const authKey = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
-    let author_id = null;
-    let author_name = "匿名用戶";
+    // 解析作者資訊（guest token 或 Supabase token）
+    let author_id: string | null = null;
+    let author_name = clientName || "匿名用戶";
 
-    if (author_token) {
+    // 嘗試驗證 Supabase token（如果是真實帳號）
+    if (author_token && !author_token.startsWith("user_") && !author_token.startsWith("anon_")) {
       try {
-        const userRes = await fetch(`${authSB}/auth/v1/user`, {
-          headers: { apikey: authKey, Authorization: `Bearer ${author_token}` }
+        const userRes = await fetch(`${AUTH_URL}/auth/v1/user`, {
+          headers: { apikey: AUTH_KEY, Authorization: `Bearer ${author_token}` }
         });
         if (userRes.ok) {
           const userData = await userRes.json();
           author_id = userData.id;
-          author_name = userData.user_metadata?.display_name || userData.email?.split("@")[0] || "用戶";
+          author_name = userData.user_metadata?.display_name || userData.email?.split("@")[0] || author_name;
         }
       } catch {}
     }
 
-    // 計算初始 trending score
-    const trending_score = 1.0;
+    // forum schema 未建立時 graceful fallback
+    if (!SB_ANON) {
+      return NextResponse.json({
+        thread: {
+          id: "pending_" + Date.now(),
+          forum_slug, title: title.trim(), body: body.trim(),
+          tags: tags || [], author_name, created_at: new Date().toISOString(),
+          likes_count: 0, replies_count: 0, trending_score: 1.0,
+        },
+        note: "forum_schema_pending — execute 001_forum_schema.sql in idolmetrics Supabase"
+      }, { status: 201 });
+    }
 
-    // 插入 thread
     const insertRes = await fetch(`${SB_URL}/rest/v1/threads`, {
       method: "POST",
       headers: H_W,
       body: JSON.stringify({
-        forum_slug,
-        title: title.trim(),
-        body: body.trim(),
-        tags: tags || [],
-        author_id,
-        author_name,
-        trending_score,
-        likes_count: 0,
-        replies_count: 0,
-        is_pinned: false,
-        is_locked: false,
+        forum_slug, title: title.trim(), body: body.trim(),
+        tags: tags || [], author_id, author_name,
+        trending_score: 1.0, likes_count: 0, replies_count: 0,
+        is_pinned: false, is_locked: false,
       }),
     });
 
     if (!insertRes.ok) {
       const err = await insertRes.text();
-      // Supabase forum schema 未建立時的 graceful fallback
-      if (insertRes.status === 404 || err.includes("relation") || err.includes("does not exist")) {
+      if (insertRes.status === 404 || err.includes("does not exist")) {
         return NextResponse.json({
-          thread: { id: "mock", forum_slug, title: title.trim(), body: body.trim(), author_name, created_at: new Date().toISOString() },
+          thread: { id: "pending_" + Date.now(), forum_slug, title: title.trim(), author_name, created_at: new Date().toISOString() },
           note: "forum_schema_pending"
         }, { status: 201 });
       }
