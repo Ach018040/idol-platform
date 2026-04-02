@@ -19,7 +19,7 @@ function StatCard({ label, value, color }: { label: string; value: string | numb
 }
 
 export default function ForumAdminPage() {
-  const { user } = useForumAuth();
+  const { user, signOut } = useForumAuth();
   const [tab, setTab] = useState<"overview"|"threads"|"posts"|"rules">("overview");
   const [threads, setThreads] = useState<ThreadRow[]>([]);
   const [posts, setPosts] = useState<PostRow[]>([]);
@@ -27,11 +27,8 @@ export default function ForumAdminPage() {
   const [loading, setLoading] = useState(false);
   const [actionMsg, setActionMsg] = useState("");
 
-  const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "").split(",").map(e=>e.trim());
-  const isAdmin = !!(user && (
-    ADMIN_EMAILS.includes(user.email) ||
-    user.display_name?.toLowerCase() === "admin"
-  ));
+  const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "cheng0180400215@gmail.com").split(",").map((e:string)=>e.trim());
+  const isAdmin = !!(user && ADMIN_EMAILS.includes(user.email));
 
   // Auth guard — 未登入或非管理員顯示拒絕畫面
   if (!user) return (
