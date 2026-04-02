@@ -173,7 +173,7 @@ export default function MemberPage({ params }:{params:{slug:string}}) {
               活動紀錄 ↗
             </a>
           )}
-          <Link href="/forum/members" className="rounded-xl border border-violet-400/20 bg-violet-400/10 px-4 py-2.5 text-sm text-violet-200 hover:bg-violet-400/20 transition-colors">💬 討論</Link>
+          <Link href={`/forum/member-${member.id}`} className="rounded-xl border border-violet-400/20 bg-violet-400/10 px-4 py-2.5 text-sm text-violet-200 hover:bg-violet-400/20 transition-colors">💬 個人討論區</Link>
         </div>
       </div>
     </main>
