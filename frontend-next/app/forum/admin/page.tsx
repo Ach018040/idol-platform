@@ -26,7 +26,38 @@ export default function ForumAdminPage() {
   const [loading, setLoading] = useState(false);
   const [actionMsg, setActionMsg] = useState("");
 
-  const isAdmin = user?.display_name?.toLowerCase().includes("admin") || false;
+  const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "").split(",").map(e=>e.trim());
+  const isAdmin = !!(user && (
+    ADMIN_EMAILS.includes(user.email) ||
+    user.display_name?.toLowerCase() === "admin"
+  ));
+
+  // Auth guard — 未登入或非管理員顯示拒絕畫面
+  if (!user) return (
+    <main className="min-h-screen text-white flex items-center justify-center">
+      <div className="text-center space-y-4">
+        <div className="text-5xl">🔐</div>
+        <h2 className="text-xl font-black text-white">請先登入</h2>
+        <p className="text-sm text-zinc-400">管理後台需要登入才能存取</p>
+        <a href="/forum/new" className="inline-flex rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 px-5 py-2.5 text-sm text-fuchsia-200 hover:bg-fuchsia-400/20 transition-colors">
+          前往登入
+        </a>
+      </div>
+    </main>
+  );
+
+  if (!isAdmin) return (
+    <main className="min-h-screen text-white flex items-center justify-center">
+      <div className="text-center space-y-4">
+        <div className="text-5xl">🚫</div>
+        <h2 className="text-xl font-black text-white">權限不足</h2>
+        <p className="text-sm text-zinc-400">你的帳號沒有管理員權限</p>
+        <a href="/forum" className="inline-flex rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm text-zinc-300 hover:bg-white/10 transition-colors">
+          返回論壇
+        </a>
+      </div>
+    </main>
+  );
 
   const fetchData = async () => {
     setLoading(true);
