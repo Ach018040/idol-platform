@@ -10,7 +10,7 @@ const ICS_API = "/api/ical";
 
 type Group = { rank: number; group: string; display_name: string; color: string; member_count: number; member_names: string; social_activity: number; temperature_index: number; conversion_score: number; instagram?: string; facebook?: string; twitter?: string; youtube?: string; is_solo?: boolean; };
 type Member = { rank: number; id: string; name: string; group?: string; instagram?: string; facebook?: string; twitter?: string; photo_url?: string; maid_url?: string; updated_at?: string; social_activity: number; temperature_index: number; conversion_score: number; platform_count: number; freshness_score: number; };
-type CalEvent = { date: string; time: string; summary: string; dtRaw: Date; url?: string; };
+type CalEvent = { date: string; time: string; summary: string; dtRaw: Date; };
 type Insights = { market_temperature: number; active_groups: number; weekly_highlights: { top_group: string; social_king: string }; rising_stars: string[]; events: CalEvent[]; };
 
 function fmt(v: number | null | undefined, d = 1) { const n = Number(v ?? 0); return Number.isFinite(n) ? n.toFixed(d) : "—"; }
@@ -132,7 +132,7 @@ async function loadData() {
   let events: CalEvent[] = [];
   try {
     const icalJson = await fetch(ICS_API).then(res => res.json());
-    events = (icalJson.events || []).map((e: { date: string; time: string; summary: string; location?: string; url?: string }) => ({ ...e, dtRaw: new Date() }));
+    events = (icalJson.events || []).map((e: { date: string; time: string; summary: string }) => ({ ...e, dtRaw: new Date() }));
   } catch (_) { events = []; }
 
   const insights: Insights = {
@@ -259,13 +259,8 @@ export default function HomePage() {
           </div>
           <div className="rounded-3xl border border-amber-400/20 bg-amber-500/10 p-5 backdrop-blur-xl">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-amber-200">
-                <a href="/events" className="hover:text-amber-300 transition-colors">近期活動 ↗</a>
-              </h2>
-              <a href="https://idolinfohub.com/events" target="_blank" rel="noopener noreferrer"
-                className="text-xs text-amber-300/70 border border-amber-300/20 rounded-full px-2 py-0.5 hover:bg-amber-300/10 transition-colors">
-                未來 60 天 ↗
-              </a>
+              <h2 className="text-lg font-bold text-amber-200"><a href="/events" className="hover:text-amber-300 transition-colors">近期活動 ↗</a></h2>
+              <span className="text-xs text-amber-300/70 border border-amber-300/20 rounded-full px-2 py-0.5">未來 60 天</span>
             </div>
             {insights.events && insights.events.length > 0 ? (
               <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
@@ -273,14 +268,7 @@ export default function HomePage() {
                   <div key={i} className="flex items-start gap-2 text-xs">
                     <span className="flex-shrink-0 text-amber-300 font-medium w-20">{ev.date}</span>
                     <span className="flex-shrink-0 text-zinc-500 w-10">{ev.time}</span>
-                    {ev.url && ev.url.startsWith('http') ? (
-                      <a href={ev.url} target="_blank" rel="noopener noreferrer"
-                        className="text-zinc-200 truncate hover:text-amber-300 transition-colors">
-                        {ev.summary} ↗
-                      </a>
-                    ) : (
-                      <span className="text-zinc-200 truncate">{ev.summary}</span>
-                    )}
+                    <span className="text-zinc-200 truncate">{ev.summary}</span>
                   </div>
                 ))}
               </div>
@@ -411,9 +399,6 @@ export default function HomePage() {
           <a href="/pricing" className="hover:text-zinc-300 transition-colors">方案</a>
           <a href="https://www.facebook.com/profile.php?id=61573475755166" target="_blank" rel="noopener noreferrer" className="hover:text-blue-300 text-blue-400/70 transition-colors">📘 Facebook</a>
           <a href="/about" className="hover:text-zinc-300 transition-colors">關於 / 隱私政策</a>
-        </div>
-        </div>
-        </div>
         </div>
       </footer>
     </main>
