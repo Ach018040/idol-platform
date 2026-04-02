@@ -330,7 +330,7 @@ export default function HomePage() {
                     {!g.instagram && !g.twitter && !g.facebook && !g.youtube && <span>轉換 {fmt(g.conversion_score, 0)}</span>}
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
@@ -382,7 +382,7 @@ export default function HomePage() {
                         {!m.instagram && !m.twitter && !m.facebook && <span className="text-zinc-600">無社群</span>}
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
