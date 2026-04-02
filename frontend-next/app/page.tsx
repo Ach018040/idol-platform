@@ -8,7 +8,7 @@ const SB_H = { apikey: SB_KEY, Accept: "application/json", "Accept-Profile": "pu
 const ICS_API = "/api/ical";
 
 type Group = { rank: number; group: string; display_name: string; color: string; member_count: number; member_names: string; social_activity: number; temperature_index: number; conversion_score: number; instagram?: string; facebook?: string; twitter?: string; youtube?: string; is_solo?: boolean; };
-type Member = { rank: number; id: string; name: string; group?: string; instagram?: string; facebook?: string; twitter?: string; photo_url?: string; social_activity: number; temperature_index: number; conversion_score: number; };
+type Member = { rank: number; id: string; name: string; group?: string; instagram?: string; facebook?: string; twitter?: string; photo_url?: string; maid_url?: string; updated_at?: string; social_activity: number; temperature_index: number; conversion_score: number; platform_count: number; freshness_score: number; };
 type CalEvent = { date: string; time: string; summary: string; dtRaw: Date; };
 type Insights = { market_temperature: number; active_groups: number; weekly_highlights: { top_group: string; social_king: string }; rising_stars: string[]; events: CalEvent[]; };
 
@@ -29,9 +29,9 @@ async function sbFetch(path: string, params: Record<string, string>) {
 
 async function loadData() {
   const [members, groups, history] = await Promise.all([
-    sbFetch("members", { select: "id,name,color,birthdate,instagram,facebook,x,photo_url", order: "updated_at.desc", limit: "500" }),
+    sbFetch("members", { select: "id,name,color,birthdate,instagram,facebook,x,photo_url,maid_url,updated_at,created_at", order: "updated_at.desc", limit: "500" }),
     sbFetch("groups", { select: "id,name,color,instagram,facebook,x,youtube", order: "name.asc", limit: "300" }),
-    sbFetch("history", { select: "member_id,group_id,joined_at", order: "joined_at.desc", limit: "2000" }),
+    sbFetch("history", { select: "member_id,group_id,joined_at,left_at,status,role", order: "joined_at.desc", limit: "2000" }),
   ]);
 
   const SOLO: Record<string, boolean> = {
@@ -47,23 +47,51 @@ async function loadData() {
     if (!mgMap[h.member_id] && h.group_id) mgMap[h.member_id] = gMap[h.group_id] || {};
   });
 
-  let seed = 99991;
-  const rand = () => { seed = ((seed * 1664525 + 1013904223) >>> 0); return seed / 4294967296; };
+  const now = Date.now();
 
-  const memberData: Member[] = members.map((m: { id: string; name: string; color?: string; instagram?: string; facebook?: string; x?: string; photo_url?: string }) => {
-    const ig = !!(m.instagram || "").startsWith("http");
-    const ph = !!(m.photo_url || "").startsWith("http");
-    const sa = Math.min(100, +ig * 55 + +ph * 15 + (rand() * 30 | 0));
-    const ti = +(sa * 0.7 + rand() * 8).toFixed(1);
+  const memberData: Member[] = members.map((m: { id: string; name: string; color?: string; instagram?: string; facebook?: string; x?: string; photo_url?: string; maid_url?: string; updated_at?: string; created_at?: string }) => {
+    // ── 平台覆蓋率（多平台 = 更廣觸及）──
+    const hasIG = (m.instagram || "").startsWith("http");
+    const hasFB = (m.facebook || "").startsWith("http");
+    const hasX  = (m.x || "").startsWith("http");
+    const platformCount = +hasIG + +hasFB + +hasX;
+    const platformScore = platformCount === 3 ? 40 : platformCount === 2 ? 28 : platformCount === 1 ? 16 : 0;
+
+    // ── 形象完整度（有公開照片）──
+    const hasPhoto   = (m.photo_url || "").startsWith("http");
+    const hasMaidUrl = (m.maid_url || "").startsWith("http");
+    const imageScore = +hasPhoto * 20 + +hasMaidUrl * 10;
+
+    // ── 資料新鮮度（最近更新日期越近分數越高）──
+    const updatedAt = m.updated_at ? new Date(m.updated_at).getTime() : 0;
+    const daysSinceUpdate = updatedAt ? (now - updatedAt) / 86400000 : 365;
+    const freshnessScore = Math.max(0, Math.round(30 * Math.exp(-daysSinceUpdate / 30)));
+
+    // ── 社群活躍度綜合 ──
+    const sa = Math.min(100, platformScore + imageScore + freshnessScore);
+
+    // ── 溫度指數（加權平均）──
+    const ti = +(
+      sa * 0.60 +
+      platformScore * 0.20 +
+      freshnessScore * 0.20
+    ).toFixed(1);
+
     const g = SOLO[m.id] ? {} : (mgMap[m.id] || {});
     return {
       rank: 0, id: m.id, name: m.name || "",
       group: (g as { name?: string }).name || "",
-      instagram: ig ? m.instagram! : "",
-      facebook: ((m.facebook || "").startsWith("http") ? m.facebook : "") as string,
-      twitter: ((m.x || "").startsWith("http") ? m.x : "") as string,
-      photo_url: ph ? m.photo_url! : "",
-      social_activity: sa, temperature_index: ti, conversion_score: +(ti * 0.6).toFixed(1),
+      instagram: hasIG ? m.instagram! : "",
+      facebook: hasFB ? m.facebook! : "",
+      twitter: hasX ? m.x! : "",
+      photo_url: hasPhoto ? m.photo_url! : "",
+      maid_url: hasMaidUrl ? m.maid_url! : "",
+      updated_at: m.updated_at || "",
+      social_activity: sa,
+      temperature_index: ti,
+      conversion_score: +(ti * 0.6).toFixed(1),
+      platform_count: platformCount,
+      freshness_score: freshnessScore,
     };
   }).sort((a: Member, b: Member) => b.temperature_index - a.temperature_index)
     .map((m: Member, i: number) => ({ ...m, rank: i + 1 }));
@@ -334,7 +362,12 @@ export default function HomePage() {
                       <div className="h-full rounded-full bg-gradient-to-r from-cyan-500 via-sky-400 to-violet-400" style={{ width: `${pct}%` }} />
                     </div>
                     <div className="flex items-center justify-between text-xs text-zinc-400">
-                      <span>社群活躍度 {fmt(m.social_activity, 0)}</span>
+                      <div className="flex items-center gap-2">
+                        <span>社群 {fmt(m.social_activity, 0)}</span>
+                        {m.freshness_score > 20 && <span className="text-emerald-400">● 活躍</span>}
+                        {m.freshness_score > 0 && m.freshness_score <= 20 && <span className="text-yellow-500">● 近期</span>}
+                        {m.freshness_score === 0 && <span className="text-zinc-600">● 久未更新</span>}
+                      </div>
                       <div className="flex gap-2">
                         {m.instagram && <a href={m.instagram} target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 font-bold">IG</a>}
                         {m.twitter && <a href={m.twitter} target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:text-sky-300 font-bold">𝕏</a>}
