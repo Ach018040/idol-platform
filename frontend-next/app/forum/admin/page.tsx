@@ -27,8 +27,10 @@ export default function ForumAdminPage() {
   const [loading, setLoading] = useState(false);
   const [actionMsg, setActionMsg] = useState("");
 
-  const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "cheng0180400215@gmail.com").split(",").map((e:string)=>e.trim());
-  const isAdmin = !!(user && ADMIN_EMAILS.includes(user.email));
+  const ADMIN_TOKEN = process.env.NEXT_PUBLIC_ADMIN_TOKEN || "idol-admin-2026";
+  // 從 localStorage 取得 admin token 並比對
+  const storedToken = typeof window !== "undefined" ? localStorage.getItem("forum_admin_token") : null;
+  const isAdmin = !!(user && storedToken && storedToken === ADMIN_TOKEN);
 
   // Auth guard — 未登入或非管理員顯示拒絕畫面
   if (!user) return (
