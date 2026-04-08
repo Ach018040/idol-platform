@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Script from "next/script";
 
 const BASE_URL = "https://idol-platform-git-main-ach018040s-projects.vercel.app";
 
@@ -56,7 +57,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-TW">
-      <body>{children}</body>
+      <body>{children}  <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9012388026055638"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </body>
     </html>
   );
 }
