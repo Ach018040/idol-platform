@@ -141,3 +141,5 @@ export default function ForumSlugPage({ params }: { params: { slug: string } }) 
     </main>
   );
 }
+
+// threadId page added
