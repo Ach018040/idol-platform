@@ -70,7 +70,7 @@ export default function NewThreadPage() {
   };
 
   const selectedForum = MOCK_FORUMS.find(f => f.slug === forum);
-  const canSubmit = title.trim().length > 3 && body.trim().length > 10;
+  const canSubmit = title.trim().length >= 1 && body.trim().length >= 1;
 
   const submit = async () => {
     if (!user) { setShowAuth(true); return; }
