@@ -38,11 +38,7 @@ export default function ThreadPage({ params }: { params: { slug: string; threadI
   useEffect(()=>{
     const load=async()=>{
       setLoading(true);
-      try {
-        const res=await fetch(`/api/forum/threads?forum_slug=${params.slug}&limit=200`);
-        const data=await res.json();
-        setThread((data.threads||[]).find((t:Thread)=>t.id===params.threadId)||null);
-      } catch { setThread(null); }
+      try { const res=await fetch(`/api/forum/thread?id=${params.threadId}`); const data=await res.json(); setThread(data.thread||null); } catch { setThread(null); }
       try {
         const fRes=await fetch("/api/forum/forums");
         const fData=await fRes.json();
