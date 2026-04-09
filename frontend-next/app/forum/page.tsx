@@ -2,8 +2,10 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import {
-  MOCK_FORUMS, MOCK_THREADS, getTrendingTag, formatRelativeTime,
-  type Thread, type Forum,
+  getTrendingTag,
+  formatRelativeTime,
+  type Thread,
+  type Forum,
 } from "../../lib/supabase-forum";
 
 function TrendingBadge({ tag }: { tag: ReturnType<typeof getTrendingTag> }) {
@@ -24,7 +26,7 @@ function ThreadCard({ thread }: { thread: Thread }) {
         <div className="flex flex-wrap items-center gap-2 mb-2">
           {thread.is_pinned && <span className="text-[10px] text-amber-400">📌</span>}
           <TrendingBadge tag={tag} />
-          {thread.tags.slice(0,2).map(t => (
+          {(thread.tags||[]).slice(0,2).map(t => (
             <span key={t} className="rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-zinc-400">{t}</span>
           ))}
         </div>
@@ -32,62 +34,69 @@ function ThreadCard({ thread }: { thread: Thread }) {
         <p className="mt-1 text-xs text-zinc-500 line-clamp-1">{thread.body}</p>
         <div className="mt-3 flex items-center justify-between text-xs text-zinc-500">
           <div className="flex items-center gap-3">
-            <span><span className="text-pink-400">♥</span> {thread.likes_count}</span>
-            <span><span className="text-cyan-400">💬</span> {thread.replies_count}</span>
+            <span><span className="text-pink-400">♥</span> {thread.likes_count||0}</span>
+            <span><span className="text-cyan-400">💬</span> {thread.replies_count||0}</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-zinc-600">{thread.author_name}</span>
             <span>·</span>
-            <span>{formatRelativeTime(thread.last_reply_at)}</span>
+            <span>{formatRelativeTime(thread.last_reply_at||thread.created_at)}</span>
           </div>
         </div>
         <div className="mt-2 h-1 rounded-full bg-white/5 overflow-hidden">
           <div className="h-full rounded-full bg-gradient-to-r from-pink-500 via-fuchsia-400 to-violet-400"
-            style={{ width: `${Math.min(100, thread.trending_score * 6)}%` }} />
+            style={{ width: `${Math.min(100, (thread.trending_score||0) * 6)}%` }} />
         </div>
       </div>
     </Link>
   );
 }
 
+const FALLBACK_FORUMS: Forum[] = [
+  { slug:"general", title:"💬 綜合討論", icon:"💬", thread_count:0, sort_order:1 },
+  { slug:"groups",  title:"🎤 團體討論", icon:"🎤", thread_count:0, sort_order:2 },
+  { slug:"members", title:"⭐ 成員討論", icon:"⭐", thread_count:0, sort_order:3 },
+  { slug:"events",  title:"🎵 活動心得", icon:"🎵", thread_count:0, sort_order:4 },
+  { slug:"photo",   title:"📸 拍照物販", icon:"📸", thread_count:0, sort_order:5 },
+  { slug:"news",    title:"📢 新聞公告", icon:"📢", thread_count:0, sort_order:6 },
+  { slug:"misc",    title:"🌸 雜談",     icon:"🌸", thread_count:0, sort_order:7 },
+];
+
 export default function ForumPage() {
   const [activeTab, setActiveTab] = useState<"trending"|"latest">("trending");
   const [threads, setThreads] = useState<Thread[]>([]);
-  const [forums, setForums] = useState<Forum[]>([]);
+  const [forums, setForums] = useState<Forum[]>(FALLBACK_FORUMS);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 優先嘗試真實 API，fallback 到 Mock
     const fetchData = async () => {
+      setLoading(true);
       try {
-        const res = await fetch(`/api/forum/threads?sort=${activeTab}&page=1`);
+        // 讀取真實討論串
+        const res = await fetch(`/api/forum/threads?sort=${activeTab === "trending" ? "trending_score" : "created_at"}&limit=20`);
         const data = await res.json();
-        if (data.threads?.length > 0) {
-          setThreads(data.threads);
-        } else {
-          setThreads(MOCK_THREADS);
+        setThreads(Array.isArray(data.threads) ? data.threads : []);
+      } catch {
+        setThreads([]);
+      }
+      try {
+        // 讀取真實版區列表
+        const fRes = await fetch("/api/forum/forums");
+        const fData = await fRes.json();
+        if (Array.isArray(fData.forums) && fData.forums.length > 0) {
+          setForums(fData.forums.filter((f:Forum)=>!f.slug.startsWith("member-")).slice(0,7));
         }
       } catch {
-        setThreads(MOCK_THREADS);
+        setForums(FALLBACK_FORUMS);
       }
-      setForums(MOCK_FORUMS);
       setLoading(false);
     };
     fetchData();
   }, [activeTab]);
 
-  const upcomingEvents = [
-    { date: "4/10（週五）", name: "Phantasy Square 奇幻動漫祭 03" },
-    { date: "4/11（週六）", name: "acosta！高雄" },
-    { date: "4/12（週日）", name: "宅化祭5 港台偶像場" },
-    { date: "4/18（週六）", name: "Pure makeR 不定期公演" },
-    { date: "4/25（週五）", name: "THEΔRAREz 週年公演" },
-  ];
-
   return (
     <main className="min-h-screen text-white">
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 lg:px-8">
-
         {/* Header */}
         <header className="mb-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -118,6 +127,7 @@ export default function ForumPage() {
                 </button>
               ))}
             </div>
+
             {loading ? (
               <div className="space-y-3">
                 {[...Array(5)].map((_,i) => (
@@ -126,6 +136,12 @@ export default function ForumPage() {
                     <div className="h-3 bg-white/5 rounded w-1/2"/>
                   </div>
                 ))}
+              </div>
+            ) : threads.length === 0 ? (
+              <div className="rounded-2xl border border-white/10 bg-black/20 p-8 text-center">
+                <div className="text-3xl mb-3">💬</div>
+                <p className="text-zinc-400 text-sm">還沒有討論串</p>
+                <Link href="/forum/new" className="mt-4 inline-block rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 px-4 py-2 text-sm text-fuchsia-200 hover:bg-fuchsia-400/20 transition-colors">✏️ 成為第一個發文的人</Link>
               </div>
             ) : (
               <div className="space-y-3">
@@ -147,39 +163,14 @@ export default function ForumPage() {
                         <span className="text-base">{f.icon}</span>
                         <span className="text-sm text-zinc-300">{f.title}</span>
                       </div>
-                      <span className="text-xs text-zinc-500">{f.thread_count}</span>
+                      {(f.thread_count||0) > 0 && <span className="text-xs text-zinc-500">{f.thread_count}</span>}
                     </div>
                   </Link>
                 ))}
               </div>
             </div>
 
-            {/* 近期活動 */}
-            <div className="rounded-3xl border border-amber-400/20 bg-amber-500/10 p-5">
-              <h2 className="mb-4 text-base font-bold text-amber-200">📅 近期活動</h2>
-              <div className="space-y-2.5">
-                {upcomingEvents.map((ev, i) => (
-                  <div key={i} className="flex items-start gap-2 text-xs">
-                    <span className="flex-shrink-0 text-amber-300 font-medium w-20">{ev.date}</span>
-                    <span className="text-zinc-300">{ev.name}</span>
-                  </div>
-                ))}
-              </div>
-              <Link href="/" className="mt-3 block text-center text-xs text-amber-400/70 hover:text-amber-300 transition-colors">查看完整活動曆 →</Link>
-            </div>
-
-            {/* AI 摘要 */}
-            <div className="rounded-3xl border border-violet-400/20 bg-violet-500/10 p-5">
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-base font-bold text-violet-200">🤖 本週論壇摘要</h2>
-                <span className="text-[10px] text-violet-400/70 border border-violet-400/20 rounded-full px-2 py-0.5">AI 生成</span>
-              </div>
-              <p className="text-xs text-zinc-300 leading-6">
-                本週最熱討論為 <strong className="text-violet-200">宅化祭5</strong> 活動心得，
-                物販交流版拍立得整理持續高人氣。時空Astria 新專輯引發廣泛討論，溫度指數排名變動也吸引大量關注。
-              </p>
-            </div>
-
+            {/* 返回排行榜 */}
             <Link href="/">
               <div className="rounded-2xl border border-white/10 bg-white/5 p-4 flex items-center justify-between hover:bg-white/10 transition-colors cursor-pointer">
                 <div>
