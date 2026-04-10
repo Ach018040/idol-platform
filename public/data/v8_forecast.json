@@ -7,13 +7,13 @@
       69.11,
       69.11,
       69.11,
-      69.12,
+      69.11,
       69.12,
       69.12
     ],
     "direction": "flat",
-    "confidence": 0.01,
-    "data_days": 19
+    "confidence": 0.009,
+    "data_days": 20
   },
   {
     "entity_name": "新增經歷",
@@ -28,8 +28,8 @@
       58.58
     ],
     "direction": "flat",
-    "confidence": 0.005,
-    "data_days": 19
+    "confidence": 0.004,
+    "data_days": 20
   },
   {
     "entity_name": "#0000FF",
@@ -39,13 +39,13 @@
       54.21,
       54.2,
       54.19,
+      54.18,
       54.17,
-      54.16,
       54.15
     ],
     "direction": "flat",
-    "confidence": 0.072,
-    "data_days": 19
+    "confidence": 0.068,
+    "data_days": 20
   },
   {
     "entity_name": "#FFFF00",
@@ -54,14 +54,14 @@
       52.12,
       52.11,
       52.11,
+      52.11,
       52.1,
       52.1,
-      52.09,
       52.09
     ],
     "direction": "flat",
-    "confidence": 0.025,
-    "data_days": 19
+    "confidence": 0.023,
+    "data_days": 20
   },
   {
     "entity_name": "宿命白",
@@ -76,8 +76,8 @@
       39.83
     ],
     "direction": "flat",
-    "confidence": 0.005,
-    "data_days": 19
+    "confidence": 0.004,
+    "data_days": 20
   },
   {
     "entity_name": "大邦奶奶",
@@ -92,8 +92,8 @@
       39.74
     ],
     "direction": "flat",
-    "confidence": 0.085,
-    "data_days": 19
+    "confidence": 0.081,
+    "data_days": 20
   },
   {
     "entity_name": "紅色",
@@ -108,8 +108,8 @@
       39.59
     ],
     "direction": "flat",
-    "confidence": 0.07,
-    "data_days": 19
+    "confidence": 0.067,
+    "data_days": 20
   },
   {
     "entity_name": "#800080",
@@ -119,13 +119,13 @@
       37.47,
       37.46,
       37.45,
-      37.45,
       37.44,
-      37.43
+      37.43,
+      37.42
     ],
     "direction": "flat",
-    "confidence": 0.045,
-    "data_days": 19
+    "confidence": 0.044,
+    "data_days": 20
   },
   {
     "entity_name": "#007500",
@@ -135,13 +135,13 @@
       20.08,
       20.1,
       20.12,
-      20.14,
-      20.16,
-      20.18
+      20.13,
+      20.15,
+      20.17
     ],
     "direction": "flat",
-    "confidence": 0.113,
-    "data_days": 19
+    "confidence": 0.106,
+    "data_days": 20
   },
   {
     "entity_name": "#C90000",
@@ -157,6 +157,6 @@
     ],
     "direction": "flat",
     "confidence": 0.007,
-    "data_days": 19
+    "data_days": 20
   }
 ]
