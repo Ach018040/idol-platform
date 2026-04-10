@@ -1,0 +1,3 @@
+import type{Metadata}from 'next';
+export const metadata:Metadata={title:'隱私政策',description:'Idol Platform 隱私政策。'};
+export default function PrivacyPolicyPage(){return(<div className="mx-auto max-w-4xl px-6 py-16"><h1 className="text-4xl font-bold text-white">隱私政策</h1><div className="mt-8 space-y-6 text-base leading-8 text-zinc-300"><p>最後更新：2026 年 4 月 10 日</p><p>本站尊重使用者隱私，可能透過 Cookies、基本流量分析工具與必要技術紀錄來改善網站體驗。</p><p>本站可能使用第三方廣告服務，例如 Google AdSense。第三方服務可能依其政策使用 Cookies 或其他技術提供廣告內容。</p><p>論壇功能採暱稱制，不強制收集個人識別資訊。使用者自願提供之暱稱及文字內容將儲存於本站資料庫，用於顯示論壇內容。</p><p>若您不同意相關資料使用方式，請自行調整瀏覽器設定或停止使用本站。</p></div></div>)} 
