@@ -11,7 +11,16 @@ const ICS_API = "/api/ical";
 type Group = { rank: number; group: string; display_name: string; color: string; member_count: number; member_names: string; social_activity: number; temperature_index: number; conversion_score: number; instagram?: string; facebook?: string; twitter?: string; youtube?: string; is_solo?: boolean; };
 type Member = { rank: number; id: string; name: string; group?: string; instagram?: string; facebook?: string; twitter?: string; photo_url?: string; maid_url?: string; updated_at?: string; social_activity: number; temperature_index: number; conversion_score: number; platform_count: number; freshness_score: number; };
 type CalEvent = { date: string; time: string; summary: string; dtRaw: Date; };
-type Insights = { market_temperature: number; active_groups: number; weekly_highlights: { top_group: string; social_king: string }; rising_stars: string[]; events: CalEvent[]; };
+type Insights = { market_temperature: number; active_groups: number; weekly_highlights: { top_group: string; social_king: string };
+
+type GroupInfo = {
+  name: string;
+  color: string;
+  instagram?: string;
+  facebook?: string;
+  x?: string;
+  youtube?: string;
+}; rising_stars: string[]; events: CalEvent[]; };
 
 function fmt(v: number | null | undefined, d = 1) { const n = Number(v ?? 0); return Number.isFinite(n) ? n.toFixed(d) : "—"; }
 function getRankBadge(r: number) { return r === 1 ? "🥇" : r === 2 ? "🥈" : r === 3 ? "🥉" : `#${r}`; }
@@ -40,10 +49,10 @@ async function loadData() {
     "bb1bba00-446c-4d16-a761-ef8a7794eab6": true,
   };
 
-  const gMap: Record<string, { name: string; color: string; instagram?: string; facebook?: string; x?: string; youtube?: string }> = {};
+  const gMap: Record<string, GroupInfo> = {};
   groups.forEach((g: { id: string; name: string; color: string; instagram?: string; facebook?: string; x?: string; youtube?: string }) => { gMap[g.id] = g; });
 
-  const mgMap: Record<string, typeof gMap[string]> = {};
+  const mgMap: Record<string, GroupInfo> = {};
   history.forEach((h: { member_id: string; group_id: string }) => {
     if (!mgMap[h.member_id] && h.group_id) mgMap[h.member_id] = gMap[h.group_id] || {};
   });
@@ -78,10 +87,10 @@ async function loadData() {
       freshnessScore * 0.20
     ).toFixed(1);
 
-    const g = SOLO[m.id] ? {} : (mgMap[m.id] || {});
+    const gInfo = SOLO[m.id] ? undefined : mgMap[m.id];
     return {
       rank: 0, id: m.id, name: m.name || "",
-      group: (g as { name?: string }).name || "",
+      group: gInfo?.name || "",
       instagram: hasIG ? m.instagram! : "",
       facebook: hasFB ? m.facebook! : "",
       twitter: hasX ? m.x! : "",
