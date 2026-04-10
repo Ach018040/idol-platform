@@ -1,0 +1,5 @@
+import type{Metadata}from 'next';
+import Link from 'next/link';
+import{insightPosts}from '../../lib/insights';
+export const metadata:Metadata={title:'Insights',description:'地下偶像市場觀察、平台分析與內容整理。'};
+export default function InsightsPage(){return(<div className="mx-auto max-w-6xl px-6 py-16"><div className="max-w-3xl"><p className="text-sm uppercase tracking-[0.2em] text-cyan-300">Insights</p><h1 className="mt-3 text-4xl font-bold text-white">內容分析與市場觀察</h1><p className="mt-4 text-base leading-8 text-zinc-300">這裡整理地下偶像市場觀察、粉絲行為分析、平台化資訊價值與內容解讀，讓網站不只停留在資料展示。</p></div><div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">{insightPosts.map(post=>(<Link key={post.slug} href={`/insights/${post.slug}`} className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"><p className="text-xs text-cyan-300">{post.category}</p><h2 className="mt-3 text-xl font-semibold text-white">{post.title}</h2><p className="mt-3 text-sm leading-7 text-zinc-400">{post.summary}</p><p className="mt-4 text-xs text-zinc-500">{post.date}</p></Link>))}</div></div>)} 
