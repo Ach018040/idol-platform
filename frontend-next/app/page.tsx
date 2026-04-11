@@ -9,7 +9,7 @@ const SB_H = { apikey: SB_KEY, Accept: "application/json", "Accept-Profile": "pu
 const ICS_API = "/api/ical";
 
 type Group = { rank: number; group: string; display_name: string; color: string; member_count: number; member_names: string; social_activity: number; temperature_index: number; conversion_score: number; instagram?: string; facebook?: string; twitter?: string; youtube?: string; is_solo?: boolean; };
-type Member = { rank: number; id: string; name: string; group?: string; instagram?: string; facebook?: string; twitter?: string; photo_url?: string; maid_url?: string; updated_at?: string; social_activity: number; temperature_index: number; conversion_score: number; platform_count: number; freshness_score: number; };
+type Member = { rank: number; id: string; name: string; group?: string; instagram?: string; facebook?: string; twitter?: string; photo_url?: string; maid_url?: string; updated_at?: string; social_activity: number; profile_completeness: number; freshness_score: number; group_affinity_score: number; temperature_index: number; conversion_score: number; platform_count: number; };
 type CalEvent = { date: string; time: string; summary: string; dtRaw: Date; };
 type Insights = { market_temperature: number; active_groups: number; weekly_highlights: { top_group: string; social_king: string }; rising_stars: string[]; events: CalEvent[]; };
 
@@ -17,6 +17,7 @@ function fmt(v: number | null | undefined, d = 1) { const n = Number(v ?? 0); re
 function getRankBadge(r: number) { return r === 1 ? "🥇" : r === 2 ? "🥈" : r === 3 ? "🥉" : `#${r}`; }
 function getInitial(name: string) { return [...name][0] ?? "?"; }
 function clamp(v: number) { return Math.max(0, Math.min(100, v)); }
+function clamp1(v: number) { return +clamp(v).toFixed(1); }
 function hashColor(name: string) { let h = 0x811c9dc5; for (let i = 0; i < name.length; i++) { h = (Math.imul(h ^ name.charCodeAt(i), 0x01000193)) >>> 0; } return `hsl(${h % 360},${55 + (h >> 8) % 30}%,${45 + (h >> 16) % 20}%)`; }
 function dotColor(g: Group) { const c = g.color || "#888888"; return c !== "#e879a0" && c !== "#888888" && c !== "#ffffff" ? c : hashColor(g.display_name || g.group); }
 
@@ -55,25 +56,25 @@ async function loadData() {
     const hasFB = (m.facebook || "").startsWith("http");
     const hasX  = (m.x || "").startsWith("http");
     const platformCount = +hasIG + +hasFB + +hasX;
-    const platformScore = platformCount === 3 ? 40 : platformCount === 2 ? 28 : platformCount === 1 ? 16 : 0;
 
     const hasPhoto   = (m.photo_url || "").startsWith("http");
-    const hasMaidUrl = (m.maid_url || "").startsWith("http");
-    const imageScore = +hasPhoto * 20 + +hasMaidUrl * 10;
+    const hasProfile = Boolean(m.id);
 
     const updatedAt = m.updated_at ? new Date(m.updated_at).getTime() : 0;
     const daysSinceUpdate = updatedAt ? (now - updatedAt) / 86400000 : 365;
-    const freshnessScore = Math.max(0, Math.round(30 * Math.exp(-daysSinceUpdate / 30)));
-
-    const sa = Math.min(100, platformScore + imageScore + freshnessScore);
-
-    const ti = +(
-      sa * 0.60 +
-      platformScore * 0.20 +
-      freshnessScore * 0.20
-    ).toFixed(1);
+    const freshnessScore = clamp1(28 * Math.exp(-daysSinceUpdate / 45));
+    const socialPresence = clamp1(+hasIG * 16 + +hasX * 14 + +hasFB * 10);
+    const profileCompleteness = clamp1(+hasPhoto * 16 + +hasProfile * 6);
 
     const g = SOLO[m.id] ? {} : (mgMap[m.id] || {});
+    const groupAffinityScore = (g as { name?: string }).name ? 10 : 0;
+    const ti = clamp1(
+      socialPresence +
+      profileCompleteness +
+      freshnessScore +
+      groupAffinityScore
+    );
+
     return {
       rank: 0, id: m.id, name: m.name || "",
       group: (g as { name?: string }).name || "",
@@ -81,13 +82,15 @@ async function loadData() {
       facebook: hasFB ? m.facebook! : "",
       twitter: hasX ? m.x! : "",
       photo_url: hasPhoto ? m.photo_url! : "",
-      maid_url: hasMaidUrl ? m.maid_url! : "",
+      maid_url: (m.maid_url || "").startsWith("http") ? m.maid_url! : "",
       updated_at: m.updated_at || "",
-      social_activity: sa,
-      temperature_index: ti,
-      conversion_score: +(ti * 0.6).toFixed(1),
-      platform_count: platformCount,
+      social_activity: socialPresence,
+      profile_completeness: profileCompleteness,
       freshness_score: freshnessScore,
+      group_affinity_score: groupAffinityScore,
+      temperature_index: ti,
+      conversion_score: clamp1(ti * 0.6),
+      platform_count: platformCount,
     };
   }).sort((a: Member, b: Member) => b.temperature_index - a.temperature_index)
     .map((m: Member, i: number) => ({ ...m, rank: i + 1 }));
@@ -98,12 +101,20 @@ async function loadData() {
   const groupData: Group[] = groups.filter((g: { name: string }) => g.name).map((g: { name: string; color: string; instagram?: string; facebook?: string; x?: string; youtube?: string }) => {
     const mb = grpMbrs[g.name] || [];
     const cnt = mb.length;
+    const memberAverage = cnt ? mb.reduce((s: number, m: Member) => s + m.temperature_index, 0) / cnt : 0;
+    const memberDepth = cnt ? Math.min(18, 6 * Math.log2(cnt + 1)) : 0;
+    const socialCoverage = clamp1(
+      +((g.instagram || "").startsWith("http")) * 8 +
+      +((g.x || "").startsWith("http")) * 8 +
+      +((g.facebook || "").startsWith("http")) * 5 +
+      +((g.youtube || "").startsWith("http")) * 7
+    );
     const sa = cnt ? +(mb.reduce((s: number, m: Member) => s + m.social_activity, 0) / cnt).toFixed(1) : 0;
-    const ti = cnt ? +(mb.reduce((s: number, m: Member) => s + m.temperature_index, 0) / cnt).toFixed(1) : 0;
+    const ti = clamp1(memberAverage * 0.72 + memberDepth + socialCoverage);
     return {
       rank: 0, group: g.name, display_name: g.name, color: g.color || "#888888",
       member_count: cnt, member_names: mb.slice(0, 6).map((m: Member) => m.name).join(" / "),
-      social_activity: sa, temperature_index: ti, conversion_score: +(ti * 0.6).toFixed(1),
+      social_activity: sa, temperature_index: ti, conversion_score: clamp1(ti * 0.6),
       instagram: g.instagram || "", facebook: g.facebook || "", twitter: g.x || "", youtube: g.youtube || "",
     };
   });
