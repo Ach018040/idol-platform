@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useForumAuth } from "../../../lib/forum-auth";
+import { roleLabel, roleBadgeColor } from "../../../lib/user-role";
 
 const SB_URL = process.env.NEXT_PUBLIC_FORUM_SB_URL || "https://vxmebuygrnynxkepyunh.supabase.co";
 const SB_ANON = process.env.NEXT_PUBLIC_FORUM_SB_ANON || "";
@@ -19,18 +20,19 @@ function StatCard({ label, value, color }: { label: string; value: string | numb
 }
 
 export default function ForumAdminPage() {
-  const { user, signOut } = useForumAuth();
-  const [tab, setTab] = useState<"overview"|"threads"|"posts"|"rules">("overview");
+  const { user, signOut, refreshProfile } = useForumAuth();
+  const [tab, setTab] = useState<"overview"|"threads"|"posts"|"reports"|"users"|"rules">("overview");
+  const [userList, setUserList] = useState<any[]>([]);
   const [threads, setThreads] = useState<ThreadRow[]>([]);
   const [posts, setPosts] = useState<PostRow[]>([]);
   const [reports, setReports] = useState<{id:string;target_type:string;target_id:string;reason:string;status:string;created_at:string;reporter_id:string}[]>([]);
   const [loading, setLoading] = useState(false);
   const [actionMsg, setActionMsg] = useState("");
 
-  const ADMIN_TOKEN = process.env.NEXT_PUBLIC_ADMIN_TOKEN || "idol-admin-2026";
-  // 從 localStorage 取得 admin token 並比對
-  const storedToken = typeof window !== "undefined" ? localStorage.getItem("forum_admin_token") : null;
-  const isAdmin = !!(user && storedToken && storedToken === ADMIN_TOKEN);
+  const isAdmin = user?.role === "admin";
+  const isModerator = user?.role === "moderator";
+  const [secret, setSecret] = useState("");
+  const [loginMsg, setLoginMsg] = useState("");
 
   // Auth guard — 未登入或非管理員顯示拒絕畫面
   if (!user) return (
@@ -48,13 +50,28 @@ export default function ForumAdminPage() {
 
   if (!isAdmin) return (
     <main className="min-h-screen text-white flex items-center justify-center">
-      <div className="text-center space-y-4">
+      <div className="text-center space-y-4 w-full max-w-sm px-4">
         <div className="text-5xl">🚫</div>
         <h2 className="text-xl font-black text-white">權限不足</h2>
-        <p className="text-sm text-zinc-400">你的帳號沒有管理員權限</p>
-        <a href="/forum" className="inline-flex rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm text-zinc-300 hover:bg-white/10 transition-colors">
-          返回論壇
-        </a>
+        <p className="text-sm text-zinc-400">請輸入管理密鑰或返回論壇</p>
+        <div className="space-y-2">
+          <input type="password"
+            className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-400/50"
+            placeholder="管理密鑰" value={secret} onChange={(e)=>setSecret(e.target.value)}/>
+          <button onClick={async()=>{
+            if(!secret||!user)return;
+            try{
+              const res=await fetch("/api/forum/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:user.token,adminSecret:secret})});
+              const d=await res.json();
+              if(d.profile?.role==="admin"){setLoginMsg("✅ 已升級為管理員");await refreshProfile();}
+              else setLoginMsg("❌ 密鑰錯誤");
+            }catch{setLoginMsg("❌ 密鑰錯誤");}
+          }} className="w-full rounded-lg border border-fuchsia-400/30 bg-fuchsia-400/10 px-4 py-2 text-sm text-fuchsia-200 hover:bg-fuchsia-400/20 transition-colors">
+            升級權限
+          </button>
+          {loginMsg&&<p className="text-xs text-emerald-300">{loginMsg}</p>}
+        </div>
+        <a href="/forum" className="inline-flex rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm text-zinc-300 hover:bg-white/10 transition-colors">返回論壇</a>
       </div>
     </main>
   );
@@ -101,6 +118,7 @@ export default function ForumAdminPage() {
     { key: "threads",  label: "💬 討論串" },
     { key: "posts",    label: "📝 回覆" },
     { key: "reports",  label: "🚨 舉報" },
+    { key: "users",    label: "👥 用戶" },
     { key: "rules",    label: "📋 管理規範" },
   ] as const;
 
