@@ -1,50 +1,88 @@
 "use client";
-import { useState } from "react";
-import Link from "next/link";
-import { MOCK_FORUMS } from "../../../lib/supabase-forum";
-import { useForumAuth } from "../../../lib/forum-auth";
-import { useRouter } from "next/navigation";
 
-const TAG_SUGGESTIONS = ["時空Astria","TUKUYOMI","soda shower!","幻獣","悪戯ピエロ","活動心得","物販","拍立得","公演","新成員","排行","解散"];
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForumAuth } from "../../../lib/forum-auth";
+import { MOCK_FORUMS } from "../../../lib/supabase-forum";
+
+const TAG_SUGGESTIONS = [
+  "Astria",
+  "TUKUYOMI",
+  "soda shower!",
+  "活動情報",
+  "新歌",
+  "舞台心得",
+  "應援",
+  "見面會",
+  "票務",
+  "周邊",
+];
 
 function SignInModal({ onClose }: { onClose: () => void }) {
   const { joinAsGuest } = useForumAuth();
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const submit = () => {
-    if (!name.trim()) { setError("請輸入暱稱"); return; }
-    const res = joinAsGuest(name.trim());
-    if (res.error) { setError(res.error); return; }
-    onClose();
+  const submit = async () => {
+    if (!name.trim()) {
+      setError("請先輸入顯示名稱");
+      return;
+    }
+
+    setSubmitting(true);
+    setError("");
+    try {
+      await joinAsGuest(name.trim());
+      onClose();
+    } catch {
+      setError("登入失敗，請稍後再試");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-      <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-[#0f1624] p-6 space-y-5">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm">
+      <div className="w-full max-w-sm space-y-5 rounded-3xl border border-white/10 bg-[#0f1624] p-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-white">💬 加入討論</h2>
-          <button onClick={onClose} className="text-zinc-500 hover:text-white text-xl leading-none">×</button>
-        </div>
-        <div className="text-center space-y-2 py-2">
-          <div className="text-4xl">🎭</div>
-          <p className="text-sm font-semibold text-white">選擇你的暱稱</p>
-          <p className="text-xs text-zinc-400">無需帳號或 email，輸入暱稱即可開始討論</p>
-        </div>
-        <div className="space-y-3">
-          <input value={name} onChange={e => { setName(e.target.value); setError(""); }}
-            onKeyDown={e => e.key === "Enter" && submit()}
-            placeholder="輸入暱稱（2–20 字元）" maxLength={20} autoFocus
-            className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50 transition-colors"/>
-          {error && <p className="text-xs text-rose-400 bg-rose-400/10 rounded-lg px-3 py-2">{error}</p>}
-          <button onClick={submit} disabled={!name.trim()}
-            className="w-full rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 py-2.5 text-sm font-semibold text-fuchsia-200 hover:bg-fuchsia-400/20 disabled:opacity-40 transition-colors">
-            開始討論 →
+          <h2 className="text-lg font-bold text-white">登入論壇</h2>
+          <button onClick={onClose} className="text-xl leading-none text-zinc-500 hover:text-white">
+            ×
           </button>
         </div>
-        <p className="text-xs text-zinc-600 text-center leading-5">
-          暱稱儲存於你的瀏覽器，不需要 email 或帳號
-        </p>
+        <div className="space-y-2 py-2 text-center">
+          <div className="text-4xl">👤</div>
+          <p className="text-sm font-semibold text-white">先用訪客名稱加入討論</p>
+          <p className="text-xs text-zinc-400">
+            目前論壇採暱稱制，不需要 Email，輸入名稱後就能立即發文與回覆。
+          </p>
+        </div>
+        <div className="space-y-3">
+          <input
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              setError("");
+            }}
+            onKeyDown={(e) => e.key === "Enter" && submit()}
+            placeholder="請輸入你的顯示名稱（1-20 字）"
+            maxLength={20}
+            autoFocus
+            className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder-zinc-600 transition-colors focus:border-fuchsia-400/50 focus:outline-none"
+          />
+          {error ? (
+            <p className="rounded-lg bg-rose-400/10 px-3 py-2 text-xs text-rose-400">{error}</p>
+          ) : null}
+          <button
+            onClick={submit}
+            disabled={!name.trim() || submitting}
+            className="w-full rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 py-2.5 text-sm font-semibold text-fuchsia-200 transition-colors hover:bg-fuchsia-400/20 disabled:opacity-40"
+          >
+            {submitting ? "登入中..." : "以訪客身分登入"}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -62,133 +100,213 @@ export default function NewThreadPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showAuth, setShowAuth] = useState(false);
-  // 頁面載入時如果是 magic link callback，auth 已在 forum-auth.tsx 處理
 
-  const addTag = (tag: string) => {
-    const t = tag.trim();
-    if (t && !tags.includes(t) && tags.length < 5) { setTags([...tags, t]); setTagInput(""); }
-  };
-
-  const selectedForum = MOCK_FORUMS.find(f => f.slug === forum);
+  const selectedForum = MOCK_FORUMS.find((item) => item.slug === forum);
   const canSubmit = title.trim().length >= 1 && body.trim().length >= 1;
 
+  const addTag = (tag: string) => {
+    const next = tag.trim();
+    if (next && !tags.includes(next) && tags.length < 5) {
+      setTags([...tags, next]);
+      setTagInput("");
+    }
+  };
+
   const submit = async () => {
-    if (!user) { setShowAuth(true); return; }
-    setLoading(true); setError("");
+    if (!user) {
+      setShowAuth(true);
+      return;
+    }
+
+    setLoading(true);
+    setError("");
     try {
       const res = await fetch("/api/forum/threads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ forum_slug: forum, title: title.trim(), body: body.trim(), tags, author_token: user.token,
-            author_name: user.display_name, }),
+        body: JSON.stringify({
+          forum_slug: forum,
+          title: title.trim(),
+          body: body.trim(),
+          tags,
+          author_token: user.token,
+          author_name: user.display_name,
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "發文失敗");
       router.push(`/forum/${forum}`);
-    } catch (e) {
-      setError(String(e));
+    } catch (err) {
+      setError(String(err));
       setLoading(false);
     }
   };
 
   return (
     <>
-      {showAuth && <SignInModal onClose={() => setShowAuth(false)} />}
+      {showAuth ? <SignInModal onClose={() => setShowAuth(false)} /> : null}
       <main className="min-h-screen text-white">
         <div className="mx-auto max-w-3xl px-4 py-8 md:px-6">
           <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/forum" className="text-zinc-500 hover:text-zinc-300 text-sm">← 返回論壇</Link>
+              <Link href="/forum" className="text-sm text-zinc-500 hover:text-zinc-300">
+                返回論壇
+              </Link>
               <span className="text-zinc-700">/</span>
-              <h1 className="text-xl font-black text-white">發表新討論</h1>
+              <h1 className="text-xl font-black text-white">發表新主題</h1>
             </div>
             {user ? (
               <div className="flex items-center gap-2 text-xs text-zinc-400">
-                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-fuchsia-500 to-violet-500 flex items-center justify-center text-white font-bold text-[10px]">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-500 to-violet-500 text-[10px] font-bold text-white">
                   {[...user.display_name][0]}
                 </div>
                 <span>{user.display_name}</span>
               </div>
             ) : (
-              <button onClick={() => setShowAuth(true)} className="text-xs text-fuchsia-400 hover:text-fuchsia-300 border border-fuchsia-400/30 rounded-lg px-3 py-1.5 transition-colors">
-                登入發文
+              <button
+                onClick={() => setShowAuth(true)}
+                className="rounded-lg border border-fuchsia-400/30 px-3 py-1.5 text-xs text-fuchsia-400 transition-colors hover:text-fuchsia-300"
+              >
+                先登入再發文
               </button>
             )}
           </div>
 
           <div className="space-y-5">
-            {/* 版區 */}
             <div>
-              <label className="block text-xs font-semibold text-zinc-400 mb-2 uppercase tracking-widest">選擇版區</label>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {MOCK_FORUMS.map(f => (
-                  <button key={f.slug} onClick={() => setForum(f.slug)}
-                    className={`rounded-xl border px-3 py-2.5 text-xs font-medium transition-all text-left ${forum === f.slug ? "border-fuchsia-400/50 bg-fuchsia-400/15 text-fuchsia-200" : "border-white/10 bg-black/20 text-zinc-400 hover:border-white/20 hover:text-zinc-200"}`}>
-                    <span className="mr-1.5">{f.icon}</span>{f.title}
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-widest text-zinc-400">
+                選擇看板
+              </label>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                {MOCK_FORUMS.map((item) => (
+                  <button
+                    key={item.slug}
+                    onClick={() => setForum(item.slug)}
+                    className={`rounded-xl border px-3 py-2.5 text-left text-xs font-medium transition-all ${
+                      forum === item.slug
+                        ? "border-fuchsia-400/50 bg-fuchsia-400/15 text-fuchsia-200"
+                        : "border-white/10 bg-black/20 text-zinc-400 hover:border-white/20 hover:text-zinc-200"
+                    }`}
+                  >
+                    <span className="mr-1.5">{item.icon}</span>
+                    {item.title}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* 標題 */}
             <div>
-              <label className="block text-xs font-semibold text-zinc-400 mb-2 uppercase tracking-widest">標題 <span className="text-zinc-600 normal-case font-normal">（{title.length}/100）</span></label>
-              <input value={title} onChange={e => setTitle(e.target.value.slice(0,100))}
-                placeholder="輸入討論串標題..." className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50 transition-colors"/>
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-widest text-zinc-400">
+                標題 <span className="font-normal normal-case text-zinc-600">({title.length}/100)</span>
+              </label>
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value.slice(0, 100))}
+                placeholder="請輸入文章標題"
+                className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder-zinc-600 transition-colors focus:border-fuchsia-400/50 focus:outline-none"
+              />
             </div>
 
-            {/* 標籤 */}
             <div>
-              <label className="block text-xs font-semibold text-zinc-400 mb-2 uppercase tracking-widest">標籤 <span className="text-zinc-600 normal-case font-normal">（{tags.length}/5）</span></label>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {tags.map(t => (
-                  <span key={t} className="flex items-center gap-1.5 rounded-full bg-fuchsia-400/15 border border-fuchsia-400/30 px-3 py-1 text-xs text-fuchsia-200">
-                    {t}<button onClick={() => setTags(tags.filter(x=>x!==t))} className="text-fuchsia-400 hover:text-white">×</button>
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-widest text-zinc-400">
+                標籤 <span className="font-normal normal-case text-zinc-600">({tags.length}/5)</span>
+              </label>
+              <div className="mb-2 flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="flex items-center gap-1.5 rounded-full border border-fuchsia-400/30 bg-fuchsia-400/15 px-3 py-1 text-xs text-fuchsia-200"
+                  >
+                    {tag}
+                    <button onClick={() => setTags(tags.filter((item) => item !== tag))}>×</button>
                   </span>
                 ))}
               </div>
               <div className="flex gap-2">
-                <input value={tagInput} onChange={e => setTagInput(e.target.value)}
-                  onKeyDown={e => { if(e.key==='Enter'||e.key===','){e.preventDefault();addTag(tagInput);}}}
-                  placeholder="輸入後按 Enter..." className="flex-1 rounded-xl border border-white/10 bg-black/30 px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-400/50"/>
-                <button onClick={() => addTag(tagInput)} className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-zinc-300 hover:bg-white/10 transition-colors">加入</button>
+                <input
+                  value={tagInput}
+                  onChange={(e) => setTagInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === ",") {
+                      e.preventDefault();
+                      addTag(tagInput);
+                    }
+                  }}
+                  placeholder="輸入標籤後按 Enter"
+                  className="flex-1 rounded-xl border border-white/10 bg-black/30 px-3 py-2 text-xs text-white placeholder-zinc-600 focus:border-fuchsia-400/50 focus:outline-none"
+                />
+                <button
+                  onClick={() => addTag(tagInput)}
+                  className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-zinc-300 transition-colors hover:bg-white/10"
+                >
+                  加入
+                </button>
               </div>
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {TAG_SUGGESTIONS.filter(t => !tags.includes(t)).slice(0, 9).map(t => (
-                  <button key={t} onClick={() => addTag(t)} className="rounded-full bg-white/5 border border-white/10 px-2.5 py-1 text-[11px] text-zinc-500 hover:text-zinc-200 hover:border-white/20 transition-colors">+ {t}</button>
-                ))}
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {TAG_SUGGESTIONS.filter((tag) => !tags.includes(tag))
+                  .slice(0, 9)
+                  .map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => addTag(tag)}
+                      className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-zinc-500 transition-colors hover:border-white/20 hover:text-zinc-200"
+                    >
+                      + {tag}
+                    </button>
+                  ))}
               </div>
             </div>
 
-            {/* 內容 */}
             <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-xs font-semibold text-zinc-400 uppercase tracking-widest">內容 <span className="text-zinc-600 normal-case font-normal">（{body.length} 字）</span></label>
-                <button onClick={() => setPreview(!preview)} className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors">{preview ? "✏️ 編輯" : "👁 預覽"}</button>
+              <div className="mb-2 flex items-center justify-between">
+                <label className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
+                  內容 <span className="font-normal normal-case text-zinc-600">({body.length} 字)</span>
+                </label>
+                <button
+                  onClick={() => setPreview(!preview)}
+                  className="text-xs text-zinc-500 transition-colors hover:text-zinc-300"
+                >
+                  {preview ? "返回編輯" : "預覽內容"}
+                </button>
               </div>
               {preview ? (
-                <div className="min-h-48 rounded-xl border border-white/10 bg-black/20 p-4 text-sm text-zinc-300 leading-7 whitespace-pre-wrap">
-                  {body || <span className="text-zinc-600 italic">空白</span>}
+                <div className="min-h-48 whitespace-pre-wrap rounded-xl border border-white/10 bg-black/20 p-4 text-sm leading-7 text-zinc-300">
+                  {body || <span className="italic text-zinc-600">尚未輸入內容</span>}
                 </div>
               ) : (
-                <textarea value={body} onChange={e => setBody(e.target.value)}
-                  placeholder={`在「${selectedForum?.title}」板發表你的想法...\n\n支援 Markdown：**粗體** *斜體*`}
-                  rows={10} className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-zinc-200 placeholder-zinc-600 resize-none focus:outline-none focus:border-fuchsia-400/50 transition-colors"/>
+                <textarea
+                  value={body}
+                  onChange={(e) => setBody(e.target.value)}
+                  placeholder={`分享你在 ${selectedForum?.title} 看板想聊的主題...\n\n支援基本 Markdown，例如 **粗體**、*斜體*。`}
+                  rows={10}
+                  className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-zinc-200 placeholder-zinc-600 transition-colors focus:border-fuchsia-400/50 focus:outline-none"
+                />
               )}
             </div>
 
-            <div className="rounded-xl border border-amber-400/20 bg-amber-500/10 p-4 text-xs text-amber-300/80 leading-6">
-              <strong className="text-amber-200">📢 發文提醒：</strong>請遵守各版區規範。拍照與物販討論請遵循各團體官方規定。
+            <div className="rounded-xl border border-amber-400/20 bg-amber-500/10 p-4 text-xs leading-6 text-amber-300/80">
+              <strong className="text-amber-200">發文提醒：</strong>
+              請避免張貼人身攻擊、未經證實的爆料、購票詐騙資訊與違規內容，管理員會視情況調整或移除貼文。
             </div>
 
-            {error && <p className="text-xs text-rose-400 bg-rose-400/10 rounded-lg px-3 py-2">{error}</p>}
+            {error ? (
+              <p className="rounded-lg bg-rose-400/10 px-3 py-2 text-xs text-rose-400">{error}</p>
+            ) : null}
 
             <div className="flex gap-3 pt-2">
-              <button onClick={submit} disabled={!canSubmit || loading}
-                className="flex-1 rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 py-3 text-sm font-semibold text-fuchsia-200 hover:bg-fuchsia-400/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-                {loading ? "發布中..." : user ? "🚀 發布討論串" : "🔐 登入後發布"}
+              <button
+                onClick={submit}
+                disabled={!canSubmit || loading}
+                className="flex-1 rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 py-3 text-sm font-semibold text-fuchsia-200 transition-colors hover:bg-fuchsia-400/20 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {loading ? "送出中..." : user ? "送出文章" : "登入後送出"}
               </button>
-              <Link href="/forum" className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm text-zinc-400 hover:text-white hover:bg-white/10 transition-colors">取消</Link>
+              <Link
+                href="/forum"
+                className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                取消
+              </Link>
             </div>
           </div>
         </div>

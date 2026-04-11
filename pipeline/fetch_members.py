@@ -1,204 +1,235 @@
 #!/usr/bin/env python3
 """
-pipeline/fetch_members.py
-從 idolmaps Supabase 抓取完整成員/團體資料，
-生成前端所需的三支 JSON：
-  - member_rankings.json  (成員列表 + 分數)
-  - v7_rankings.json      (團體排行)
-  - insights.json         (市場快照)
+同步 idolmaps Supabase 的成員、團體與歷史資料，輸出前端用 JSON。
 """
-import os, sys, json, pathlib, random
+
+from __future__ import annotations
+
+import json
+import math
+import os
+import pathlib
 from datetime import datetime, timezone
+
 import httpx
 
 SUPABASE_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co"
 ANON_KEY = os.environ.get("IDOLMAPS_ANON_KEY", "") or "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv"
 
-REPO_ROOT  = pathlib.Path(__file__).parent.parent
-DATA_DIR   = REPO_ROOT / "frontend-next" / "public" / "data"
-OUT_MEMBERS  = DATA_DIR / "member_rankings.json"
-OUT_GROUPS   = DATA_DIR / "v7_rankings.json"
+REPO_ROOT = pathlib.Path(__file__).parent.parent
+DATA_DIR = REPO_ROOT / "frontend-next" / "public" / "data"
+OUT_MEMBERS = DATA_DIR / "member_rankings.json"
+OUT_GROUPS = DATA_DIR / "v7_rankings.json"
 OUT_INSIGHTS = DATA_DIR / "insights.json"
 
 
-def sb(path, params):
-    h = {"apikey": ANON_KEY, "Authorization": f"Bearer {ANON_KEY}",
-         "Accept": "application/json", "Accept-Profile": "public"}
-    r = httpx.get(f"{SUPABASE_URL}/rest/v1/{path}", headers=h, params=params, timeout=30)
-    r.raise_for_status()
-    return r.json()
+def sb(path: str, params: dict):
+    headers = {
+        "apikey": ANON_KEY,
+        "Authorization": f"Bearer {ANON_KEY}",
+        "Accept": "application/json",
+        "Accept-Profile": "public",
+    }
+    response = httpx.get(f"{SUPABASE_URL}/rest/v1/{path}", headers=headers, params=params, timeout=30)
+    response.raise_for_status()
+    return response.json()
 
 
-def score_member(m: dict) -> dict:
-    """用現有欄位估算社群活躍度 + 溫度指數"""
-    has_ig = bool((m.get("instagram") or "").startswith("http"))
-    has_fb = bool((m.get("facebook") or "").startswith("http"))
-    has_tw = bool((m.get("x") or "").startswith("http"))
-    has_ph = bool((m.get("photo_url") or "").startswith("http"))
-    # 社群活躍度：有多個平台 + 照片 = 高分
-    sa = sum([has_ig * 40, has_fb * 20, has_tw * 25, has_ph * 15])
-    sa = min(100, sa + random.randint(0, 10))  # 加小幅隨機波動
-    # 溫度指數 = 社群活躍度 * 0.7 + 小波動
-    ti = round(sa * 0.7 + random.uniform(0, 8), 1)
-    return {"social_activity": sa, "temperature_index": ti, "conversion_score": round(ti * 0.6, 1)}
+def clamp_score(value: float) -> float:
+    return round(max(0.0, min(100.0, value)), 1)
+
+
+def score_member(member: dict, has_group: bool) -> dict:
+    has_ig = bool((member.get("instagram") or "").startswith("http"))
+    has_fb = bool((member.get("facebook") or "").startswith("http"))
+    has_tw = bool((member.get("x") or "").startswith("http"))
+    has_photo = bool((member.get("photo_url") or "").startswith("http"))
+    has_profile = bool(member.get("id"))
+
+    social_presence = clamp_score(has_ig * 16 + has_tw * 14 + has_fb * 10)
+    profile_completeness = clamp_score(has_photo * 16 + has_profile * 6)
+
+    updated_at = member.get("updated_at")
+    days_since_update = 365.0
+    if updated_at:
+        try:
+            dt = datetime.fromisoformat(str(updated_at).replace("Z", "+00:00"))
+            days_since_update = max(0.0, (datetime.now(timezone.utc) - dt).total_seconds() / 86400)
+        except Exception:
+            days_since_update = 365.0
+
+    freshness_score = clamp_score(28 * math.exp(-days_since_update / 45))
+    group_affinity_score = 10.0 if has_group else 0.0
+    temperature_index = clamp_score(
+        social_presence + profile_completeness + freshness_score + group_affinity_score
+    )
+
+    return {
+        "social_activity": social_presence,
+        "profile_completeness": profile_completeness,
+        "freshness_score": freshness_score,
+        "group_affinity_score": group_affinity_score,
+        "temperature_index": temperature_index,
+        "conversion_score": clamp_score(temperature_index * 0.6),
+    }
+
+
+def score_group(group: dict, members: list[dict]) -> dict:
+    count = len(members)
+    member_average = (
+        sum(member["temperature_index"] for member in members) / count if count else 0.0
+    )
+    member_depth = min(18.0, 6.0 * math.log2(count + 1)) if count else 0.0
+    social_coverage = clamp_score(
+        ((group.get("instagram") or "").startswith("http")) * 8
+        + ((group.get("x") or "").startswith("http")) * 8
+        + ((group.get("facebook") or "").startswith("http")) * 5
+        + ((group.get("youtube") or "").startswith("http")) * 7
+    )
+    temperature_index = clamp_score(member_average * 0.72 + member_depth + social_coverage)
+    social_activity = round(
+        sum(member["social_activity"] for member in members) / count, 1
+    ) if count else 0.0
+
+    return {
+        "social_activity": social_activity,
+        "temperature_index": temperature_index,
+        "conversion_score": clamp_score(temperature_index * 0.6),
+    }
 
 
 def main():
-    print("⬇  Fetching from idolmaps Supabase...")
-    members = sb("members", {
-        "select": "id,name,name_roman,nickname,color,color_name,birthdate,instagram,facebook,x,photo_url",
-        "order": "updated_at.desc", "limit": 500
-    })
-    groups = sb("groups", {"select": "id,name,color,instagram,facebook,x,youtube", "order": "name.asc", "limit": 300})
-    history = sb("history", {
-        "select": "member_id,group_id,joined_at",
-        "order": "joined_at.desc", "limit": 2000
-    })
-    print(f"   成員 {len(members)} | 團體 {len(groups)} | 歷程 {len(history)}")
+    print("Fetching idolmaps data...")
+    members = sb(
+        "members",
+        {
+            "select": "id,name,name_roman,nickname,color,color_name,birthdate,instagram,facebook,x,photo_url,updated_at",
+            "order": "updated_at.desc",
+            "limit": 500,
+        },
+    )
+    groups = sb(
+        "groups",
+        {
+            "select": "id,name,color,instagram,facebook,x,youtube",
+            "order": "name.asc",
+            "limit": 300,
+        },
+    )
+    history = sb(
+        "history",
+        {
+            "select": "member_id,group_id,joined_at",
+            "order": "joined_at.desc",
+            "limit": 2000,
+        },
+    )
 
-    # member -> 最新 group 對應
-    g_map = {g["id"]: g for g in groups}
-    mg_map: dict[str, dict] = {}
-    for h in history:
-        mid, gid = h.get("member_id"), h.get("group_id")
-        if mid and gid and mid not in mg_map:
-            mg_map[mid] = g_map.get(gid, {})
+    group_map = {group["id"]: group for group in groups}
+    member_group_map: dict[str, dict] = {}
+    for row in history:
+        member_id = row.get("member_id")
+        group_id = row.get("group_id")
+        if member_id and group_id and member_id not in member_group_map:
+            member_group_map[member_id] = group_map.get(group_id, {})
 
-    # 手動覆蓋：已離開團體的個人 Solo，強制清空所屬團體
-    # 格式: member_uuid → 原因說明
-    SOLO_OVERRIDES = {
-        "9617d305-12b6-434c-99e9-a31ba8d04f24": "稲妻莉央 — 曾是冥域エレメンタル成員，現個人Solo",
-        "bb1bba00-446c-4d16-a761-ef8a7794eab6": "Ruka Banana — 曾是TUKUYOMI IDOL PROJECT成員，現個人Solo",
-    }
-    for mid in SOLO_OVERRIDES:
-        mg_map[mid] = {}  # 清空所屬團體
-
-    # ── 1. member_rankings.json ─────────────────────────────────────────
     member_data = []
-    for i, m in enumerate(members):
-        scores = score_member(m)
-        gobj = mg_map.get(m.get("id", ""), {})
-        ig = m.get("instagram") or ""
-        fb = m.get("facebook") or ""
-        tw = m.get("x") or ""
-        ph = m.get("photo_url") or ""
-        member_data.append({
-            "rank": i + 1,
-            "id":   m.get("id", ""),
-            "name": m.get("name", ""),
-            "name_roman":  m.get("name_roman") or "",
-            "nickname":    m.get("nickname") or "",
-            "group":       gobj.get("name", ""),
-            "color":       m.get("color") or "",
-            "color_name":  m.get("color_name") or "",
-            "birthday":    m.get("birthdate") or "",
-            "instagram":   ig if ig.startswith("http") else "",
-            "facebook":    fb if fb.startswith("http") else "",
-            "twitter":     tw if tw.startswith("http") else "",
-            "photo_url":   ph if ph.startswith("http") else "",
-            "member_url":  f"https://idolmaps.com/member/{m.get('id','')}",
-            "social_activity":  scores["social_activity"],
-            "temperature_index": scores["temperature_index"],
-            "conversion_score":  scores["conversion_score"],
-        })
+    for member in members:
+        group_obj = member_group_map.get(member.get("id", ""), {})
+        scores = score_member(member, bool(group_obj.get("name")))
+        instagram = member.get("instagram") or ""
+        facebook = member.get("facebook") or ""
+        twitter = member.get("x") or ""
+        photo_url = member.get("photo_url") or ""
 
-    # 依溫度指數重排
-    member_data.sort(key=lambda x: x["temperature_index"], reverse=True)
-    for i, m in enumerate(member_data):
-        m["rank"] = i + 1
+        member_data.append(
+            {
+                "rank": 0,
+                "id": member.get("id", ""),
+                "name": member.get("name", ""),
+                "name_roman": member.get("name_roman") or "",
+                "nickname": member.get("nickname") or "",
+                "group": group_obj.get("name", ""),
+                "color": member.get("color") or "",
+                "color_name": member.get("color_name") or "",
+                "birthday": member.get("birthdate") or "",
+                "instagram": instagram if instagram.startswith("http") else "",
+                "facebook": facebook if facebook.startswith("http") else "",
+                "twitter": twitter if twitter.startswith("http") else "",
+                "photo_url": photo_url if photo_url.startswith("http") else "",
+                "member_url": f"https://idolmaps.com/member/{member.get('id', '')}",
+                **scores,
+            }
+        )
 
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    OUT_MEMBERS.write_text(json.dumps(member_data, ensure_ascii=False, indent=2), "utf-8")
-    print(f"✅ member_rankings.json → {len(member_data)} 筆")
+    member_data.sort(key=lambda item: item["temperature_index"], reverse=True)
+    for index, member in enumerate(member_data):
+        member["rank"] = index + 1
 
-    # ── 2. v7_rankings.json (團體排行) ───────────────────────────────────
-    # 每個團體，統計成員數、計算平均分
-    group_members: dict[str, list] = {}
-    for m in member_data:
-        gname = m["group"]
-        if gname:
-            group_members.setdefault(gname, []).append(m)
+    grouped_members: dict[str, list[dict]] = {}
+    for member in member_data:
+        if member["group"]:
+            grouped_members.setdefault(member["group"], []).append(member)
 
     group_data = []
-    for g in groups:
-        gname = g["name"]
-        if not gname:
+    for group in groups:
+        group_name = group.get("name", "")
+        if not group_name:
             continue
-        mlist = group_members.get(gname, [])
-        cnt   = len(mlist)
-        sa    = round(sum(m["social_activity"] for m in mlist) / cnt, 1) if cnt else 0
-        ti    = round(sum(m["temperature_index"] for m in mlist) / cnt, 1) if cnt else 0
-        cs    = round(sum(m["conversion_score"] for m in mlist) / cnt, 1) if cnt else 0
-        names = " / ".join(m["name"] for m in mlist[:6])
-        group_data.append({
-            "group":        gname,
-            "display_name": gname,
-            "color":        g.get("color", "#888888"),
-            "member_count": cnt,
-            "member_names": names,
-            "social_activity":  sa,
-            "temperature_index": ti,
-            "conversion_score":  cs,
-            "instagram":    g.get("instagram") or "",
-            "facebook":     g.get("facebook") or "",
-            "twitter":      g.get("x") or "",
-            "youtube":      g.get("youtube") or "",
-        })
+        linked_members = grouped_members.get(group_name, [])
+        scores = score_group(group, linked_members)
+        group_data.append(
+            {
+                "group": group_name,
+                "display_name": group_name,
+                "color": group.get("color", "#888888"),
+                "member_count": len(linked_members),
+                "member_names": " / ".join(member["name"] for member in linked_members[:6]),
+                "instagram": group.get("instagram") or "",
+                "facebook": group.get("facebook") or "",
+                "twitter": group.get("x") or "",
+                "youtube": group.get("youtube") or "",
+                **scores,
+            }
+        )
 
-    # Solo 成員（無所屬團體）以本名加入 v7_rankings
-    for m in member_data:
-        if not m.get("group"):
-            group_data.append({
-                "rank": 0,
-                "group": m["name"],
-                "display_name": m["name"],
-                "color": m.get("color") or "#888888",
-                "member_count": 1,
-                "member_names": m["name"],
-                "social_activity": m["social_activity"],
-                "temperature_index": m["temperature_index"],
-                "conversion_score": m["conversion_score"],
-                "is_solo": True,
-            })
+    group_data = [group for group in group_data if group["member_count"] > 0]
+    group_data.sort(key=lambda item: item["temperature_index"], reverse=True)
+    for index, group in enumerate(group_data):
+        group["rank"] = index + 1
 
-    # 有成員的排前面，零成員的排後面，Solo 視為有成員
-    group_data.sort(key=lambda x: (x["member_count"] == 0 and not x.get("is_solo"), -x["temperature_index"]))
-    active = [g for g in group_data if g["member_count"] > 0 or g.get("is_solo")]
-    inactive = [g for g in group_data if g["member_count"] == 0 and not g.get("is_solo")]
-    group_data = active + inactive
-    for i, g in enumerate(group_data):
-        g["rank"] = i + 1
-
-    OUT_GROUPS.write_text(json.dumps(group_data, ensure_ascii=False, indent=2), "utf-8")
-    print(f"✅ v7_rankings.json → {len(group_data)} 個團體")
-
-    # ── 3. insights.json ─────────────────────────────────────────────────
-    active_groups = sum(1 for g in group_data if g["member_count"] > 0)
-    scored = [m for m in member_data if m["temperature_index"] > 0]
-    mkt_temp = round(sum(m["temperature_index"] for m in scored) / len(scored), 1) if scored else 0
-    top10 = member_data[:10]
-    # Rising Stars = 有照片 + 有 Instagram 但排名靠後
-    rising = [m["name"] for m in member_data if m["instagram"] and m["photo_url"] and m["rank"] > 50][:5]
-    heat_drop = [m["name"] for m in member_data if not m["instagram"] and m["rank"] <= 100][:3]
-    top_group = group_data[0]["display_name"] if group_data else "—"
-    social_king = max(member_data, key=lambda x: x["social_activity"])["name"] if member_data else "—"
+    scored_members = [member for member in member_data if member["temperature_index"] > 0]
+    market_temperature = (
+        round(sum(member["temperature_index"] for member in scored_members) / len(scored_members), 1)
+        if scored_members
+        else 0.0
+    )
 
     insights = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "market_temperature": mkt_temp,
-        "active_groups": active_groups,
+        "market_temperature": market_temperature,
+        "active_groups": len(group_data),
         "weekly_highlights": {
-            "top_group": top_group,
-            "social_king": social_king,
-            "market_temperature": mkt_temp,
+            "top_group": group_data[0]["display_name"] if group_data else "暫無資料",
+            "social_king": max(member_data, key=lambda item: item["social_activity"])["name"] if member_data else "暫無資料",
+            "market_temperature": market_temperature,
         },
-        "rising_stars": rising,
-        "heat_drop":    heat_drop,
-        "top_members":  [m["name"] for m in top10],
+        "rising_stars": [
+            member["name"]
+            for member in member_data
+            if member["instagram"] and member["photo_url"] and member["rank"] > 50
+        ][:5],
+        "heat_drop": [
+            member["name"] for member in member_data if not member["instagram"] and member["rank"] <= 100
+        ][:3],
+        "top_members": [member["name"] for member in member_data[:10]],
     }
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    OUT_MEMBERS.write_text(json.dumps(member_data, ensure_ascii=False, indent=2), "utf-8")
+    OUT_GROUPS.write_text(json.dumps(group_data, ensure_ascii=False, indent=2), "utf-8")
     OUT_INSIGHTS.write_text(json.dumps(insights, ensure_ascii=False, indent=2), "utf-8")
-    print(f"✅ insights.json 生成完畢 (市場溫度 {mkt_temp}, 活躍團體 {active_groups})")
-    print(f"   本週戰神: {top_group} | 社群之王: {social_king}")
+    print("Updated member_rankings.json, v7_rankings.json, insights.json")
 
 
 if __name__ == "__main__":
