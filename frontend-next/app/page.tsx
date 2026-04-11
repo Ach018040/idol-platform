@@ -62,18 +62,14 @@ async function loadData() {
 
     const updatedAt = m.updated_at ? new Date(m.updated_at).getTime() : 0;
     const daysSinceUpdate = updatedAt ? (now - updatedAt) / 86400000 : 365;
-    const freshnessScore = clamp1(28 * Math.exp(-daysSinceUpdate / 45));
-    const socialPresence = clamp1(+hasIG * 16 + +hasX * 14 + +hasFB * 10);
-    const profileCompleteness = clamp1(+hasPhoto * 16 + +hasProfile * 6);
+    const freshnessScore = clamp1(20 * Math.exp(-daysSinceUpdate / 60));
+    const socialPresence = clamp1(+hasIG * 14 + +hasX * 12 + +hasFB * 8 + Math.max(0, platformCount - 1) * 3);
+    const profileCompleteness = clamp1(+hasPhoto * 14 + +hasProfile * 6);
 
     const g = SOLO[m.id] ? {} : (mgMap[m.id] || {});
-    const groupAffinityScore = (g as { name?: string }).name ? 10 : 0;
-    const ti = clamp1(
-      socialPresence +
-      profileCompleteness +
-      freshnessScore +
-      groupAffinityScore
-    );
+    const groupAffinityScore = (g as { name?: string }).name ? 6 : 0;
+    const rawTotal = socialPresence + profileCompleteness + freshnessScore + groupAffinityScore;
+    const ti = clamp1(rawTotal * (100 / 86));
 
     return {
       rank: 0, id: m.id, name: m.name || "",
@@ -102,15 +98,15 @@ async function loadData() {
     const mb = grpMbrs[g.name] || [];
     const cnt = mb.length;
     const memberAverage = cnt ? mb.reduce((s: number, m: Member) => s + m.temperature_index, 0) / cnt : 0;
-    const memberDepth = cnt ? Math.min(18, 6 * Math.log2(cnt + 1)) : 0;
+    const memberDepth = cnt ? Math.min(12, 4 * Math.log2(cnt + 1)) : 0;
     const socialCoverage = clamp1(
-      +((g.instagram || "").startsWith("http")) * 8 +
-      +((g.x || "").startsWith("http")) * 8 +
+      +((g.instagram || "").startsWith("http")) * 9 +
+      +((g.x || "").startsWith("http")) * 7 +
       +((g.facebook || "").startsWith("http")) * 5 +
       +((g.youtube || "").startsWith("http")) * 7
     );
     const sa = cnt ? +(mb.reduce((s: number, m: Member) => s + m.social_activity, 0) / cnt).toFixed(1) : 0;
-    const ti = clamp1(memberAverage * 0.72 + memberDepth + socialCoverage);
+    const ti = clamp1(memberAverage * 0.58 + memberDepth + socialCoverage);
     return {
       rank: 0, group: g.name, display_name: g.name, color: g.color || "#888888",
       member_count: cnt, member_names: mb.slice(0, 6).map((m: Member) => m.name).join(" / "),

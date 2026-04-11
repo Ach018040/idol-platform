@@ -19,7 +19,7 @@ const FEATURES = [
   {
     emoji: "🌡️",
     title: "溫度指數",
-    desc: "以社群覆蓋、資料完整度、更新新鮮度與團體關聯綜合計算，反映目前市場熱度。",
+    desc: "以社群覆蓋、資料完整度、更新活躍度與團體關聯綜合計算，作為市場熱度的基礎觀察指標。",
   },
   {
     emoji: "🤖",
@@ -68,9 +68,14 @@ const DATA_SOURCES = [
 
 const VERSION_HISTORY = [
   {
+    ver: "v3.8",
+    date: "2026-04",
+    desc: "優化溫度公式的分數分布與衰減邏輯，並將 About 頁說明改為更嚴謹的市場觀察表述。",
+  },
+  {
     ver: "v3.7",
     date: "2026-04",
-    desc: "溫度指數改為新版 deterministic 公式，About 說明與首頁排行榜同步對齊實際計算方式。",
+    desc: "溫度指數改為 deterministic 公式，About 說明與首頁排行榜同步對齊實際計算方式。",
   },
   {
     ver: "v3.6",
@@ -82,11 +87,6 @@ const VERSION_HISTORY = [
     date: "2026-02",
     desc: "接入 Supabase 資料來源，建立基礎排行榜與平台使用統計。",
   },
-  {
-    ver: "v1–v3",
-    date: "2025–2026",
-    desc: "初始版本，提供靜態資料展示與基本排名頁面。",
-  },
 ];
 
 export default function AboutPage() {
@@ -95,7 +95,7 @@ export default function AboutPage() {
       <div className="mx-auto max-w-4xl space-y-16">
         <section className="space-y-5 text-center">
           <div className="inline-flex items-center rounded-full border border-fuchsia-400/30 bg-fuchsia-400/10 px-4 py-1.5 text-xs uppercase tracking-widest text-fuchsia-200">
-            Idol Temperature Platform v3.7
+            Idol Temperature Platform v3.8
           </div>
           <h1 className="text-4xl font-black text-white md:text-5xl">
             關於
@@ -143,45 +143,52 @@ export default function AboutPage() {
           <h2 className="border-b border-white/10 pb-3 text-2xl font-bold text-white">溫度指數計算方式</h2>
           <p className="text-sm leading-7 text-zinc-300">
             <span className="font-semibold text-pink-300">溫度指數（Temperature Index）</span>
-            是本平台的核心評估指標，反映偶像或團體在特定時間點的市場熱度與社群覆蓋程度。
-            目前正式站採用 deterministic 公式，已移除舊版隨機值，所有分數基於公開可得資料計算，無人為調整。
+            是本平台的核心評估指標，用於反映偶像或團體在特定時間點的社群覆蓋、資料完整度與更新活躍度，
+            並作為市場熱度的基礎觀察指標。這代表它能描述目前平台可觀測到的市場狀態，但不等同於完整的真實互動熱度。
           </p>
 
           <div className="space-y-4 rounded-2xl border border-white/10 bg-black/30 p-5 font-mono text-sm">
             <div>
               <p className="mb-1 text-xs uppercase tracking-widest text-emerald-300">① 成員社群覆蓋（最高 40 分）</p>
-              <p className="text-zinc-300">Instagram +16 ｜ X +14 ｜ Facebook +10</p>
+              <p className="text-zinc-300">Instagram +14 ｜ X +12 ｜ Facebook +8 ｜ 跨平台加成最高 +6</p>
             </div>
             <div>
-              <p className="mb-1 text-xs uppercase tracking-widest text-cyan-300">② 資料完整度（最高 22 分）</p>
-              <p className="text-zinc-300">個人照片 +16 ｜ 基本資料存在 +6</p>
+              <p className="mb-1 text-xs uppercase tracking-widest text-cyan-300">② 資料完整度（最高 20 分）</p>
+              <p className="text-zinc-300">個人照片 +14 ｜ 基本資料存在 +6</p>
             </div>
             <div>
-              <p className="mb-1 text-xs uppercase tracking-widest text-violet-300">③ 資料新鮮度（最高 28 分，指數衰減）</p>
-              <p className="text-zinc-300">freshness_score = 28 × e^(−距離更新天數 / 45)</p>
+              <p className="mb-1 text-xs uppercase tracking-widest text-violet-300">③ 資料新鮮度（最高 20 分，指數衰減）</p>
+              <p className="text-zinc-300">freshness_score = 20 × e^(−距離更新天數 / 60)</p>
             </div>
             <div>
-              <p className="mb-1 text-xs uppercase tracking-widest text-sky-300">④ 團體關聯加分（10 分）</p>
-              <p className="text-zinc-300">group_affinity_score = 有團體關聯時 +10</p>
+              <p className="mb-1 text-xs uppercase tracking-widest text-sky-300">④ 團體關聯加分（6 分）</p>
+              <p className="text-zinc-300">group_affinity_score = 有團體關聯時 +6</p>
             </div>
             <div className="h-px bg-white/10" />
             <div>
               <p className="mb-1 text-xs uppercase tracking-widest text-pink-300">⑤ 成員綜合</p>
               <p className="text-zinc-300">
-                temperature_index = social_presence + profile_completeness + freshness_score + group_affinity_score
+                raw_total = social_presence + profile_completeness + freshness_score + group_affinity_score
               </p>
+              <p className="text-zinc-300">temperature_index = raw_total × (100 / 86)</p>
               <p className="text-zinc-400">conversion_score = temperature_index × 0.6</p>
             </div>
             <div className="h-px bg-white/10" />
             <div>
               <p className="mb-1 text-xs uppercase tracking-widest text-fuchsia-300">⑥ 團體綜合</p>
               <p className="text-zinc-300">member_average = 成員溫度平均</p>
-              <p className="text-zinc-300">member_depth = min(18, 6 × log2(成員數 + 1))</p>
-              <p className="text-zinc-300">social_coverage = Instagram 8 + X 8 + Facebook 5 + YouTube 7</p>
+              <p className="text-zinc-300">member_depth = min(12, 4 × log2(成員數 + 1))</p>
+              <p className="text-zinc-300">social_coverage = Instagram 9 + X 7 + Facebook 5 + YouTube 7</p>
               <p className="text-zinc-300">
-                temperature_index = member_average × 0.72 + member_depth + social_coverage
+                temperature_index = member_average × 0.58 + member_depth + social_coverage
               </p>
             </div>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs leading-7 text-zinc-400">
+            <strong className="text-white">這次優化重點：</strong>
+            新版公式降低了滿分飽和的機率，讓高排名不再只靠平台帳號數堆高，並透過跨平台加成、較平滑的新鮮度衰減、
+            以及較保守的團體加權，讓排序更能區分不同成員與團體在同一時間點的相對狀態。
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs leading-7 text-zinc-400">

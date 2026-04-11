@@ -45,9 +45,12 @@ def score_member(member: dict, has_group: bool) -> dict:
     has_tw = bool((member.get("x") or "").startswith("http"))
     has_photo = bool((member.get("photo_url") or "").startswith("http"))
     has_profile = bool(member.get("id"))
+    platform_count = int(has_ig) + int(has_fb) + int(has_tw)
 
-    social_presence = clamp_score(has_ig * 16 + has_tw * 14 + has_fb * 10)
-    profile_completeness = clamp_score(has_photo * 16 + has_profile * 6)
+    # Reward both platform presence and cross-platform diversity without letting
+    # raw platform count dominate the score.
+    social_presence = clamp_score(has_ig * 14 + has_tw * 12 + has_fb * 8 + max(0, platform_count - 1) * 3)
+    profile_completeness = clamp_score(has_photo * 14 + has_profile * 6)
 
     updated_at = member.get("updated_at")
     days_since_update = 365.0
@@ -58,11 +61,10 @@ def score_member(member: dict, has_group: bool) -> dict:
         except Exception:
             days_since_update = 365.0
 
-    freshness_score = clamp_score(28 * math.exp(-days_since_update / 45))
-    group_affinity_score = 10.0 if has_group else 0.0
-    temperature_index = clamp_score(
-        social_presence + profile_completeness + freshness_score + group_affinity_score
-    )
+    freshness_score = clamp_score(20 * math.exp(-days_since_update / 60))
+    group_affinity_score = 6.0 if has_group else 0.0
+    raw_total = social_presence + profile_completeness + freshness_score + group_affinity_score
+    temperature_index = clamp_score(raw_total * (100 / 86))
 
     return {
         "social_activity": social_presence,
@@ -79,14 +81,14 @@ def score_group(group: dict, members: list[dict]) -> dict:
     member_average = (
         sum(member["temperature_index"] for member in members) / count if count else 0.0
     )
-    member_depth = min(18.0, 6.0 * math.log2(count + 1)) if count else 0.0
+    member_depth = min(12.0, 4.0 * math.log2(count + 1)) if count else 0.0
     social_coverage = clamp_score(
-        ((group.get("instagram") or "").startswith("http")) * 8
-        + ((group.get("x") or "").startswith("http")) * 8
+        ((group.get("instagram") or "").startswith("http")) * 9
+        + ((group.get("x") or "").startswith("http")) * 7
         + ((group.get("facebook") or "").startswith("http")) * 5
         + ((group.get("youtube") or "").startswith("http")) * 7
     )
-    temperature_index = clamp_score(member_average * 0.72 + member_depth + social_coverage)
+    temperature_index = clamp_score(member_average * 0.58 + member_depth + social_coverage)
     social_activity = round(
         sum(member["social_activity"] for member in members) / count, 1
     ) if count else 0.0
