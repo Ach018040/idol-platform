@@ -240,7 +240,7 @@ def sync_groups(groups: list) -> tuple[int, int]:
     return added, updated
 
 # ── 寫入日誌 ──────────────────────────────────────────────────────────────────
-def write_log(status, n_members, n_groups, added, updated, elapsed, error=""):
+def write_log(status, n_members, n_groups, added, updated, elapsed, error="", avg_growth=None, avg_freshness=None):
     ts  = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     sha = os.environ.get("GITHUB_SHA","manual")[:8]
     src = "GitHub Actions" if os.environ.get("GITHUB_ACTIONS") else "手動執行"
@@ -258,6 +258,10 @@ def write_log(status, n_members, n_groups, added, updated, elapsed, error=""):
             "Commit SHA":   rt(sha),
         }
     }
+    if avg_growth is not None:
+        body["properties"]["平均成長指數"] = {"number": round(avg_growth, 1)}
+    if avg_freshness is not None:
+        body["properties"]["平均新鮮度"] = {"number": round(avg_freshness, 1)}
     if error:
         body["properties"]["錯誤訊息"] = rt(error[:500])
     try:
@@ -306,7 +310,20 @@ def main():
     log.info(f"   成員 {len(members)} | 團體 {len(groups)}")
     log.info("="*55)
 
-    write_log(status, len(members), len(groups), added, updated, elapsed, err)
+    avg_growth = None
+    avg_freshness = None
+    try:
+        import json as _json, pathlib as _pl
+        _p = _pl.Path("public/data/member_rankings.json")
+        if _p.exists():
+            _rm = _json.loads(_p.read_text("utf-8"))
+            _gs = [m.get("growth_score") for m in _rm if m.get("growth_score") is not None]
+            _fs = [m.get("freshness_score") for m in _rm if m.get("freshness_score") is not None]
+            if _gs: avg_growth = sum(_gs) / len(_gs)
+            if _fs: avg_freshness = sum(_fs) / len(_fs)
+    except Exception:
+        pass
+    write_log(status, len(members), len(groups), added, updated, elapsed, err, avg_growth, avg_freshness)
     if status == "失敗": sys.exit(1)
 
 if __name__ == "__main__":
