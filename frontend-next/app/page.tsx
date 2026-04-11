@@ -18,6 +18,21 @@ function getRankBadge(r: number) { return r === 1 ? "🥇" : r === 2 ? "🥈" : 
 function getInitial(name: string) { return [...name][0] ?? "?"; }
 function clamp(v: number) { return Math.max(0, Math.min(100, v)); }
 function clamp1(v: number) { return +clamp(v).toFixed(1); }
+function pickSocialKing(members: Member[]) {
+  if (members.length === 0) return null;
+  return members.reduce((best, current) => {
+    if (current.social_activity !== best.social_activity) {
+      return current.social_activity > best.social_activity ? current : best;
+    }
+    if (current.temperature_index !== best.temperature_index) {
+      return current.temperature_index > best.temperature_index ? current : best;
+    }
+    if (current.freshness_score !== best.freshness_score) {
+      return current.freshness_score > best.freshness_score ? current : best;
+    }
+    return current.rank < best.rank ? current : best;
+  }, members[0]);
+}
 function hashColor(name: string) { let h = 0x811c9dc5; for (let i = 0; i < name.length; i++) { h = (Math.imul(h ^ name.charCodeAt(i), 0x01000193)) >>> 0; } return `hsl(${h % 360},${55 + (h >> 8) % 30}%,${45 + (h >> 16) % 20}%)`; }
 function dotColor(g: Group) { const c = g.color || "#888888"; return c !== "#e879a0" && c !== "#888888" && c !== "#ffffff" ? c : hashColor(g.display_name || g.group); }
 
@@ -128,7 +143,7 @@ async function loadData() {
   const scored = memberData.filter((m: Member) => m.temperature_index > 0);
   const mktTemp = scored.length ? +(scored.reduce((s: number, m: Member) => s + m.temperature_index, 0) / scored.length).toFixed(1) : 0;
   const topGrp = groupData.find((g: Group) => g.member_count > 0 || g.is_solo)?.display_name || "—";
-  const socialKing = memberData.reduce((a: Member, b: Member) => a.social_activity > b.social_activity ? a : b, memberData[0]);
+  const socialKing = pickSocialKing(memberData);
   const rising = memberData.filter((m: Member) => m.instagram && m.photo_url && m.rank > 50).slice(0, 5).map((m: Member) => m.name);
 
   let events: CalEvent[] = [];
