@@ -252,7 +252,7 @@ export default function HomePage() {
               { label: "市場平均溫度", value: fmt(insights.market_temperature), cls: "pink" },
               { label: "活躍單位數", value: String(insights.active_groups), cls: "cyan" },
               { label: "本週戰神", value: insights.weekly_highlights.top_group, cls: "amber" },
-              { label: "社群之王", value: insights.weekly_highlights.social_king, cls: "violet" },
+              { label: "本週社群焦點", value: insights.weekly_highlights.social_king, cls: "violet" },
             ].map(({ label, value, cls }) => (
               <div key={label} className={`rounded-2xl border border-${cls}-400/20 bg-gradient-to-br from-${cls}-500/15 to-${cls}-500/5 p-5`}>
                 <div className={`text-xs uppercase tracking-widest text-${cls}-200/80`}>{label}</div>
