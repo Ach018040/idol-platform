@@ -13,11 +13,13 @@ export type IdolActivity = {
   level: ActivityLevel
 }
 
+const NORMALIZE_PUNCTUATION_REGEX = /[【】\[\]（）()・/\\｜|\-_.:,，。!！?？]/g
+
 function normalizeText(value?: string | null): string {
   return (value || '')
     .toLowerCase()
     .replace(/\s+/g, '')
-    .replace(/[【】\[\]（）()・/\\｜|\-_.:,，。!！?？]/g, '')
+    .replace(NORMALIZE_PUNCTUATION_REGEX, '')
 }
 
 function eventDateValue(event: EventItem): string | null {
@@ -33,13 +35,17 @@ function withinDays(dateValue: string | null, days: number): boolean {
 }
 
 function eventSearchText(event: EventItem): string {
-  return normalizeText([
-    event.title,
-    event.venue,
-    event.city,
-    event.organizer,
-    event.source_url,
-  ].filter(Boolean).join(' '))
+  return normalizeText(
+    [
+      event.title,
+      event.venue,
+      event.city,
+      event.organizer,
+      event.source_url,
+    ]
+      .filter(Boolean)
+      .join(' ')
+  )
 }
 
 function detectLevel(events90d: number): ActivityLevel {
@@ -59,61 +65,76 @@ function latestDate(values: string[]): string | null {
   return values.sort((a, b) => new Date(b).getTime() - new Date(a).getTime())[0]
 }
 
-export function analyzeGroupActivity(groups = getGroups(), events = getEvents()): IdolActivity[] {
-  return groups.map((group: Group) => {
-    const names = [group.display_name, group.group].filter(Boolean).map((v) => normalizeText(v))
-    const matched = events.filter((event) => {
-      const text = eventSearchText(event)
-      return names.some((name) => name && text.includes(name))
+export function analyzeGroupActivity(
+  groups = getGroups(),
+  events = getEvents()
+): IdolActivity[] {
+  return groups
+    .map((group: Group): IdolActivity => {
+      const names = [group.display_name, group.group]
+        .filter(Boolean)
+        .map((value) => normalizeText(value))
+      const matched = events.filter((event) => {
+        const text = eventSearchText(event)
+        return names.some((name) => name && text.includes(name))
+      })
+
+      const dates = matched.map(eventDateValue).filter(Boolean) as string[]
+      const events30d = matched.filter((event) => withinDays(eventDateValue(event), 30)).length
+      const events90d = matched.filter((event) => withinDays(eventDateValue(event), 90)).length
+
+      return {
+        name: group.display_name || group.group,
+        type: 'group',
+        events30d,
+        events90d,
+        lastEventDate: latestDate(dates),
+        activityScore: score(events30d, events90d),
+        level: detectLevel(events90d),
+      }
     })
-
-    const dates = matched.map(eventDateValue).filter(Boolean) as string[]
-    const events30d = matched.filter((event) => withinDays(eventDateValue(event), 30)).length
-    const events90d = matched.filter((event) => withinDays(eventDateValue(event), 90)).length
-
-    return {
-      name: group.display_name || group.group,
-      type: 'group',
-      events30d,
-      events90d,
-      lastEventDate: latestDate(dates),
-      activityScore: score(events30d, events90d),
-      level: detectLevel(events90d),
-    }
-  }).sort((a, b) => b.activityScore - a.activityScore || b.events90d - a.events90d)
+    .sort((a, b) => b.activityScore - a.activityScore || b.events90d - a.events90d)
 }
 
-export function analyzeMemberActivity(members = getMembers(), groups = getGroups(), events = getEvents()): IdolActivity[] {
+export function analyzeMemberActivity(
+  members = getMembers(),
+  groups = getGroups(),
+  events = getEvents()
+): IdolActivity[] {
   const groupActivity = analyzeGroupActivity(groups, events)
-  const groupMap = new Map(groupActivity.map((g) => [normalizeText(g.name), g]))
+  const groupMap = new Map(groupActivity.map((group) => [normalizeText(group.name), group]))
 
-  return members.map((member: Member) => {
-    const names = [member.name, member.nickname].filter(Boolean).map((v) => normalizeText(v))
-    const matched = events.filter((event) => {
-      const text = eventSearchText(event)
-      return names.some((name) => name && text.includes(name))
+  return members
+    .map((member: Member): IdolActivity => {
+      const names = [member.name, member.nickname]
+        .filter(Boolean)
+        .map((value) => normalizeText(value))
+      const matched = events.filter((event) => {
+        const text = eventSearchText(event)
+        return names.some((name) => name && text.includes(name))
+      })
+
+      const dates = matched.map(eventDateValue).filter(Boolean) as string[]
+      const direct30d = matched.filter((event) => withinDays(eventDateValue(event), 30)).length
+      const direct90d = matched.filter((event) => withinDays(eventDateValue(event), 90)).length
+
+      const fallbackGroup = groupMap.get(normalizeText(member.group))
+      const events30d = direct30d > 0 ? direct30d : fallbackGroup?.events30d ?? 0
+      const events90d = direct90d > 0 ? direct90d : fallbackGroup?.events90d ?? 0
+      const lastEventDate = latestDate(dates) || fallbackGroup?.lastEventDate || null
+
+      return {
+        name: member.name,
+        type: 'member',
+        relatedGroup: member.group,
+        events30d,
+        events90d,
+        lastEventDate,
+        activityScore: score(events30d, events90d),
+        level: detectLevel(events90d),
+      }
     })
-
-    const dates = matched.map(eventDateValue).filter(Boolean) as string[]
-    const direct30d = matched.filter((event) => withinDays(eventDateValue(event), 30)).length
-    const direct90d = matched.filter((event) => withinDays(eventDateValue(event), 90)).length
-
-    const fallbackGroup = groupMap.get(normalizeText(member.group))
-    const events30d = direct30d > 0 ? direct30d : fallbackGroup?.events30d ?? 0
-    const events90d = direct90d > 0 ? direct90d : fallbackGroup?.events90d ?? 0
-    const lastEventDate = latestDate(dates) || fallbackGroup?.lastEventDate || null
-
-    return {
-      name: member.name,
-      type: 'member',
-      relatedGroup: member.group,
-      events30d,
-      events90d,
-      lastEventDate,
-      activityScore: score(events30d, events90d),
-      level: detectLevel(events90d),
-    }
-  }).sort((a, b) => b.activityScore - a.activityScore || b.events90d - a.events90d)
+    .sort((a, b) => b.activityScore - a.activityScore || b.events90d - a.events90d)
 }
 
 export function summarizeActivity() {
