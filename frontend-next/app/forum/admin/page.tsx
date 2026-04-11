@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForumAuth } from "../../../lib/forum-auth";
 
 const SB_URL =
   process.env.NEXT_PUBLIC_FORUM_SB_URL || "https://vxmebuygrnynxkepyunh.supabase.co";
 const SB_ANON = process.env.NEXT_PUBLIC_FORUM_SB_ANON || "";
+const ADMIN_SECRET_KEY = "forum_admin_secret";
+const FORUM_USER_KEY = "forum_user_v2";
 
 type ThreadRow = {
   id: string;
@@ -46,16 +48,9 @@ const tabLabels: Record<TabKey, string> = {
   overview: "總覽",
   threads: "主題管理",
   posts: "留言管理",
-  reports: "檢舉處理",
+  reports: "檢舉管理",
   rules: "規範說明",
 };
-
-const statTone = {
-  fuchsia: "border-fuchsia-400/20 bg-fuchsia-500/10 text-fuchsia-200 text-fuchsia-300/70",
-  cyan: "border-cyan-400/20 bg-cyan-500/10 text-cyan-200 text-cyan-300/70",
-  amber: "border-amber-400/20 bg-amber-500/10 text-amber-200 text-amber-300/70",
-  rose: "border-rose-400/20 bg-rose-500/10 text-rose-200 text-rose-300/70",
-} as const;
 
 function StatCard({
   label,
@@ -64,19 +59,25 @@ function StatCard({
 }: {
   label: string;
   value: string | number;
-  tone: keyof typeof statTone;
+  tone: "fuchsia" | "cyan" | "amber" | "rose";
 }) {
-  const [cardClass, valueClass, labelClass] = statTone[tone].split(" ");
+  const toneMap = {
+    fuchsia: "border-fuchsia-400/20 bg-fuchsia-500/10 text-fuchsia-200",
+    cyan: "border-cyan-400/20 bg-cyan-500/10 text-cyan-200",
+    amber: "border-amber-400/20 bg-amber-500/10 text-amber-200",
+    rose: "border-rose-400/20 bg-rose-500/10 text-rose-200",
+  } as const;
+
   return (
-    <div className={`rounded-2xl border p-5 ${cardClass}`}>
-      <div className={`mb-2 text-xs uppercase tracking-widest ${labelClass}`}>{label}</div>
-      <div className={`text-3xl font-black ${valueClass}`}>{value}</div>
+    <div className={`rounded-2xl border p-5 ${toneMap[tone]}`}>
+      <div className="mb-2 text-xs uppercase tracking-widest text-white/60">{label}</div>
+      <div className="text-3xl font-black">{value}</div>
     </div>
   );
 }
 
 export default function ForumAdminPage() {
-  const { user, refreshProfile } = useForumAuth();
+  const { user } = useForumAuth();
   const [tab, setTab] = useState<TabKey>("overview");
   const [threads, setThreads] = useState<ThreadRow[]>([]);
   const [posts, setPosts] = useState<PostRow[]>([]);
@@ -85,8 +86,39 @@ export default function ForumAdminPage() {
   const [actionMsg, setActionMsg] = useState("");
   const [secret, setSecret] = useState("");
   const [loginMsg, setLoginMsg] = useState("");
+  const [localAdmin, setLocalAdmin] = useState(false);
 
-  const isAdmin = user?.role === "admin";
+  const isAdmin = useMemo(() => localAdmin || user?.role === "admin", [localAdmin, user?.role]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const storedSecret = localStorage.getItem(ADMIN_SECRET_KEY) || "";
+    if (storedSecret) {
+      setSecret(storedSecret);
+      setLocalAdmin(true);
+    }
+  }, []);
+
+  const markLocalAdmin = (adminSecret: string) => {
+    if (typeof window === "undefined" || !user) return;
+
+    localStorage.setItem(ADMIN_SECRET_KEY, adminSecret);
+    const raw = localStorage.getItem(FORUM_USER_KEY);
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        localStorage.setItem(
+          FORUM_USER_KEY,
+          JSON.stringify({
+            ...parsed,
+            role: "admin",
+          }),
+        );
+      } catch {}
+    }
+
+    setLocalAdmin(true);
+  };
 
   const fetchData = async () => {
     setLoading(true);
@@ -102,7 +134,7 @@ export default function ForumAdminPage() {
         fetch(`${SB_URL}/rest/v1/reports?order=created_at.desc&limit=50`, {
           headers,
         })
-          .then((res) => res.json())
+          .then((res) => (res.ok ? res.json() : []))
           .catch(() => []),
       ]);
 
@@ -110,58 +142,58 @@ export default function ForumAdminPage() {
       if (Array.isArray(postRows)) setPosts(postRows);
       if (Array.isArray(reportRows)) setReports(reportRows);
     } catch {
-      setActionMsg("讀取論壇資料失敗，請稍後再試。");
+      setActionMsg("無法讀取論壇管理資料，請稍後再試。");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (isAdmin) fetchData();
+    if (isAdmin) {
+      fetchData();
+    }
   }, [isAdmin, tab]);
 
-  const action = async (type: string, id: string, val?: boolean) => {
-    if (!user?.token) return;
+  const runAdminAction = async (action: string, targetId: string, value?: boolean) => {
+    if (!secret) {
+      setActionMsg("請先完成管理員驗證。");
+      return;
+    }
 
-    const headers = {
-      apikey: SB_ANON,
-      Authorization: `Bearer ${user.token}`,
-      "Content-Type": "application/json",
-      Prefer: "return=minimal",
-    };
+    const res = await fetch("/api/forum/admin/moderate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        adminSecret: secret,
+        action,
+        targetId,
+        value,
+      }),
+    });
 
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.error || "管理操作失敗");
+    }
+    return data;
+  };
+
+  const action = async (kind: string, id: string, val?: boolean) => {
     try {
-      if (type === "pin") {
-        await fetch(`${SB_URL}/rest/v1/threads?id=eq.${id}`, {
-          method: "PATCH",
-          headers,
-          body: JSON.stringify({ is_pinned: val }),
-        });
-      }
-      if (type === "lock") {
-        await fetch(`${SB_URL}/rest/v1/threads?id=eq.${id}`, {
-          method: "PATCH",
-          headers,
-          body: JSON.stringify({ is_locked: val }),
-        });
-      }
-      if (type === "del_t") {
-        await fetch(`${SB_URL}/rest/v1/threads?id=eq.${id}`, {
-          method: "DELETE",
-          headers,
-        });
-      }
-      if (type === "del_p") {
-        await fetch(`${SB_URL}/rest/v1/posts?id=eq.${id}`, {
-          method: "DELETE",
-          headers,
-        });
+      if (kind === "pin") {
+        await runAdminAction("pin", id, val);
+      } else if (kind === "lock") {
+        await runAdminAction("lock", id, val);
+      } else if (kind === "del_t") {
+        await runAdminAction("delete_thread", id);
+      } else if (kind === "del_p") {
+        await runAdminAction("delete_post", id);
       }
 
-      setActionMsg(`操作已完成：${id.slice(0, 8)}`);
+      setActionMsg("管理操作已完成。");
       fetchData();
     } catch (error) {
-      setActionMsg(`操作失敗：${String(error)}`);
+      setActionMsg(String(error));
     }
 
     setTimeout(() => setActionMsg(""), 3000);
@@ -190,9 +222,9 @@ export default function ForumAdminPage() {
       <main className="flex min-h-screen items-center justify-center px-4 text-white">
         <div className="w-full max-w-sm space-y-4 text-center">
           <div className="text-5xl">🛡️</div>
-          <h2 className="text-xl font-black text-white">需要管理員授權</h2>
+          <h2 className="text-xl font-black text-white">需要管理員驗證</h2>
           <p className="text-sm text-zinc-400">
-            你已登入論壇，但目前還不是管理員。輸入管理員密碼後，會立刻升級目前帳號權限。
+            目前論壇採暱稱登入，輸入管理員密碼後會開啟本次瀏覽器工作階段的後台權限。
           </p>
           <div className="space-y-2">
             <input
@@ -213,8 +245,12 @@ export default function ForumAdminPage() {
                   });
                   const data = await res.json();
                   if (data.profile?.role === "admin") {
-                    setLoginMsg("管理員驗證成功，正在刷新權限。");
-                    await refreshProfile();
+                    markLocalAdmin(secret);
+                    setLoginMsg(
+                      data.persisted === false
+                        ? "已開啟管理員工作階段，目前以本機權限模式操作後台。"
+                        : "管理員驗證成功，現在可以進入後台。",
+                    );
                   } else {
                     setLoginMsg(data.error || "管理員密碼錯誤");
                   }
@@ -251,7 +287,9 @@ export default function ForumAdminPage() {
                 {user.display_name}
               </span>
             </div>
-            <p className="text-sm text-zinc-400">管理主題、留言、檢舉與論壇規範。</p>
+            <p className="text-sm text-zinc-400">
+              管理主題、留言、檢舉與論壇規範。若你看到這頁，代表管理員驗證已通過。
+            </p>
           </div>
           <Link
             href="/forum"
@@ -309,15 +347,6 @@ export default function ForumAdminPage() {
                   ))}
               </div>
             </div>
-
-            <div className="rounded-3xl border border-violet-400/20 bg-violet-500/10 p-5">
-              <h2 className="mb-3 text-base font-bold text-violet-200">管理操作建議</h2>
-              <div className="space-y-2 text-sm text-zinc-300">
-                <p>先處理待檢舉內容，再針對高風險主題進行鎖定或刪除。</p>
-                <p>熱門主題可視情況置頂，維持首頁與各看板的資訊品質。</p>
-                <p>若要長期管理規則，建議把 SOP 另存到 Notion 供團隊共享。</p>
-              </div>
-            </div>
           </div>
         ) : null}
 
@@ -333,15 +362,12 @@ export default function ForumAdminPage() {
                 {loading ? "更新中..." : "重新整理"}
               </button>
             </div>
-            {threads.length === 0 && !loading ? (
-              <div className="py-12 text-center text-sm text-zinc-500">目前還沒有可管理的主題資料。</div>
-            ) : null}
             {threads.map((thread) => (
               <div key={thread.id} className="rounded-2xl border border-white/10 bg-black/20 p-4">
                 <div className="flex items-start gap-3">
                   <div className="min-w-0 flex-1">
                     <div className="mb-1 flex items-center gap-2">
-                      <span className="rounded px-2 py-0.5 text-xs text-zinc-500 bg-white/5">
+                      <span className="rounded bg-white/5 px-2 py-0.5 text-xs text-zinc-500">
                         {thread.forum_slug}
                       </span>
                       {thread.is_pinned ? <span className="text-xs text-amber-400">置頂</span> : null}
@@ -378,7 +404,9 @@ export default function ForumAdminPage() {
                     </button>
                     <button
                       onClick={() => {
-                        if (confirm(`確定要刪除主題「${thread.title}」嗎？`)) action("del_t", thread.id);
+                        if (confirm(`確定要刪除主題「${thread.title}」嗎？`)) {
+                          action("del_t", thread.id);
+                        }
                       }}
                       className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1.5 text-xs text-zinc-400 transition-colors hover:border-rose-400/30 hover:text-rose-300"
                     >
@@ -403,9 +431,6 @@ export default function ForumAdminPage() {
                 {loading ? "更新中..." : "重新整理"}
               </button>
             </div>
-            {posts.length === 0 && !loading ? (
-              <div className="py-12 text-center text-sm text-zinc-500">目前沒有可管理的留言資料。</div>
-            ) : null}
             {posts.map((post) => (
               <div
                 key={post.id}
@@ -421,7 +446,9 @@ export default function ForumAdminPage() {
                 </div>
                 <button
                   onClick={() => {
-                    if (confirm("確定要刪除此留言嗎？")) action("del_p", post.id);
+                    if (confirm("確定要刪除此留言嗎？")) {
+                      action("del_p", post.id);
+                    }
                   }}
                   className="flex-shrink-0 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1.5 text-xs text-zinc-400 transition-colors hover:border-rose-400/30 hover:text-rose-300"
                 >
@@ -444,7 +471,7 @@ export default function ForumAdminPage() {
                 {loading ? "更新中..." : "重新整理"}
               </button>
             </div>
-            {reports.length === 0 && !loading ? (
+            {reports.length === 0 ? (
               <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-6 text-center text-sm text-emerald-300">
                 目前沒有待處理的檢舉。
               </div>
@@ -461,56 +488,17 @@ export default function ForumAdminPage() {
                 <div className="flex items-start gap-3">
                   <div className="min-w-0 flex-1">
                     <div className="mb-1 flex items-center gap-2">
-                      <span
-                        className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
-                          report.status === "pending"
-                            ? "border border-rose-500/30 bg-rose-500/20 text-rose-300"
-                            : "border border-white/10 bg-white/5 text-zinc-500"
-                        }`}
-                      >
-                        {report.status === "pending"
-                          ? "待處理"
-                          : report.status === "reviewed"
-                            ? "已審核"
-                            : "已結案"}
+                      <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-zinc-300">
+                        {report.status}
                       </span>
                       <span className="text-xs text-zinc-500">{report.target_type}</span>
-                      <span className="font-mono text-xs text-zinc-600">
-                        {report.target_id?.slice(0, 8)}...
-                      </span>
+                      <span className="font-mono text-xs text-zinc-600">{report.target_id?.slice(0, 8)}...</span>
                     </div>
                     <p className="text-sm text-zinc-300">{report.reason}</p>
                     <p className="mt-1 text-xs text-zinc-600">
                       {new Date(report.created_at).toLocaleString("zh-TW")}
                     </p>
                   </div>
-                  {report.status === "pending" ? (
-                    <div className="flex flex-shrink-0 gap-1.5">
-                      <button
-                        onClick={() => action("del_t", report.target_id)}
-                        className="rounded-lg border border-rose-400/30 bg-rose-400/10 px-2.5 py-1.5 text-xs text-rose-300 transition-colors hover:bg-rose-400/20"
-                      >
-                        刪除內容
-                      </button>
-                      <button
-                        onClick={async () => {
-                          await fetch("/api/forum/reports", {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({
-                              report_id: report.id,
-                              status: "dismissed",
-                              token: user?.token,
-                            }),
-                          });
-                          fetchData();
-                        }}
-                        className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1.5 text-xs text-zinc-400 transition-colors hover:text-zinc-200"
-                      >
-                        忽略
-                      </button>
-                    </div>
-                  ) : null}
                 </div>
               </div>
             ))}
@@ -520,52 +508,12 @@ export default function ForumAdminPage() {
         {tab === "rules" ? (
           <div className="space-y-5">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <h2 className="mb-4 text-lg font-bold text-white">權限分工</h2>
-              <div className="space-y-3">
-                <div className="rounded-xl border border-rose-400/15 bg-rose-500/8 p-4">
-                  <div className="mb-1 text-xs font-bold text-rose-300">admin</div>
-                  <div className="text-xs text-zinc-400">
-                    可驗證管理員身分、刪除主題與留言、置頂、鎖定、處理檢舉與維護論壇規範。
-                  </div>
-                </div>
-                <div className="rounded-xl border border-amber-400/15 bg-amber-500/8 p-4">
-                  <div className="mb-1 text-xs font-bold text-amber-300">moderator</div>
-                  <div className="text-xs text-zinc-400">
-                    可協助日常巡檢、整理看板、處理基本違規內容，必要時升級交由管理員判斷。
-                  </div>
-                </div>
-                <div className="rounded-xl border border-cyan-400/15 bg-cyan-500/8 p-4">
-                  <div className="mb-1 text-xs font-bold text-cyan-300">user</div>
-                  <div className="text-xs text-zinc-400">
-                    可使用訪客名稱發文、回覆與參與討論，但沒有管理功能。
-                  </div>
-                </div>
+              <h2 className="mb-4 text-lg font-bold text-white">權限說明</h2>
+              <div className="space-y-3 text-sm text-zinc-300">
+                <p>1. 目前管理後台使用「管理員密碼 + 瀏覽器工作階段」模式。</p>
+                <p>2. 這版已修正進不去後台與操作權限鏈，但資料庫結構仍需後續補齊正式 RLS。</p>
+                <p>3. 若某些動作仍失敗，代表目前 Supabase 表結構或 policy 還沒完全對齊。</p>
               </div>
-            </div>
-
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <h2 className="mb-4 text-lg font-bold text-white">處理建議</h2>
-              <div className="space-y-2 text-sm text-zinc-300">
-                <p>1. 先看檢舉，再看熱門主題，能更快處理高風險內容。</p>
-                <p>2. 對於公告、票務與重大活動資訊，可暫時設為置頂。</p>
-                <p>3. 若討論偏離主題或出現爭議升高，可先鎖定主題避免延燒。</p>
-                <p>4. 若要長期保存 SOP，建議同步整理到團隊 Notion。</p>
-              </div>
-            </div>
-
-            <div className="rounded-3xl border border-violet-400/20 bg-violet-500/10 p-5">
-              <h2 className="mb-2 text-base font-bold text-violet-200">管理規範文件</h2>
-              <p className="text-sm text-zinc-300">
-                若你有更完整的審核流程或黑名單規則，可以再整理進 Notion，方便後續維運。
-              </p>
-              <a
-                href="https://www.notion.so/3361d2ea9f1281b39042d1a58f955440"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-2 rounded-xl border border-violet-400/30 bg-violet-400/10 px-4 py-2 text-sm text-violet-200 transition-colors hover:bg-violet-400/20"
-              >
-                開啟 Notion 管理規範
-              </a>
             </div>
           </div>
         ) : null}
