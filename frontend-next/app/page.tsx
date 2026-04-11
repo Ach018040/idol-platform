@@ -1,415 +1,403 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 const SB_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co";
 const SB_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
-const SB_H = { apikey: SB_KEY, Accept: "application/json", "Accept-Profile": "public" };
-const ICS_API = "/api/ical";
+const SB_HEADERS = {
+  apikey: SB_KEY,
+  Accept: "application/json",
+  "Accept-Profile": "public",
+};
 
-type Group = { rank: number; group: string; display_name: string; color: string; member_count: number; member_names: string; social_activity: number; temperature_index: number; conversion_score: number; instagram?: string; facebook?: string; twitter?: string; youtube?: string; is_solo?: boolean; };
-type Member = { rank: number; id: string; name: string; group?: string; instagram?: string; facebook?: string; twitter?: string; photo_url?: string; maid_url?: string; updated_at?: string; social_activity: number; temperature_index: number; conversion_score: number; platform_count: number; freshness_score: number; };
-type CalEvent = { date: string; time: string; summary: string; dtRaw: Date; };
-type Insights = { market_temperature: number; active_groups: number; weekly_highlights: { top_group: string; social_king: string };
-
-type GroupInfo = {
+type GroupRow = {
+  id: string;
   name: string;
-  color: string;
+};
+
+type MemberRow = {
+  id: string;
+  name: string;
   instagram?: string;
   facebook?: string;
   x?: string;
-  youtube?: string;
-}; rising_stars: string[]; events: CalEvent[]; };
+  photo_url?: string;
+  maid_url?: string;
+  updated_at?: string;
+};
 
-function fmt(v: number | null | undefined, d = 1) { const n = Number(v ?? 0); return Number.isFinite(n) ? n.toFixed(d) : "—"; }
-function getRankBadge(r: number) { return r === 1 ? "🥇" : r === 2 ? "🥈" : r === 3 ? "🥉" : `#${r}`; }
-function getInitial(name: string) { return [...name][0] ?? "?"; }
-function clamp(v: number) { return Math.max(0, Math.min(100, v)); }
-function hashColor(name: string) { let h = 0x811c9dc5; for (let i = 0; i < name.length; i++) { h = (Math.imul(h ^ name.charCodeAt(i), 0x01000193)) >>> 0; } return `hsl(${h % 360},${55 + (h >> 8) % 30}%,${45 + (h >> 16) % 20}%)`; }
-function dotColor(g: Group) { const c = g.color || "#888888"; return c !== "#e879a0" && c !== "#888888" && c !== "#ffffff" ? c : hashColor(g.display_name || g.group); }
+type HistoryRow = {
+  member_id: string;
+  group_id: string;
+};
 
-async function sbFetch(path: string, params: Record<string, string>) {
-  const url = new URL(`${SB_URL}/rest/v1/${path}`);
-  Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
-  const r = await fetch(url.toString(), { headers: SB_H, cache: "no-store" });
-  if (!r.ok) throw new Error(`Supabase ${path} ${r.status}`);
-  return r.json();
+type RankedMember = {
+  id: string;
+  name: string;
+  group: string;
+  score: number;
+  freshness: number;
+};
+
+type RankedGroup = {
+  id: string;
+  name: string;
+  memberCount: number;
+  score: number;
+};
+
+type HomeData = {
+  marketTemperature: number;
+  activeGroups: number;
+  topGroup: string;
+  topMember: string;
+  topGroups: RankedGroup[];
+  topMembers: RankedMember[];
+};
+
+function badge(rank: number) {
+  if (rank === 1) return "01";
+  if (rank === 2) return "02";
+  if (rank === 3) return "03";
+  return String(rank).padStart(2, "0");
 }
 
-async function loadData() {
+function computeMemberScore(member: MemberRow) {
+  const hasInstagram = (member.instagram || "").startsWith("http");
+  const hasFacebook = (member.facebook || "").startsWith("http");
+  const hasX = (member.x || "").startsWith("http");
+  const hasPhoto = (member.photo_url || "").startsWith("http");
+  const hasMaid = (member.maid_url || "").startsWith("http");
+  const updatedAt = member.updated_at ? new Date(member.updated_at).getTime() : 0;
+  const daysSinceUpdate = updatedAt ? (Date.now() - updatedAt) / 86400000 : 365;
+  const freshness = Math.max(0, Math.round(30 * Math.exp(-daysSinceUpdate / 30)));
+  const socialBase =
+    (hasInstagram ? 18 : 0) +
+    (hasFacebook ? 14 : 0) +
+    (hasX ? 14 : 0) +
+    (hasPhoto ? 16 : 0) +
+    (hasMaid ? 8 : 0);
+  const score = Math.min(100, Number((socialBase + freshness).toFixed(1)));
+
+  return { score, freshness };
+}
+
+async function sbFetch<T>(path: string, params: Record<string, string>): Promise<T[]> {
+  const url = new URL(`${SB_URL}/rest/v1/${path}`);
+  Object.entries(params).forEach(([key, value]) => {
+    url.searchParams.set(key, value);
+  });
+
+  const response = await fetch(url.toString(), {
+    headers: SB_HEADERS,
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error(`${path} 載入失敗 (${response.status})`);
+  }
+
+  return response.json();
+}
+
+async function loadHomeData(): Promise<HomeData> {
   const [members, groups, history] = await Promise.all([
-    sbFetch("members", { select: "id,name,color,birthdate,instagram,facebook,x,photo_url,maid_url,updated_at,created_at", order: "updated_at.desc", limit: "500" }),
-    sbFetch("groups", { select: "id,name,color,instagram,facebook,x,youtube", order: "name.asc", limit: "300" }),
-    sbFetch("history", { select: "member_id,group_id,joined_at,left_at,status,role", order: "joined_at.desc", limit: "2000" }),
+    sbFetch<MemberRow>("members", {
+      select: "id,name,instagram,facebook,x,photo_url,maid_url,updated_at",
+      order: "updated_at.desc",
+      limit: "500",
+    }),
+    sbFetch<GroupRow>("groups", {
+      select: "id,name",
+      order: "name.asc",
+      limit: "300",
+    }),
+    sbFetch<HistoryRow>("history", {
+      select: "member_id,group_id",
+      order: "joined_at.desc",
+      limit: "2000",
+    }),
   ]);
 
-  const SOLO: Record<string, boolean> = {
-    "9617d305-12b6-434c-99e9-a31ba8d04f24": true,
-    "bb1bba00-446c-4d16-a761-ef8a7794eab6": true,
+  const groupMap = new Map(groups.map((group) => [group.id, group.name]));
+  const memberGroup = new Map<string, string>();
+
+  history.forEach((row) => {
+    if (!memberGroup.has(row.member_id)) {
+      memberGroup.set(row.member_id, groupMap.get(row.group_id) || "未分組");
+    }
+  });
+
+  const rankedMembers = members
+    .filter((member) => member.name)
+    .map((member) => {
+      const { score, freshness } = computeMemberScore(member);
+      return {
+        id: member.id,
+        name: member.name,
+        group: memberGroup.get(member.id) || "未分組",
+        score,
+        freshness,
+      };
+    })
+    .sort((left, right) => right.score - left.score);
+
+  const rankedGroups = groups
+    .filter((group) => group.name)
+    .map((group) => {
+      const relatedMembers = rankedMembers.filter((member) => member.group === group.name);
+      const averageScore = relatedMembers.length
+        ? Number(
+            (
+              relatedMembers.reduce((sum, member) => sum + member.score, 0) /
+              relatedMembers.length
+            ).toFixed(1),
+          )
+        : 0;
+
+      return {
+        id: group.id,
+        name: group.name,
+        memberCount: relatedMembers.length,
+        score: averageScore,
+      };
+    })
+    .filter((group) => group.memberCount > 0)
+    .sort((left, right) => right.score - left.score);
+
+  const topMembers = rankedMembers.slice(0, 8);
+  const topGroups = rankedGroups.slice(0, 8);
+  const marketTemperature = topMembers.length
+    ? Number((topMembers.reduce((sum, member) => sum + member.score, 0) / topMembers.length).toFixed(1))
+    : 0;
+
+  return {
+    marketTemperature,
+    activeGroups: rankedGroups.length,
+    topGroup: topGroups[0]?.name || "尚無資料",
+    topMember: topMembers[0]?.name || "尚無資料",
+    topGroups,
+    topMembers,
   };
-
-  const gMap: Record<string, GroupInfo> = {};
-  groups.forEach((g: { id: string; name: string; color: string; instagram?: string; facebook?: string; x?: string; youtube?: string }) => { gMap[g.id] = g; });
-
-  const mgMap: Record<string, GroupInfo> = {};
-  history.forEach((h: { member_id: string; group_id: string }) => {
-    if (!mgMap[h.member_id] && h.group_id) mgMap[h.member_id] = gMap[h.group_id] || {};
-  });
-
-  const now = Date.now();
-
-  const memberData: Member[] = members.map((m: { id: string; name: string; color?: string; instagram?: string; facebook?: string; x?: string; photo_url?: string; maid_url?: string; updated_at?: string; created_at?: string }) => {
-    // ── 平台覆蓋率（多平台 = 更廣觸及）──
-    const hasIG = (m.instagram || "").startsWith("http");
-    const hasFB = (m.facebook || "").startsWith("http");
-    const hasX  = (m.x || "").startsWith("http");
-    const platformCount = +hasIG + +hasFB + +hasX;
-    const platformScore = platformCount === 3 ? 40 : platformCount === 2 ? 28 : platformCount === 1 ? 16 : 0;
-
-    // ── 形象完整度（有公開照片）──
-    const hasPhoto   = (m.photo_url || "").startsWith("http");
-    const hasMaidUrl = (m.maid_url || "").startsWith("http");
-    const imageScore = +hasPhoto * 20 + +hasMaidUrl * 10;
-
-    // ── 資料新鮮度（最近更新日期越近分數越高）──
-    const updatedAt = m.updated_at ? new Date(m.updated_at).getTime() : 0;
-    const daysSinceUpdate = updatedAt ? (now - updatedAt) / 86400000 : 365;
-    const freshnessScore = Math.max(0, Math.round(30 * Math.exp(-daysSinceUpdate / 30)));
-
-    // ── 社群活躍度綜合 ──
-    const sa = Math.min(100, platformScore + imageScore + freshnessScore);
-
-    // ── 溫度指數（加權平均）──
-    const ti = +(
-      sa * 0.60 +
-      platformScore * 0.20 +
-      freshnessScore * 0.20
-    ).toFixed(1);
-
-    const gInfo = SOLO[m.id] ? undefined : mgMap[m.id];
-    return {
-      rank: 0, id: m.id, name: m.name || "",
-      group: gInfo?.name || "",
-      instagram: hasIG ? m.instagram! : "",
-      facebook: hasFB ? m.facebook! : "",
-      twitter: hasX ? m.x! : "",
-      photo_url: hasPhoto ? m.photo_url! : "",
-      maid_url: hasMaidUrl ? m.maid_url! : "",
-      updated_at: m.updated_at || "",
-      social_activity: sa,
-      temperature_index: ti,
-      conversion_score: +(ti * 0.6).toFixed(1),
-      platform_count: platformCount,
-      freshness_score: freshnessScore,
-    };
-  }).sort((a: Member, b: Member) => b.temperature_index - a.temperature_index)
-    .map((m: Member, i: number) => ({ ...m, rank: i + 1 }));
-
-  const grpMbrs: Record<string, Member[]> = {};
-  memberData.forEach((m: Member) => { if (m.group) grpMbrs[m.group] = (grpMbrs[m.group] || []).concat(m); });
-
-  const groupData: Group[] = groups.filter((g: { name: string }) => g.name).map((g: { name: string; color: string; instagram?: string; facebook?: string; x?: string; youtube?: string }) => {
-    const mb = grpMbrs[g.name] || [];
-    const cnt = mb.length;
-    const sa = cnt ? +(mb.reduce((s: number, m: Member) => s + m.social_activity, 0) / cnt).toFixed(1) : 0;
-    const ti = cnt ? +(mb.reduce((s: number, m: Member) => s + m.temperature_index, 0) / cnt).toFixed(1) : 0;
-    return {
-      rank: 0, group: g.name, display_name: g.name, color: g.color || "#888888",
-      member_count: cnt, member_names: mb.slice(0, 6).map((m: Member) => m.name).join(" / "),
-      social_activity: sa, temperature_index: ti, conversion_score: +(ti * 0.6).toFixed(1),
-      instagram: g.instagram || "", facebook: g.facebook || "", twitter: g.x || "", youtube: g.youtube || "",
-    };
-  });
-
-  memberData.forEach((m: Member) => {
-    if (!m.group) groupData.push({ rank: 0, group: m.name, display_name: m.name, color: "#888888", member_count: 1, member_names: m.name, social_activity: m.social_activity, temperature_index: m.temperature_index, conversion_score: m.conversion_score, instagram: m.instagram, is_solo: true });
-  });
-
-  groupData.sort((a: Group, b: Group) => {
-    if ((a.member_count === 0 && !a.is_solo) !== (b.member_count === 0 && !b.is_solo)) return (a.member_count === 0 && !a.is_solo) ? 1 : -1;
-    return b.temperature_index - a.temperature_index;
-  });
-  groupData.forEach((g: Group, i: number) => { g.rank = i + 1; });
-
-  const scored = memberData.filter((m: Member) => m.temperature_index > 0);
-  const mktTemp = scored.length ? +(scored.reduce((s: number, m: Member) => s + m.temperature_index, 0) / scored.length).toFixed(1) : 0;
-  const topGrp = groupData.find((g: Group) => g.member_count > 0 || g.is_solo)?.display_name || "—";
-  const socialKing = memberData.reduce((a: Member, b: Member) => a.social_activity > b.social_activity ? a : b, memberData[0]);
-  const rising = memberData.filter((m: Member) => m.instagram && m.photo_url && m.rank > 50).slice(0, 5).map((m: Member) => m.name);
-
-  let events: CalEvent[] = [];
-  try {
-    const icalJson = await fetch(ICS_API).then(res => res.json());
-    events = (icalJson.events || []).map((e: { date: string; time: string; summary: string }) => ({ ...e, dtRaw: new Date() }));
-  } catch (_) { events = []; }
-
-  const insights: Insights = {
-    market_temperature: mktTemp,
-    active_groups: groupData.filter((g: Group) => g.member_count > 0 || g.is_solo).length,
-    weekly_highlights: { top_group: topGrp, social_king: socialKing?.name || "—" },
-    rising_stars: rising,
-    events,
-  };
-
-  return { memberData, groupData, insights };
 }
 
 export default function HomePage() {
-  const [data, setData] = useState<{ memberData: Member[]; groupData: Group[]; insights: Insights } | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<HomeData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
-  const [visitCount, setVisitCount] = useState<number | null>(null);
-
-  const refresh = async () => {
-    setLoading(true);
-    try {
-      const d = await loadData();
-      setData(d);
-      setLastUpdated(new Date());
-      setError(null);
-    } catch (e) {
-      setError(String(e));
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    refresh();
-    // 造訪次數：localStorage 計算本機次數，同時 POST 到伺服器累計全域次數
-    try {
-      const key = "idol_visit_count";
-      const next = parseInt(localStorage.getItem(key) || "0", 10) + 1;
-      localStorage.setItem(key, String(next));
-      setVisitCount(next);
-      // 非同步上報到伺服器（不阻塞頁面載入）
-      fetch("/api/visit", { method: "POST" }).catch(() => {});
-    } catch (_) {}
+    loadHomeData()
+      .then((result) => {
+        setData(result);
+        setError(null);
+      })
+      .catch((err: unknown) => {
+        setError(err instanceof Error ? err.message : "首頁資料暫時無法載入");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
-  const fmt_dt = (d: Date) => new Intl.DateTimeFormat("zh-TW", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Taipei" }).format(d);
-
-  if (loading && !data) return (
-    <main className="min-h-screen bg-[#070b14] text-white flex items-center justify-center">
-      <div className="text-center space-y-4">
-        <div className="text-4xl animate-spin">⚙️</div>
-        <p className="text-zinc-300 text-lg">從資料庫載入最新資料中...</p>
-      </div>
-    </main>
-  );
-
-  if (error) return (
-    <main className="min-h-screen bg-[#070b14] text-white flex items-center justify-center">
-      <div className="text-center space-y-3">
-        <p className="text-red-400">載入失敗：{error}</p>
-        <button onClick={refresh} className="px-4 py-2 bg-pink-500 rounded-xl text-sm">重試</button>
-      </div>
-    </main>
-  );
-
-  const { memberData, groupData, insights } = data!;
-  const groups = groupData.filter(g => g.member_count > 0 || g.is_solo).slice(0, 10);
-  const members = memberData.slice(0, 10);
-  const maxGS = Math.max(...groups.map(g => g.temperature_index), 1);
-  const maxMS = Math.max(...members.map(m => m.temperature_index), 1);
-
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.22),_transparent_30%),linear-gradient(180deg,_#070b14_0%,_#111827_100%)] text-white">
-      <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 lg:px-8">
-        <header className="mb-8 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl md:p-8">
-          <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <div className="mb-2 inline-flex items-center rounded-full border border-fuchsia-400/30 bg-fuchsia-400/10 px-3 py-1 text-xs text-fuchsia-200">Idol Temperature Platform v3.7</div>
-              <h1 className="text-3xl font-black text-white md:text-5xl">台灣地下偶像<span className="block bg-gradient-to-r from-pink-400 via-violet-300 to-cyan-300 bg-clip-text text-transparent">數據情報平台</span></h1>
-              <p className="mt-3 text-sm text-zinc-300">整合團體排行、成員熱度、社群活躍與市場趨勢的地下偶像數據平台。</p>
-            </div>
-            <div className="flex flex-col gap-2 items-end">
-              <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-100">
-                <div className="flex items-center gap-3 text-xs text-cyan-300/80 uppercase tracking-widest mb-1">
-                  <span>Last Update</span>
-                  {visitCount !== null && <span className="text-zinc-400 normal-case tracking-normal">👁 {visitCount.toLocaleString()} 次</span>}
-                </div>
-                <div className="font-semibold">{lastUpdated ? fmt_dt(lastUpdated) : "—"}</div>
+    <main className="min-h-screen overflow-hidden bg-[#07111f] text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(244,114,182,0.18),transparent_22%),radial-gradient(circle_at_bottom,rgba(59,130,246,0.12),transparent_36%)]" />
+      <div className="relative mx-auto max-w-7xl px-4 py-8 md:px-6 lg:px-8">
+        <header className="rounded-[36px] border border-white/10 bg-white/5 px-6 py-6 shadow-[0_30px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl md:px-8 md:py-8">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-3xl">
+              <div className="mb-4 inline-flex items-center rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 text-[11px] font-semibold tracking-[0.28em] text-cyan-100">
+                IDOL PLATFORM
               </div>
-              <button onClick={refresh} disabled={loading} className="rounded-xl border border-pink-400/20 bg-pink-400/10 px-4 py-2 text-xs text-pink-200 hover:bg-pink-400/20 transition-colors disabled:opacity-50">
-                {loading ? "更新中..." : "⟳ 立即更新"}
-              </button>
-              <a href="/forum" className="rounded-xl border border-violet-400/20 bg-violet-400/10 px-4 py-2 text-xs text-violet-200 hover:bg-violet-400/20 transition-colors text-center">
-                💬 討論區
-              </a>
+              <h1 className="max-w-3xl text-4xl font-black leading-tight text-white md:text-6xl">
+                用繁體中文追蹤
+                <span className="block bg-gradient-to-r from-cyan-300 via-sky-200 to-pink-300 bg-clip-text text-transparent">
+                  偶像團體熱度與成員動態
+                </span>
+              </h1>
+              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+                這裡把團體、成員與社群公開資料整理成一個容易閱讀的首頁。
+                你可以先看本週熱度，再進一步點進團體頁、成員頁、論壇與活動頁面。
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link
+                  href="/rankings"
+                  className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-5 py-3 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20"
+                >
+                  查看排行
+                </Link>
+                <Link
+                  href="/events"
+                  className="rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
+                >
+                  近期活動
+                </Link>
+                <Link
+                  href="/forum"
+                  className="rounded-full border border-pink-300/25 bg-pink-300/10 px-5 py-3 text-sm font-semibold text-pink-100 transition hover:bg-pink-300/20"
+                >
+                  進入論壇
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid min-w-full grid-cols-2 gap-3 sm:min-w-[340px]">
+              <MetricCard label="市場熱度" value={data ? data.marketTemperature.toFixed(1) : "--"} />
+              <MetricCard label="活躍團體" value={data ? String(data.activeGroups) : "--"} />
+              <MetricCard label="本週團體" value={data ? data.topGroup : "--"} />
+              <MetricCard label="焦點成員" value={data ? data.topMember : "--"} />
             </div>
           </div>
-          <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {[
-              { label: "市場平均溫度", value: fmt(insights.market_temperature), cls: "pink" },
-              { label: "活躍單位數", value: String(insights.active_groups), cls: "cyan" },
-              { label: "本週戰神", value: insights.weekly_highlights.top_group, cls: "amber" },
-              { label: "社群之王", value: insights.weekly_highlights.social_king, cls: "violet" },
-            ].map(({ label, value, cls }) => (
-              <div key={label} className={`rounded-2xl border border-${cls}-400/20 bg-gradient-to-br from-${cls}-500/15 to-${cls}-500/5 p-5`}>
-                <div className={`text-xs uppercase tracking-widest text-${cls}-200/80`}>{label}</div>
-                <div className={`mt-2 text-3xl font-extrabold text-${cls}-300 line-clamp-2`}>{value}</div>
-              </div>
-            ))}
-          </section>
         </header>
 
-        <section className="mb-8 grid grid-cols-1 gap-4 xl:grid-cols-3">
-          <div className="rounded-3xl border border-emerald-400/20 bg-emerald-500/10 p-5 backdrop-blur-xl">
-            <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-emerald-200">Rising Stars</h2>
-              <span className="text-xs text-emerald-300/70 border border-emerald-300/20 rounded-full px-2 py-0.5">近期上升</span>
-            </div>
-            {insights.rising_stars.length > 0 ? (
-              <div className="flex flex-wrap gap-2">{insights.rising_stars.map(s => <span key={s} className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1.5 text-sm text-emerald-100">{s}</span>)}</div>
-            ) : <p className="text-sm text-zinc-400">目前沒有上升名單。</p>}
-          </div>
-          <div className="rounded-3xl border border-amber-400/20 bg-amber-500/10 p-5 backdrop-blur-xl">
-            <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-amber-200"><a href="/events" className="hover:text-amber-300 transition-colors">近期活動 ↗</a></h2>
-              <span className="text-xs text-amber-300/70 border border-amber-300/20 rounded-full px-2 py-0.5">未來 60 天</span>
-            </div>
-            {insights.events && insights.events.length > 0 ? (
-              <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
-                {insights.events.slice(0, 15).map((ev, i) => (
-                  <div key={i} className="flex items-start gap-2 text-xs">
-                    <span className="flex-shrink-0 text-amber-300 font-medium w-20">{ev.date}</span>
-                    <span className="flex-shrink-0 text-zinc-500 w-10">{ev.time}</span>
-                    <span className="text-zinc-200 truncate">{ev.summary}</span>
-                  </div>
-                ))}
+        <section className="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+          <div className="rounded-[32px] border border-white/10 bg-[#0b1628]/80 p-6 backdrop-blur-xl">
+            <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-white">首頁焦點</h2>
+                <p className="mt-1 text-sm leading-6 text-slate-400">
+                  先看整體熱度，再往下延伸到你想追的團體與成員。
+                </p>
               </div>
-            ) : <p className="text-sm text-zinc-400">載入活動中...</p>}
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
-            <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-white">AI Market Snapshot</h2>
-              <span className="text-xs text-zinc-400 border border-white/10 rounded-full px-2 py-0.5">auto insight</span>
+              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">
+                {loading ? "資料載入中" : error ? "資料暫時無法更新" : "資料已成功更新"}
+              </div>
             </div>
-            <div className="space-y-2 text-sm text-zinc-300">
-              <p>市場平均溫度 <span className="font-bold text-pink-300">{fmt(insights.market_temperature)}</span>，近期整體活躍。</p>
-              <p>本週焦點 <span className="font-semibold text-amber-300">{insights.weekly_highlights.top_group}</span>，社群領先 <span className="font-semibold text-violet-300">{insights.weekly_highlights.social_king}</span>。</p>
-              <p>追蹤 <span className="font-semibold text-cyan-300">{insights.active_groups}</span> 個活躍單位（含 Solo）。</p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              <SpotlightCard
+                title="快速看榜單"
+                body="團體與成員的首頁排行榜會先提供一個高層次視角，適合快速掌握目前關注焦點。"
+              />
+              <SpotlightCard
+                title="探索個別頁面"
+                body="每筆排行都可以再點進詳細頁，往下追成員資料、分組狀態與相關內容。"
+              />
+              <SpotlightCard
+                title="延伸到論壇與活動"
+                body="如果你想看討論氛圍或行程資訊，論壇與活動頁面可以接著補完整個使用情境。"
+              />
+            </div>
+          </div>
+
+          <div className="rounded-[32px] border border-cyan-400/15 bg-cyan-400/10 p-6 backdrop-blur-xl">
+            <h2 className="text-2xl font-bold text-white">使用方式</h2>
+            <div className="mt-4 space-y-4 text-sm leading-7 text-cyan-50/90">
+              <p>先從首頁看市場熱度與本週焦點，決定要追團體還是成員。</p>
+              <p>如果你在意互動與內容深度，可以直接跳到論壇頁面看最新討論。</p>
+              <p>若想安排追星行程，活動頁面會比首頁更適合當作下一步入口。</p>
             </div>
           </div>
         </section>
 
-        <section className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl md:p-6">
-            <div className="mb-5 flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-bold text-white">團體排行 Top 10</h2>
-                <p className="mt-1 text-sm text-zinc-400">依成員社群活躍度加權計算</p>
-              </div>
-              <span className="rounded-full border border-pink-400/20 bg-pink-400/10 px-3 py-1 text-xs text-pink-200">Groups</span>
-            </div>
-            <div className="space-y-3">
-              {groups.map(g => {
-                const pct = clamp((g.temperature_index / maxGS) * 100);
-                const dc = dotColor(g);
-                return (
-                  <Link key={`${g.rank}-${g.group}`} href={`/groups/${encodeURIComponent(g.display_name)}`} className="block rounded-2xl border border-white/10 bg-black/20 p-4 hover:border-pink-400/30 hover:bg-white/10 transition-colors">
-                    <div className="mb-3 flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold">{getRankBadge(g.rank)}</div>
-                      <div className="h-4 w-4 flex-shrink-0 rounded-full border border-white/20" style={{ backgroundColor: dc }} />
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2">
-                          <span className="truncate text-base font-semibold text-white">{g.display_name}</span>
-                          {g.is_solo && <span className="flex-shrink-0 rounded-full bg-violet-500/20 border border-violet-400/30 px-2 py-0.5 text-[10px] text-violet-300">Solo</span>}
-                        </div>
-                        <div className="truncate text-xs text-zinc-400">{g.member_count} 人{g.member_names ? ` · ${g.member_names.split(" / ").slice(0, 4).join(" / ")}` : ""}</div>
-                      </div>
-                      <div className="text-right flex-shrink-0">
-                        <div className="text-lg font-extrabold text-pink-300">{fmt(g.temperature_index)}</div>
-                        <div className="text-[11px] text-zinc-400">溫度指數</div>
-                      </div>
-                    </div>
-                    <div className="mb-2 h-2 overflow-hidden rounded-full bg-white/10">
-                      <div className="h-full rounded-full bg-gradient-to-r from-pink-500 via-fuchsia-400 to-violet-400" style={{ width: `${pct}%` }} />
-                    </div>
-                    <div className="flex items-center justify-between text-xs text-zinc-400">
-                      <span>社群活躍度 {fmt(g.social_activity, 0)}</span>
-                      <div className="flex items-center gap-2">
-                        {g.instagram && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.instagram,'_blank')}} className="text-pink-400 hover:text-pink-300 font-bold text-xs">IG</button>}
-                    {g.twitter && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.twitter,'_blank')}} className="text-sky-400 hover:text-sky-300 font-bold text-xs">𝕏</button>}
-                    {g.facebook && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.facebook,'_blank')}} className="text-blue-400 hover:text-blue-300 font-bold text-xs">FB</button>}
-                    {g.youtube && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.youtube,'_blank')}} className="text-red-400 hover:text-red-300 font-bold text-xs">YT</button>}
-                    {!g.instagram && !g.twitter && !g.facebook && !g.youtube && <span>轉換 {fmt(g.conversion_score, 0)}</span>}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl md:p-6">
-            <div className="mb-5 flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-bold text-white">成員排行 Top 10</h2>
-                <p className="mt-1 text-sm text-zinc-400">依溫度指數排序</p>
-              </div>
-              <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200">Members</span>
-            </div>
-            <div className="space-y-3">
-              {members.map(m => {
-                const pct = clamp((m.temperature_index / maxMS) * 100);
-                return (
-                  <Link key={`${m.rank}-${m.name}`} href={`/members/${encodeURIComponent(m.name)}`} className="block rounded-2xl border border-white/10 bg-black/20 p-4 hover:border-cyan-400/30 hover:bg-white/10 transition-colors">
-                    <div className="mb-3 flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold">{getRankBadge(m.rank)}</div>
-                      {m.photo_url ? (
-                        <Image src={m.photo_url} alt={m.name} width={44} height={44} className="h-11 w-11 rounded-2xl object-cover ring-1 ring-white/10" unoptimized />
-                      ) : (
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/30 to-violet-500/30 text-sm font-bold">{getInitial(m.name)}</div>
-                      )}
-                      <div className="min-w-0 flex-1">
-                        <div className="truncate text-base font-semibold text-white">{m.name}</div>
-                        <div className="truncate text-xs text-zinc-400">{m.group || "—"}</div>
-                      </div>
-                      <div className="text-right flex-shrink-0">
-                        <div className="text-lg font-extrabold text-cyan-300">{fmt(m.temperature_index)}</div>
-                        <div className="text-[11px] text-zinc-400">溫度指數</div>
-                      </div>
-                    </div>
-                    <div className="mb-2 h-2 overflow-hidden rounded-full bg-white/10">
-                      <div className="h-full rounded-full bg-gradient-to-r from-cyan-500 via-sky-400 to-violet-400" style={{ width: `${pct}%` }} />
-                    </div>
-                    <div className="flex items-center justify-between text-xs text-zinc-400">
-                      <div className="flex items-center gap-2">
-                        <span>社群 {fmt(m.social_activity, 0)}</span>
-                        {m.freshness_score > 20 && <span className="text-emerald-400">● 活躍</span>}
-                        {m.freshness_score > 0 && m.freshness_score <= 20 && <span className="text-yellow-500">● 近期</span>}
-                        {m.freshness_score === 0 && <span className="text-zinc-600">● 久未更新</span>}
-                      </div>
-                      <div className="flex gap-2">
-                        {m.instagram && <button type="button" onClick={e=>{e.stopPropagation();window.open(m.instagram,'_blank')}} className="text-pink-400 hover:text-pink-300 font-bold text-xs">IG</button>}
-                        {m.twitter && <button type="button" onClick={e=>{e.stopPropagation();window.open(m.twitter,'_blank')}} className="text-sky-400 hover:text-sky-300 font-bold text-xs">𝕏</button>}
-                        {m.facebook && <button type="button" onClick={e=>{e.stopPropagation();window.open(m.facebook,'_blank')}} className="text-blue-400 hover:text-blue-300 font-bold text-xs">FB</button>}
-                        {!m.instagram && !m.twitter && !m.facebook && <span className="text-zinc-600">無社群</span>}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
+        <section className="mt-8 grid gap-6 lg:grid-cols-2">
+          <RankingPanel
+            title="團體熱度排行"
+            subtitle="以成員整體表現估算本週團體熱度"
+            emptyMessage={error || "暫時沒有團體資料"}
+            items={
+              data?.topGroups.map((group, index) => ({
+                key: group.id,
+                href: `/groups/${encodeURIComponent(group.name)}`,
+                rank: index + 1,
+                title: group.name,
+                meta: `${group.memberCount} 位成員`,
+                value: group.score.toFixed(1),
+              })) || []
+            }
+          />
+          <RankingPanel
+            title="成員熱度排行"
+            subtitle="結合社群存在感與資料新鮮度"
+            emptyMessage={error || "暫時沒有成員資料"}
+            items={
+              data?.topMembers.map((member, index) => ({
+                key: member.id,
+                href: `/members/${encodeURIComponent(member.name)}`,
+                rank: index + 1,
+                title: member.name,
+                meta: `${member.group} · 新鮮度 ${member.freshness}`,
+                value: member.score.toFixed(1),
+              })) || []
+            }
+          />
         </section>
       </div>
-
-      {/* Footer */}
-      <footer className="mx-auto max-w-7xl px-4 py-6 mt-4 border-t border-white/5 flex items-center justify-between text-xs text-zinc-500">
-        <span>台灣地下偶像數據情報平台 v3.7</span>
-        <div className="flex items-center gap-4">
-<a href="/forum" className="hover:text-zinc-300 transition-colors">💬 討論區</a>
-          <a href="/events" className="hover:text-zinc-300 transition-colors">📅 活動</a>
-          <a href="/pricing" className="hover:text-zinc-300 transition-colors">方案</a>
-          <a href="https://www.facebook.com/profile.php?id=61573475755166" target="_blank" rel="noopener noreferrer" className="hover:text-blue-300 text-blue-400/70 transition-colors">📘 Facebook</a>
-          <a href="/about" className="hover:text-zinc-300 transition-colors">關於 / 隱私政策</a>
-        </div>
-      </footer>
     </main>
+  );
+}
+
+function MetricCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-[24px] border border-white/10 bg-slate-950/55 p-4">
+      <div className="text-[11px] uppercase tracking-[0.24em] text-slate-400">{label}</div>
+      <div className="mt-3 line-clamp-2 text-2xl font-bold leading-tight text-white">{value}</div>
+    </div>
+  );
+}
+
+function SpotlightCard({ title, body }: { title: string; body: string }) {
+  return (
+    <div className="rounded-[24px] border border-white/10 bg-white/5 p-5">
+      <h3 className="text-lg font-semibold text-white">{title}</h3>
+      <p className="mt-3 text-sm leading-7 text-slate-300">{body}</p>
+    </div>
+  );
+}
+
+function RankingPanel({
+  title,
+  subtitle,
+  items,
+  emptyMessage,
+}: {
+  title: string;
+  subtitle: string;
+  items: Array<{
+    key: string;
+    href: string;
+    rank: number;
+    title: string;
+    meta: string;
+    value: string;
+  }>;
+  emptyMessage: string;
+}) {
+  return (
+    <section className="rounded-[32px] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+      <div className="mb-5">
+        <h2 className="text-2xl font-bold text-white">{title}</h2>
+        <p className="mt-1 text-sm text-slate-400">{subtitle}</p>
+      </div>
+      {items.length === 0 ? (
+        <div className="rounded-[24px] border border-white/10 bg-slate-950/40 p-5 text-sm text-slate-400">
+          {emptyMessage}
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {items.map((item) => (
+            <Link
+              key={item.key}
+              href={item.href}
+              className="flex items-center gap-4 rounded-[24px] border border-white/10 bg-slate-950/45 p-4 transition hover:border-cyan-300/30 hover:bg-slate-900/75"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300/10 text-sm font-bold text-cyan-100">
+                {badge(item.rank)}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="truncate text-base font-semibold text-white">{item.title}</div>
+                <div className="truncate text-sm text-slate-400">{item.meta}</div>
+              </div>
+              <div className="text-right">
+                <div className="text-lg font-bold text-cyan-300">{item.value}</div>
+                <div className="text-xs uppercase tracking-[0.18em] text-slate-500">score</div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }

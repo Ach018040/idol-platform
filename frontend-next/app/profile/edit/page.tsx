@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useForumAuth } from "../../../../lib/forum-auth";
-import type { UserProfile } from "../../../../lib/user-role";
+import { useForumAuth } from "../../../lib/forum-auth";
+import type { UserProfile } from "../../../lib/user-role";
 
 const COLORS = ["#7c3aed","#db2777","#dc2626","#ea580c","#ca8a04","#16a34a","#0891b2","#2563eb","#7e22ce","#be185d"];
 

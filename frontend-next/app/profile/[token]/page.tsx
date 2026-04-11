@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useForumAuth } from "../../../../lib/forum-auth";
-import { roleBadgeColor, roleLabel, canModerate, type UserProfile } from "../../../../lib/user-role";
+import { useForumAuth } from "../../../lib/forum-auth";
+import { roleBadgeColor, roleLabel, canModerate, type UserProfile } from "../../../lib/user-role";
 
 export default function ProfilePage({ params }: { params: { token: string } }) {
   const { user } = useForumAuth();
