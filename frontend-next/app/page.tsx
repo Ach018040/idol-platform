@@ -8,10 +8,11 @@ const SB_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
 const SB_H = { apikey: SB_KEY, Accept: "application/json", "Accept-Profile": "public" };
 const ICS_API = "/api/ical";
 
-type Group = { rank: number; group: string; display_name: string; color: string; member_count: number; member_names: string; social_activity: number; temperature_index: number; conversion_score: number; instagram?: string; facebook?: string; twitter?: string; youtube?: string; is_solo?: boolean; };
-type Member = { rank: number; id: string; name: string; group?: string; instagram?: string; facebook?: string; twitter?: string; photo_url?: string; maid_url?: string; updated_at?: string; social_activity: number; profile_completeness: number; freshness_score: number; group_affinity_score: number; temperature_index: number; conversion_score: number; platform_count: number; };
+type Group = { rank: number; group: string; display_name: string; color: string; member_count: number; member_names: string; social_activity: number; temperature_index: number; conversion_score: number; instagram?: string; facebook?: string; twitter?: string; youtube?: string; is_solo?: boolean; days_since_update?: number; };
+type Member = { rank: number; id: string; name: string; group?: string; instagram?: string; facebook?: string; twitter?: string; photo_url?: string; maid_url?: string; updated_at?: string; social_activity: number; profile_completeness: number; freshness_score: number; group_affinity_score: number; temperature_index: number; conversion_score: number; platform_count: number; days_since_update: number; };
 type CalEvent = { date: string; time: string; summary: string; dtRaw: Date; };
 type Insights = { market_temperature: number; active_groups: number; weekly_highlights: { top_group: string; social_king: string }; rising_stars: string[]; events: CalEvent[]; };
+const ACTIVE_WINDOW_DAYS = 90;
 
 function fmt(v: number | null | undefined, d = 1) { const n = Number(v ?? 0); return Number.isFinite(n) ? n.toFixed(d) : "—"; }
 function getRankBadge(r: number) { return r === 1 ? "🥇" : r === 2 ? "🥈" : r === 3 ? "🥉" : `#${r}`; }
@@ -102,6 +103,7 @@ async function loadData() {
       temperature_index: ti,
       conversion_score: clamp1(ti * 0.6),
       platform_count: platformCount,
+      days_since_update: daysSinceUpdate,
     };
   }).sort((a: Member, b: Member) => b.temperature_index - a.temperature_index)
     .map((m: Member, i: number) => ({ ...m, rank: i + 1 }));
@@ -114,6 +116,7 @@ async function loadData() {
     const cnt = mb.length;
     const memberAverage = cnt ? mb.reduce((s: number, m: Member) => s + m.temperature_index, 0) / cnt : 0;
     const memberDepth = cnt ? Math.min(12, 4 * Math.log2(cnt + 1)) : 0;
+    const daysSinceUpdate = cnt ? Math.min(...mb.map((m: Member) => m.days_since_update)) : Infinity;
     const socialCoverage = clamp1(
       +((g.instagram || "").startsWith("http")) * 9 +
       +((g.x || "").startsWith("http")) * 7 +
@@ -127,11 +130,12 @@ async function loadData() {
       member_count: cnt, member_names: mb.slice(0, 6).map((m: Member) => m.name).join(" / "),
       social_activity: sa, temperature_index: ti, conversion_score: clamp1(ti * 0.6),
       instagram: g.instagram || "", facebook: g.facebook || "", twitter: g.x || "", youtube: g.youtube || "",
+      days_since_update: daysSinceUpdate,
     };
   });
 
   memberData.forEach((m: Member) => {
-    if (!m.group) groupData.push({ rank: 0, group: m.name, display_name: m.name, color: "#888888", member_count: 1, member_names: m.name, social_activity: m.social_activity, temperature_index: m.temperature_index, conversion_score: m.conversion_score, instagram: m.instagram, is_solo: true });
+    if (!m.group) groupData.push({ rank: 0, group: m.name, display_name: m.name, color: "#888888", member_count: 1, member_names: m.name, social_activity: m.social_activity, temperature_index: m.temperature_index, conversion_score: m.conversion_score, instagram: m.instagram, is_solo: true, days_since_update: m.days_since_update });
   });
 
   groupData.sort((a: Group, b: Group) => {
@@ -141,8 +145,9 @@ async function loadData() {
   groupData.forEach((g: Group, i: number) => { g.rank = i + 1; });
 
   const scored = memberData.filter((m: Member) => m.temperature_index > 0);
+  const activeRankableGroups = groupData.filter((g: Group) => !g.is_solo && g.member_count > 0 && (g.days_since_update ?? Infinity) <= ACTIVE_WINDOW_DAYS);
   const mktTemp = scored.length ? +(scored.reduce((s: number, m: Member) => s + m.temperature_index, 0) / scored.length).toFixed(1) : 0;
-  const topGrp = groupData.find((g: Group) => g.member_count > 0 || g.is_solo)?.display_name || "—";
+  const topGrp = activeRankableGroups[0]?.display_name || "N/A";
   const socialKing = pickSocialKing(memberData);
   const rising = memberData.filter((m: Member) => m.instagram && m.photo_url && m.rank > 50).slice(0, 5).map((m: Member) => m.name);
 
@@ -154,7 +159,7 @@ async function loadData() {
 
   const insights: Insights = {
     market_temperature: mktTemp,
-    active_groups: groupData.filter((g: Group) => g.member_count > 0 || g.is_solo).length,
+    active_groups: activeRankableGroups.length,
     weekly_highlights: { top_group: topGrp, social_king: socialKing?.name || "—" },
     rising_stars: rising,
     events,
@@ -216,9 +221,11 @@ export default function HomePage() {
   );
 
   const { memberData, groupData, insights } = data!;
-  const groups = groupData.filter(g => g.member_count > 0 || g.is_solo).slice(0, 10);
+  const groups = groupData.filter(g => !g.is_solo && g.member_count > 0 && (g.days_since_update ?? Infinity) <= ACTIVE_WINDOW_DAYS).slice(0, 10);
+  const solos = groupData.filter(g => g.is_solo && (g.days_since_update ?? Infinity) <= ACTIVE_WINDOW_DAYS).slice(0, 6);
   const members = memberData.slice(0, 10);
   const maxGS = Math.max(...groups.map(g => g.temperature_index), 1);
+  const maxSolo = Math.max(...solos.map(g => g.temperature_index), 1);
   const maxMS = Math.max(...members.map(m => m.temperature_index), 1);
 
   return (
@@ -297,7 +304,7 @@ export default function HomePage() {
             <div className="space-y-2 text-sm text-zinc-300">
               <p>市場平均溫度 <span className="font-bold text-pink-300">{fmt(insights.market_temperature)}</span>，近期整體活躍。</p>
               <p>本週焦點 <span className="font-semibold text-amber-300">{insights.weekly_highlights.top_group}</span>，社群領先 <span className="font-semibold text-violet-300">{insights.weekly_highlights.social_king}</span>。</p>
-              <p>追蹤 <span className="font-semibold text-cyan-300">{insights.active_groups}</span> 個活躍單位（含 Solo）。</p>
+              <p>近 90 天內共有 <span className="font-semibold text-cyan-300">{insights.active_groups}</span> 個正式團體進入排行榜。</p>
             </div>
           </div>
         </section>
@@ -401,6 +408,54 @@ export default function HomePage() {
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        <section className="mt-6">
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl md:p-6">
+            <div className="mb-5 flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-white">Solo 焦點</h2>
+                <p className="mt-1 text-sm text-zinc-400">獨立成員獨立顯示，且僅保留近 90 天內有更新者。</p>
+              </div>
+              <span className="rounded-full border border-violet-400/20 bg-violet-400/10 px-3 py-1 text-xs text-violet-200">Solo</span>
+            </div>
+            {solos.length > 0 ? (
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+                {solos.map(g => {
+                  const pct = clamp((g.temperature_index / maxSolo) * 100);
+                  const dc = dotColor(g);
+                  return (
+                    <Link key={`solo-${g.group}`} href={`/members/${encodeURIComponent(g.display_name)}`} className="block rounded-2xl border border-white/10 bg-black/20 p-4 hover:border-violet-400/30 hover:bg-white/10 transition-colors">
+                      <div className="mb-3 flex items-center gap-3">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold">{getInitial(g.display_name)}</div>
+                        <div className="h-4 w-4 flex-shrink-0 rounded-full border border-white/20" style={{ backgroundColor: dc }} />
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="truncate text-base font-semibold text-white">{g.display_name}</span>
+                            <span className="flex-shrink-0 rounded-full bg-violet-500/20 border border-violet-400/30 px-2 py-0.5 text-[10px] text-violet-300">Solo</span>
+                          </div>
+                          <div className="truncate text-xs text-zinc-400">近 {Math.round(g.days_since_update ?? 0)} 天內有更新</div>
+                        </div>
+                        <div className="text-right flex-shrink-0">
+                          <div className="text-lg font-extrabold text-violet-300">{fmt(g.temperature_index)}</div>
+                          <div className="text-[11px] text-zinc-400">溫度指數</div>
+                        </div>
+                      </div>
+                      <div className="mb-2 h-2 overflow-hidden rounded-full bg-white/10">
+                        <div className="h-full rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-400 to-pink-400" style={{ width: `${pct}%` }} />
+                      </div>
+                      <div className="flex items-center justify-between text-xs text-zinc-400">
+                        <span>社群覆蓋 {fmt(g.social_activity, 0)}</span>
+                        <span>90 天內可見</span>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-sm text-zinc-400">目前沒有符合近 90 天更新條件的 Solo 成員。</p>
+            )}
           </div>
         </section>
       </div>
