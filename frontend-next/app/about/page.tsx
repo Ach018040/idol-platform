@@ -4,33 +4,33 @@ import { searchBrainPages } from "@/lib/brain";
 
 export const metadata = {
   title: "About",
-  description: "關於 idol-platform、溫度指數與平台知識層",
+  description: "關於 idol-platform、溫度公式與平台知識層",
 };
 
 const FEATURES = [
   {
     title: "即時排行榜",
-    desc: "整合成員與團體溫度指數，讓使用者快速觀察近期值得注意的對象。",
+    desc: "以成員與團體溫度指數為核心，整理市場概況、近期變化與值得關注的焦點對象。",
   },
   {
     title: "近期活動",
-    desc: "整理地下偶像活動資訊，降低粉絲追蹤演出與行程的成本。",
+    desc: "整合近期活動與公開資訊，幫助使用者快速掌握值得追蹤的演出與動態。",
   },
   {
     title: "Idol Forum",
-    desc: "提供論壇討論區，讓粉絲能圍繞團體、成員與活動建立互動。",
+    desc: "提供討論、發文、管理與規範治理的論壇空間，讓排行榜之外也能留下社群互動脈絡。",
   },
   {
     title: "AI 與 Knowledge Layer",
-    desc: "將市場摘要、公式說明與研究筆記逐步沉澱到 brain knowledge base。",
+    desc: "把每週摘要、公式版本、產品研究與知識頁串成可搜尋的資料層，方便後續推薦與說明引用。",
   },
 ];
 
 const FORMULA_POINTS = [
-  "成員分數以 social presence、profile completeness、mixed freshness 與 group affinity 組成。",
-  "團體分數以 member average、top member、group social coverage 與 content diversity 組成。",
-  "freshness v2 會混合資料更新時間與 best-effort 社群最後發文訊號。",
-  "若部分指標尚不可得，系統會保守 fallback，並以 data coverage / confidence 呈現可得性。",
+  "成員公式以 social presence、profile completeness、mixed freshness 與 group affinity 為主。",
+  "團體公式則綜合 member average、top member、group social coverage 與內容面向。",
+  "freshness v2 會混合資料更新時間與 best-effort 的社群最後發文時間，而不是只看單一欄位。",
+  "若外部社群數據尚未完整覆蓋，系統會保留 fallback，並透過 data coverage 與 confidence 提示可信度。",
 ];
 
 export default async function AboutPage() {
@@ -46,8 +46,8 @@ export default async function AboutPage() {
           </div>
           <h1 className="text-4xl font-black md:text-5xl">關於本平台</h1>
           <p className="mx-auto max-w-3xl text-sm leading-8 text-zinc-300">
-            idol-platform 是一個以台灣地下偶像為主題的資料平台，整合排行榜、活動、論壇、AI 摘要與知識層。
-            我們希望不只提供分數，也能讓每次變化、推薦與觀察都更容易被理解。
+            idol-platform 是面向台灣地下偶像的數據情報平台，整合排行榜、論壇、觀察內容與可搜尋知識頁。
+            我們希望讓使用者不只看見名次，也能理解分數背後的資料來源、公式版本與市場脈絡。
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link href="/" className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10">
@@ -72,7 +72,7 @@ export default async function AboutPage() {
         </section>
 
         <section className="space-y-5">
-          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold">溫度指數 v2</h2>
+          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold">溫度公式 v2</h2>
           <div className="rounded-2xl border border-white/10 bg-black/30 p-6">
             <div className="space-y-3 text-sm leading-7 text-zinc-300">
               {FORMULA_POINTS.map((point) => (
@@ -80,22 +80,22 @@ export default async function AboutPage() {
               ))}
             </div>
             <div className="mt-5 rounded-xl border border-emerald-400/20 bg-emerald-400/10 p-4 text-xs leading-7 text-zinc-200">
-              溫度指數目前較準確地反映「社群覆蓋、資料完整度、更新活躍度與團體結構」，
-              並作為市場熱度的基礎觀察指標；它仍會隨著 followers、engagement、views 與 audience 資料接入而持續升級。
+              目前正式站已經切到 v2 結構，但 followers、engagement、views 與 audience 這些更完整的外部訊號，
+              仍會隨著資料可得性逐步接入，因此分數可信度會和資料覆蓋率一起持續提升。
             </div>
           </div>
         </section>
 
         <section className="space-y-5">
           <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-3">
-            <h2 className="text-2xl font-bold">Brain 引用</h2>
+            <h2 className="text-2xl font-bold">Brain 參考頁</h2>
             <Link href="/brain" className="text-sm text-cyan-300 hover:text-cyan-200">
               查看全部
             </Link>
           </div>
           <p className="text-sm leading-7 text-zinc-300">
-            這一層來自 `Secbrain` 的整合方向，後續會承接公式說明、每週市場摘要、產品研究與推薦解釋。
-            `/about` 現在已開始直接引用這些 brain 頁面。
+            這裡展示的是 Secbrain 風格整合後的知識頁來源。就算資料庫 migration 尚未正式套用，
+            `/about` 仍會先顯示可用的 fallback 頁面，讓知識層先進入使用流程。
           </p>
           <div className="grid gap-4 md:grid-cols-2">
             {brainRefs.length ? (
@@ -112,7 +112,8 @@ export default async function AboutPage() {
               ))
             ) : (
               <div className="rounded-2xl border border-dashed border-white/10 bg-white/5 p-6 text-sm text-zinc-400">
-                Brain 頁面尚未從 Supabase 讀回。若你剛完成整合，請先執行 migration 與 seed。
+                Brain 目前仍以 fallback 內容顯示。之後若 Supabase 已正式套用 migration 與 seed，
+                這裡會自動切到資料庫版內容。
               </div>
             )}
           </div>

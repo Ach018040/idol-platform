@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { getLocalBrainLinks, getLocalBrainPage } from "@/lib/brain-local";
 import { BRAIN_HEADERS, BRAIN_SB_URL } from "@/lib/supabase-brain";
 
 async function fetchJson(path: string) {
@@ -21,7 +22,11 @@ export async function GET(request: NextRequest) {
   }
 
   if (!BRAIN_HEADERS.apikey) {
-    return NextResponse.json({ page: null, links: [], error: "BRAIN_SUPABASE_ANON_NOT_CONFIGURED" });
+    return NextResponse.json({
+      page: getLocalBrainPage(slug),
+      links: getLocalBrainLinks(slug),
+      fallback: true,
+    });
   }
 
   try {
@@ -33,16 +38,28 @@ export async function GET(request: NextRequest) {
 
     const page = Array.isArray(pageRows) ? pageRows[0] || null : null;
     if (!page) {
-      return NextResponse.json({ page: null, links: [] });
+      return NextResponse.json({
+        page: getLocalBrainPage(slug),
+        links: getLocalBrainLinks(slug),
+        fallback: true,
+      });
     }
 
     const linkRows = await fetchJson(
-      `/rest/v1/brain_links?select=to_slug,link_type&from_slug=eq.${encodeURIComponent(slug)}`
+      `/rest/v1/brain_links?select=to_slug,link_type,from_slug&from_slug=eq.${encodeURIComponent(slug)}`
     );
 
     const links = Array.isArray(linkRows) ? linkRows : [];
-    return NextResponse.json({ page, links });
+    return NextResponse.json({ page, links: links.length ? links : getLocalBrainLinks(slug) });
   } catch (error) {
-    return NextResponse.json({ page: null, links: [], error: String(error) }, { status: 200 });
+    return NextResponse.json(
+      {
+        page: getLocalBrainPage(slug),
+        links: getLocalBrainLinks(slug),
+        error: String(error),
+        fallback: true,
+      },
+      { status: 200 }
+    );
   }
 }

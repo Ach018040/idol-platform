@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { searchLocalBrainPages } from "@/lib/brain-local";
 import { BRAIN_HEADERS, BRAIN_SB_URL } from "@/lib/supabase-brain";
 
 function escapeIlike(value: string) {
@@ -13,7 +14,7 @@ export async function GET(request: NextRequest) {
   const limit = Number.isFinite(limitRaw) ? Math.min(Math.max(limitRaw, 1), 20) : 8;
 
   if (!BRAIN_HEADERS.apikey) {
-    return NextResponse.json({ pages: [], error: "BRAIN_SUPABASE_ANON_NOT_CONFIGURED" });
+    return NextResponse.json({ pages: searchLocalBrainPages(q, type, limit), fallback: true });
   }
 
   const params = new URLSearchParams({
@@ -41,12 +42,19 @@ export async function GET(request: NextRequest) {
     });
 
     if (!res.ok) {
-      return NextResponse.json({ pages: [], error: `SUPABASE_${res.status}` }, { status: 200 });
+      return NextResponse.json(
+        { pages: searchLocalBrainPages(q, type, limit), error: `SUPABASE_${res.status}`, fallback: true },
+        { status: 200 }
+      );
     }
 
     const pages = await res.json();
-    return NextResponse.json({ pages: Array.isArray(pages) ? pages : [] });
+    const resolved = Array.isArray(pages) && pages.length ? pages : searchLocalBrainPages(q, type, limit);
+    return NextResponse.json({ pages: resolved, fallback: !Array.isArray(pages) || !pages.length });
   } catch (error) {
-    return NextResponse.json({ pages: [], error: String(error) }, { status: 200 });
+    return NextResponse.json(
+      { pages: searchLocalBrainPages(q, type, limit), error: String(error), fallback: true },
+      { status: 200 }
+    );
   }
 }

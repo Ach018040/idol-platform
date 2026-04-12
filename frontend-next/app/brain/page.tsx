@@ -4,7 +4,7 @@ import { searchBrainPages } from "@/lib/brain";
 
 export const metadata = {
   title: "Brain",
-  description: "idol-platform knowledge base and searchable research notes",
+  description: "idol-platform 平台知識庫與研究索引",
 };
 
 export default async function BrainPage({
@@ -26,7 +26,7 @@ export default async function BrainPage({
           <h1 className="text-4xl font-black">平台知識庫與研究索引</h1>
           <p className="max-w-3xl text-sm leading-7 text-zinc-300">
             這裡整合了 idol-platform 的公式版本、每週觀察、產品研究與後續可重用的知識頁。
-            後續 AI 摘要、推薦說明與論壇管理規範都會逐步接到這一層。
+            後續 AI 摘要、推薦說明與論壇管理規範，都能逐步接到這一層。
           </p>
           <form className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 md:flex-row">
             <input
@@ -74,8 +74,8 @@ export default async function BrainPage({
             ))
           ) : (
             <div className="rounded-2xl border border-dashed border-white/10 bg-white/5 p-8 text-sm text-zinc-400">
-              目前沒有符合條件的 brain 頁面。若剛完成 migration，請先在 Supabase 套用
-              `005_secbrain_knowledge_base.sql` 與 `seed_brain_runtime.sql`。
+              目前還沒有符合條件的 brain 頁面。你可以先改搜尋條件，或之後再把 Supabase 的
+              `005_secbrain_knowledge_base.sql` 與 `seed_brain_runtime.sql` 套上，讓資料庫版內容接手。
             </div>
           )}
         </section>

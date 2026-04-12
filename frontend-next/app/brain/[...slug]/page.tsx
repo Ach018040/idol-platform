@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { getBrainPage, searchBrainPages } from "@/lib/brain";
+import { getBrainLinks, getBrainPage, searchBrainPages } from "@/lib/brain";
 
 function brainHref(slug: string) {
   return `/brain/${slug.split("/").map(encodeURIComponent).join("/")}`;
@@ -16,6 +16,7 @@ export default async function BrainDetailPage({
   const page = await getBrainPage(slug);
   if (!page) notFound();
 
+  const links = await getBrainLinks(slug);
   const related = (await searchBrainPages("", "", 12)).filter((item) => item.slug !== slug).slice(0, 6);
 
   return (
@@ -24,7 +25,7 @@ export default async function BrainDetailPage({
         <article className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8">
           <div className="flex flex-wrap items-center gap-3 text-xs">
             <Link href="/brain" className="text-cyan-300 hover:text-cyan-200">
-              ← 返回 Brain
+              返回 Brain
             </Link>
             <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-2 py-1 text-cyan-200">
               {page.type}
@@ -52,7 +53,27 @@ export default async function BrainDetailPage({
                   </span>
                 ))
               ) : (
-                <span className="text-sm text-zinc-500">尚無 tags</span>
+                <span className="text-sm text-zinc-500">目前沒有 tags</span>
+              )}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-300">Links</h2>
+            <div className="mt-3 space-y-3">
+              {links.length ? (
+                links.map((link) => (
+                  <Link
+                    key={`${link.from_slug}-${link.to_slug}-${link.link_type}`}
+                    href={brainHref(link.to_slug)}
+                    className="block"
+                  >
+                    <div className="text-sm font-medium text-white">{link.to_slug}</div>
+                    <div className="text-xs text-zinc-500">{link.link_type}</div>
+                  </Link>
+                ))
+              ) : (
+                <div className="text-sm text-zinc-500">目前沒有關聯頁面</div>
               )}
             </div>
           </div>

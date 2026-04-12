@@ -1,7 +1,13 @@
+import {
+  getLocalBrainLinks,
+  getLocalBrainPage,
+  searchLocalBrainPages,
+  type BrainLink,
+} from "./brain-local";
 import { BRAIN_HEADERS, BRAIN_SB_URL, type BrainPage } from "./supabase-brain";
 
 export async function searchBrainPages(query = "", type = "", limit = 8): Promise<BrainPage[]> {
-  if (!BRAIN_HEADERS.apikey) return [];
+  if (!BRAIN_HEADERS.apikey) return searchLocalBrainPages(query, type, limit);
 
   const params = new URLSearchParams({
     select: "slug,type,title,compiled_truth,timeline_md,tags,frontmatter,updated_at",
@@ -22,16 +28,20 @@ export async function searchBrainPages(query = "", type = "", limit = 8): Promis
       headers: BRAIN_HEADERS,
       cache: "no-store",
     });
-    if (!res.ok) return [];
+    if (!res.ok) return searchLocalBrainPages(query, type, limit);
     const data = await res.json();
-    return Array.isArray(data) ? (data as BrainPage[]) : [];
+    if (!Array.isArray(data) || !data.length) {
+      return searchLocalBrainPages(query, type, limit);
+    }
+    return data as BrainPage[];
   } catch {
-    return [];
+    return searchLocalBrainPages(query, type, limit);
   }
 }
 
 export async function getBrainPage(slug: string): Promise<BrainPage | null> {
-  if (!BRAIN_HEADERS.apikey || !slug) return null;
+  if (!slug) return null;
+  if (!BRAIN_HEADERS.apikey) return getLocalBrainPage(slug);
 
   try {
     const res = await fetch(
@@ -43,10 +53,32 @@ export async function getBrainPage(slug: string): Promise<BrainPage | null> {
         cache: "no-store",
       }
     );
-    if (!res.ok) return null;
+    if (!res.ok) return getLocalBrainPage(slug);
     const data = await res.json();
-    return Array.isArray(data) ? ((data[0] as BrainPage) || null) : null;
+    return Array.isArray(data) ? ((data[0] as BrainPage) || getLocalBrainPage(slug)) : getLocalBrainPage(slug);
   } catch {
-    return null;
+    return getLocalBrainPage(slug);
+  }
+}
+
+export async function getBrainLinks(slug: string): Promise<BrainLink[]> {
+  if (!slug) return [];
+  if (!BRAIN_HEADERS.apikey) return getLocalBrainLinks(slug);
+
+  try {
+    const res = await fetch(
+      `${BRAIN_SB_URL}/rest/v1/brain_links?select=from_slug,to_slug,link_type&from_slug=eq.${encodeURIComponent(
+        slug
+      )}`,
+      {
+        headers: BRAIN_HEADERS,
+        cache: "no-store",
+      }
+    );
+    if (!res.ok) return getLocalBrainLinks(slug);
+    const data = await res.json();
+    return Array.isArray(data) ? (data as BrainLink[]) : getLocalBrainLinks(slug);
+  } catch {
+    return getLocalBrainLinks(slug);
   }
 }
