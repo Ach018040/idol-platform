@@ -89,9 +89,9 @@ function fmt(value: number | null | undefined, digits = 1) {
 }
 
 function getRankBadge(rank: number) {
-  if (rank === 1) return "🥇";
-  if (rank === 2) return "🥈";
-  if (rank === 3) return "🥉";
+  if (rank === 1) return "🥇 #1";
+  if (rank === 2) return "🥈 #2";
+  if (rank === 3) return "🥉 #3";
   return `#${rank}`;
 }
 
