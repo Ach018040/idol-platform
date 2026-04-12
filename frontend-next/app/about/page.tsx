@@ -4,88 +4,122 @@ const FEATURES = [
   {
     emoji: "🏆",
     title: "即時排行榜",
-    desc: "成員與團體溫度指數 Top 10，每次載入即時從資料來源重新計算與排序。",
+    desc: "首頁直接讀取每日自動更新的 member_rankings.json、v7_rankings.json 與 insights.json，避免前台顯示與資料管線使用不同公式。",
   },
   {
     emoji: "📅",
     title: "近期活動",
-    desc: "整合 Google Calendar，顯示未來 60 天的地下偶像相關活動與演出資訊。",
+    desc: "整合 Google Calendar 活動資料，協助讀者快速掌握未來 60 天內的地下偶像活動行程。",
   },
   {
     emoji: "💬",
     title: "Idol Forum",
-    desc: "台灣地下偶像專屬討論社群，支援論壇登入、發文、回覆與管理後台。",
+    desc: "提供台灣地下偶像專屬討論空間，讓粉絲可以延伸討論排行、活動與市場觀察。",
   },
   {
     emoji: "🌡️",
-    title: "溫度指數",
-    desc: "以社群覆蓋、資料完整度、更新活躍度與團體關聯綜合計算，作為市場熱度的基礎觀察指標。",
+    title: "溫度指數 v2",
+    desc: "新版公式保留原本的可解釋性，並用結構化欄位為後續追蹤數、互動率、觀看率與受眾分析預留升級空間。",
   },
   {
     emoji: "🤖",
-    title: "市場摘要",
-    desc: "整理市場溫度、活躍團體與近期焦點，作為首頁與洞察頁面的輔助資訊。",
+    title: "資料摘要",
+    desc: "insights.json 會輸出 weekly_highlights、market_temperature_v2 與 data_coverage，作為首頁摘要與後續分析的基礎。",
   },
   {
-    emoji: "👁️",
-    title: "使用統計",
-    desc: "造訪次數傳送至伺服器蒐集，用於掌握平台整體使用人數與更新節奏。",
+    emoji: "🔁",
+    title: "每日自動更新",
+    desc: "GitHub Actions 會每日排程執行資料同步與 JSON 產出，讓正式站資料可持續維持更新節奏。",
   },
 ];
 
 const DATA_SOURCES = [
   {
     label: "成員與團體資料",
-    src: "idolmaps.com / Supabase",
-    note: "台灣地下偶像公開資料庫，目前溫度指數的成員、團體與社群欄位皆由此取得。",
+    src: "Supabase / idolmaps",
+    note: "目前排行榜資料來自 idolmaps 公開資料表，包含成員基本資料、群組關聯、社群連結與更新時間。",
   },
   {
-    label: "社群平台連結",
-    src: "Instagram / X / Facebook / YouTube",
-    note: "目前先作為社群覆蓋度的判斷依據，尚未直接納入真實互動數。",
+    label: "結構化 v2 欄位",
+    src: "member_rankings.json / v7_rankings.json / insights.json",
+    note: "正式站現已改讀 *_v2 欄位，未來追蹤數、互動率、觀看率與受眾欄位可在不破壞舊版相容的前提下逐步補齊。",
   },
   {
-    label: "更新時間",
-    src: "updated_at",
-    note: "用於計算資料新鮮度，資料越近期更新，分數越高。",
+    label: "更新新鮮度",
+    src: "updated_at / last_social_snapshot_at",
+    note: "用於計算資料新鮮度與近 90 天可見條件，避免長期未更新資料繼續占據正式排行榜。",
   },
   {
-    label: "團體關聯資料",
-    src: "history / groups",
-    note: "成員若能正確對應到團體，會在成員溫度中得到額外加分。",
-  },
-  {
-    label: "近期活動",
+    label: "活動資料",
     src: "Google Calendar 公開行事曆",
-    note: "顯示未來活動資訊，作為平台補充資訊與觀察依據。",
+    note: "活動列表會透過 API 每次載入時更新，補足社群之外的線下活動觀測。",
   },
   {
-    label: "論壇資料",
-    src: "Supabase",
-    note: "討論串、回覆、管理操作與論壇權限資料儲存在獨立資料表中。",
+    label: "論壇與站內互動",
+    src: "Supabase / Forum APIs",
+    note: "論壇資料與站內互動可做為未來熱度驗證的輔助訊號，但目前尚未納入 v2 主公式。",
+  },
+];
+
+const V2_FIELDS = [
+  "temperature_index_v2",
+  "conversion_score_v2",
+  "member_average_temperature_v2",
+  "member_top_temperature_v2",
+  "group_social_coverage_score",
+  "group_content_diversity_score",
+  "market_temperature_v2",
+  "data_coverage",
+  "data_confidence",
+  "metrics_available",
+];
+
+const TASKS = [
+  {
+    title: "Followers",
+    items: [
+      "Instagram followers_count：需授權 Business / Creator 帳號與 Meta Graph API。",
+      "Threads followers：需 Threads API 或授權後台資料；非授權帳號目前只能保留空值。",
+    ],
+  },
+  {
+    title: "Engagement",
+    items: [
+      "Instagram 每篇平均按讚、留言、互動率：可由媒體 insights 或授權資料取得。",
+      "Threads 每篇平均按讚、回覆、互動率：需 Threads API 支援；未授權時先保留欄位。",
+    ],
+  },
+  {
+    title: "Views",
+    items: [
+      "Instagram views / reach：需授權帳號 insights。",
+      "Threads views：需 Threads API 或平台可見指標。",
+    ],
+  },
+  {
+    title: "Audience",
+    items: [
+      "受眾地區、年齡、性別：僅能從授權帳號 insights 取得。",
+      "未授權帳號目前以 null 保留欄位，並以 data_confidence 顯示資料完整度。",
+    ],
   },
 ];
 
 const VERSION_HISTORY = [
   {
+    ver: "v3.9",
+    date: "2026-04",
+    desc: "首頁正式改讀 v2 JSON schema，/about 說明改為結構化欄位版本，並保留舊欄位相容。",
+  },
+  {
     ver: "v3.8",
     date: "2026-04",
-    desc: "優化溫度公式的分數分布與衰減邏輯，並將 About 頁說明改為更嚴謹的市場觀察表述。",
+    desc: "團體排行與 Solo 焦點切開，團體公式改為更重視成員平均與團內最高成員。",
   },
   {
     ver: "v3.7",
     date: "2026-04",
-    desc: "溫度指數改為 deterministic 公式，About 說明與首頁排行榜同步對齊實際計算方式。",
-  },
-  {
-    ver: "v3.6",
-    date: "2026-03",
-    desc: "加入活動整合、論壇功能與更多成員、團體資料顯示。",
-  },
-  {
-    ver: "v3.5",
-    date: "2026-02",
-    desc: "接入 Supabase 資料來源，建立基礎排行榜與平台使用統計。",
+    desc: "論壇上線、首頁重新整理、/about 與正式站公式說明對齊。",
   },
 ];
 
@@ -95,7 +129,7 @@ export default function AboutPage() {
       <div className="mx-auto max-w-4xl space-y-16">
         <section className="space-y-5 text-center">
           <div className="inline-flex items-center rounded-full border border-fuchsia-400/30 bg-fuchsia-400/10 px-4 py-1.5 text-xs uppercase tracking-widest text-fuchsia-200">
-            Idol Temperature Platform v3.8
+            Idol Temperature Platform v3.9
           </div>
           <h1 className="text-4xl font-black text-white md:text-5xl">
             關於
@@ -104,21 +138,21 @@ export default function AboutPage() {
             </span>
           </h1>
           <p className="mx-auto max-w-2xl leading-7 text-zinc-300">
-            台灣地下偶像數據情報平台，整合社群活躍度、演出頻率與市場趨勢，
-            提供客觀的排行分析、近期活動資訊，以及專屬的偶像討論社群。
+            台灣地下偶像數據情報平台，整合成員與團體的社群覆蓋、資料新鮮度、團體結構與每日自動更新資料，
+            讓排行榜、活動資訊與站內觀察使用相同資料來源。
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/"
               className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300 transition-colors hover:bg-white/10"
             >
-              ← 返回排行榜
+              返回排行榜
             </Link>
             <Link
               href="/forum"
               className="rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 px-4 py-2 text-sm text-fuchsia-200 transition-colors hover:bg-fuchsia-400/20"
             >
-              💬 前往討論區
+              前往討論區
             </Link>
           </div>
         </section>
@@ -127,10 +161,7 @@ export default function AboutPage() {
           <h2 className="border-b border-white/10 pb-3 text-2xl font-bold text-white">平台功能</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {FEATURES.map(({ emoji, title, desc }) => (
-              <div
-                key={title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-colors hover:border-fuchsia-400/20"
-              >
+              <div key={title} className="rounded-2xl border border-white/10 bg-white/5 p-5 transition-colors hover:border-fuchsia-400/20">
                 <div className="mb-2 text-2xl">{emoji}</div>
                 <div className="mb-1 text-sm font-semibold text-white">{title}</div>
                 <div className="text-xs leading-6 text-zinc-400">{desc}</div>
@@ -140,64 +171,63 @@ export default function AboutPage() {
         </section>
 
         <section className="space-y-6">
-          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold text-white">溫度指數計算方式</h2>
+          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold text-white">溫度指數 v2 計算方式</h2>
           <p className="text-sm leading-7 text-zinc-300">
-            <span className="font-semibold text-pink-300">溫度指數（Temperature Index）</span>
-            是本平台的核心評估指標，用於反映偶像或團體在特定時間點的社群覆蓋、資料完整度與更新活躍度，
-            並作為市場熱度的基礎觀察指標。這代表它能描述目前平台可觀測到的市場狀態，但不等同於完整的真實互動熱度。
+            正式站目前會優先讀取 `temperature_index_v2`、`group_temperature_index_v2`、`market_temperature_v2`
+            等欄位。這代表首頁、JSON 與資料管線現在已經走同一套資料結構，而不是前台再各自重算一次。
           </p>
 
           <div className="space-y-4 rounded-2xl border border-white/10 bg-black/30 p-5 font-mono text-sm">
             <div>
-              <p className="mb-1 text-xs uppercase tracking-widest text-emerald-300">① 成員社群覆蓋（最高 40 分）</p>
+              <p className="mb-1 text-xs uppercase tracking-widest text-emerald-300">① 成員社群覆蓋</p>
               <p className="text-zinc-300">Instagram +14 ｜ X +12 ｜ Facebook +8 ｜ 跨平台加成最高 +6</p>
             </div>
             <div>
-              <p className="mb-1 text-xs uppercase tracking-widest text-cyan-300">② 資料完整度（最高 20 分）</p>
-              <p className="text-zinc-300">個人照片 +14 ｜ 基本資料存在 +6</p>
+              <p className="mb-1 text-xs uppercase tracking-widest text-cyan-300">② 資料完整度</p>
+              <p className="text-zinc-300">照片 +14 ｜ 基本資料 +6</p>
             </div>
             <div>
-              <p className="mb-1 text-xs uppercase tracking-widest text-violet-300">③ 資料新鮮度（最高 20 分，指數衰減）</p>
+              <p className="mb-1 text-xs uppercase tracking-widest text-violet-300">③ 資料新鮮度</p>
               <p className="text-zinc-300">freshness_score = 20 × e^(−距離更新天數 / 60)</p>
             </div>
             <div>
-              <p className="mb-1 text-xs uppercase tracking-widest text-sky-300">④ 團體關聯加分（6 分）</p>
+              <p className="mb-1 text-xs uppercase tracking-widest text-sky-300">④ 團體關聯</p>
               <p className="text-zinc-300">group_affinity_score = 有團體關聯時 +6</p>
             </div>
             <div className="h-px bg-white/10" />
             <div>
               <p className="mb-1 text-xs uppercase tracking-widest text-pink-300">⑤ 成員綜合</p>
-              <p className="text-zinc-300">
-                raw_total = social_presence + profile_completeness + freshness_score + group_affinity_score
-              </p>
-              <p className="text-zinc-300">temperature_index = raw_total × (100 / 86)</p>
-              <p className="text-zinc-400">conversion_score = temperature_index × 0.6</p>
+              <p className="text-zinc-300">raw_total = social_presence + profile_completeness + freshness_score + group_affinity_score</p>
+              <p className="text-zinc-300">temperature_index_v2 = raw_total × (100 / 86)</p>
+              <p className="text-zinc-400">conversion_score_v2 = temperature_index_v2 × 0.6</p>
             </div>
             <div className="h-px bg-white/10" />
             <div>
               <p className="mb-1 text-xs uppercase tracking-widest text-fuchsia-300">⑥ 團體綜合</p>
-              <p className="text-zinc-300">member_average = 成員溫度平均</p>
-              <p className="text-zinc-300">top_member = 團內最高成員溫度</p>
-              <p className="text-zinc-300">member_depth = min(9, 3 × log2(成員數 + 1))</p>
-              <p className="text-zinc-300">social_coverage = Instagram 6 + X 5 + Facebook 3 + YouTube 4</p>
-              <p className="text-zinc-300">temperature_index = member_average × 0.45 + top_member × 0.25 + member_depth + social_coverage</p>
+              <p className="text-zinc-300">member_average_temperature_v2 = 成員溫度平均</p>
+              <p className="text-zinc-300">member_top_temperature_v2 = 團內最高成員溫度</p>
+              <p className="text-zinc-300">group_social_coverage_score = Instagram 6 + X 5 + Facebook 3 + YouTube 4</p>
+              <p className="text-zinc-300">group_content_diversity_score = 依內容類型數量加分</p>
+              <p className="text-zinc-300">group_temperature_index_v2 = 平均 × 0.45 + 最高 × 0.25 + 團體覆蓋與內容多樣性</p>
             </div>
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs leading-7 text-zinc-400">
-            <strong className="text-white">這次優化重點：</strong>
-            新版公式降低了滿分飽和的機率，讓高排名不再只靠平台帳號數堆高，並透過跨平台加成、較平滑的新鮮度衰減、
-            以及較保守的團體加權，讓排序更能區分不同成員與團體在同一時間點的相對狀態。
+            <strong className="text-white">目前限制：</strong>
+            v2 結構已經預留 `followers_*`、`engagement_rate_*`、`view_rate_*`、`audience_*`、
+            `brand_collab_*` 等欄位，但目前正式站仍以公開可得資料為主，無法直接填滿所有社群平台的私有 insights。
+            因此這一版會用 `data_confidence` 與 `metrics_available` 反映資料完整度。
           </div>
+        </section>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs leading-7 text-zinc-400">
-            <strong className="text-white">活躍狀態：</strong>
-            <span className="mx-2 text-emerald-400">● 活躍</span>
-            近 10 天內更新
-            <span className="mx-2 text-yellow-400">● 近期</span>
-            10–30 天
-            <span className="mx-2 text-zinc-500">● 久未更新</span>
-            超過 30 天
+        <section className="space-y-4">
+          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold text-white">目前已上線的 v2 欄位</h2>
+          <div className="flex flex-wrap gap-2">
+            {V2_FIELDS.map((field) => (
+              <span key={field} className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200">
+                {field}
+              </span>
+            ))}
           </div>
         </section>
 
@@ -215,69 +245,30 @@ export default function AboutPage() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold text-white">隱私政策</h2>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3 text-xs leading-7 text-zinc-400">
-            <p className="text-sm text-zinc-300">
-              本平台提供公開唯讀的資料展示服務。論壇（Idol Forum）目前採用論壇登入與管理員驗證機制。
-            </p>
-            <ul className="space-y-2">
-              <li>✦ 排行榜頁面不收集訪客姓名、電子郵件或裝置識別碼等個人資料。</li>
-              <li>✦ 造訪次數：每次訪問會傳送一筆匿名計數至伺服器，用於蒐集平台整體使用人次，不含任何個人識別資訊。</li>
-              <li>✦ 論壇發文、回覆、管理後台操作資料儲存於 Supabase 資料庫，並依目前權限設計限制存取。</li>
-              <li>✦ 平台展示的偶像成員資料均來自公開資料庫與社群平台。</li>
-              <li>✦ 若您是平台展示資料的當事人，如有疑慮請透過本頁下方的 Facebook 粉絲專頁反映。</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold text-white">使用條款</h2>
-          <div className="space-y-2 text-xs leading-7 text-zinc-400">
-            <p>
-              本平台提供的排行與指數僅供<span className="font-semibold text-white">參考用途</span>，
-              不代表任何官方認可或商業評級。
-            </p>
-            <p>溫度指數基於公開資料計算，可能不完整或存在誤差，本平台對資料準確性不作保證。</p>
-            <p>論壇用戶發表的內容代表其個人意見，平台不對發文內容的準確性或合法性負責。</p>
+          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold text-white">後續可實作資料任務</h2>
+          <div className="space-y-4">
+            {TASKS.map(({ title, items }) => (
+              <div key={title} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div className="mb-2 text-sm font-semibold text-white">{title}</div>
+                <ul className="space-y-2 text-xs leading-6 text-zinc-400">
+                  {items.map((item) => (
+                    <li key={item}>• {item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </section>
 
         <section className="space-y-3">
           <h2 className="border-b border-white/10 pb-3 text-2xl font-bold text-white">版本記錄</h2>
           {VERSION_HISTORY.map(({ ver, date, desc }) => (
-            <div
-              key={ver}
-              className="flex items-start gap-4 rounded-xl border border-white/10 bg-black/20 px-4 py-3"
-            >
+            <div key={ver} className="flex items-start gap-4 rounded-xl border border-white/10 bg-black/20 px-4 py-3">
               <span className="w-12 flex-shrink-0 text-xs font-mono text-fuchsia-300">{ver}</span>
               <span className="w-16 flex-shrink-0 text-xs text-zinc-600">{date}</span>
               <span className="text-xs leading-5 text-zinc-400">{desc}</span>
             </div>
           ))}
-        </section>
-
-        <section className="space-y-4 rounded-3xl border border-blue-400/20 bg-blue-500/10 p-6 text-center">
-          <h2 className="text-lg font-bold text-blue-200">聯絡與回饋</h2>
-          <p className="text-sm text-zinc-300">
-            資料更正、合作洽詢、功能建議，或您是平台展示資料的當事人如有疑慮，
-            歡迎透過 Facebook 粉絲專頁與我們聯繫。
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="https://www.facebook.com/profile.php?id=61573475755166"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-blue-400/30 bg-blue-400/10 px-5 py-2.5 text-sm font-medium text-blue-200 transition-colors hover:bg-blue-400/20"
-            >
-              📘 Facebook 粉絲專頁
-            </a>
-            <Link
-              href="/forum"
-              className="inline-flex items-center gap-2 rounded-xl border border-violet-400/30 bg-violet-400/10 px-5 py-2.5 text-sm text-violet-200 transition-colors hover:bg-violet-400/20"
-            >
-              💬 論壇討論
-            </Link>
-          </div>
         </section>
       </div>
     </main>
