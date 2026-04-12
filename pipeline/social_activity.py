@@ -15,7 +15,7 @@ import os
 import re
 from datetime import datetime, timezone
 from typing import Any
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 import httpx
 
@@ -24,6 +24,7 @@ USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/124.0.0.0 Safari/537.36"
 )
+INSTAGRAM_APP_ID = "936619743392459"
 
 ISO_PATTERNS = [
     r'"uploadDate"\s*:\s*"([^"]+)"',
@@ -102,6 +103,15 @@ def _extract_latest_timestamp(text: str) -> datetime | None:
     return max(candidates)
 
 
+def _datetime_from_unix(value: Any) -> datetime | None:
+    try:
+        if value in (None, ""):
+            return None
+        return datetime.fromtimestamp(int(value), tz=timezone.utc)
+    except Exception:
+        return None
+
+
 def _iso_or_none(value: datetime | None) -> str | None:
     if not value:
         return None
@@ -117,7 +127,58 @@ def _best_effort_fetch(url: str, client: httpx.Client) -> str | None:
         return None
 
 
+def _best_effort_fetch_json(
+    url: str,
+    client: httpx.Client,
+    extra_headers: dict[str, str] | None = None,
+) -> dict[str, Any] | None:
+    try:
+        response = client.get(url, headers=extra_headers)
+        response.raise_for_status()
+        return response.json()
+    except Exception:
+        return None
+
+
+def _extract_instagram_timestamp_from_payload(payload: dict[str, Any] | None) -> datetime | None:
+    if not payload:
+        return None
+
+    user = payload.get("data", {}).get("user", {})
+    timeline = user.get("edge_owner_to_timeline_media", {})
+    edges = timeline.get("edges") or []
+
+    candidates: list[datetime] = []
+    for edge in edges[:6]:
+        node = edge.get("node", {})
+        for value in (
+            node.get("taken_at_timestamp"),
+            node.get("video_upload_time"),
+            node.get("published_at"),
+        ):
+            parsed = _datetime_from_unix(value)
+            if parsed:
+                candidates.append(parsed)
+
+    if not candidates:
+        return None
+    return max(candidates)
+
+
 def _fetch_instagram_last_post(handle: str, client: httpx.Client) -> datetime | None:
+    payload = _best_effort_fetch_json(
+        f"https://www.instagram.com/api/v1/users/web_profile_info/?username={quote(handle)}",
+        client,
+        extra_headers={
+            "X-IG-App-ID": INSTAGRAM_APP_ID,
+            "X-Requested-With": "XMLHttpRequest",
+            "Referer": f"https://www.instagram.com/{handle}/",
+        },
+    )
+    parsed_from_payload = _extract_instagram_timestamp_from_payload(payload)
+    if parsed_from_payload:
+        return parsed_from_payload
+
     html = _best_effort_fetch(f"https://www.instagram.com/{handle}/", client)
     if not html:
         return None
