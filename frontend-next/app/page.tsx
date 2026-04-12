@@ -34,6 +34,7 @@ type Member = {
 
 type Group = {
   rank: number;
+  display_rank?: number;
   group: string;
   display_name: string;
   color: string;
@@ -295,7 +296,8 @@ export default function HomePage() {
   const { memberData, groupData, insights } = data!;
   const groups = groupData
     .filter((group) => !group.is_solo && group.member_count > 0 && (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS)
-    .slice(0, 10);
+    .slice(0, 10)
+    .map((group, index) => ({ ...group, display_rank: index + 1 }));
   const solos = groupData
     .filter((group) => group.is_solo && (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS)
     .slice(0, 6);
@@ -448,7 +450,7 @@ export default function HomePage() {
                     className="block rounded-2xl border border-white/10 bg-black/20 p-4 hover:border-pink-400/30 hover:bg-white/10 transition-colors"
                   >
                     <div className="mb-3 flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold">{getRankBadge(group.rank)}</div>
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold">{getRankBadge(group.display_rank ?? group.rank)}</div>
                       <div className="h-4 w-4 flex-shrink-0 rounded-full border border-white/20" style={{ backgroundColor: dc }} />
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
