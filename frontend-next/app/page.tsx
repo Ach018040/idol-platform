@@ -37,6 +37,7 @@ type Group = {
   group: string;
   display_name: string;
   color: string;
+  photo_url?: string;
   member_count: number;
   member_names: string;
   social_activity: number;
@@ -181,6 +182,7 @@ async function loadData() {
       color: "#888888",
       member_count: 1,
       member_names: member.name,
+      photo_url: member.photo_url,
       social_activity: member.social_activity,
       temperature_index: member.temperature_index,
       conversion_score: member.conversion_score,
@@ -589,7 +591,11 @@ export default function HomePage() {
                       className="block rounded-2xl border border-white/10 bg-black/20 p-4 hover:border-violet-400/30 hover:bg-white/10 transition-colors"
                     >
                       <div className="mb-3 flex items-center gap-3">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold">{getInitial(group.display_name)}</div>
+                        {group.photo_url ? (
+                          <Image src={group.photo_url} alt={group.display_name} width={44} height={44} className="h-11 w-11 rounded-2xl object-cover ring-1 ring-white/10" unoptimized />
+                        ) : (
+                          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-sm font-bold">{getInitial(group.display_name)}</div>
+                        )}
                         <div className="h-4 w-4 flex-shrink-0 rounded-full border border-white/20" style={{ backgroundColor: dc }} />
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">
