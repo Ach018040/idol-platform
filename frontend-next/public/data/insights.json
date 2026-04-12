@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-12T06:46:52Z",
-  "market_temperature": 61.3,
-  "market_temperature_v2": 61.3,
-  "active_groups": 89,
+  "generated_at": "2026-04-12T20:42:50Z",
+  "market_temperature": 61.1,
+  "market_temperature_v2": 61.1,
+  "active_groups": 90,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
     "instagram": 0.87,
-    "threads": 0.22,
+    "threads": 0.21,
     "social_post_dates": 0.04,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
@@ -16,7 +16,7 @@
     "top_group": "幻獣",
     "social_king": "小豆 Azuki",
     "social_focus": "小豆 Azuki",
-    "market_temperature": 61.3
+    "market_temperature": 61.1
   },
   "rising_stars": [
     "燁水 Yomizu",
