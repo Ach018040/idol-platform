@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 import httpx
+from social_activity import fetch_social_signals
 
 SUPABASE_URL = "https://ziiagdrrytyrmzoeegjk.supabase.co"
 ANON_KEY = os.environ.get("IDOLMAPS_ANON_KEY", "") or "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv"
@@ -267,10 +268,25 @@ def main() -> None:
         if member_id and group_id and member_id not in member_group_map:
             member_group_map[member_id] = group_map.get(group_id, {})
 
-    member_data: list[dict[str, Any]] = []
+    members_with_social_urls: list[dict[str, Any]] = []
     for member in members:
+        twitter = member.get("x") or ""
+        member_with_urls = {
+            **member,
+            "threads": twitter if "threads.com" in twitter else "",
+        }
+        members_with_social_urls.append(member_with_urls)
+
+    social_signals = fetch_social_signals(members_with_social_urls)
+
+    member_data: list[dict[str, Any]] = []
+    for member in members_with_social_urls:
         group_obj = member_group_map.get(member.get("id", ""), {})
-        scores = score_member(member, bool(group_obj.get("name")))
+        enriched_member = {
+            **member,
+            **social_signals.get(member.get("id", ""), {}),
+        }
+        scores = score_member(enriched_member, bool(group_obj.get("name")))
         instagram = member.get("instagram") or ""
         facebook = member.get("facebook") or ""
         twitter = member.get("x") or ""
