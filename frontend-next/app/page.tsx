@@ -55,6 +55,7 @@ type Group = {
   group_social_coverage_score?: number;
   group_content_diversity_score?: number;
   active_member_count?: number;
+  last_group_snapshot_at?: string | null;
 };
 
 type CalEvent = { date: string; time: string; summary: string; dtRaw: Date };
@@ -150,6 +151,7 @@ async function loadData() {
     fetch(ICS_API).then((res) => (res.ok ? res.json() : { events: [] })).catch(() => ({ events: [] })),
   ]);
 
+  const now = Date.now();
   const memberData = membersRaw
     .map((member) => ({
       ...member,
@@ -163,7 +165,11 @@ async function loadData() {
     ...group,
     temperature_index: group.group_temperature_index_v2 ?? group.temperature_index_v2 ?? group.temperature_index,
     conversion_score: group.group_conversion_score_v2 ?? group.conversion_score_v2 ?? group.conversion_score,
-    days_since_update: group.days_since_update ?? 365,
+    days_since_update:
+      group.days_since_update ??
+      (group.last_group_snapshot_at
+        ? Math.max(0, (now - new Date(group.last_group_snapshot_at).getTime()) / 86400000)
+        : 365),
   }));
 
   const soloGroups = memberData
