@@ -14,6 +14,7 @@ STEPS = [
     ("📸 Build Trend Snapshots", PIPELINE / "build_trend_snapshots.py"),
     ("🤖 v8 Forecast",           PIPELINE / "forecast_v8.py"),
     ("✨ Build Insights",         PIPELINE / "build_insights.py"),
+    ("🧠 Sync Brain Runtime",     PIPELINE / "sync_brain.py"),
 ]
 
 def run():
