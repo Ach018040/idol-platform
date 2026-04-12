@@ -21,6 +21,7 @@ FRONTEND_DATA = ROOT / "frontend-next" / "public" / "data"
 INSIGHTS = FRONTEND_DATA / "insights.json"
 MEMBERS = FRONTEND_DATA / "member_rankings.json"
 GROUPS = FRONTEND_DATA / "v7_rankings.json"
+INSIGHT_POSTS = FRONTEND_DATA / "insight_posts.json"
 OUT_SQL = ROOT / "supabase" / "seed_brain_runtime.sql"
 
 
@@ -132,9 +133,48 @@ on conflict do nothing;
 """
 
 
+def render_insight_post_sql(posts: list[dict[str, object]]) -> str:
+    statements: list[str] = []
+    for post in posts:
+        slug = f"insights/{post['slug']}"
+        compiled_truth = " ".join(post.get("content", []))
+        timeline_md = f"- {post['date']}: insight published\n- category: {post['category']}"
+        frontmatter = json.dumps(
+            {
+                "source": "frontend-next/public/data/insight_posts.json",
+                "category": post["category"],
+                "summary": post["summary"],
+                "published_at": post["date"],
+            },
+            ensure_ascii=False,
+        ).replace("'", "''")
+        statements.append(
+            f"""insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, frontmatter)
+values (
+  {sql_text(slug)},
+  'source',
+  {sql_text(str(post["title"]))},
+  {sql_text(compiled_truth)},
+  {sql_text(timeline_md)},
+  {sql_array(["insight", "idol-platform", str(post["category"])])},
+  '{frontmatter}'::jsonb
+)
+on conflict (slug) do update set
+  title = excluded.title,
+  compiled_truth = excluded.compiled_truth,
+  timeline_md = excluded.timeline_md,
+  tags = excluded.tags,
+  frontmatter = excluded.frontmatter,
+  updated_at = now();
+"""
+        )
+    return "\n".join(statements)
+
+
 def main():
     digest = build_digest()
-    sql = render_sql(digest)
+    posts = load_json(INSIGHT_POSTS, [])
+    sql = render_sql(digest) + "\n" + render_insight_post_sql(posts if isinstance(posts, list) else [])
     OUT_SQL.write_text(sql, encoding="utf-8")
     print(f"Wrote brain runtime seed to {OUT_SQL}")
 

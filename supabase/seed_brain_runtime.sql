@@ -29,3 +29,60 @@ values (
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
+
+insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, frontmatter)
+values (
+  'insights/weekly-idol-market-observation-01',
+  'source',
+  '本週地下偶像市場觀察',
+  '本週的地下偶像市場呈現兩個明顯特徵：一是社群更新頻率高的成員開始對排行榜有更直接的影響，二是團體整體表現與單一成員爆發之間的差異被看得更清楚。 對平台來說，這代表單看社群帳號存在與否已經不夠，必須把更新時間、內容節奏與跨平台表現一起納入，才能讓排行榜更接近真實觀察。 因此 idol-platform 目前正逐步把 weekly insights、brain knowledge 與推薦解釋串在一起，讓使用者不只看到分數，也能理解變化背後的原因。',
+  '- 2026-04-10: insight published
+- category: 市場觀察',
+  array['insight','idol-platform','市場觀察'],
+  '{"source": "frontend-next/public/data/insight_posts.json", "category": "市場觀察", "summary": "整理近期團體熱度、社群更新與活動節奏，提供一份可快速掌握市場變化的週報式觀察。", "published_at": "2026-04-10"}'::jsonb
+)
+on conflict (slug) do update set
+  title = excluded.title,
+  compiled_truth = excluded.compiled_truth,
+  timeline_md = excluded.timeline_md,
+  tags = excluded.tags,
+  frontmatter = excluded.frontmatter,
+  updated_at = now();
+
+insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, frontmatter)
+values (
+  'insights/oshi-activity-and-fan-engagement',
+  'source',
+  '推活熱度與粉絲互動的關係',
+  '粉絲互動通常比最終名次變動更早出現。當某位成員的留言密度、轉貼意願或短時間內的關注回流變高，往往代表她的內容正進入更高討論度區段。 這也是為什麼平台正在把社群最後發文時間、未來的互動率與內容分類逐步接入公式，避免只依賴靜態資料做判斷。 若能把論壇討論、活動出席與公開社群訊號一起看，未來就能更準確辨識真正上升中的推活熱點。',
+  '- 2026-04-10: insight published
+- category: 粉絲互動',
+  array['insight','idol-platform','粉絲互動'],
+  '{"source": "frontend-next/public/data/insight_posts.json", "category": "粉絲互動", "summary": "從推活、留言與內容更新的節奏切入，說明粉絲互動為何常是熱度變化的前導訊號。", "published_at": "2026-04-10"}'::jsonb
+)
+on conflict (slug) do update set
+  title = excluded.title,
+  compiled_truth = excluded.compiled_truth,
+  timeline_md = excluded.timeline_md,
+  tags = excluded.tags,
+  frontmatter = excluded.frontmatter,
+  updated_at = now();
+
+insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, frontmatter)
+values (
+  'insights/how-data-platforms-help-idol-discovery',
+  'source',
+  '資料平台如何幫助偶像被看見',
+  '地下偶像的資訊通常分散在社群平台、行事曆、論壇與粉絲整理頁之間。資料平台的價值，在於把原本分散的訊號集中成一條可追蹤的探索路徑。 對新粉絲來說，排行榜與活動整理能降低入門成本；對既有粉絲來說，論壇與分析內容能讓追蹤更有脈絡；對營運方來說，知識層則能把觀察與決策累積成可重用資產。 這也是 idol-platform 將 Secbrain 併入 knowledge base 的原因：未來不只做榜單，也要讓平台成為能持續沉澱偶像市場理解的資料底座。',
+  '- 2026-04-10: insight published
+- category: 產品觀點',
+  array['insight','idol-platform','產品觀點'],
+  '{"source": "frontend-next/public/data/insight_posts.json", "category": "產品觀點", "summary": "說明排行榜、活動整理、論壇與知識層如何一起降低粉絲探索偶像的門檻。", "published_at": "2026-04-10"}'::jsonb
+)
+on conflict (slug) do update set
+  title = excluded.title,
+  compiled_truth = excluded.compiled_truth,
+  timeline_md = excluded.timeline_md,
+  tags = excluded.tags,
+  frontmatter = excluded.frontmatter,
+  updated_at = now();
