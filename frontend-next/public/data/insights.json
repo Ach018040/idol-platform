@@ -1,10 +1,20 @@
 {
-  "generated_at": "2026-04-12T05:23:16Z",
+  "generated_at": "2026-04-12T05:41:24Z",
   "market_temperature": 68.6,
+  "market_temperature_v2": 68.6,
   "active_groups": 89,
+  "formula_version": "v2-structured-fallback",
+  "data_coverage": {
+    "instagram": 0.87,
+    "threads": 0.22,
+    "audience_insights": 0.0,
+    "commercial_insights": 0.0,
+    "views": 0.0
+  },
   "weekly_highlights": {
     "top_group": "幻獣",
     "social_king": "小豆 Azuki",
+    "social_focus": "小豆 Azuki",
     "market_temperature": 68.6
   },
   "rising_stars": [
