@@ -64,6 +64,8 @@ const DATA_SOURCES = [
 const V2_FIELDS = [
   "temperature_index_v2",
   "conversion_score_v2",
+  "data_refresh_score",
+  "social_post_score",
   "member_average_temperature_v2",
   "member_top_temperature_v2",
   "group_social_coverage_score",
@@ -72,6 +74,15 @@ const V2_FIELDS = [
   "data_coverage",
   "data_confidence",
   "metrics_available",
+  "last_data_refresh_at",
+  "last_social_signal_at",
+];
+
+const FRESHNESS_EXPLANATION = [
+  "freshness_score 已升級為混合版本：同時參考資料庫更新時間與真實社群最後發文時間。",
+  "data_refresh_score = 8 × e^(−資料更新天數 / 45)，反映 idolmaps 資料最近是否仍被維護。",
+  "social_post_score = 12 × e^(−社群最後發文天數 / 21)，反映 Instagram / Threads / Facebook 的近期活躍度。",
+  "若目前尚未取得真實社群最後發文時間，系統會退回資料更新時間並套用保守權重，避免假性高分。",
 ];
 
 const TASKS = [
@@ -227,6 +238,15 @@ export default function AboutPage() {
               <span key={field} className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200">
                 {field}
               </span>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold text-white">Freshness 混合公式</h2>
+          <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-5 text-sm leading-7 text-zinc-200">
+            {FRESHNESS_EXPLANATION.map((line) => (
+              <p key={line}>{line}</p>
             ))}
           </div>
         </section>

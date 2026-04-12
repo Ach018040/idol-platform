@@ -24,7 +24,7 @@ DATA_DIR = REPO_ROOT / "frontend-next" / "public" / "data"
 OUT_MEMBERS = DATA_DIR / "member_rankings.json"
 OUT_GROUPS = DATA_DIR / "v7_rankings.json"
 OUT_INSIGHTS = DATA_DIR / "insights.json"
-FORMULA_VERSION = "v2-structured-fallback"
+FORMULA_VERSION = "v2-mixed-freshness"
 
 
 def sb(path: str, params: dict[str, Any]) -> list[dict[str, Any]]:
@@ -63,6 +63,12 @@ def iso_or_none(value: datetime | None) -> str | None:
     return value.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def days_since(value: datetime | None, fallback: float = 365.0) -> float:
+    if not value:
+        return fallback
+    return max(0.0, (datetime.now(timezone.utc) - value).total_seconds() / 86400)
+
+
 def infer_content_type_mix(member: dict[str, Any]) -> list[str]:
     content_types = ["idol_updates"]
     if (member.get("photo_url") or "").startswith("http"):
@@ -86,13 +92,24 @@ def score_member(member: dict[str, Any], has_group: bool) -> dict[str, Any]:
     profile_completeness = clamp_score(has_photo * 14 + has_profile * 6)
 
     updated_dt = safe_iso_to_datetime(member.get("updated_at"))
-    days_since_update = (
-        max(0.0, (datetime.now(timezone.utc) - updated_dt).total_seconds() / 86400)
-        if updated_dt
-        else 365.0
+    # Reserved for future ingestion from real Instagram / Threads / Facebook post metadata.
+    ig_post_dt = safe_iso_to_datetime(member.get("last_post_at_instagram"))
+    threads_post_dt = safe_iso_to_datetime(member.get("last_post_at_threads"))
+    facebook_post_dt = safe_iso_to_datetime(member.get("last_post_at_facebook"))
+    social_signal_dt = max(
+        (dt for dt in (ig_post_dt, threads_post_dt, facebook_post_dt) if dt),
+        default=None,
     )
 
-    freshness_score = clamp_score(20 * math.exp(-days_since_update / 60))
+    days_since_update = days_since(updated_dt)
+    days_since_social_signal = days_since(social_signal_dt, fallback=days_since_update)
+
+    data_refresh_score = clamp_score(8 * math.exp(-days_since_update / 45))
+    social_post_score_raw = 12 * math.exp(-days_since_social_signal / 21)
+    social_post_score = clamp_score(
+        social_post_score_raw if social_signal_dt else social_post_score_raw * 0.55
+    )
+    freshness_score = clamp_score(data_refresh_score + social_post_score)
     group_affinity_score = 6.0 if has_group else 0.0
     raw_total = social_presence + profile_completeness + freshness_score + group_affinity_score
     temperature_index = clamp_score(raw_total * (100 / 86))
@@ -108,8 +125,14 @@ def score_member(member: dict[str, Any], has_group: bool) -> dict[str, Any]:
 
     return {
         "updated_at": member.get("updated_at") or "",
+        "last_data_refresh_at": iso_or_none(updated_dt),
         "last_social_snapshot_at": iso_or_none(updated_dt),
         "days_since_update": round(days_since_update, 1),
+        "last_post_at_instagram": iso_or_none(ig_post_dt),
+        "last_post_at_threads": iso_or_none(threads_post_dt),
+        "last_post_at_facebook": iso_or_none(facebook_post_dt),
+        "last_social_signal_at": iso_or_none(social_signal_dt),
+        "days_since_social_signal": round(days_since_social_signal, 1),
         "followers_instagram": None,
         "followers_threads": None,
         "avg_likes_instagram": None,
@@ -138,6 +161,7 @@ def score_member(member: dict[str, Any], has_group: bool) -> dict[str, Any]:
             "instagram_public": has_ig,
             "facebook_public": has_fb,
             "threads_public": has_tw,
+            "social_post_dates": bool(social_signal_dt),
             "views_available": False,
             "audience_available": False,
             "commercial_available": False,
@@ -150,6 +174,8 @@ def score_member(member: dict[str, Any], has_group: bool) -> dict[str, Any]:
         "audience_fit_score": None,
         "social_activity": social_presence,
         "profile_completeness": profile_completeness,
+        "data_refresh_score": data_refresh_score,
+        "social_post_score": social_post_score,
         "freshness_score": freshness_score,
         "group_affinity_score": group_affinity_score,
         "temperature_index": temperature_index,
@@ -324,6 +350,9 @@ def main() -> None:
         "data_coverage": {
             "instagram": round(sum(1 for member in member_data if member["instagram"]) / len(member_data), 2) if member_data else 0,
             "threads": round(sum(1 for member in member_data if member["threads"]) / len(member_data), 2) if member_data else 0,
+            "social_post_dates": round(
+                sum(1 for member in member_data if member["last_social_signal_at"]) / len(member_data), 2
+            ) if member_data else 0,
             "audience_insights": 0.0,
             "commercial_insights": 0.0,
             "views": 0.0,

@@ -1,12 +1,13 @@
 {
-  "generated_at": "2026-04-12T05:41:24Z",
-  "market_temperature": 68.6,
-  "market_temperature_v2": 68.6,
+  "generated_at": "2026-04-12T06:12:09Z",
+  "market_temperature": 61.3,
+  "market_temperature_v2": 61.3,
   "active_groups": 89,
-  "formula_version": "v2-structured-fallback",
+  "formula_version": "v2-mixed-freshness",
   "data_coverage": {
     "instagram": 0.87,
     "threads": 0.22,
+    "social_post_dates": 0.0,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
@@ -15,14 +16,14 @@
     "top_group": "幻獣",
     "social_king": "小豆 Azuki",
     "social_focus": "小豆 Azuki",
-    "market_temperature": 68.6
+    "market_temperature": 61.3
   },
   "rising_stars": [
     "燁水 Yomizu",
-    "稲妻莉央",
-    "天国 せいや（あまくに せいや）",
-    "骼実 百瀬（かくみ ももせ）",
-    "姫野 あいる（ひめの あいる）"
+    "DeDe",
+    "Meya",
+    "Neko",
+    "稲妻莉央"
   ],
   "heat_drop": [],
   "top_members": [
