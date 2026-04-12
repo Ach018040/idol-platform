@@ -115,16 +115,17 @@ async function loadData() {
     const mb = grpMbrs[g.name] || [];
     const cnt = mb.length;
     const memberAverage = cnt ? mb.reduce((s: number, m: Member) => s + m.temperature_index, 0) / cnt : 0;
-    const memberDepth = cnt ? Math.min(12, 4 * Math.log2(cnt + 1)) : 0;
+    const topMember = cnt ? Math.max(...mb.map((m: Member) => m.temperature_index)) : 0;
+    const memberDepth = cnt ? Math.min(9, 3 * Math.log2(cnt + 1)) : 0;
     const daysSinceUpdate = cnt ? Math.min(...mb.map((m: Member) => m.days_since_update)) : Infinity;
     const socialCoverage = clamp1(
-      +((g.instagram || "").startsWith("http")) * 9 +
-      +((g.x || "").startsWith("http")) * 7 +
-      +((g.facebook || "").startsWith("http")) * 5 +
-      +((g.youtube || "").startsWith("http")) * 7
+      +((g.instagram || "").startsWith("http")) * 6 +
+      +((g.x || "").startsWith("http")) * 5 +
+      +((g.facebook || "").startsWith("http")) * 3 +
+      +((g.youtube || "").startsWith("http")) * 4
     );
     const sa = cnt ? +(mb.reduce((s: number, m: Member) => s + m.social_activity, 0) / cnt).toFixed(1) : 0;
-    const ti = clamp1(memberAverage * 0.58 + memberDepth + socialCoverage);
+    const ti = clamp1(memberAverage * 0.45 + topMember * 0.25 + memberDepth + socialCoverage);
     return {
       rank: 0, group: g.name, display_name: g.name, color: g.color || "#888888",
       member_count: cnt, member_names: mb.slice(0, 6).map((m: Member) => m.name).join(" / "),
@@ -135,7 +136,7 @@ async function loadData() {
   });
 
   memberData.forEach((m: Member) => {
-    if (!m.group) groupData.push({ rank: 0, group: m.name, display_name: m.name, color: "#888888", member_count: 1, member_names: m.name, social_activity: m.social_activity, temperature_index: m.temperature_index, conversion_score: m.conversion_score, instagram: m.instagram, is_solo: true, days_since_update: m.days_since_update });
+    if (!m.group) groupData.push({ rank: 0, group: m.name, display_name: m.name, color: "#888888", member_count: 1, member_names: m.name, social_activity: m.social_activity, temperature_index: m.temperature_index, conversion_score: m.conversion_score, instagram: m.instagram, facebook: m.facebook, twitter: m.twitter, is_solo: true, days_since_update: m.days_since_update });
   });
 
   groupData.sort((a: Group, b: Group) => {
@@ -447,7 +448,12 @@ export default function HomePage() {
                       </div>
                       <div className="flex items-center justify-between text-xs text-zinc-400">
                         <span>社群覆蓋 {fmt(g.social_activity, 0)}</span>
-                        <span>90 天內可見</span>
+                        <div className="flex items-center gap-2">
+                          {g.instagram && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.instagram,"_blank")}} className="text-pink-400 hover:text-pink-300 font-bold text-xs">IG</button>}
+                          {g.twitter && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.twitter,"_blank")}} className="text-sky-400 hover:text-sky-300 font-bold text-xs">X</button>}
+                          {g.facebook && <button type="button" onClick={e=>{e.stopPropagation();window.open(g.facebook,"_blank")}} className="text-blue-400 hover:text-blue-300 font-bold text-xs">FB</button>}
+                          {!g.instagram && !g.twitter && !g.facebook && <span>90 天內可見</span>}
+                        </div>
                       </div>
                     </Link>
                   );

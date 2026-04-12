@@ -177,11 +177,10 @@ export default function AboutPage() {
             <div>
               <p className="mb-1 text-xs uppercase tracking-widest text-fuchsia-300">⑥ 團體綜合</p>
               <p className="text-zinc-300">member_average = 成員溫度平均</p>
-              <p className="text-zinc-300">member_depth = min(12, 4 × log2(成員數 + 1))</p>
-              <p className="text-zinc-300">social_coverage = Instagram 9 + X 7 + Facebook 5 + YouTube 7</p>
-              <p className="text-zinc-300">
-                temperature_index = member_average × 0.58 + member_depth + social_coverage
-              </p>
+              <p className="text-zinc-300">top_member = 團內最高成員溫度</p>
+              <p className="text-zinc-300">member_depth = min(9, 3 × log2(成員數 + 1))</p>
+              <p className="text-zinc-300">social_coverage = Instagram 6 + X 5 + Facebook 3 + YouTube 4</p>
+              <p className="text-zinc-300">temperature_index = member_average × 0.45 + top_member × 0.25 + member_depth + social_coverage</p>
             </div>
           </div>
 

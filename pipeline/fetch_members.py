@@ -81,14 +81,17 @@ def score_group(group: dict, members: list[dict]) -> dict:
     member_average = (
         sum(member["temperature_index"] for member in members) / count if count else 0.0
     )
-    member_depth = min(12.0, 4.0 * math.log2(count + 1)) if count else 0.0
+    top_member = max((member["temperature_index"] for member in members), default=0.0)
+    member_depth = min(9.0, 3.0 * math.log2(count + 1)) if count else 0.0
     social_coverage = clamp_score(
-        ((group.get("instagram") or "").startswith("http")) * 9
-        + ((group.get("x") or "").startswith("http")) * 7
-        + ((group.get("facebook") or "").startswith("http")) * 5
-        + ((group.get("youtube") or "").startswith("http")) * 7
+        ((group.get("instagram") or "").startswith("http")) * 6
+        + ((group.get("x") or "").startswith("http")) * 5
+        + ((group.get("facebook") or "").startswith("http")) * 3
+        + ((group.get("youtube") or "").startswith("http")) * 4
     )
-    temperature_index = clamp_score(member_average * 0.58 + member_depth + social_coverage)
+    temperature_index = clamp_score(
+        member_average * 0.45 + top_member * 0.25 + member_depth + social_coverage
+    )
     social_activity = round(
         sum(member["social_activity"] for member in members) / count, 1
     ) if count else 0.0
