@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-12T20:42:50Z",
-  "market_temperature": 61.1,
-  "market_temperature_v2": 61.1,
-  "active_groups": 90,
+  "generated_at": "2026-04-13T21:01:06Z",
+  "market_temperature": 61.0,
+  "market_temperature_v2": 61.0,
+  "active_groups": 91,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
     "instagram": 0.87,
@@ -14,19 +14,20 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "小豆 Azuki",
-    "social_focus": "小豆 Azuki",
-    "market_temperature": 61.1
+    "social_king": "天琴 ドウナ",
+    "social_focus": "天琴 ドウナ",
+    "market_temperature": 61.0
   },
   "rising_stars": [
+    "Nya にゃあ",
     "燁水 Yomizu",
-    "DeDe",
-    "Meya",
-    "Neko",
-    "稲妻莉央"
+    "稲妻莉央",
+    "天国 せいや（あまくに せいや）",
+    "骼実 百瀬（かくみ ももせ）"
   ],
   "heat_drop": [],
   "top_members": [
+    "天琴 ドウナ",
     "小豆 Azuki",
     "冥月 Runa",
     "雪薇 Yukibi",
@@ -35,7 +36,6 @@
     "桜野杏理",
     "御金 寧々花",
     "愛栖 栗夢",
-    "恋乃 もも",
-    "宮月 かみ"
+    "恋乃 もも"
   ]
 }

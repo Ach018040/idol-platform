@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-04-12T20:42:50Z',
-  'Weekly idol market digest generated on 2026-04-12T20:42:50Z. Top group: 幻獣. Top member: 小豆 Azuki. Market temperature: 61.1. Rising stars: 燁水 Yomizu, DeDe, Meya, Neko, 稲妻莉央. Heat drop watch: none.',
-  '- 2026-04-12T20:42:50Z: weekly market digest generated
+  'Weekly Market Digest 2026-04-13T21:01:06Z',
+  'Weekly idol market digest generated on 2026-04-13T21:01:06Z. Top group: 幻獣. Top member: 天琴 ドウナ. Market temperature: 61.0. Rising stars: Nya にゃあ, 燁水 Yomizu, 稲妻莉央, 天国 せいや（あまくに せいや）, 骼実 百瀬（かくみ ももせ）. Heat drop watch: none.',
+  '- 2026-04-13T21:01:06Z: weekly market digest generated
 - Highlight top group: 幻獣
-- Highlight top member: 小豆 Azuki
-- Rising stars: 燁水 Yomizu, DeDe, Meya, Neko, 稲妻莉央',
+- Highlight top member: 天琴 ドウナ
+- Rising stars: Nya にゃあ, 燁水 Yomizu, 稲妻莉央, 天国 せいや（あまくに せいや）, 骼実 百瀬（かくみ ももせ）',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-04-12T20:42:50Z", "top_group": "幻獣", "top_member": "小豆 Azuki", "market_temperature": "61.1", "rising_stars": ["燁水 Yomizu", "DeDe", "Meya", "Neko", "稲妻莉央"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-04-13T21:01:06Z", "top_group": "幻獣", "top_member": "天琴 ドウナ", "market_temperature": "61.0", "rising_stars": ["Nya にゃあ", "燁水 Yomizu", "稲妻莉央", "天国 せいや（あまくに せいや）", "骼実 百瀬（かくみ ももせ）"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-04-12T20:42:50Z',
-  'Weekly digest refreshed: 2026-04-12T20:42:50Z',
-  'Weekly idol market digest generated on 2026-04-12T20:42:50Z. Top group: 幻獣. Top member: 小豆 Azuki. Market temperature: 61.1. Rising stars: 燁水 Yomizu, DeDe, Meya, Neko, 稲妻莉央. Heat drop watch: none.',
+  '2026-04-13T21:01:06Z',
+  'Weekly digest refreshed: 2026-04-13T21:01:06Z',
+  'Weekly idol market digest generated on 2026-04-13T21:01:06Z. Top group: 幻獣. Top member: 天琴 ドウナ. Market temperature: 61.0. Rising stars: Nya にゃあ, 燁水 Yomizu, 稲妻莉央, 天国 せいや（あまくに せいや）, 骼実 百瀬（かくみ ももせ）. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
