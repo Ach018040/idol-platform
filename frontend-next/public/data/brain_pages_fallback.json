@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "projects/idol-platform",
+    "type": "project",
+    "title": "idol-platform",
+    "compiled_truth": "idol-platform 是面向台灣地下偶像的數據情報平台，整合成員與團體排行榜、論壇、近期活動、觀察內容與可搜尋知識頁。",
+    "tags": ["idol-platform", "ranking", "forum", "knowledge-base"],
+    "updated_at": "2026-04-12T00:00:00Z"
+  },
+  {
+    "slug": "concepts/idol-temperature-index-v2",
+    "type": "concept",
+    "title": "偶像溫度指數 v2",
+    "compiled_truth": "v2 公式以社群覆蓋、資料完整度、mixed freshness 與團體關聯為主，並保留對真實社群更新訊號的接入能力。",
+    "tags": ["formula", "temperature-index", "freshness"],
+    "updated_at": "2026-04-12T00:00:00Z"
+  },
+  {
+    "slug": "tech/secbrain-integration",
+    "type": "tech",
+    "title": "Secbrain 整合紀錄",
+    "compiled_truth": "Secbrain 整合讓 idol-platform 擁有可搜尋的知識庫層，可供 AI 摘要、推薦說明與平台研究重用。",
+    "tags": ["secbrain", "api", "brain"],
+    "updated_at": "2026-04-12T00:00:00Z"
+  }
+]

@@ -348,6 +348,12 @@ export default function HomePage() {
               >
                 前往討論區
               </a>
+              <a
+                href="/agent"
+                className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs text-cyan-200 hover:bg-cyan-400/20 transition-colors text-center"
+              >
+                AI Agent
+              </a>
             </div>
           </div>
 
