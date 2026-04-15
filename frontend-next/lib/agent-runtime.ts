@@ -1,4 +1,7 @@
 import { type AgentResult, runIdolAgent } from "@/lib/agent";
+import membersRaw from "@/public/data/member_rankings.json";
+import groupsRaw from "@/public/data/v7_rankings.json";
+import { buildGroupEntities, buildMemberEntities, type V4Entity } from "@/lib/v4-entities";
 
 type AgentIntent = "freshness_explain" | "formula_explain" | "group_vs_member" | "ranking_reason" | "general";
 
@@ -19,6 +22,41 @@ function inferIntent(question: string): AgentIntent {
 
 function hasUsefulHit(result: AgentResult) {
   return result.traces.some((trace) => trace.tool.startsWith("search_") && trace.hits > 0);
+}
+
+const V4_ENTITIES = [...buildMemberEntities(membersRaw, 120), ...buildGroupEntities(groupsRaw, 80)];
+
+function findMentionedEntity(question: string): V4Entity | null {
+  const q = question.toLowerCase();
+  return (
+    V4_ENTITIES.find((entity) => {
+      const name = entity.name.toLowerCase();
+      return name.length >= 2 && q.includes(name);
+    }) || null
+  );
+}
+
+function entityAnswerPrefix(entity: V4Entity, intent: AgentIntent) {
+  const freshness = Math.round(entity.freshnessDays);
+  const confidence = entity.confidence == null ? "尚未標示" : `${Math.round(entity.confidence * 100)}%`;
+  const platformCount = Object.values(entity.socialLinks).filter(Boolean).length;
+  const base = `${entity.name} 目前在 v4 entity 中是「${entity.kind === "member" ? "成員" : "團體"}」，V2 溫度為 ${entity.score.toFixed(
+    1,
+  )}，資料新鮮度約 ${freshness} 天，社群平台連結數 ${platformCount}，資料可信度 ${confidence}。`;
+
+  if (intent === "freshness_explain") {
+    return `${base} 這題要先看 freshnessDays 與 freshness_score：若資料或社群訊號仍在近期窗口內，分數不會因為單一平台看起來少更新就立刻歸零。`;
+  }
+
+  if (intent === "ranking_reason") {
+    return `${base} 排名靠前或靠後主要取決於 V2 溫度、社群覆蓋、資料新鮮度與可信度是否一起支撐，而不是只看單一社群連結。`;
+  }
+
+  if (intent === "group_vs_member") {
+    return `${base} 成員分數與團體分數不是同一條公式：成員看個體訊號，團體會再看成員平均、活躍成員數與團體社群覆蓋。`;
+  }
+
+  return `${base} 這個分數可以從 social_activity、freshness_score、temperature_index_v2、data_confidence 與社群連結完整度一起驗證。`;
 }
 
 function intentFallback(intent: AgentIntent, base: AgentResult): Pick<AgentResult, "answer" | "summary" | "suggestedQuestions"> {
@@ -157,15 +195,32 @@ async function askAnthropic(question: string, base: AgentResult, intent: AgentIn
 export async function runRuntimeAgent(question: string): Promise<RuntimeAgentResult> {
   const base = await runIdolAgent(question);
   const intent = inferIntent(question);
+  const entity = findMentionedEntity(question);
   const fallback = !hasUsefulHit(base) ? intentFallback(intent, base) : null;
 
   const local: RuntimeAgentResult = {
     ...base,
     ...(fallback || {}),
+    answer: entity ? `${entityAnswerPrefix(entity, intent)}\n\n${(fallback || base).answer}` : (fallback || base).answer,
+    evidence: entity
+      ? [
+          {
+            type: entity.kind,
+            title: entity.name,
+            snippet: `score ${entity.score.toFixed(1)}, freshness ${Math.round(entity.freshnessDays)} 天, ${entity.subtitle}`,
+            href: entity.kind === "member" ? `/members/${encodeURIComponent(entity.name)}` : `/groups/${encodeURIComponent(entity.name)}`,
+          },
+          ...base.evidence,
+        ]
+      : base.evidence,
     intent,
     mode: "local",
     provider: "local",
-    traces: [...base.traces, { tool: "infer_intent", input: intent, hits: 1 }],
+    traces: [
+      ...base.traces,
+      { tool: "search_v4_entities", input: question, hits: entity ? 1 : 0 },
+      { tool: "infer_intent", input: intent, hits: 1 },
+    ],
   };
 
   const openAiAnswer = await askOpenAI(question, local, intent);

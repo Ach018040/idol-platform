@@ -64,13 +64,13 @@ jobs:
         working-directory: frontend-next
         run: npm ci
 
-      - name: Type-check frontend
-        working-directory: frontend-next
-        run: npx tsc --noEmit
-
       - name: Build frontend
         working-directory: frontend-next
         run: npm run build
+
+      - name: Type-check frontend
+        working-directory: frontend-next
+        run: npx tsc --noEmit
 
       - name: Commit updated JSON data
         run: |
