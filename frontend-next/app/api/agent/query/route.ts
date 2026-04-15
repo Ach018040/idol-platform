@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { runIdolAgent } from "@/lib/agent";
+import { runRuntimeAgent } from "@/lib/agent-runtime";
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "question required" }, { status: 400 });
     }
 
-    const result = await runIdolAgent(question);
+    const result = await runRuntimeAgent(question);
     return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json({ error: String(error) }, { status: 500 });
