@@ -90,7 +90,12 @@ export function analyzeEmotion(input: EmotionCheckinInput): EmotionCheckinResult
     .filter(([keyword]) => text.includes(keyword))
     .map(([, value]) => value);
 
-  const defaultState = { emotion: "複雜", energy: 45, pleasantness: 40, weight: 1 };
+  const defaultState: { emotion: string; energy: number; pleasantness: number; weight: number; signal?: string } = {
+    emotion: "複雜",
+    energy: 45,
+    pleasantness: 40,
+    weight: 1,
+  };
   const totalWeight = hits.reduce((sum, item) => sum + item.weight, 0) || defaultState.weight;
   const weighted = hits.length ? hits : [defaultState];
 

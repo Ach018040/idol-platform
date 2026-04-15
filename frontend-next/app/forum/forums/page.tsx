@@ -13,7 +13,11 @@ export default function ForumsPage() {
           {MOCK_FORUMS.map(forum => {
             const recentThreads = MOCK_THREADS
               .filter(t => t.forum_slug === forum.slug)
-              .sort((a, b) => new Date(b.last_reply_at).getTime() - new Date(a.last_reply_at).getTime())
+              .sort(
+                (a, b) =>
+                  new Date(b.last_reply_at ?? b.created_at).getTime() -
+                  new Date(a.last_reply_at ?? a.created_at).getTime(),
+              )
               .slice(0, 2);
             return (
               <Link key={forum.slug} href={`/forum/${forum.slug}`}>

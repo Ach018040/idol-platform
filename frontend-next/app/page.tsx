@@ -58,6 +58,8 @@ type Group = {
   group_content_diversity_score?: number;
   active_member_count?: number;
   last_group_snapshot_at?: string | null;
+  group_temperature_index_v2?: number;
+  group_conversion_score_v2?: number;
 };
 
 type CalEvent = { date: string; time: string; summary: string; dtRaw: Date };
