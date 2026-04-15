@@ -655,6 +655,7 @@ export default function HomePage() {
         <span>Idol Temperature Platform v3.8</span>
         <div className="flex items-center gap-4">
           <a href="/forum" className="hover:text-zinc-300 transition-colors">討論區</a>
+          <a href="/agent" className="hover:text-zinc-300 transition-colors">AI Agent</a>
           <a href="/events" className="hover:text-zinc-300 transition-colors">活動</a>
           <a href="/pricing" className="hover:text-zinc-300 transition-colors">方案</a>
           <a href="https://www.facebook.com/profile.php?id=61573475755166" target="_blank" rel="noopener noreferrer" className="hover:text-blue-300 text-blue-400/70 transition-colors">
