@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-15T20:57:58Z",
-  "market_temperature": 60.4,
-  "market_temperature_v2": 60.4,
+  "generated_at": "2026-04-16T20:55:17Z",
+  "market_temperature": 60.0,
+  "market_temperature_v2": 60.0,
   "active_groups": 91,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
@@ -16,7 +16,7 @@
     "top_group": "幻獣",
     "social_king": "天琴 ドウナ",
     "social_focus": "天琴 ドウナ",
-    "market_temperature": 60.4
+    "market_temperature": 60.0
   },
   "rising_stars": [
     "Nya にゃあ",
