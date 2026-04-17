@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-16T20:55:17Z",
-  "market_temperature": 60.0,
-  "market_temperature_v2": 60.0,
+  "generated_at": "2026-04-17T20:53:28Z",
+  "market_temperature": 59.7,
+  "market_temperature_v2": 59.7,
   "active_groups": 91,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
@@ -14,28 +14,28 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "天琴 ドウナ",
-    "social_focus": "天琴 ドウナ",
-    "market_temperature": 60.0
+    "social_king": "つつ子",
+    "social_focus": "つつ子",
+    "market_temperature": 59.7
   },
   "rising_stars": [
+    "優芽 Yuume",
     "Nya にゃあ",
     "燁水 Yomizu",
     "稲妻莉央",
-    "天国 せいや（あまくに せいや）",
-    "骼実 百瀬（かくみ ももせ）"
+    "天国 せいや（あまくに せいや）"
   ],
   "heat_drop": [],
   "top_members": [
+    "つつ子",
+    "羽黒凛香",
+    "伊波花怜",
     "天琴 ドウナ",
     "小豆 Azuki",
     "冥月 Runa",
     "雪薇 Yukibi",
     "雛菜 Hina",
     "真白 レモン",
-    "桜野杏理",
-    "御金 寧々花",
-    "愛栖 栗夢",
-    "恋乃 もも"
+    "桜野杏理"
   ]
 }
