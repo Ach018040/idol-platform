@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://idol-platform.local/prompts/agents/agent-role.schema.json",
+  "title": "Idol Platform Agent Role",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "label",
+    "sourceAgentName",
+    "sourceAgentPath",
+    "category",
+    "mission",
+    "focus",
+    "defaultQuestions",
+    "promptPath"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceAgentName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceAgentPath": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "type": "string",
+      "enum": ["engineering", "product", "marketing"]
+    },
+    "mission": {
+      "type": "string",
+      "minLength": 1
+    },
+    "focus": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "defaultQuestions": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "promptPath": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

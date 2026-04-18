@@ -1,0 +1,90 @@
+[
+  {
+    "id": "ranking-analyst",
+    "label": "Ranking Analyst",
+    "sourceAgentName": "Product Trend Researcher",
+    "sourceAgentPath": "product/product-trend-researcher.md",
+    "category": "product",
+    "mission": "解釋成員與團體為何上榜、掉榜或排名跳動。",
+    "focus": ["Top 10 排名解釋", "成員 vs 團體差異", "freshness 對榜單影響"],
+    "defaultQuestions": ["為何有些成員不常更新卻仍然排在前面？", "團體榜和成員榜為何有時不一致？"],
+    "promptPath": "prompts/agents/ranking-analyst.md"
+  },
+  {
+    "id": "formula-architect",
+    "label": "Formula Architect",
+    "sourceAgentName": "AI Engineer",
+    "sourceAgentPath": "engineering/engineering-ai-engineer.md",
+    "category": "engineering",
+    "mission": "把平台指標拆成可驗證的公式邏輯與補強方向。",
+    "focus": ["temperature_index_v2", "freshness mixed scoring", "可信度說明"],
+    "defaultQuestions": ["目前 v2 公式最需要補強的是什麼？", "為何最高分不是 100，應該怎麼解釋？"],
+    "promptPath": "prompts/agents/formula-architect.md"
+  },
+  {
+    "id": "data-pipeline-operator",
+    "label": "Data Pipeline Operator",
+    "sourceAgentName": "Data Engineer",
+    "sourceAgentPath": "engineering/engineering-data-engineer.md",
+    "category": "engineering",
+    "mission": "把平台缺資料、重抓條件與 JSON 欄位落成可執行任務。",
+    "focus": ["social activity 抓取", "last_post_at 欄位", "增量更新策略"],
+    "defaultQuestions": ["哪些欄位還沒抓到，所以公式可信度不夠？", "Instagram / Threads 最後發文時間要怎麼補？"],
+    "promptPath": "prompts/agents/data-pipeline-operator.md"
+  },
+  {
+    "id": "platform-architect",
+    "label": "Platform Architect",
+    "sourceAgentName": "Backend Architect",
+    "sourceAgentPath": "engineering/engineering-backend-architect.md",
+    "category": "engineering",
+    "mission": "把單一問題放回整體平台架構，指出最小可行修正點。",
+    "focus": ["crawler -> supabase -> api -> frontend", "schema 對齊", "部署風險"],
+    "defaultQuestions": ["這個功能應該落在 crawler、api 還是 frontend？", "排行榜與 /about 公式不同步時要先查哪一層？"],
+    "promptPath": "prompts/agents/platform-architect.md"
+  },
+  {
+    "id": "database-optimizer",
+    "label": "Database Optimizer",
+    "sourceAgentName": "Database Optimizer",
+    "sourceAgentPath": "engineering/engineering-database-optimizer.md",
+    "category": "engineering",
+    "mission": "把新功能需要的資料表、欄位與 policy 具體化。",
+    "focus": ["Supabase schema", "RLS / policy", "watchlist / alerts persistence"],
+    "defaultQuestions": ["watchlist / alerts 還需要哪些 schema 才算正式？", "論壇 token 模型下，RLS 應該怎麼設比較穩？"],
+    "promptPath": "prompts/agents/database-optimizer.md"
+  },
+  {
+    "id": "product-strategist",
+    "label": "Product Strategist",
+    "sourceAgentName": "Product Manager",
+    "sourceAgentPath": "product/product-manager.md",
+    "category": "product",
+    "mission": "讓 idol-platform 更像 Bloomberg for idols，而不是只是一張榜單。",
+    "focus": ["使用者價值", "功能優先順序", "v4 路線圖"],
+    "defaultQuestions": ["下一步最值得上的功能是什麼？", "compare / watchlist / alerts 要怎麼變成日常使用功能？"],
+    "promptPath": "prompts/agents/product-strategist.md"
+  },
+  {
+    "id": "market-researcher",
+    "label": "Market Researcher",
+    "sourceAgentName": "Product Trend Researcher",
+    "sourceAgentPath": "product/product-trend-researcher.md",
+    "category": "product",
+    "mission": "把週觀察、社群訊號與內容趨勢整理成策略摘要。",
+    "focus": ["市場觀察", "本週社群焦點", "偶像發展趨勢"],
+    "defaultQuestions": ["本週社群焦點該怎麼寫才不只是榜單摘要？", "哪些團體的成長曲線值得特別關注？"],
+    "promptPath": "prompts/agents/market-researcher.md"
+  },
+  {
+    "id": "social-intelligence",
+    "label": "Social Intelligence Strategist",
+    "sourceAgentName": "Social Media Strategist",
+    "sourceAgentPath": "marketing/marketing-social-media-strategist.md",
+    "category": "marketing",
+    "mission": "把社群覆蓋、互動率與真實更新訊號翻成可操作的洞察。",
+    "focus": ["平台覆蓋", "互動率 / 觀看率", "社群內容解讀"],
+    "defaultQuestions": ["如何用 followers / engagement / views 強化公式可信度？", "哪些社群欄位最值得先實作？"],
+    "promptPath": "prompts/agents/social-intelligence.md"
+  }
+]
