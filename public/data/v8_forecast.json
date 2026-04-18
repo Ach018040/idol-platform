@@ -12,24 +12,24 @@
       69.11
     ],
     "direction": "flat",
-    "confidence": 0.007,
-    "data_days": 27
+    "confidence": 0.006,
+    "data_days": 28
   },
   {
     "entity_name": "新增經歷",
     "last_index": 58.6,
     "forecast_7d": [
-      58.59,
-      58.59,
-      58.59,
-      58.59,
-      58.59,
+      58.6,
+      58.6,
+      58.6,
+      58.6,
+      58.6,
       58.6,
       58.6
     ],
     "direction": "flat",
     "confidence": 0.0,
-    "data_days": 27
+    "data_days": 28
   },
   {
     "entity_name": "#0000FF",
@@ -37,15 +37,15 @@
     "forecast_7d": [
       54.24,
       54.23,
-      54.22,
+      54.23,
       54.22,
       54.21,
-      54.2,
-      54.19
+      54.21,
+      54.2
     ],
     "direction": "flat",
-    "confidence": 0.047,
-    "data_days": 27
+    "confidence": 0.045,
+    "data_days": 28
   },
   {
     "entity_name": "#FFFF00",
@@ -53,31 +53,31 @@
     "forecast_7d": [
       52.13,
       52.13,
-      52.12,
+      52.13,
       52.12,
       52.12,
       52.12,
       52.12
     ],
     "direction": "flat",
-    "confidence": 0.014,
-    "data_days": 27
+    "confidence": 0.013,
+    "data_days": 28
   },
   {
     "entity_name": "宿命白",
     "last_index": 39.85,
     "forecast_7d": [
-      39.84,
-      39.84,
-      39.84,
-      39.84,
-      39.84,
+      39.85,
+      39.85,
+      39.85,
+      39.85,
+      39.85,
       39.85,
       39.85
     ],
     "direction": "flat",
-    "confidence": 0.0,
-    "data_days": 27
+    "confidence": 0.001,
+    "data_days": 28
   },
   {
     "entity_name": "大邦奶奶",
@@ -86,14 +86,14 @@
       39.8,
       39.8,
       39.79,
+      39.79,
       39.78,
       39.78,
-      39.77,
       39.77
     ],
     "direction": "flat",
-    "confidence": 0.057,
-    "data_days": 27
+    "confidence": 0.055,
+    "data_days": 28
   },
   {
     "entity_name": "紅色",
@@ -102,14 +102,14 @@
       39.65,
       39.65,
       39.64,
-      39.63,
+      39.64,
       39.63,
       39.62,
       39.62
     ],
     "direction": "flat",
-    "confidence": 0.049,
-    "data_days": 27
+    "confidence": 0.047,
+    "data_days": 28
   },
   {
     "entity_name": "#800080",
@@ -119,13 +119,13 @@
       37.45,
       37.45,
       37.44,
-      37.43,
+      37.44,
       37.43,
       37.42
     ],
     "direction": "flat",
-    "confidence": 0.037,
-    "data_days": 27
+    "confidence": 0.036,
+    "data_days": 28
   },
   {
     "entity_name": "#007500",
@@ -134,14 +134,14 @@
       20.04,
       20.05,
       20.06,
+      20.07,
       20.08,
       20.09,
-      20.1,
-      20.11
+      20.1
     ],
     "direction": "flat",
-    "confidence": 0.072,
-    "data_days": 27
+    "confidence": 0.068,
+    "data_days": 28
   },
   {
     "entity_name": "#C90000",
@@ -156,7 +156,7 @@
       19.94
     ],
     "direction": "flat",
-    "confidence": 0.006,
-    "data_days": 27
+    "confidence": 0.005,
+    "data_days": 28
   }
 ]
