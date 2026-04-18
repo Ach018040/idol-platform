@@ -389,14 +389,15 @@ export default function AgentWorkbench() {
       <div className="mx-auto max-w-7xl space-y-8">
         <section className="space-y-5">
           <div className="inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1 text-xs uppercase tracking-[0.2em] text-cyan-200">
-            Agency Agents Adapted
+            Agent Workspace
           </div>
           <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
             <div>
               <h1 className="text-4xl font-black md:text-5xl">idol-platform 多角色智能代理</h1>
               <p className="mt-4 max-w-3xl text-sm leading-7 text-zinc-300">
-                這一版把 agency-agents 的角色切分方式，轉成 idol-platform 可直接使用的多角色工作台。
-                你可以依題目切換角色，讓同一個問題從排名、公式、資料管線、產品策略或社群洞察角度回應。
+                這裡是給你直接使用平台分析功能的智能工作台，不是更新進度看板。
+                你可以依問題切換角色，查看為何上榜、比較成員與團體差異、追蹤觀察名單、建立提醒草稿，
+                或從公式、資料管線、產品策略與社群洞察角度理解平台資料。
               </p>
             </div>
             <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm text-zinc-300">
@@ -420,10 +421,10 @@ export default function AgentWorkbench() {
               返回首頁
             </Link>
             <Link href="/brain" className="rounded-xl border border-violet-400/20 bg-violet-400/10 px-4 py-2 text-violet-200 hover:bg-violet-400/20">
-              前往 Brain
+              知識庫
             </Link>
             <Link href="/insights" className="rounded-xl border border-amber-400/20 bg-amber-400/10 px-4 py-2 text-amber-200 hover:bg-amber-400/20">
-              查看 Insights
+              市場觀察
             </Link>
           </div>
         </section>
