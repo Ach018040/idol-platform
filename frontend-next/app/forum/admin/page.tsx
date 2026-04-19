@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+
 import { useForumAuth } from "../../../lib/forum-auth";
 
 const SB_URL =
@@ -142,7 +143,7 @@ export default function ForumAdminPage() {
       if (Array.isArray(postRows)) setPosts(postRows);
       if (Array.isArray(reportRows)) setReports(reportRows);
     } catch {
-      setActionMsg("無法讀取論壇管理資料，請稍後再試。");
+      setActionMsg("目前無法載入論壇管理資料。");
     } finally {
       setLoading(false);
     }
@@ -190,7 +191,7 @@ export default function ForumAdminPage() {
         await runAdminAction("delete_post", id);
       }
 
-      setActionMsg("管理操作已完成。");
+      setActionMsg("操作已完成。");
       fetchData();
     } catch (error) {
       setActionMsg(String(error));
@@ -201,16 +202,16 @@ export default function ForumAdminPage() {
 
   if (!user) {
     return (
-      <main className="flex min-h-screen items-center justify-center px-4 text-white">
+      <main className="page-shell flex min-h-screen items-center justify-center px-4 text-white">
         <div className="space-y-4 text-center">
           <div className="text-5xl">🔐</div>
-          <h2 className="text-xl font-black text-white">請先登入論壇</h2>
-          <p className="text-sm text-zinc-400">管理後台需要先建立論壇身分，才能驗證管理員權限。</p>
+          <h2 className="text-xl font-black text-white">需要先登入論壇帳號</h2>
+          <p className="text-sm text-zinc-400">論壇後台會驗證登入狀態與管理權限，請先回到發文頁完成登入。</p>
           <Link
             href="/forum/new"
             className="inline-flex rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 px-5 py-2.5 text-sm text-fuchsia-200 transition-colors hover:bg-fuchsia-400/20"
           >
-            前往論壇登入
+            前往登入 / 發文頁
           </Link>
         </div>
       </main>
@@ -219,19 +220,19 @@ export default function ForumAdminPage() {
 
   if (!isAdmin) {
     return (
-      <main className="flex min-h-screen items-center justify-center px-4 text-white">
-        <div className="w-full max-w-sm space-y-4 text-center">
+      <main className="page-shell flex min-h-screen items-center justify-center px-4 text-white">
+        <div className="surface-panel w-full max-w-sm space-y-4 p-6 text-center">
           <div className="text-5xl">🛡️</div>
-          <h2 className="text-xl font-black text-white">需要管理員驗證</h2>
+          <h2 className="text-xl font-black text-white">管理員驗證</h2>
           <p className="text-sm text-zinc-400">
-            目前論壇採暱稱登入，輸入管理員密碼後會開啟本次瀏覽器工作階段的後台權限。
+            請輸入論壇管理密鑰。驗證通過後，這個裝置會暫時記住後台權限。
           </p>
           <div className="space-y-2">
             <input
               type="password"
               value={secret}
               onChange={(e) => setSecret(e.target.value)}
-              placeholder="輸入管理員密碼"
+              placeholder="請輸入管理密鑰"
               className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-400/50"
             />
             <button
@@ -248,14 +249,14 @@ export default function ForumAdminPage() {
                     markLocalAdmin(secret);
                     setLoginMsg(
                       data.persisted === false
-                        ? "已開啟管理員工作階段，目前以本機權限模式操作後台。"
+                        ? "本次裝置已通過管理員驗證，但資料庫角色尚未持久寫入。"
                         : "管理員驗證成功，現在可以進入後台。",
                     );
                   } else {
-                    setLoginMsg(data.error || "管理員密碼錯誤");
+                    setLoginMsg(data.error || "管理密鑰驗證失敗。");
                   }
                 } catch {
-                  setLoginMsg("管理員驗證失敗，請稍後再試");
+                  setLoginMsg("管理員驗證暫時失敗，請稍後再試。");
                 }
               }}
               className="w-full rounded-lg border border-fuchsia-400/30 bg-fuchsia-400/10 px-4 py-2 text-sm text-fuchsia-200 transition-colors hover:bg-fuchsia-400/20"
@@ -276,27 +277,29 @@ export default function ForumAdminPage() {
   }
 
   return (
-    <main className="min-h-screen px-4 py-8 text-white md:px-6">
+    <main className="page-shell min-h-screen px-4 py-8 text-white md:px-6">
       <div className="mx-auto max-w-6xl">
-        <header className="mb-8 flex items-center justify-between">
-          <div>
-            <div className="mb-1 flex items-center gap-2">
-              <span className="text-xl">🛠️</span>
-              <h1 className="text-2xl font-black text-white">論壇管理後台</h1>
-              <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2 py-0.5 text-xs text-emerald-400">
-                {user.display_name}
-              </span>
+        <header className="hero-surface mb-8 p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="mb-1 flex items-center gap-2">
+                <span className="text-xl">🛠️</span>
+                <h1 className="text-2xl font-black text-white">論壇管理後台</h1>
+                <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2 py-0.5 text-xs text-emerald-400">
+                  {user.display_name}
+                </span>
+              </div>
+              <p className="text-sm text-zinc-400">
+                管理主題、留言、檢舉與論壇規範。若你看到這頁，代表管理員驗證已通過。
+              </p>
             </div>
-            <p className="text-sm text-zinc-400">
-              管理主題、留言、檢舉與論壇規範。若你看到這頁，代表管理員驗證已通過。
-            </p>
+            <Link
+              href="/forum"
+              className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300 transition-colors hover:bg-white/10"
+            >
+              返回論壇
+            </Link>
           </div>
-          <Link
-            href="/forum"
-            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300 transition-colors hover:bg-white/10"
-          >
-            返回論壇
-          </Link>
         </header>
 
         {actionMsg ? (
@@ -328,17 +331,15 @@ export default function ForumAdminPage() {
               <StatCard label="鎖定主題" value={threads.filter((t) => t.is_locked).length} tone="rose" />
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
+            <div className="surface-panel p-5">
               <h2 className="mb-4 text-base font-bold text-white">近期熱門主題</h2>
               <div className="space-y-2">
                 {[...threads]
                   .sort((a, b) => b.trending_score - a.trending_score)
                   .slice(0, 5)
                   .map((thread) => (
-                    <div key={thread.id} className="flex items-center gap-3 rounded-xl bg-black/20 p-3 text-sm">
-                      <span className="w-12 text-xs font-bold text-fuchsia-300">
-                        {thread.trending_score.toFixed(1)}
-                      </span>
+                    <div key={thread.id} className="surface-card flex items-center gap-3 p-3 text-sm">
+                      <span className="w-12 text-xs font-bold text-fuchsia-300">{thread.trending_score.toFixed(1)}</span>
                       <span className="flex-1 truncate text-zinc-300">{thread.title}</span>
                       <span className="text-xs text-zinc-600">{thread.forum_slug}</span>
                       {thread.is_pinned ? <span className="text-xs text-amber-400">置頂</span> : null}
@@ -363,13 +364,11 @@ export default function ForumAdminPage() {
               </button>
             </div>
             {threads.map((thread) => (
-              <div key={thread.id} className="rounded-2xl border border-white/10 bg-black/20 p-4">
+              <div key={thread.id} className="surface-card p-4">
                 <div className="flex items-start gap-3">
                   <div className="min-w-0 flex-1">
                     <div className="mb-1 flex items-center gap-2">
-                      <span className="rounded bg-white/5 px-2 py-0.5 text-xs text-zinc-500">
-                        {thread.forum_slug}
-                      </span>
+                      <span className="rounded bg-white/5 px-2 py-0.5 text-xs text-zinc-500">{thread.forum_slug}</span>
                       {thread.is_pinned ? <span className="text-xs text-amber-400">置頂</span> : null}
                       {thread.is_locked ? <span className="text-xs text-rose-400">鎖定</span> : null}
                     </div>
@@ -432,10 +431,7 @@ export default function ForumAdminPage() {
               </button>
             </div>
             {posts.map((post) => (
-              <div
-                key={post.id}
-                className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-4"
-              >
+              <div key={post.id} className="surface-card flex items-start gap-3 p-4">
                 <div className="min-w-0 flex-1">
                   <div className="mb-1 flex items-center gap-2 text-xs text-zinc-500">
                     <span className="text-zinc-300">{post.author_name || "匿名"}</span>
@@ -446,7 +442,7 @@ export default function ForumAdminPage() {
                 </div>
                 <button
                   onClick={() => {
-                    if (confirm("確定要刪除此留言嗎？")) {
+                    if (confirm("確定要刪除這則留言嗎？")) {
                       action("del_p", post.id);
                     }
                   }}
@@ -488,16 +484,12 @@ export default function ForumAdminPage() {
                 <div className="flex items-start gap-3">
                   <div className="min-w-0 flex-1">
                     <div className="mb-1 flex items-center gap-2">
-                      <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-zinc-300">
-                        {report.status}
-                      </span>
+                      <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-zinc-300">{report.status}</span>
                       <span className="text-xs text-zinc-500">{report.target_type}</span>
                       <span className="font-mono text-xs text-zinc-600">{report.target_id?.slice(0, 8)}...</span>
                     </div>
                     <p className="text-sm text-zinc-300">{report.reason}</p>
-                    <p className="mt-1 text-xs text-zinc-600">
-                      {new Date(report.created_at).toLocaleString("zh-TW")}
-                    </p>
+                    <p className="mt-1 text-xs text-zinc-600">{new Date(report.created_at).toLocaleString("zh-TW")}</p>
                   </div>
                 </div>
               </div>
@@ -507,12 +499,12 @@ export default function ForumAdminPage() {
 
         {tab === "rules" ? (
           <div className="space-y-5">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-              <h2 className="mb-4 text-lg font-bold text-white">權限說明</h2>
+            <div className="surface-panel p-6">
+              <h2 className="mb-4 text-lg font-bold text-white">後台操作原則</h2>
               <div className="space-y-3 text-sm text-zinc-300">
-                <p>1. 目前管理後台使用「管理員密碼 + 瀏覽器工作階段」模式。</p>
-                <p>2. 這版已修正進不去後台與操作權限鏈，但資料庫結構仍需後續補齊正式 RLS。</p>
-                <p>3. 若某些動作仍失敗，代表目前 Supabase 表結構或 policy 還沒完全對齊。</p>
+                <p>1. 目前後台採管理密鑰驗證與論壇帳號並用，目的在於先確保管理流程可實際運作。</p>
+                <p>2. 刪除、鎖定與置頂操作會直接影響論壇內容，操作前請先確認是否符合版規。</p>
+                <p>3. 後續會再往 Supabase schema / policy 層補強，讓管理權限與審核流程更完整。</p>
               </div>
             </div>
           </div>
