@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -143,7 +143,7 @@ export default function ForumAdminPage() {
       if (Array.isArray(postRows)) setPosts(postRows);
       if (Array.isArray(reportRows)) setReports(reportRows);
     } catch {
-      setActionMsg("目前無法載入論壇管理資料。");
+      setActionMsg("目前無法讀取管理資料，請稍後再試。");
     } finally {
       setLoading(false);
     }
@@ -174,7 +174,7 @@ export default function ForumAdminPage() {
 
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
-      throw new Error(data.error || "管理操作失敗");
+      throw new Error(data.error || "管理操作失敗。");
     }
     return data;
   };
@@ -191,10 +191,10 @@ export default function ForumAdminPage() {
         await runAdminAction("delete_post", id);
       }
 
-      setActionMsg("操作已完成。");
+      setActionMsg("管理操作已完成。");
       fetchData();
     } catch (error) {
-      setActionMsg(String(error));
+      setActionMsg(error instanceof Error ? error.message : "管理操作失敗。");
     }
 
     setTimeout(() => setActionMsg(""), 3000);
@@ -203,10 +203,12 @@ export default function ForumAdminPage() {
   if (!user) {
     return (
       <main className="page-shell flex min-h-screen items-center justify-center px-4 text-white">
-        <div className="space-y-4 text-center">
-          <div className="text-5xl">🔐</div>
-          <h2 className="text-xl font-black text-white">需要先登入論壇帳號</h2>
-          <p className="text-sm text-zinc-400">論壇後台會驗證登入狀態與管理權限，請先回到發文頁完成登入。</p>
+        <div className="surface-panel max-w-md space-y-4 p-6 text-center">
+          <div className="text-5xl">ADMIN</div>
+          <h2 className="text-xl font-black text-white">請先登入論壇帳號</h2>
+          <p className="text-sm leading-6 text-zinc-400">
+            管理後台只提供已登入的論壇使用者驗證與操作。請先進入論壇登入，再回到這裡。
+          </p>
           <Link
             href="/forum/new"
             className="inline-flex rounded-xl border border-fuchsia-400/30 bg-fuchsia-400/10 px-5 py-2.5 text-sm text-fuchsia-200 transition-colors hover:bg-fuchsia-400/20"
@@ -221,18 +223,18 @@ export default function ForumAdminPage() {
   if (!isAdmin) {
     return (
       <main className="page-shell flex min-h-screen items-center justify-center px-4 text-white">
-        <div className="surface-panel w-full max-w-sm space-y-4 p-6 text-center">
-          <div className="text-5xl">🛡️</div>
+        <div className="surface-panel w-full max-w-md space-y-5 p-6 text-center">
+          <div className="text-5xl">LOCK</div>
           <h2 className="text-xl font-black text-white">管理員驗證</h2>
-          <p className="text-sm text-zinc-400">
-            請輸入論壇管理密鑰。驗證通過後，這個裝置會暫時記住後台權限。
+          <p className="text-sm leading-6 text-zinc-400">
+            輸入管理員密鑰後，系統會把你目前的論壇身份升級為管理員，之後即可進入主題、留言與檢舉管理。
           </p>
           <div className="space-y-2">
             <input
               type="password"
               value={secret}
               onChange={(e) => setSecret(e.target.value)}
-              placeholder="請輸入管理密鑰"
+              placeholder="輸入管理員密鑰"
               className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-400/50"
             />
             <button
@@ -249,21 +251,21 @@ export default function ForumAdminPage() {
                     markLocalAdmin(secret);
                     setLoginMsg(
                       data.persisted === false
-                        ? "本次裝置已通過管理員驗證，但資料庫角色尚未持久寫入。"
-                        : "管理員驗證成功，現在可以進入後台。",
+                        ? "驗證成功，目前以前端管理模式開啟；待資料庫權限同步後可持久保存。"
+                        : "驗證成功，已切換成管理員身份。",
                     );
                   } else {
-                    setLoginMsg(data.error || "管理密鑰驗證失敗。");
+                    setLoginMsg(data.error || "管理員驗證失敗。");
                   }
                 } catch {
-                  setLoginMsg("管理員驗證暫時失敗，請稍後再試。");
+                  setLoginMsg("驗證過程發生錯誤，請稍後再試。");
                 }
               }}
               className="w-full rounded-lg border border-fuchsia-400/30 bg-fuchsia-400/10 px-4 py-2 text-sm text-fuchsia-200 transition-colors hover:bg-fuchsia-400/20"
             >
-              驗證管理員身分
+              驗證並進入後台
             </button>
-            {loginMsg ? <p className="text-xs text-emerald-300">{loginMsg}</p> : null}
+            {loginMsg ? <p className="text-xs leading-6 text-emerald-300">{loginMsg}</p> : null}
           </div>
           <Link
             href="/forum"
@@ -280,16 +282,16 @@ export default function ForumAdminPage() {
     <main className="page-shell min-h-screen px-4 py-8 text-white md:px-6">
       <div className="mx-auto max-w-6xl">
         <header className="hero-surface mb-8 p-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <div className="mb-1 flex items-center gap-2">
-                <span className="text-xl">🛠️</span>
+              <div className="mb-2 flex items-center gap-2">
+                <span className="text-xl">ADMIN</span>
                 <h1 className="text-2xl font-black text-white">論壇管理後台</h1>
                 <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2 py-0.5 text-xs text-emerald-400">
                   {user.display_name}
                 </span>
               </div>
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm leading-6 text-zinc-400">
                 管理主題、留言、檢舉與論壇規範。若你看到這頁，代表管理員驗證已通過。
               </p>
             </div>
@@ -325,14 +327,14 @@ export default function ForumAdminPage() {
         {tab === "overview" ? (
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-              <StatCard label="主題數" value={threads.length} tone="fuchsia" />
-              <StatCard label="留言數" value={posts.length} tone="cyan" />
+              <StatCard label="主題總數" value={threads.length} tone="fuchsia" />
+              <StatCard label="留言總數" value={posts.length} tone="cyan" />
               <StatCard label="置頂主題" value={threads.filter((t) => t.is_pinned).length} tone="amber" />
               <StatCard label="鎖定主題" value={threads.filter((t) => t.is_locked).length} tone="rose" />
             </div>
 
             <div className="surface-panel p-5">
-              <h2 className="mb-4 text-base font-bold text-white">近期熱門主題</h2>
+              <h2 className="mb-4 text-base font-bold text-white">熱門主題</h2>
               <div className="space-y-2">
                 {[...threads]
                   .sort((a, b) => b.trending_score - a.trending_score)
@@ -360,7 +362,7 @@ export default function ForumAdminPage() {
                 disabled={loading}
                 className="rounded-lg border border-white/10 px-3 py-1.5 text-xs text-zinc-400 transition-colors hover:bg-white/5 hover:text-white"
               >
-                {loading ? "更新中..." : "重新整理"}
+                {loading ? "重新整理中..." : "重新整理"}
               </button>
             </div>
             {threads.map((thread) => (
@@ -403,7 +405,7 @@ export default function ForumAdminPage() {
                     </button>
                     <button
                       onClick={() => {
-                        if (confirm(`確定要刪除主題「${thread.title}」嗎？`)) {
+                        if (confirm(`確定要刪除這篇主題「${thread.title}」嗎？`)) {
                           action("del_t", thread.id);
                         }
                       }}
@@ -427,7 +429,7 @@ export default function ForumAdminPage() {
                 disabled={loading}
                 className="rounded-lg border border-white/10 px-3 py-1.5 text-xs text-zinc-400 transition-colors hover:bg-white/5 hover:text-white"
               >
-                {loading ? "更新中..." : "重新整理"}
+                {loading ? "重新整理中..." : "重新整理"}
               </button>
             </div>
             {posts.map((post) => (
@@ -464,7 +466,7 @@ export default function ForumAdminPage() {
                 disabled={loading}
                 className="rounded-lg border border-white/10 px-3 py-1.5 text-xs text-zinc-400 transition-colors hover:bg-white/5 hover:text-white"
               >
-                {loading ? "更新中..." : "重新整理"}
+                {loading ? "重新整理中..." : "重新整理"}
               </button>
             </div>
             {reports.length === 0 ? (
@@ -484,7 +486,9 @@ export default function ForumAdminPage() {
                 <div className="flex items-start gap-3">
                   <div className="min-w-0 flex-1">
                     <div className="mb-1 flex items-center gap-2">
-                      <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-zinc-300">{report.status}</span>
+                      <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-zinc-300">
+                        {report.status}
+                      </span>
                       <span className="text-xs text-zinc-500">{report.target_type}</span>
                       <span className="font-mono text-xs text-zinc-600">{report.target_id?.slice(0, 8)}...</span>
                     </div>
@@ -500,11 +504,11 @@ export default function ForumAdminPage() {
         {tab === "rules" ? (
           <div className="space-y-5">
             <div className="surface-panel p-6">
-              <h2 className="mb-4 text-lg font-bold text-white">後台操作原則</h2>
-              <div className="space-y-3 text-sm text-zinc-300">
-                <p>1. 目前後台採管理密鑰驗證與論壇帳號並用，目的在於先確保管理流程可實際運作。</p>
-                <p>2. 刪除、鎖定與置頂操作會直接影響論壇內容，操作前請先確認是否符合版規。</p>
-                <p>3. 後續會再往 Supabase schema / policy 層補強，讓管理權限與審核流程更完整。</p>
+              <h2 className="mb-4 text-lg font-bold text-white">管理操作原則</h2>
+              <div className="space-y-3 text-sm leading-7 text-zinc-300">
+                <p>1. 優先維持討論秩序與可讀性，避免刪除正常討論；置頂與鎖定應有清楚理由。</p>
+                <p>2. 對於人身攻擊、惡意爆料、洗版與明顯違規內容，可優先刪除或鎖定處理。</p>
+                <p>3. 若後續補上 Supabase schema 與 policy，建議再加入操作紀錄與管理員註記，方便追蹤。</p>
               </div>
             </div>
           </div>
