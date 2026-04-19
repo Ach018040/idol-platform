@@ -60,8 +60,24 @@ type RemoteAlertItem = {
   created_at: string;
 };
 
+type AgentMemoryItem = {
+  id: string;
+  sessionId: string | null;
+  roleId: IdolAgentRoleId;
+  roleLabel: string;
+  question: string;
+  answer: string;
+  summary: string;
+  intent?: string | null;
+  entityId?: string | null;
+  entityKind?: "member" | "group" | null;
+  entityName?: string | null;
+  createdAt: string;
+};
+
 const WATCHLIST_KEY = "idol_v4_watchlist";
 const ALERTS_KEY = "idol_v4_alerts";
+const MEMORY_KEY = "idol_agent_memory";
 const FORUM_USER_KEY = "forum_user_v2";
 
 function fmt(value: number | null | undefined, digits = 1) {
@@ -109,6 +125,37 @@ function syncLabel(storageMode: "local" | "cloud", syncingStorage: boolean) {
   return storageMode === "cloud" ? "已同步到雲端" : "目前儲存在本機";
 }
 
+function isRoleId(value: string | null | undefined): value is IdolAgentRoleId {
+  return IDOL_AGENT_ROLES.some((role) => role.id === value);
+}
+
+function normalizeMemoryItem(raw: Record<string, unknown>): AgentMemoryItem | null {
+  const roleId = String(raw.roleId ?? raw.role_id ?? "");
+  if (!isRoleId(roleId)) return null;
+  return {
+    id: String(raw.id || ""),
+    sessionId: raw.sessionId == null ? String(raw.session_id || "") || null : String(raw.sessionId || "") || null,
+    roleId,
+    roleLabel:
+      String(raw.roleLabel ?? "").trim() ||
+      getIdolAgentRole(roleId).label,
+    question: String(raw.question || "").trim(),
+    answer: String(raw.answer || "").trim(),
+    summary: String(raw.summary || "").trim(),
+    intent: raw.intent == null ? null : String(raw.intent),
+    entityId: raw.entityId == null ? String(raw.entity_id || "") || null : String(raw.entityId || "") || null,
+    entityKind:
+      raw.entityKind === "group" || raw.entity_kind === "group"
+        ? "group"
+        : raw.entityKind === "member" || raw.entity_kind === "member"
+          ? "member"
+          : null,
+    entityName:
+      raw.entityName == null ? String(raw.entity_name || "") || null : String(raw.entityName || "") || null,
+    createdAt: String(raw.createdAt ?? raw.created_at ?? new Date().toISOString()),
+  };
+}
+
 export default function AgentWorkbench() {
   const [question, setQuestion] = useState(getIdolAgentRole(DEFAULT_AGENT_ROLE_ID).defaultQuestions[0]);
   const [selectedRole, setSelectedRole] = useState<IdolAgentRoleId>(DEFAULT_AGENT_ROLE_ID);
@@ -119,6 +166,9 @@ export default function AgentWorkbench() {
   const [rightId, setRightId] = useState("");
   const [watchlist, setWatchlist] = useState<string[]>([]);
   const [alerts, setAlerts] = useState<AlertDraft[]>([]);
+  const [recentMemory, setRecentMemory] = useState<AgentMemoryItem[]>([]);
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const [continuedFrom, setContinuedFrom] = useState<AgentMemoryItem | null>(null);
   const [forumIdentity, setForumIdentity] = useState<ForumIdentity | null>(null);
   const [storageMode, setStorageMode] = useState<"local" | "cloud">("local");
   const [syncingStorage, setSyncingStorage] = useState(false);
@@ -130,6 +180,11 @@ export default function AgentWorkbench() {
   useEffect(() => {
     setWatchlist(readStoredArray<string>(WATCHLIST_KEY));
     setAlerts(readStoredArray<AlertDraft>(ALERTS_KEY));
+    setRecentMemory(
+      readStoredArray<Record<string, unknown>>(MEMORY_KEY)
+        .map((item) => normalizeMemoryItem(item))
+        .filter(Boolean) as AgentMemoryItem[],
+    );
     setForumIdentity(readForumIdentity());
 
     fetch("/api/v4/entities", { cache: "no-store" })
@@ -144,6 +199,27 @@ export default function AgentWorkbench() {
       })
       .catch((err) => setError(String(err)));
   }, []);
+
+  async function loadAgentMemory(identity: ForumIdentity) {
+    try {
+      const response = await fetch(
+        `/api/agent/memory?token=${encodeURIComponent(identity.token)}&limit=8`,
+        { cache: "no-store" },
+      );
+      const payload = await response.json();
+      const items = Array.isArray(payload.items)
+        ? payload.items
+            .map((item: Record<string, unknown>) => normalizeMemoryItem(item))
+            .filter(Boolean)
+        : [];
+
+      setRecentMemory(items as AgentMemoryItem[]);
+      setCurrentSessionId(payload.latestSessionId || null);
+      writeStoredArray(MEMORY_KEY, items);
+    } catch {
+      // Keep local fallback memory when cloud fetch fails.
+    }
+  }
 
   const allEntities = useMemo(() => [...(entities?.members || []), ...(entities?.groups || [])], [entities]);
   const entityById = useMemo(() => new Map(allEntities.map((entity) => [entity.id, entity])), [allEntities]);
@@ -265,10 +341,18 @@ export default function AgentWorkbench() {
     };
   }, [forumIdentity, allEntities.length, entityById]);
 
+  useEffect(() => {
+    if (!forumIdentity) return;
+    void loadAgentMemory(forumIdentity);
+  }, [forumIdentity]);
+
   async function ask(nextQuestion?: string, nextRole?: IdolAgentRoleId) {
     const finalQuestion = (nextQuestion ?? question).trim();
     const finalRole = nextRole ?? selectedRole;
     if (!finalQuestion) return;
+    const continuedQuestion = continuedFrom
+      ? `延續上一題「${continuedFrom.question}」。這次追問：${finalQuestion}`
+      : finalQuestion;
 
     setLoading(true);
     setError(null);
@@ -279,12 +363,68 @@ export default function AgentWorkbench() {
       const response = await fetch("/api/agent/query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: finalQuestion, role: finalRole }),
+        body: JSON.stringify({ question: continuedQuestion, role: finalRole }),
       });
 
       const data = await response.json();
       if (!response.ok) throw new Error(data?.error || "agent request failed");
       setResult(data);
+
+      const primaryEntity = (data?.evidence || []).find(
+        (item: { type?: string }) => item.type === "member" || item.type === "group",
+      );
+
+      const memoryQuestion = continuedFrom
+        ? `延續「${continuedFrom.question}」：${finalQuestion}`
+        : finalQuestion;
+      const nextMemoryItem: AgentMemoryItem = {
+        id: `local-${Date.now()}`,
+        sessionId: currentSessionId,
+        roleId: finalRole,
+        roleLabel: data.roleLabel || getIdolAgentRole(finalRole).label,
+        question: memoryQuestion,
+        answer: String(data.answer || ""),
+        summary: String(data.summary || ""),
+        intent: data.intent || null,
+        entityId: primaryEntity?.href ? null : null,
+        entityKind: primaryEntity?.type === "group" ? "group" : primaryEntity?.type === "member" ? "member" : null,
+        entityName: primaryEntity?.title || null,
+        createdAt: new Date().toISOString(),
+      };
+
+      const nextLocalMemory = [nextMemoryItem, ...recentMemory].slice(0, 8);
+      setRecentMemory(nextLocalMemory);
+      writeStoredArray(MEMORY_KEY, nextLocalMemory);
+
+      const identity = forumIdentity;
+      if (identity) {
+        const memoryResponse = await fetch("/api/agent/memory", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            token: identity.token,
+            displayName: identity.displayName,
+            sessionId: continuedFrom?.sessionId || currentSessionId,
+            roleId: finalRole,
+            question: memoryQuestion,
+            answer: data.answer,
+            summary: data.summary,
+            intent: data.intent,
+            provider: data.provider,
+            mode: data.mode,
+            entityName: primaryEntity?.title || null,
+            entityKind: primaryEntity?.type === "group" ? "group" : primaryEntity?.type === "member" ? "member" : null,
+            evidence: Array.isArray(data.evidence) ? data.evidence : [],
+            traces: Array.isArray(data.traces) ? data.traces : [],
+            suggestedQuestions: Array.isArray(data.suggestedQuestions) ? data.suggestedQuestions : [],
+          }),
+        });
+        const memoryPayload = await memoryResponse.json().catch(() => null);
+        if (memoryPayload?.sessionId) {
+          setCurrentSessionId(memoryPayload.sessionId);
+        }
+        await loadAgentMemory(identity);
+      }
     } catch (err) {
       setError(String(err));
     } finally {
@@ -439,7 +579,7 @@ export default function AgentWorkbench() {
 
         <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           {IDOL_AGENT_ROLES.map((item) => (
-            <button key={item.id} type="button" onClick={() => { setSelectedRole(item.id); setQuestion(item.defaultQuestions[0]); }} className={`rounded-[28px] border p-5 text-left transition ${selectedRole === item.id ? "border-cyan-300/40 bg-cyan-300/10 shadow-[0_18px_40px_rgba(34,211,238,0.12)]" : "border-white/10 bg-[rgba(12,16,28,0.7)] hover:border-white/20 hover:bg-white/8"}`}>
+            <button key={item.id} type="button" onClick={() => { setSelectedRole(item.id); setQuestion(item.defaultQuestions[0]); setContinuedFrom(null); setCurrentSessionId(null); }} className={`rounded-[28px] border p-5 text-left transition ${selectedRole === item.id ? "border-cyan-300/40 bg-cyan-300/10 shadow-[0_18px_40px_rgba(34,211,238,0.12)]" : "border-white/10 bg-[rgba(12,16,28,0.7)] hover:border-white/20 hover:bg-white/8"}`}>
               <div className="flex items-start justify-between gap-3"><div className="text-xs uppercase tracking-[0.18em] text-cyan-300">{item.shortLabel}</div><span className="rounded-full border border-white/10 px-2 py-1 text-[11px] text-zinc-400">{item.sourceCategory}</span></div>
               <div className="mt-3 text-lg font-semibold text-white">{item.label}</div>
               <div className="mt-2 text-sm leading-6 text-zinc-300">{item.tagline}</div>
@@ -458,6 +598,27 @@ export default function AgentWorkbench() {
                   <p className="mt-2 leading-7 text-zinc-300">{role.mission}</p>
                   <div className="mt-3 flex flex-wrap gap-2 text-xs text-cyan-100">{role.focus.map((item) => <span key={item} className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1">{item}</span>)}</div>
                 </div>
+                {continuedFrom ? (
+                  <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4 text-sm text-cyan-50">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="text-xs uppercase tracking-[0.18em] text-cyan-200">延續上次問題</div>
+                        <div className="mt-2 font-medium text-white">{continuedFrom.question}</div>
+                        <div className="mt-1 text-xs text-cyan-100/80">{continuedFrom.roleLabel}</div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setContinuedFrom(null);
+                          setCurrentSessionId(null);
+                        }}
+                        className="text-xs text-cyan-100/70 transition hover:text-white"
+                      >
+                        清除
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
                 <textarea value={question} onChange={(event) => setQuestion(event.target.value)} className="min-h-32 rounded-[24px] border border-white/10 bg-black/25 px-4 py-4 text-sm leading-7 text-white outline-none placeholder:text-zinc-500" placeholder="直接輸入你想查的問題，例如：某位成員為何上榜、某團體最近為何掉分、v2 公式怎麼影響 freshness。" />
                 <div className="flex flex-wrap gap-3">
                   <button type="button" onClick={() => ask()} disabled={loading} className="rounded-2xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:opacity-50">{loading ? "分析中..." : "開始分析"}</button>
@@ -505,6 +666,41 @@ export default function AgentWorkbench() {
           </section>
 
           <aside className="space-y-6">
+            <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.82)] p-6">
+              <h2 className="text-lg font-semibold text-white">最近分析紀錄</h2>
+              <p className="mt-2 text-sm text-zinc-400">
+                {forumIdentity
+                  ? "你最近的分析會同步保存，可直接延續同一題往下追問。"
+                  : "未登入時會先暫存在本機；登入後可同步保存最近分析紀錄。"}
+              </p>
+              <div className="mt-4 space-y-3">
+                {recentMemory.length ? recentMemory.map((item) => (
+                  <div key={item.id} className="rounded-[24px] border border-white/10 bg-black/20 p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="text-xs uppercase tracking-[0.18em] text-cyan-300">{item.roleLabel}</div>
+                        <div className="mt-2 text-sm font-medium text-white">{item.question}</div>
+                        <div className="mt-2 text-xs text-zinc-400">{item.summary}</div>
+                        <div className="mt-2 text-[11px] text-zinc-500">{new Date(item.createdAt).toLocaleString("zh-TW")}</div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setContinuedFrom(item);
+                          setCurrentSessionId(item.sessionId);
+                          setSelectedRole(item.roleId);
+                          setQuestion("");
+                        }}
+                        className="rounded-xl border border-cyan-300/20 bg-cyan-300/10 px-3 py-2 text-xs text-cyan-100 transition hover:bg-cyan-300/20"
+                      >
+                        延續這題
+                      </button>
+                    </div>
+                  </div>
+                )) : <p className="rounded-[24px] border border-dashed border-white/10 bg-black/20 p-4 text-sm text-zinc-400">完成一次分析後，這裡會保留最近的提問與摘要，方便你快速回到上一題。</p>}
+              </div>
+            </section>
+
             <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.82)] p-6">
               <h2 className="text-lg font-semibold text-white">Alerts 提醒草稿</h2>
               <p className="mt-2 text-sm text-zinc-400">{forumIdentity ? "提醒草稿會跟著你的論壇身份同步保存。" : "登入論壇後可同步保存提醒草稿；未登入時會先存在本機。"}</p>
