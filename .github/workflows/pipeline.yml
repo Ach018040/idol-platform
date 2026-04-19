@@ -70,7 +70,7 @@ jobs:
 
       - name: Type-check frontend
         working-directory: frontend-next
-        run: npx tsc --noEmit
+        run: npm run typecheck
 
       - name: Commit updated JSON data
         run: |
