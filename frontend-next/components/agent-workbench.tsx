@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -106,7 +106,7 @@ function readForumIdentity(): ForumIdentity | null {
 
 function syncLabel(storageMode: "local" | "cloud", syncingStorage: boolean) {
   if (syncingStorage) return "同步中";
-  return storageMode === "cloud" ? "已同步到雲端" : "僅保存在本機";
+  return storageMode === "cloud" ? "已同步到雲端" : "目前儲存在本機";
 }
 
 export default function AgentWorkbench() {
@@ -399,20 +399,20 @@ export default function AgentWorkbench() {
         <section className="overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,rgba(10,14,24,0.98)_0%,rgba(16,28,54,0.94)_56%,rgba(23,32,51,0.96)_100%)] shadow-[0_30px_90px_rgba(0,0,0,0.35)]">
           <div className="grid gap-8 px-6 py-8 lg:grid-cols-[minmax(0,1.15fr)_340px] lg:px-8 lg:py-10">
             <div className="space-y-5">
-              <div className="inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-1 text-xs uppercase tracking-[0.24em] text-cyan-100">Agent Workspace</div>
+              <div className="inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-1 text-xs uppercase tracking-[0.24em] text-cyan-100">Analysis Workspace</div>
               <div className="space-y-4">
                 <h1 className="max-w-4xl text-4xl font-black tracking-tight text-white md:text-5xl">用一個分析工作台，快速讀懂 idol-platform 的排名、公式與資料訊號</h1>
-                <p className="max-w-3xl text-sm leading-8 text-slate-200/90">這裡是給你直接使用的平台分析介面。你可以依題目切換角色，追問成員與團體為何上榜、公式如何影響分數、資料更新是否可信，以及市場觀察背後的依據。</p>
+                <p className="max-w-3xl text-sm leading-8 text-slate-200/90">這裡是給你直接使用的平台分析介面。你可以依照想了解的問題切換角色，查看成員或團體為何上榜、分數怎麼計算、資料更新是否可靠，以及每一則市場觀察背後的依據。</p>
               </div>
               <div className="grid gap-3 md:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">01</div><div className="mt-2 text-lg font-semibold text-white">選角色</div><p className="mt-2 text-sm leading-6 text-zinc-300">依你的問題切到排名、公式、資料管線、產品策略或市場研究角度。</p></div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">02</div><div className="mt-2 text-lg font-semibold text-white">問問題</div><p className="mt-2 text-sm leading-6 text-zinc-300">直接輸入成員、團體、公式或 freshness 相關問題，快速得到可讀的分析結果。</p></div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">03</div><div className="mt-2 text-lg font-semibold text-white">延伸操作</div><p className="mt-2 text-sm leading-6 text-zinc-300">把關注對象加入比較、追蹤與提醒草稿，讓單次查詢延伸成持續觀察。</p></div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">01</div><div className="mt-2 text-lg font-semibold text-white">看懂排名</div><p className="mt-2 text-sm leading-6 text-zinc-300">選一個分析角色，直接問成員或團體為什麼上榜、排名為何變動，以及哪些訊號拉高或拉低了分數。</p></div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">02</div><div className="mt-2 text-lg font-semibold text-white">拆解公式</div><p className="mt-2 text-sm leading-6 text-zinc-300">快速檢查分數是怎麼算的，包括社群覆蓋、資料新鮮度、freshness 與其他影響權重的欄位。</p></div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">03</div><div className="mt-2 text-lg font-semibold text-white">追資料訊號</div><p className="mt-2 text-sm leading-6 text-zinc-300">搭配比較、追蹤清單與提醒草稿，持續觀察哪些成員或團體最近更新、停滯，或值得再追蹤。</p></div>
               </div>
               <div className="flex flex-wrap gap-3 text-sm">
                 <Link href="/" className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-zinc-200 transition hover:bg-white/10">返回首頁</Link>
-                <Link href="/brain" className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-cyan-100 transition hover:bg-cyan-300/20">前往 Brain</Link>
-                <Link href="/insights" className="rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-amber-100 transition hover:bg-amber-300/20">查看 Insights</Link>
+                <Link href="/brain" className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-cyan-100 transition hover:bg-cyan-300/20">前往知識庫</Link>
+                <Link href="/insights" className="rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-amber-100 transition hover:bg-amber-300/20">查看市場觀察</Link>
               </div>
             </div>
             <div className="grid gap-4 self-start">
@@ -420,17 +420,17 @@ export default function AgentWorkbench() {
                 <div className="text-xs uppercase tracking-[0.18em] text-cyan-300">工作狀態</div>
                 <div className="mt-4 space-y-3 text-sm text-zinc-300">
                   <div className="flex items-center justify-between gap-4"><span>目前角色</span><span className="font-medium text-cyan-100">{role.shortLabel}</span></div>
-                  <div className="flex items-center justify-between gap-4"><span>回答模式</span><span className="font-medium text-cyan-100">{result?.mode || "standby"}</span></div>
-                  <div className="flex items-center justify-between gap-4"><span>模型來源</span><span className="font-medium text-cyan-100">{result?.provider || "local"}</span></div>
-                  <div className="flex items-center justify-between gap-4"><span>追蹤同步</span><span className="font-medium text-cyan-100">{syncLabel(storageMode, syncingStorage)}</span></div>
+                  <div className="flex items-center justify-between gap-4"><span>分析模式</span><span className="font-medium text-cyan-100">{result?.mode || "standby"}</span></div>
+                  <div className="flex items-center justify-between gap-4"><span>回答來源</span><span className="font-medium text-cyan-100">{result?.provider || "local"}</span></div>
+                  <div className="flex items-center justify-between gap-4"><span>追蹤資料狀態</span><span className="font-medium text-cyan-100">{syncLabel(storageMode, syncingStorage)}</span></div>
                 </div>
               </div>
               <div className="rounded-[28px] border border-white/10 bg-white/5 p-5">
                 <div className="text-xs uppercase tracking-[0.18em] text-cyan-300">使用建議</div>
                 <ul className="mt-4 space-y-3 text-sm leading-6 text-zinc-300">
-                  <li>先選一個最接近問題的角色，答案會更聚焦，不會只回通用摘要。</li>
-                  <li>想看實際差異時，搭配下方的比較區塊與追蹤清單一起使用。</li>
-                  <li>如果要長期觀察某位成員或團體，建議加入提醒草稿與追蹤。</li>
+                  <li>先從一個具體問題開始，例如「某位成員為何上榜」或「某個團體最近為何掉分」。</li>
+                  <li>如果想長期觀察變化，可以把成員或團體加入追蹤清單，再建立提醒草稿。</li>
+                  <li>看完答案後，往下搭配比較、證據來源與工具追蹤，能更快確認結論是否可信。</li>
                 </ul>
               </div>
             </div>
@@ -443,7 +443,7 @@ export default function AgentWorkbench() {
               <div className="flex items-start justify-between gap-3"><div className="text-xs uppercase tracking-[0.18em] text-cyan-300">{item.shortLabel}</div><span className="rounded-full border border-white/10 px-2 py-1 text-[11px] text-zinc-400">{item.sourceCategory}</span></div>
               <div className="mt-3 text-lg font-semibold text-white">{item.label}</div>
               <div className="mt-2 text-sm leading-6 text-zinc-300">{item.tagline}</div>
-              <div className="mt-4 text-xs text-zinc-500">Source: {item.sourceAgentName}</div>
+              <div className="mt-4 text-xs text-zinc-500">角色來源：{item.sourceAgentName}</div>
             </button>
           ))}
         </section>
@@ -453,12 +453,12 @@ export default function AgentWorkbench() {
             <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.82)] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.28)]">
               <div className="flex flex-col gap-4">
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-zinc-300">
-                  <div className="text-xs uppercase tracking-[0.18em] text-cyan-300">角色焦點</div>
+                  <div className="text-xs uppercase tracking-[0.18em] text-cyan-300">角色說明</div>
                   <div className="mt-2 text-lg font-semibold text-white">{role.label}</div>
                   <p className="mt-2 leading-7 text-zinc-300">{role.mission}</p>
                   <div className="mt-3 flex flex-wrap gap-2 text-xs text-cyan-100">{role.focus.map((item) => <span key={item} className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1">{item}</span>)}</div>
                 </div>
-                <textarea value={question} onChange={(event) => setQuestion(event.target.value)} className="min-h-32 rounded-[24px] border border-white/10 bg-black/25 px-4 py-4 text-sm leading-7 text-white outline-none placeholder:text-zinc-500" placeholder="例如：桜野杏理目前分數為何這樣算？或是團體排行為何和成員榜不一致？也可以問 v2 公式、freshness 與資料可信度。" />
+                <textarea value={question} onChange={(event) => setQuestion(event.target.value)} className="min-h-32 rounded-[24px] border border-white/10 bg-black/25 px-4 py-4 text-sm leading-7 text-white outline-none placeholder:text-zinc-500" placeholder="直接輸入你想查的問題，例如：某位成員為何上榜、某團體最近為何掉分、v2 公式怎麼影響 freshness。" />
                 <div className="flex flex-wrap gap-3">
                   <button type="button" onClick={() => ask()} disabled={loading} className="rounded-2xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:opacity-50">{loading ? "分析中..." : "開始分析"}</button>
                   {role.defaultQuestions.map((preset) => <button key={preset} type="button" onClick={() => ask(preset)} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300 transition hover:bg-white/10">{preset}</button>)}
@@ -471,50 +471,50 @@ export default function AgentWorkbench() {
             {result ? (
               <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.84)] p-6">
                 <div className="flex flex-wrap items-center gap-2"><h2 className="text-lg font-semibold text-cyan-200">分析結果</h2><span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs text-cyan-100">{result.roleLabel}</span>{result.intent ? <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">{result.intent}</span> : null}</div>
-                <div className="mt-3 text-xs uppercase tracking-[0.16em] text-zinc-500">Adapted from {result.sourceAgentName}</div>
+                <div className="mt-3 text-xs uppercase tracking-[0.16em] text-zinc-500">回答角色：{result.sourceAgentName}</div>
                 <p className="mt-5 whitespace-pre-wrap text-sm leading-8 text-zinc-200">{result.answer}</p>
                 <div className="mt-5 rounded-[24px] border border-cyan-400/20 bg-cyan-400/10 p-4 text-sm leading-7 text-cyan-100">{result.summary}</div>
               </section>
             ) : (
-              <section className="rounded-[32px] border border-dashed border-white/10 bg-[rgba(10,14,24,0.78)] p-6 text-sm leading-7 text-zinc-300">送出問題後，這裡會顯示本次分析結果。你可以先從「開始分析」送出目前問題，或直接點一個預設問題，快速看這個角色如何解讀排名、公式與資料更新。</section>
+              <section className="rounded-[32px] border border-dashed border-white/10 bg-[rgba(10,14,24,0.78)] p-6 text-sm leading-7 text-zinc-300">輸入問題後，這裡會顯示分析結果。你可以先從預設問題開始，也可以直接問某位成員、某個團體、某個公式欄位，或某次排名變動的原因。</section>
             )}
 
             <div className="grid gap-6 lg:grid-cols-2">
               <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.82)] p-6">
                 <h2 className="text-lg font-semibold text-white">Compare 比較</h2>
-                <p className="mt-2 text-sm text-zinc-400">選兩個 entity 並直接查看分數與 freshness 差異。</p>
+                <p className="mt-2 text-sm text-zinc-400">挑兩個對象快速比較分數、freshness 與目前差距。</p>
                 <div className="mt-4 grid gap-3">
-                  <select value={leftId} onChange={(event) => setLeftId(event.target.value)} className="rounded-2xl border border-white/10 bg-slate-950 px-3 py-3 text-sm text-white">{allEntities.map((entity) => <option key={entity.id} value={entity.id}>{kindLabel(entity.kind)}｜{entity.name}</option>)}</select>
-                  <select value={rightId} onChange={(event) => setRightId(event.target.value)} className="rounded-2xl border border-white/10 bg-slate-950 px-3 py-3 text-sm text-white">{allEntities.map((entity) => <option key={entity.id} value={entity.id}>{kindLabel(entity.kind)}｜{entity.name}</option>)}</select>
+                  <select value={leftId} onChange={(event) => setLeftId(event.target.value)} className="rounded-2xl border border-white/10 bg-slate-950 px-3 py-3 text-sm text-white">{allEntities.map((entity) => <option key={entity.id} value={entity.id}>{kindLabel(entity.kind)} · {entity.name}</option>)}</select>
+                  <select value={rightId} onChange={(event) => setRightId(event.target.value)} className="rounded-2xl border border-white/10 bg-slate-950 px-3 py-3 text-sm text-white">{allEntities.map((entity) => <option key={entity.id} value={entity.id}>{kindLabel(entity.kind)} · {entity.name}</option>)}</select>
                 </div>
-                {left && right && comparison ? <div className="mt-5 rounded-[24px] border border-white/10 bg-black/20 p-4 text-sm text-zinc-300"><div className="grid grid-cols-2 gap-3"><span>{left.name}</span><span className="text-right text-cyan-200">{fmt(left.score)}</span><span>{right.name}</span><span className="text-right text-violet-200">{fmt(right.score)}</span></div><div className="mt-4 text-zinc-400">分數差 {fmt(Math.abs(comparison.scoreDelta))}，最近更新差 {fmt(Math.abs(comparison.freshnessDelta), 0)} 天。</div></div> : null}
+                {left && right && comparison ? <div className="mt-5 rounded-[24px] border border-white/10 bg-black/20 p-4 text-sm text-zinc-300"><div className="grid grid-cols-2 gap-3"><span>{left.name}</span><span className="text-right text-cyan-200">{fmt(left.score)}</span><span>{right.name}</span><span className="text-right text-violet-200">{fmt(right.score)}</span></div><div className="mt-4 text-zinc-400">目前分數差 {fmt(Math.abs(comparison.scoreDelta))}，資料新鮮度差約 {fmt(Math.abs(comparison.freshnessDelta), 0)} 天。</div></div> : null}
               </section>
 
               <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.82)] p-6">
                 <h2 className="text-lg font-semibold text-white">Watchlist 追蹤清單</h2>
-                <p className="mt-2 text-sm text-zinc-400">{forumIdentity ? "已登入論壇帳號，追蹤清單會同步保存到雲端。" : "尚未登入論壇帳號，追蹤清單先保存在本機。"}</p>
+                <p className="mt-2 text-sm text-zinc-400">{forumIdentity ? "你目前的追蹤清單可以同步保存，方便之後持續觀察。" : "登入論壇後可把追蹤清單同步保存；未登入時會先暫存在本機。"}</p>
                 <input value={query} onChange={(event) => setQuery(event.target.value)} className="mt-4 w-full rounded-2xl border border-white/10 bg-black/20 px-3 py-3 text-sm text-white outline-none placeholder:text-zinc-500" placeholder="搜尋成員或團體..." />
-                <div className="mt-4 max-h-72 space-y-2 overflow-y-auto pr-1">{filteredEntities.map((entity) => <button key={entity.id} type="button" onClick={() => void toggleWatch(entity)} className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left transition hover:bg-white/10"><span><span className="block text-sm font-medium text-white">{entity.name}</span><span className="text-xs text-zinc-400">{entity.subtitle}｜{fmt(entity.score)} 分</span></span><span className="text-xs text-cyan-200">{watchlist.includes(entity.id) ? "已追蹤" : "加入追蹤"}</span></button>)}</div>
+                <div className="mt-4 max-h-72 space-y-2 overflow-y-auto pr-1">{filteredEntities.map((entity) => <button key={entity.id} type="button" onClick={() => void toggleWatch(entity)} className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left transition hover:bg-white/10"><span><span className="block text-sm font-medium text-white">{entity.name}</span><span className="text-xs text-zinc-400">{entity.subtitle} · {fmt(entity.score)} 分</span></span><span className="text-xs text-cyan-200">{watchlist.includes(entity.id) ? "移出追蹤" : "加入追蹤"}</span></button>)}</div>
               </section>
             </div>
 
             <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.82)] p-6">
               <h2 className="text-lg font-semibold text-white">證據與資料來源</h2>
-              {result?.evidence?.length ? <div className="mt-4 grid gap-3 md:grid-cols-2">{result.evidence.map((item, index) => <div key={`${item.type}-${item.title}-${index}`} className="rounded-[24px] border border-white/10 bg-black/20 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-300">{item.type}</div><div className="mt-2 text-base font-semibold text-white">{item.title}</div><p className="mt-2 text-sm leading-7 text-zinc-300">{item.snippet}</p>{item.href ? <Link href={item.href} className="mt-3 inline-block text-sm text-cyan-300 hover:text-cyan-200">查看來源</Link> : null}</div>)}</div> : <p className="mt-3 text-sm text-zinc-400">送出問題後，這裡會顯示本次回答所引用的資料片段。若目前沒有證據卡，通常代表回答以 insights 或 brain 的整理內容為主。</p>}
+              {result?.evidence?.length ? <div className="mt-4 grid gap-3 md:grid-cols-2">{result.evidence.map((item, index) => <div key={`${item.type}-${item.title}-${index}`} className="rounded-[24px] border border-white/10 bg-black/20 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-300">{item.type}</div><div className="mt-2 text-base font-semibold text-white">{item.title}</div><p className="mt-2 text-sm leading-7 text-zinc-300">{item.snippet}</p>{item.href ? <Link href={item.href} className="mt-3 inline-block text-sm text-cyan-300 hover:text-cyan-200">查看來源</Link> : null}</div>)}</div> : <p className="mt-3 text-sm text-zinc-400">分析結果如果有引用排行榜、insights 或 brain 的內容，會在這裡列出對應依據，方便你回頭檢查來源。</p>}
             </section>
           </section>
 
           <aside className="space-y-6">
             <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.82)] p-6">
               <h2 className="text-lg font-semibold text-white">Alerts 提醒草稿</h2>
-              <p className="mt-2 text-sm text-zinc-400">{forumIdentity ? "提醒草稿會綁定目前論壇 token 並同步到 Supabase。" : "尚未登入論壇帳號，提醒草稿先保留在本機。"}</p>
-              <div className="mt-4 space-y-3">{watchedEntities.length ? watchedEntities.map((entity) => <div key={entity.id} className="rounded-[24px] border border-white/10 bg-black/20 p-4"><div className="flex items-start justify-between gap-3"><div><div className="font-semibold text-white">{entity.name}</div><div className="mt-1 text-xs text-zinc-400">{entity.subtitle}｜{fmt(entity.score)} 分｜最近更新 {fmt(entity.freshnessDays, 0)} 天前</div></div><button type="button" onClick={() => void toggleWatch(entity)} className="text-xs text-zinc-400 hover:text-white">移出追蹤</button></div><div className="mt-3 flex flex-wrap gap-2"><button type="button" onClick={() => void addAlert(entity, "分數下降 5 分以上")} className="rounded-xl border border-pink-400/20 bg-pink-400/10 px-3 py-2 text-xs text-pink-100">分數下降</button><button type="button" onClick={() => void addAlert(entity, "14 天內沒有新更新")} className="rounded-xl border border-amber-400/20 bg-amber-400/10 px-3 py-2 text-xs text-amber-100">更新停滯</button></div></div>) : <p className="rounded-[24px] border border-dashed border-white/10 bg-black/20 p-4 text-sm text-zinc-400">先從左側把成員或團體加入追蹤，這裡才會出現可建立的提醒草稿。</p>}</div>
-              {alerts.length ? <div className="mt-5 space-y-2">{alerts.map((alert) => <div key={alert.id} className="rounded-xl border border-cyan-300/10 bg-cyan-300/10 p-3 text-sm text-cyan-50"><div className="flex items-start justify-between gap-3"><span>{alert.entityName}｜{alert.rule}</span><button type="button" onClick={() => void removeAlert(alert.id)} className="text-xs text-cyan-200/70 hover:text-white">刪除</button></div></div>)}</div> : null}
+              <p className="mt-2 text-sm text-zinc-400">{forumIdentity ? "提醒草稿會跟著你的論壇身份同步保存。" : "登入論壇後可同步保存提醒草稿；未登入時會先存在本機。"}</p>
+              <div className="mt-4 space-y-3">{watchedEntities.length ? watchedEntities.map((entity) => <div key={entity.id} className="rounded-[24px] border border-white/10 bg-black/20 p-4"><div className="flex items-start justify-between gap-3"><div><div className="font-semibold text-white">{entity.name}</div><div className="mt-1 text-xs text-zinc-400">{entity.subtitle} · {fmt(entity.score)} 分 · 最近更新約 {fmt(entity.freshnessDays, 0)} 天前</div></div><button type="button" onClick={() => void toggleWatch(entity)} className="text-xs text-zinc-400 hover:text-white">移出追蹤</button></div><div className="mt-3 flex flex-wrap gap-2"><button type="button" onClick={() => void addAlert(entity, "分數下降超過 5 分")} className="rounded-xl border border-pink-400/20 bg-pink-400/10 px-3 py-2 text-xs text-pink-100">分數下降</button><button type="button" onClick={() => void addAlert(entity, "14 天沒有明顯更新")} className="rounded-xl border border-amber-400/20 bg-amber-400/10 px-3 py-2 text-xs text-amber-100">更新停滯</button></div></div>) : <p className="rounded-[24px] border border-dashed border-white/10 bg-black/20 p-4 text-sm text-zinc-400">先把成員或團體加入追蹤清單，這裡才會顯示可建立的提醒草稿。</p>}</div>
+              {alerts.length ? <div className="mt-5 space-y-2">{alerts.map((alert) => <div key={alert.id} className="rounded-xl border border-cyan-300/10 bg-cyan-300/10 p-3 text-sm text-cyan-50"><div className="flex items-start justify-between gap-3"><span>{alert.entityName} · {alert.rule}</span><button type="button" onClick={() => void removeAlert(alert.id)} className="text-xs text-cyan-200/70 hover:text-white">刪除</button></div></div>)}</div> : null}
             </section>
 
             <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.82)] p-6">
               <h2 className="text-lg font-semibold text-white">工具追蹤</h2>
-              <div className="mt-4 space-y-3">{(result?.traces || []).map((trace) => <div key={`${trace.tool}-${trace.input}`} className="rounded-[24px] border border-white/10 bg-black/20 p-4"><div className="text-sm font-medium text-white">{trace.tool}</div><div className="mt-1 text-xs text-zinc-400">query: {trace.input}</div><div className="mt-2 text-sm text-cyan-300">hits: {trace.hits}</div></div>)}{!result?.traces?.length ? <p className="text-sm text-zinc-400">送出問題後，這裡會顯示本次實際用到的角色與資料工具。</p> : null}</div>
+              <div className="mt-4 space-y-3">{(result?.traces || []).map((trace) => <div key={`${trace.tool}-${trace.input}`} className="rounded-[24px] border border-white/10 bg-black/20 p-4"><div className="text-sm font-medium text-white">{trace.tool}</div><div className="mt-1 text-xs text-zinc-400">query: {trace.input}</div><div className="mt-2 text-sm text-cyan-300">hits: {trace.hits}</div></div>)}{!result?.traces?.length ? <p className="text-sm text-zinc-400">當分析有實際查詢排行榜、entities 或 insights 時，這裡會顯示查詢過程與命中結果。</p> : null}</div>
             </section>
 
             <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.82)] p-6">
