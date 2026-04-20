@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-19T20:44:30Z",
-  "market_temperature": 59.2,
-  "market_temperature_v2": 59.2,
+  "generated_at": "2026-04-20T20:55:16Z",
+  "market_temperature": 58.9,
+  "market_temperature_v2": 58.9,
   "active_groups": 92,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
@@ -16,7 +16,7 @@
     "top_group": "幻獣",
     "social_king": "つつ子",
     "social_focus": "つつ子",
-    "market_temperature": 59.2
+    "market_temperature": 58.9
   },
   "rising_stars": [
     "優芽 Yuume",
