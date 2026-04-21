@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-20T20:55:16Z",
-  "market_temperature": 58.9,
-  "market_temperature_v2": 58.9,
+  "generated_at": "2026-04-21T20:59:25Z",
+  "market_temperature": 58.6,
+  "market_temperature_v2": 58.6,
   "active_groups": 92,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
@@ -13,10 +13,10 @@
     "views": 0.0
   },
   "weekly_highlights": {
-    "top_group": "幻獣",
-    "social_king": "つつ子",
-    "social_focus": "つつ子",
-    "market_temperature": 58.9
+    "top_group": "虹星iRiSTELLA",
+    "social_king": "瀧日灯璃",
+    "social_focus": "瀧日灯璃",
+    "market_temperature": 58.6
   },
   "rising_stars": [
     "優芽 Yuume",
@@ -27,6 +27,7 @@
   ],
   "heat_drop": [],
   "top_members": [
+    "瀧日灯璃",
     "つつ子",
     "羽黒凛香",
     "伊波花怜",
@@ -35,7 +36,6 @@
     "冥月 Runa",
     "雪薇 Yukibi",
     "雛菜 Hina",
-    "真白 レモン",
-    "桜野杏理"
+    "真白 レモン"
   ]
 }

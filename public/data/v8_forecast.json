@@ -12,8 +12,8 @@
       69.11
     ],
     "direction": "flat",
-    "confidence": 0.006,
-    "data_days": 30
+    "confidence": 0.005,
+    "data_days": 31
   },
   {
     "entity_name": "新增經歷",
@@ -29,7 +29,7 @@
     ],
     "direction": "flat",
     "confidence": 0.001,
-    "data_days": 30
+    "data_days": 31
   },
   {
     "entity_name": "#0000FF",
@@ -38,14 +38,14 @@
       54.24,
       54.24,
       54.23,
-      54.22,
+      54.23,
       54.22,
       54.21,
       54.21
     ],
     "direction": "flat",
-    "confidence": 0.041,
-    "data_days": 30
+    "confidence": 0.039,
+    "data_days": 31
   },
   {
     "entity_name": "#FFFF00",
@@ -55,13 +55,13 @@
       52.13,
       52.13,
       52.13,
-      52.12,
+      52.13,
       52.12,
       52.12
     ],
     "direction": "flat",
     "confidence": 0.011,
-    "data_days": 30
+    "data_days": 31
   },
   {
     "entity_name": "宿命白",
@@ -77,7 +77,7 @@
     ],
     "direction": "flat",
     "confidence": 0.001,
-    "data_days": 30
+    "data_days": 31
   },
   {
     "entity_name": "大邦奶奶",
@@ -92,24 +92,24 @@
       39.78
     ],
     "direction": "flat",
-    "confidence": 0.05,
-    "data_days": 30
+    "confidence": 0.048,
+    "data_days": 31
   },
   {
     "entity_name": "紅色",
     "last_index": 39.7,
     "forecast_7d": [
+      39.66,
       39.65,
       39.65,
       39.64,
       39.64,
       39.63,
-      39.63,
-      39.62
+      39.63
     ],
     "direction": "flat",
-    "confidence": 0.043,
-    "data_days": 30
+    "confidence": 0.041,
+    "data_days": 31
   },
   {
     "entity_name": "#800080",
@@ -124,15 +124,15 @@
       37.43
     ],
     "direction": "flat",
-    "confidence": 0.034,
-    "data_days": 30
+    "confidence": 0.033,
+    "data_days": 31
   },
   {
     "entity_name": "#007500",
     "last_index": 19.95,
     "forecast_7d": [
+      20.03,
       20.04,
-      20.05,
       20.05,
       20.06,
       20.07,
@@ -140,8 +140,8 @@
       20.09
     ],
     "direction": "flat",
-    "confidence": 0.062,
-    "data_days": 30
+    "confidence": 0.059,
+    "data_days": 31
   },
   {
     "entity_name": "#C90000",
@@ -157,6 +157,6 @@
     ],
     "direction": "flat",
     "confidence": 0.005,
-    "data_days": 30
+    "data_days": 31
   }
 ]

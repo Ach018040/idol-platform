@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-04-20T20:55:16Z',
-  'Weekly idol market digest generated on 2026-04-20T20:55:16Z. Top group: 幻獣. Top member: つつ子. Market temperature: 58.9. Rising stars: 優芽 Yuume, Nya にゃあ, 燁水 Yomizu, 稲妻莉央, 天国 せいや（あまくに せいや）. Heat drop watch: none.',
-  '- 2026-04-20T20:55:16Z: weekly market digest generated
-- Highlight top group: 幻獣
-- Highlight top member: つつ子
+  'Weekly Market Digest 2026-04-21T20:59:25Z',
+  'Weekly idol market digest generated on 2026-04-21T20:59:25Z. Top group: 虹星iRiSTELLA. Top member: 瀧日灯璃. Market temperature: 58.6. Rising stars: 優芽 Yuume, Nya にゃあ, 燁水 Yomizu, 稲妻莉央, 天国 せいや（あまくに せいや）. Heat drop watch: none.',
+  '- 2026-04-21T20:59:25Z: weekly market digest generated
+- Highlight top group: 虹星iRiSTELLA
+- Highlight top member: 瀧日灯璃
 - Rising stars: 優芽 Yuume, Nya にゃあ, 燁水 Yomizu, 稲妻莉央, 天国 せいや（あまくに せいや）',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-04-20T20:55:16Z", "top_group": "幻獣", "top_member": "つつ子", "market_temperature": "58.9", "rising_stars": ["優芽 Yuume", "Nya にゃあ", "燁水 Yomizu", "稲妻莉央", "天国 せいや（あまくに せいや）"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-04-21T20:59:25Z", "top_group": "虹星iRiSTELLA", "top_member": "瀧日灯璃", "market_temperature": "58.6", "rising_stars": ["優芽 Yuume", "Nya にゃあ", "燁水 Yomizu", "稲妻莉央", "天国 せいや（あまくに せいや）"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-04-20T20:55:16Z',
-  'Weekly digest refreshed: 2026-04-20T20:55:16Z',
-  'Weekly idol market digest generated on 2026-04-20T20:55:16Z. Top group: 幻獣. Top member: つつ子. Market temperature: 58.9. Rising stars: 優芽 Yuume, Nya にゃあ, 燁水 Yomizu, 稲妻莉央, 天国 せいや（あまくに せいや）. Heat drop watch: none.',
+  '2026-04-21T20:59:25Z',
+  'Weekly digest refreshed: 2026-04-21T20:59:25Z',
+  'Weekly idol market digest generated on 2026-04-21T20:59:25Z. Top group: 虹星iRiSTELLA. Top member: 瀧日灯璃. Market temperature: 58.6. Rising stars: 優芽 Yuume, Nya にゃあ, 燁水 Yomizu, 稲妻莉央, 天国 せいや（あまくに せいや）. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
