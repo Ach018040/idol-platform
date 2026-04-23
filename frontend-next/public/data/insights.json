@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-22T21:02:24Z",
-  "market_temperature": 58.4,
-  "market_temperature_v2": 58.4,
+  "generated_at": "2026-04-23T20:58:07Z",
+  "market_temperature": 58.2,
+  "market_temperature_v2": 58.2,
   "active_groups": 92,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
@@ -16,7 +16,7 @@
     "top_group": "時空Astria",
     "social_king": "魂音ちよ",
     "social_focus": "魂音ちよ",
-    "market_temperature": 58.4
+    "market_temperature": 58.2
   },
   "rising_stars": [
     "優芽 Yuume",

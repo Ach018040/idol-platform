@@ -13,7 +13,7 @@
     ],
     "direction": "flat",
     "confidence": 0.005,
-    "data_days": 32
+    "data_days": 33
   },
   {
     "entity_name": "新增經歷",
@@ -29,23 +29,23 @@
     ],
     "direction": "flat",
     "confidence": 0.001,
-    "data_days": 32
+    "data_days": 33
   },
   {
     "entity_name": "#0000FF",
     "last_index": 54.3,
     "forecast_7d": [
+      54.25,
       54.24,
       54.24,
       54.23,
       54.23,
       54.22,
-      54.22,
-      54.21
+      54.22
     ],
     "direction": "flat",
-    "confidence": 0.038,
-    "data_days": 32
+    "confidence": 0.036,
+    "data_days": 33
   },
   {
     "entity_name": "#FFFF00",
@@ -57,11 +57,11 @@
       52.13,
       52.13,
       52.13,
-      52.12
+      52.13
     ],
     "direction": "flat",
     "confidence": 0.01,
-    "data_days": 32
+    "data_days": 33
   },
   {
     "entity_name": "宿命白",
@@ -77,7 +77,7 @@
     ],
     "direction": "flat",
     "confidence": 0.001,
-    "data_days": 32
+    "data_days": 33
   },
   {
     "entity_name": "大邦奶奶",
@@ -88,12 +88,12 @@
       39.8,
       39.79,
       39.79,
-      39.78,
+      39.79,
       39.78
     ],
     "direction": "flat",
-    "confidence": 0.046,
-    "data_days": 32
+    "confidence": 0.044,
+    "data_days": 33
   },
   {
     "entity_name": "紅色",
@@ -108,8 +108,8 @@
       39.63
     ],
     "direction": "flat",
-    "confidence": 0.04,
-    "data_days": 32
+    "confidence": 0.038,
+    "data_days": 33
   },
   {
     "entity_name": "#800080",
@@ -124,8 +124,8 @@
       37.43
     ],
     "direction": "flat",
-    "confidence": 0.032,
-    "data_days": 32
+    "confidence": 0.031,
+    "data_days": 33
   },
   {
     "entity_name": "#007500",
@@ -134,14 +134,14 @@
       20.03,
       20.04,
       20.05,
-      20.06,
+      20.05,
       20.06,
       20.07,
       20.08
     ],
     "direction": "flat",
-    "confidence": 0.057,
-    "data_days": 32
+    "confidence": 0.055,
+    "data_days": 33
   },
   {
     "entity_name": "#C90000",
@@ -157,6 +157,6 @@
     ],
     "direction": "flat",
     "confidence": 0.005,
-    "data_days": 32
+    "data_days": 33
   }
 ]
