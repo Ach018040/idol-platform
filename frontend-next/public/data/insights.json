@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-24T20:55:48Z",
+  "generated_at": "2026-04-25T20:47:10Z",
   "market_temperature": 58.1,
   "market_temperature_v2": 58.1,
   "active_groups": 92,
@@ -7,35 +7,35 @@
   "data_coverage": {
     "instagram": 0.87,
     "threads": 0.21,
-    "social_post_dates": 0.09,
+    "social_post_dates": 0.13,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
   },
   "weekly_highlights": {
     "top_group": "時空Astria",
-    "social_king": "羽黒凛香",
-    "social_focus": "羽黒凛香",
+    "social_king": "君宣苺香",
+    "social_focus": "君宣苺香",
     "market_temperature": 58.1
   },
   "rising_stars": [
     "優芽 Yuume",
+    "Una",
     "Nya にゃあ",
     "燁水 Yomizu",
-    "稲妻莉央",
-    "天国 せいや（あまくに せいや）"
+    "Haru"
   ],
   "heat_drop": [],
   "top_members": [
+    "君宣苺香",
+    "魂音ちよ",
+    "霧宮蒼生",
+    "つつ子",
+    "天唯陽奈",
+    "伊波花怜",
+    "夢笛きむ",
     "羽黒凛香",
     "雪薇 Yukibi",
-    "魂音ちよ",
-    "天唯陽奈",
-    "君宣苺香",
-    "霧宮蒼生",
-    "夢笛きむ",
-    "雛菜 Hina",
-    "つつ子",
-    "伊波花怜"
+    "雛菜 Hina"
   ]
 }
