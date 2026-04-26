@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-25T20:47:10Z",
-  "market_temperature": 58.1,
-  "market_temperature_v2": 58.1,
+  "generated_at": "2026-04-26T20:46:45Z",
+  "market_temperature": 57.8,
+  "market_temperature_v2": 57.8,
   "active_groups": 92,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
@@ -16,13 +16,13 @@
     "top_group": "時空Astria",
     "social_king": "君宣苺香",
     "social_focus": "君宣苺香",
-    "market_temperature": 58.1
+    "market_temperature": 57.8
   },
   "rising_stars": [
     "優芽 Yuume",
-    "Una",
     "Nya にゃあ",
     "燁水 Yomizu",
+    "Una",
     "Haru"
   ],
   "heat_drop": [],
