@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-04-28T12:45:32Z",
+  "schema_version": "event-discovery-v1",
+  "events": [],
+  "coverage": {
+    "events": 0,
+    "with_start_time": 0,
+    "with_venue": 0,
+    "with_group_match": 0
+  }
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "idolinfohub",
+    "name": "Idol Info Hub Events",
+    "url": "https://idolinfohub.com/events",
+    "enabled": true,
+    "event_selector": "article, .event, .event-item, li",
+    "field_selectors": {
+      "title": "h1, h2, h3, .title, .event-title, a",
+      "datetime": "time, .date, .datetime, .event-date",
+      "venue": ".venue, .location, .place, address",
+      "url": "a"
+    }
+  }
+]

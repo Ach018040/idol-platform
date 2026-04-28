@@ -10,6 +10,7 @@ from pathlib import Path
 
 PIPELINE = Path(__file__).parent
 STEPS = [
+    ("Event Discovery Crawl", PIPELINE / "event_crawler.py"),
     # (描述, 腳本路徑)
     ("📸 Build Trend Snapshots", PIPELINE / "build_trend_snapshots.py"),
     ("🤖 v8 Forecast",           PIPELINE / "forecast_v8.py"),
