@@ -32,6 +32,25 @@ type AgentResponse = {
     hits: number;
   }>;
   suggestedQuestions: string[];
+  delegates?: Array<{
+    role: IdolAgentRoleId;
+    roleLabel: string;
+    sourceAgentName: string;
+    answer: string;
+    summary: string;
+    evidence: Array<{
+      type: string;
+      title: string;
+      snippet: string;
+      href?: string;
+    }>;
+    traces: Array<{
+      tool: string;
+      input: string;
+      hits: number;
+    }>;
+  }>;
+  orchestratedBy?: string;
 };
 
 type AlertDraft = {
@@ -632,9 +651,28 @@ export default function AgentWorkbench() {
             {result ? (
               <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.84)] p-6">
                 <div className="flex flex-wrap items-center gap-2"><h2 className="text-lg font-semibold text-cyan-200">分析結果</h2><span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs text-cyan-100">{result.roleLabel}</span>{result.intent ? <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">{result.intent}</span> : null}</div>
-                <div className="mt-3 text-xs uppercase tracking-[0.16em] text-zinc-500">回答角色：{result.sourceAgentName}</div>
+                <div className="mt-3 text-xs uppercase tracking-[0.16em] text-zinc-500">主導角色：{result.sourceAgentName}{result.orchestratedBy ? ` · ${result.orchestratedBy}` : ""}</div>
                 <p className="mt-5 whitespace-pre-wrap text-sm leading-8 text-zinc-200">{result.answer}</p>
                 <div className="mt-5 rounded-[24px] border border-cyan-400/20 bg-cyan-400/10 p-4 text-sm leading-7 text-cyan-100">{result.summary}</div>
+                {result.delegates?.length ? (
+                  <div className="mt-6 space-y-3">
+                    <div className="text-xs uppercase tracking-[0.18em] text-cyan-300">協作角色拆解</div>
+                    <div className="grid gap-3">
+                      {result.delegates.map((delegate) => (
+                        <div key={`${delegate.role}-${delegate.sourceAgentName}`} className="rounded-[24px] border border-white/10 bg-black/20 p-4">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <div className="text-sm font-semibold text-white">{delegate.roleLabel}</div>
+                            <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-zinc-400">
+                              {delegate.sourceAgentName}
+                            </span>
+                          </div>
+                          <p className="mt-3 text-sm leading-7 text-zinc-300">{delegate.answer}</p>
+                          <div className="mt-3 text-xs text-cyan-100">{delegate.summary}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
               </section>
             ) : (
               <section className="rounded-[32px] border border-dashed border-white/10 bg-[rgba(10,14,24,0.78)] p-6 text-sm leading-7 text-zinc-300">輸入問題後，這裡會顯示分析結果。你可以先從預設問題開始，也可以直接問某位成員、某個團體、某個公式欄位，或某次排名變動的原因。</section>
