@@ -25,6 +25,7 @@ DATA_DIR = REPO_ROOT / "frontend-next" / "public" / "data"
 OUT_MEMBERS = DATA_DIR / "member_rankings.json"
 OUT_GROUPS = DATA_DIR / "v7_rankings.json"
 OUT_INSIGHTS = DATA_DIR / "insights.json"
+OUT_DATA_QUALITY = DATA_DIR / "data_quality.json"
 FORMULA_VERSION = "v2-mixed-freshness"
 
 
@@ -215,6 +216,7 @@ def score_group(group: dict[str, Any], members: list[dict[str, Any]]) -> dict[st
         default=None,
         key=lambda dt: dt or datetime.min.replace(tzinfo=timezone.utc),
     )
+    days_since_group_update = days_since(latest_snapshot)
     conversion_score = clamp_score(temperature_index * 0.6)
 
     return {
@@ -226,10 +228,83 @@ def score_group(group: dict[str, Any], members: list[dict[str, Any]]) -> dict[st
         "group_conversion_score_v2": conversion_score,
         "active_member_count": count,
         "last_group_snapshot_at": iso_or_none(latest_snapshot),
+        "days_since_update": round(days_since_group_update, 1),
         "social_activity": social_activity,
         "temperature_index": temperature_index,
         "conversion_score": conversion_score,
         "formula_version": FORMULA_VERSION,
+    }
+
+
+def ratio(rows: list[dict[str, Any]], key: str) -> float:
+    if not rows:
+        return 0.0
+    return round(sum(1 for row in rows if row.get(key)) / len(rows), 3)
+
+
+def build_data_quality(member_data: list[dict[str, Any]], group_data: list[dict[str, Any]]) -> dict[str, Any]:
+    member_total = len(member_data)
+    group_total = len(group_data)
+    members_with_social_dates = sum(1 for member in member_data if member.get("last_social_signal_at"))
+    members_missing_core = [
+        member["name"]
+        for member in member_data
+        if not member.get("instagram") or not member.get("photo_url") or not member.get("group")
+    ][:25]
+    groups_missing_core = [
+        group["display_name"]
+        for group in group_data
+        if not group.get("instagram") or not group.get("youtube") or not group.get("twitter")
+    ][:25]
+
+    return {
+        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "schema_version": "idol-data-quality-v1",
+        "summary": {
+            "member_total": member_total,
+            "group_total": group_total,
+            "current_maturity": "L1",
+            "largest_gap": "real_social_activity_and_event_discovery",
+        },
+        "member_coverage": {
+            "instagram": ratio(member_data, "instagram"),
+            "facebook": ratio(member_data, "facebook"),
+            "twitter": ratio(member_data, "twitter"),
+            "threads": ratio(member_data, "threads"),
+            "photo_url": ratio(member_data, "photo_url"),
+            "group": ratio(member_data, "group"),
+            "last_social_signal_at": round(members_with_social_dates / member_total, 3) if member_total else 0.0,
+            "missing_core_examples": members_missing_core,
+        },
+        "group_coverage": {
+            "instagram": ratio(group_data, "instagram"),
+            "facebook": ratio(group_data, "facebook"),
+            "twitter": ratio(group_data, "twitter"),
+            "youtube": ratio(group_data, "youtube"),
+            "member_names": ratio(group_data, "member_names"),
+            "last_group_snapshot_at": ratio(group_data, "last_group_snapshot_at"),
+            "missing_core_examples": groups_missing_core,
+        },
+        "known_gaps": [
+            {
+                "id": "social_last_post",
+                "label": "真實社群最後發文時間覆蓋不足",
+                "impact": "freshness_score 仍大量依賴資料庫 updated_at fallback，無法完整代表真實社群更新。",
+                "next_action": "提升 Instagram / Threads 抓取命中率，保留上次成功結果並只重抓需要更新的帳號。",
+            },
+            {
+                "id": "events",
+                "label": "活動 discovery 尚未命中",
+                "impact": "活動頁仍主要依賴 Google Calendar，無法補足多來源活動資料。",
+                "next_action": "新增 3-5 個可信活動來源，逐站調整 Scrapling selector。",
+            },
+            {
+                "id": "creator_metrics",
+                "label": "追蹤數、互動率、觀看率與受眾資料尚未接真實來源",
+                "impact": "temperature_index_v2 已保留欄位，但商業分析可信度仍受限。",
+                "next_action": "拆成 provider 任務：公開頁抓取、第三方 API、人工補登、商業合作資料。",
+            },
+        ],
     }
 
 
@@ -394,7 +469,8 @@ def main() -> None:
     OUT_MEMBERS.write_text(json.dumps(member_data, ensure_ascii=False, indent=2), "utf-8")
     OUT_GROUPS.write_text(json.dumps(group_data, ensure_ascii=False, indent=2), "utf-8")
     OUT_INSIGHTS.write_text(json.dumps(insights, ensure_ascii=False, indent=2), "utf-8")
-    print("Updated member_rankings.json, v7_rankings.json, insights.json")
+    OUT_DATA_QUALITY.write_text(json.dumps(build_data_quality(member_data, group_data), ensure_ascii=False, indent=2), "utf-8")
+    print("Updated member_rankings.json, v7_rankings.json, insights.json, data_quality.json")
 
 
 if __name__ == "__main__":

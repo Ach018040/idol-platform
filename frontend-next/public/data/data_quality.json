@@ -1,0 +1,101 @@
+{
+  "generated_at": "2026-04-29T04:56:45Z",
+  "schema_version": "idol-data-quality-v1",
+  "summary": {
+    "member_total": 406,
+    "group_total": 92,
+    "current_maturity": "L1",
+    "largest_gap": "real_social_activity_and_event_discovery"
+  },
+  "member_coverage": {
+    "instagram": 0.874,
+    "facebook": 0.357,
+    "twitter": 0.209,
+    "threads": 0.209,
+    "photo_url": 0.879,
+    "group": 0.845,
+    "last_social_signal_at": 0.236,
+    "missing_core_examples": [
+      "DeDe",
+      "Meya",
+      "Neko",
+      "結城朋子",
+      "天川未來",
+      "OMOCHIおもち",
+      "氧氣みどり",
+      "悠洛 YoLo",
+      "しか",
+      "aka Collection",
+      "ナヒミコ",
+      "米粒R ミリア",
+      "いちご",
+      "イルミ",
+      "音転 心夕",
+      "呆紫 アホコ",
+      "亞寧",
+      "七ノ歌 Nanoka",
+      "月海 晴",
+      "睦月",
+      "りた",
+      "たまき",
+      "かずな",
+      "あいり",
+      "Kamiko"
+    ]
+  },
+  "group_coverage": {
+    "instagram": 0.826,
+    "facebook": 0.793,
+    "twitter": 0.228,
+    "youtube": 0.478,
+    "member_names": 1.0,
+    "last_group_snapshot_at": 1.0,
+    "missing_core_examples": [
+      "未完成プロローグ",
+      "幻波 SYNC",
+      "i<3",
+      "花咲＊Chloris",
+      "ZETTA",
+      "MORINAGA",
+      "天国地獄",
+      "Happy Holiday!!",
+      "冥恋セレナーデ",
+      "RAISE -きっと、らいせ-",
+      "Immerse",
+      "Flora・Fiore",
+      "Pure makeR",
+      "TUKUYOMI IDOL PROJECT",
+      "冥域エレメンタル",
+      "LuvRush",
+      "VEZALiA",
+      "魔法♡ドリーム",
+      "xEnomoRph",
+      "少女ガチャポン",
+      "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
+      "プラスタ台灣候補生",
+      "Karei & ooo",
+      "LUNARIS",
+      "曖昧な宝石"
+    ]
+  },
+  "known_gaps": [
+    {
+      "id": "social_last_post",
+      "label": "真實社群最後發文時間覆蓋不足",
+      "impact": "freshness_score 仍大量依賴資料庫 updated_at fallback，無法完整代表真實社群更新。",
+      "next_action": "提升 Instagram / Threads 抓取命中率，保留上次成功結果並只重抓需要更新的帳號。"
+    },
+    {
+      "id": "events",
+      "label": "活動 discovery 尚未命中",
+      "impact": "活動頁仍主要依賴 Google Calendar，無法補足多來源活動資料。",
+      "next_action": "新增 3-5 個可信活動來源，逐站調整 Scrapling selector。"
+    },
+    {
+      "id": "creator_metrics",
+      "label": "追蹤數、互動率、觀看率與受眾資料尚未接真實來源",
+      "impact": "temperature_index_v2 已保留欄位，但商業分析可信度仍受限。",
+      "next_action": "拆成 provider 任務：公開頁抓取、第三方 API、人工補登、商業合作資料。"
+    }
+  ]
+}
