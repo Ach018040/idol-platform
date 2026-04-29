@@ -27,6 +27,7 @@ export default function ValidationPage() {
           <nav className="flex flex-wrap gap-2 text-sm font-bold">
             <Link href="/" className="rounded-md border border-white/15 px-4 py-2 text-slate-200 hover:bg-white/10">返回首頁</Link>
             <Link href="/agent" className="rounded-md border border-white/15 px-4 py-2 text-slate-200 hover:bg-white/10">Agent</Link>
+            <Link href="/orchestration" className="rounded-md border border-white/15 px-4 py-2 text-slate-200 hover:bg-white/10">Orchestration</Link>
             <Link href="/creative-studio" className="rounded-md bg-cyan-300 px-4 py-2 text-slate-950 hover:bg-cyan-200">Creative Studio</Link>
           </nav>
         </div>
