@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-29T04:56:45Z",
+  "generated_at": "2026-04-29T21:11:56Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 406,
@@ -9,12 +9,12 @@
   },
   "member_coverage": {
     "instagram": 0.874,
-    "facebook": 0.357,
-    "twitter": 0.209,
-    "threads": 0.209,
+    "facebook": 0.36,
+    "twitter": 0.212,
+    "threads": 0.212,
     "photo_url": 0.879,
     "group": 0.845,
-    "last_social_signal_at": 0.236,
+    "last_social_signal_at": 0.239,
     "missing_core_examples": [
       "DeDe",
       "Meya",
@@ -36,10 +36,10 @@
       "七ノ歌 Nanoka",
       "月海 晴",
       "睦月",
-      "りた",
-      "たまき",
-      "かずな",
       "あいり",
+      "かずな",
+      "たまき",
+      "りた",
       "Kamiko"
     ]
   },
@@ -47,7 +47,7 @@
     "instagram": 0.826,
     "facebook": 0.793,
     "twitter": 0.228,
-    "youtube": 0.478,
+    "youtube": 0.489,
     "member_names": 1.0,
     "last_group_snapshot_at": 1.0,
     "missing_core_examples": [
@@ -60,22 +60,22 @@
       "天国地獄",
       "Happy Holiday!!",
       "冥恋セレナーデ",
-      "RAISE -きっと、らいせ-",
       "Immerse",
+      "𝗥𝗔𝗕𝗕𝗶𝗧 & 𝗕𝗘𝗔𝗥",
+      "RAISE -きっと、らいせ-",
       "Flora・Fiore",
       "Pure makeR",
       "TUKUYOMI IDOL PROJECT",
       "冥域エレメンタル",
-      "LuvRush",
       "VEZALiA",
+      "LuvRush",
       "魔法♡ドリーム",
       "xEnomoRph",
       "少女ガチャポン",
       "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
       "プラスタ台灣候補生",
       "Karei & ooo",
-      "LUNARIS",
-      "曖昧な宝石"
+      "LUNARIS"
     ]
   },
   "known_gaps": [

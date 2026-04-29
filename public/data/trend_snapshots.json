@@ -1,18 +1,5 @@
 [
   {
-    "date": "2026-03-22",
-    "entity_type": "group",
-    "entity_id": "#0000FF",
-    "entity_name": "#0000FF",
-    "group": "#0000FF",
-    "live_frequency": 75,
-    "social_reach": 75,
-    "growth_momentum": 0.08,
-    "stability": 0.75,
-    "momentum_acceleration": 0.02,
-    "v7_index": 54.71
-  },
-  {
     "date": "2026-03-23",
     "entity_type": "group",
     "entity_id": "#0000FF",
@@ -494,17 +481,17 @@
     "v7_index": 54.3
   },
   {
-    "date": "2026-03-22",
+    "date": "2026-04-29",
     "entity_type": "group",
-    "entity_id": "#007500",
-    "entity_name": "#007500",
-    "group": "#007500",
-    "live_frequency": 25,
-    "social_reach": 25,
-    "growth_momentum": 0.01,
-    "stability": 0.4,
-    "momentum_acceleration": 0.0,
-    "v7_index": 19.77
+    "entity_id": "#0000FF",
+    "entity_name": "#0000FF",
+    "group": "#0000FF",
+    "live_frequency": 75,
+    "social_reach": 75,
+    "growth_momentum": 0.08,
+    "stability": 0.75,
+    "momentum_acceleration": 0.02,
+    "v7_index": 54.3
   },
   {
     "date": "2026-03-23",
@@ -988,17 +975,17 @@
     "v7_index": 19.95
   },
   {
-    "date": "2026-03-22",
+    "date": "2026-04-29",
     "entity_type": "group",
-    "entity_id": "#800080",
-    "entity_name": "#800080",
-    "group": "#800080",
-    "live_frequency": 50,
-    "social_reach": 50,
-    "growth_momentum": 0.05,
-    "stability": 0.6,
+    "entity_id": "#007500",
+    "entity_name": "#007500",
+    "group": "#007500",
+    "live_frequency": 25,
+    "social_reach": 25,
+    "growth_momentum": 0.01,
+    "stability": 0.4,
     "momentum_acceleration": 0.0,
-    "v7_index": 37.64
+    "v7_index": 19.95
   },
   {
     "date": "2026-03-23",
@@ -1482,17 +1469,17 @@
     "v7_index": 37.5
   },
   {
-    "date": "2026-03-22",
+    "date": "2026-04-29",
     "entity_type": "group",
-    "entity_id": "#C90000",
-    "entity_name": "#C90000",
-    "group": "#C90000",
-    "live_frequency": 25,
-    "social_reach": 25,
-    "growth_momentum": 0.01,
-    "stability": 0.4,
+    "entity_id": "#800080",
+    "entity_name": "#800080",
+    "group": "#800080",
+    "live_frequency": 50,
+    "social_reach": 50,
+    "growth_momentum": 0.05,
+    "stability": 0.6,
     "momentum_acceleration": 0.0,
-    "v7_index": 19.47
+    "v7_index": 37.5
   },
   {
     "date": "2026-03-23",
@@ -1976,17 +1963,17 @@
     "v7_index": 19.95
   },
   {
-    "date": "2026-03-22",
+    "date": "2026-04-29",
     "entity_type": "group",
-    "entity_id": "#FFFF00",
-    "entity_name": "#FFFF00",
-    "group": "#FFFF00",
-    "live_frequency": 72,
-    "social_reach": 73,
-    "growth_momentum": 0.07,
-    "stability": 0.72,
-    "momentum_acceleration": 0.01,
-    "v7_index": 52.55
+    "entity_id": "#C90000",
+    "entity_name": "#C90000",
+    "group": "#C90000",
+    "live_frequency": 25,
+    "social_reach": 25,
+    "growth_momentum": 0.01,
+    "stability": 0.4,
+    "momentum_acceleration": 0.0,
+    "v7_index": 19.95
   },
   {
     "date": "2026-03-23",
@@ -2470,17 +2457,17 @@
     "v7_index": 52.15
   },
   {
-    "date": "2026-03-22",
+    "date": "2026-04-29",
     "entity_type": "group",
-    "entity_id": "#FFFFFF",
-    "entity_name": "#FFFFFF",
-    "group": "#FFFFFF",
-    "live_frequency": 92,
-    "social_reach": 100,
-    "growth_momentum": 0.14,
-    "stability": 0.88,
-    "momentum_acceleration": 0.05,
-    "v7_index": 69.03
+    "entity_id": "#FFFF00",
+    "entity_name": "#FFFF00",
+    "group": "#FFFF00",
+    "live_frequency": 72,
+    "social_reach": 73,
+    "growth_momentum": 0.07,
+    "stability": 0.72,
+    "momentum_acceleration": 0.01,
+    "v7_index": 52.15
   },
   {
     "date": "2026-03-23",
@@ -2964,17 +2951,17 @@
     "v7_index": 69.1
   },
   {
-    "date": "2026-03-22",
+    "date": "2026-04-29",
     "entity_type": "group",
-    "entity_id": "大邦奶奶",
-    "entity_name": "大邦奶奶",
-    "group": "大邦奶奶",
-    "live_frequency": 55,
-    "social_reach": 55,
-    "growth_momentum": 0.04,
-    "stability": 0.58,
-    "momentum_acceleration": 0.01,
-    "v7_index": 39.73
+    "entity_id": "#FFFFFF",
+    "entity_name": "#FFFFFF",
+    "group": "#FFFFFF",
+    "live_frequency": 92,
+    "social_reach": 100,
+    "growth_momentum": 0.14,
+    "stability": 0.88,
+    "momentum_acceleration": 0.05,
+    "v7_index": 69.1
   },
   {
     "date": "2026-03-23",
@@ -3458,17 +3445,17 @@
     "v7_index": 39.85
   },
   {
-    "date": "2026-03-22",
+    "date": "2026-04-29",
     "entity_type": "group",
-    "entity_id": "宿命白",
-    "entity_name": "宿命白",
-    "group": "宿命白",
+    "entity_id": "大邦奶奶",
+    "entity_name": "大邦奶奶",
+    "group": "大邦奶奶",
     "live_frequency": 55,
     "social_reach": 55,
     "growth_momentum": 0.04,
     "stability": 0.58,
     "momentum_acceleration": 0.01,
-    "v7_index": 40.22
+    "v7_index": 39.85
   },
   {
     "date": "2026-03-23",
@@ -3952,17 +3939,17 @@
     "v7_index": 39.85
   },
   {
-    "date": "2026-03-22",
+    "date": "2026-04-29",
     "entity_type": "group",
-    "entity_id": "新增經歷",
-    "entity_name": "新增經歷",
-    "group": "新增經歷",
-    "live_frequency": 80,
-    "social_reach": 80,
-    "growth_momentum": 0.1,
-    "stability": 0.82,
-    "momentum_acceleration": 0.03,
-    "v7_index": 58.9
+    "entity_id": "宿命白",
+    "entity_name": "宿命白",
+    "group": "宿命白",
+    "live_frequency": 55,
+    "social_reach": 55,
+    "growth_momentum": 0.04,
+    "stability": 0.58,
+    "momentum_acceleration": 0.01,
+    "v7_index": 39.85
   },
   {
     "date": "2026-03-23",
@@ -4446,17 +4433,17 @@
     "v7_index": 58.6
   },
   {
-    "date": "2026-03-22",
+    "date": "2026-04-29",
     "entity_type": "group",
-    "entity_id": "紅色",
-    "entity_name": "紅色",
-    "group": "紅色",
-    "live_frequency": 55,
-    "social_reach": 55,
-    "growth_momentum": 0.04,
-    "stability": 0.57,
-    "momentum_acceleration": 0.01,
-    "v7_index": 40.09
+    "entity_id": "新增經歷",
+    "entity_name": "新增經歷",
+    "group": "新增經歷",
+    "live_frequency": 80,
+    "social_reach": 80,
+    "growth_momentum": 0.1,
+    "stability": 0.82,
+    "momentum_acceleration": 0.03,
+    "v7_index": 58.6
   },
   {
     "date": "2026-03-23",
@@ -4928,6 +4915,19 @@
   },
   {
     "date": "2026-04-28",
+    "entity_type": "group",
+    "entity_id": "紅色",
+    "entity_name": "紅色",
+    "group": "紅色",
+    "live_frequency": 55,
+    "social_reach": 55,
+    "growth_momentum": 0.04,
+    "stability": 0.57,
+    "momentum_acceleration": 0.01,
+    "v7_index": 39.7
+  },
+  {
+    "date": "2026-04-29",
     "entity_type": "group",
     "entity_id": "紅色",
     "entity_name": "紅色",
