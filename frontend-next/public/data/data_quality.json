@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-29T21:11:56Z",
+  "generated_at": "2026-04-30T21:06:45Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 406,
@@ -14,7 +14,7 @@
     "threads": 0.212,
     "photo_url": 0.879,
     "group": 0.845,
-    "last_social_signal_at": 0.239,
+    "last_social_signal_at": 0.273,
     "missing_core_examples": [
       "DeDe",
       "Meya",
@@ -24,23 +24,23 @@
       "OMOCHIおもち",
       "氧氣みどり",
       "悠洛 YoLo",
-      "しか",
       "aka Collection",
+      "しか",
       "ナヒミコ",
       "米粒R ミリア",
       "いちご",
       "イルミ",
+      "睦月",
+      "かずな",
+      "あいり",
+      "たまき",
       "音転 心夕",
       "呆紫 アホコ",
       "亞寧",
       "七ノ歌 Nanoka",
-      "月海 晴",
-      "睦月",
-      "あいり",
-      "かずな",
-      "たまき",
       "りた",
-      "Kamiko"
+      "Kamiko",
+      "ジュリリジュリラン未來ゴロゴロコロニー13世"
     ]
   },
   "group_coverage": {
@@ -65,17 +65,17 @@
       "RAISE -きっと、らいせ-",
       "Flora・Fiore",
       "Pure makeR",
-      "TUKUYOMI IDOL PROJECT",
       "冥域エレメンタル",
+      "少女ガチャポン",
+      "TUKUYOMI IDOL PROJECT",
+      "魔法♡ドリーム",
       "VEZALiA",
       "LuvRush",
-      "魔法♡ドリーム",
       "xEnomoRph",
-      "少女ガチャポン",
+      "紫苑アスター",
       "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
       "プラスタ台灣候補生",
-      "Karei & ooo",
-      "LUNARIS"
+      "Karei & ooo"
     ]
   },
   "known_gaps": [

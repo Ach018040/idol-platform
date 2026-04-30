@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-29T21:11:56Z",
+  "generated_at": "2026-04-30T21:06:45Z",
   "market_temperature": 58.2,
   "market_temperature_v2": 58.2,
   "active_groups": 92,
@@ -7,7 +7,7 @@
   "data_coverage": {
     "instagram": 0.87,
     "threads": 0.21,
-    "social_post_dates": 0.24,
+    "social_post_dates": 0.27,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
