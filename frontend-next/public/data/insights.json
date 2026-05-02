@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-01T20:58:55Z",
-  "market_temperature": 58.1,
-  "market_temperature_v2": 58.1,
+  "generated_at": "2026-05-02T20:50:45Z",
+  "market_temperature": 57.8,
+  "market_temperature_v2": 57.8,
   "active_groups": 93,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
@@ -16,7 +16,7 @@
     "top_group": "時空Astria",
     "social_king": "天唯陽奈",
     "social_focus": "天唯陽奈",
-    "market_temperature": 58.1
+    "market_temperature": 57.8
   },
   "rising_stars": [
     "夢良咲夜眠",
@@ -34,8 +34,8 @@
     "天琴 ドウナ",
     "霧宮蒼生",
     "うみ",
-    "Nya にゃあ",
     "つつ子",
+    "Nya にゃあ",
     "せいら"
   ]
 }
