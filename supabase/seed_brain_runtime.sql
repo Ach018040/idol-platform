@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-05-02T20:50:45Z',
-  'Weekly idol market digest generated on 2026-05-02T20:50:45Z. Top group: 時空Astria. Top member: 天唯陽奈. Market temperature: 57.8. Rising stars: 夢良咲夜眠, 栗羽黎奈, 姫宮まい, 燁水 Yomizu, 稲妻莉央. Heat drop watch: none.',
-  '- 2026-05-02T20:50:45Z: weekly market digest generated
+  'Weekly Market Digest 2026-05-03T20:53:07Z',
+  'Weekly idol market digest generated on 2026-05-03T20:53:07Z. Top group: 時空Astria. Top member: 御金 寧々花. Market temperature: 57.7. Rising stars: 夢良咲夜眠, 栗羽黎奈, 姫宮まい, 燁水 Yomizu, 穗綺羅 はな. Heat drop watch: none.',
+  '- 2026-05-03T20:53:07Z: weekly market digest generated
 - Highlight top group: 時空Astria
-- Highlight top member: 天唯陽奈
-- Rising stars: 夢良咲夜眠, 栗羽黎奈, 姫宮まい, 燁水 Yomizu, 稲妻莉央',
+- Highlight top member: 御金 寧々花
+- Rising stars: 夢良咲夜眠, 栗羽黎奈, 姫宮まい, 燁水 Yomizu, 穗綺羅 はな',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-05-02T20:50:45Z", "top_group": "時空Astria", "top_member": "天唯陽奈", "market_temperature": "57.8", "rising_stars": ["夢良咲夜眠", "栗羽黎奈", "姫宮まい", "燁水 Yomizu", "稲妻莉央"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-05-03T20:53:07Z", "top_group": "時空Astria", "top_member": "御金 寧々花", "market_temperature": "57.7", "rising_stars": ["夢良咲夜眠", "栗羽黎奈", "姫宮まい", "燁水 Yomizu", "穗綺羅 はな"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-05-02T20:50:45Z',
-  'Weekly digest refreshed: 2026-05-02T20:50:45Z',
-  'Weekly idol market digest generated on 2026-05-02T20:50:45Z. Top group: 時空Astria. Top member: 天唯陽奈. Market temperature: 57.8. Rising stars: 夢良咲夜眠, 栗羽黎奈, 姫宮まい, 燁水 Yomizu, 稲妻莉央. Heat drop watch: none.',
+  '2026-05-03T20:53:07Z',
+  'Weekly digest refreshed: 2026-05-03T20:53:07Z',
+  'Weekly idol market digest generated on 2026-05-03T20:53:07Z. Top group: 時空Astria. Top member: 御金 寧々花. Market temperature: 57.7. Rising stars: 夢良咲夜眠, 栗羽黎奈, 姫宮まい, 燁水 Yomizu, 穗綺羅 はな. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;

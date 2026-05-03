@@ -1,41 +1,41 @@
 {
-  "generated_at": "2026-05-02T20:50:45Z",
-  "market_temperature": 57.8,
-  "market_temperature_v2": 57.8,
+  "generated_at": "2026-05-03T20:53:07Z",
+  "market_temperature": 57.7,
+  "market_temperature_v2": 57.7,
   "active_groups": 93,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
     "instagram": 0.88,
     "threads": 0.21,
-    "social_post_dates": 0.27,
+    "social_post_dates": 0.28,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
   },
   "weekly_highlights": {
     "top_group": "時空Astria",
-    "social_king": "天唯陽奈",
-    "social_focus": "天唯陽奈",
-    "market_temperature": 57.8
+    "social_king": "御金 寧々花",
+    "social_focus": "御金 寧々花",
+    "market_temperature": 57.7
   },
   "rising_stars": [
     "夢良咲夜眠",
     "栗羽黎奈",
     "姫宮まい",
     "燁水 Yomizu",
-    "稲妻莉央"
+    "穗綺羅 はな"
   ],
   "heat_drop": [],
   "top_members": [
+    "御金 寧々花",
     "天唯陽奈",
     "君宣苺香",
     "魂音ちよ",
+    "恋乃 もも",
     "綿空もり",
     "天琴 ドウナ",
     "霧宮蒼生",
     "うみ",
-    "つつ子",
-    "Nya にゃあ",
-    "せいら"
+    "つつ子"
   ]
 }
