@@ -3,64 +3,64 @@
     "entity_name": "#FFFFFF",
     "last_index": 69.1,
     "forecast_7d": [
-      69.09,
-      69.09,
-      69.09,
-      69.09,
-      69.09,
-      69.09,
-      69.09
+      69.1,
+      69.1,
+      69.1,
+      69.1,
+      69.1,
+      69.1,
+      69.1
     ],
     "direction": "flat",
-    "confidence": 0.028,
+    "confidence": 0.025,
     "data_days": 38
   },
   {
     "entity_name": "新增經歷",
     "last_index": 58.6,
     "forecast_7d": [
-      58.62,
-      58.62,
-      58.62,
-      58.62,
-      58.62,
-      58.62,
-      58.63
+      58.59,
+      58.59,
+      58.59,
+      58.59,
+      58.59,
+      58.59,
+      58.59
     ],
     "direction": "flat",
-    "confidence": 0.016,
+    "confidence": 0.025,
     "data_days": 38
   },
   {
     "entity_name": "#0000FF",
     "last_index": 54.3,
     "forecast_7d": [
-      54.31,
-      54.31,
-      54.31,
-      54.31,
-      54.31,
-      54.31,
-      54.31
+      54.29,
+      54.29,
+      54.29,
+      54.29,
+      54.29,
+      54.29,
+      54.29
     ],
     "direction": "flat",
-    "confidence": 0.012,
+    "confidence": 0.025,
     "data_days": 38
   },
   {
     "entity_name": "#FFFF00",
     "last_index": 52.15,
     "forecast_7d": [
-      52.16,
       52.17,
       52.17,
-      52.17,
-      52.17,
-      52.17,
-      52.17
+      52.18,
+      52.18,
+      52.18,
+      52.18,
+      52.18
     ],
     "direction": "flat",
-    "confidence": 0.016,
+    "confidence": 0.025,
     "data_days": 38
   },
   {
@@ -73,7 +73,7 @@
       39.87,
       39.87,
       39.87,
-      39.87
+      39.88
     ],
     "direction": "flat",
     "confidence": 0.025,
@@ -92,71 +92,71 @@
       39.84
     ],
     "direction": "flat",
-    "confidence": 0.021,
+    "confidence": 0.025,
     "data_days": 38
   },
   {
     "entity_name": "紅色",
     "last_index": 39.7,
     "forecast_7d": [
-      39.69,
-      39.69,
-      39.69,
+      39.68,
+      39.68,
+      39.68,
       39.68,
       39.68,
       39.68,
       39.68
     ],
     "direction": "flat",
-    "confidence": 0.021,
+    "confidence": 0.025,
     "data_days": 38
   },
   {
     "entity_name": "#800080",
     "last_index": 37.5,
     "forecast_7d": [
-      37.45,
-      37.45,
-      37.44,
-      37.44,
-      37.44,
-      37.43,
-      37.43
+      37.48,
+      37.47,
+      37.47,
+      37.47,
+      37.47,
+      37.47,
+      37.46
     ],
     "direction": "flat",
-    "confidence": 0.035,
-    "data_days": 38
-  },
-  {
-    "entity_name": "#007500",
-    "last_index": 19.95,
-    "forecast_7d": [
-      19.96,
-      19.96,
-      19.96,
-      19.96,
-      19.96,
-      19.97,
-      19.97
-    ],
-    "direction": "flat",
-    "confidence": 0.01,
+    "confidence": 0.025,
     "data_days": 38
   },
   {
     "entity_name": "#C90000",
     "last_index": 19.95,
     "forecast_7d": [
-      19.96,
-      19.96,
-      19.96,
-      19.96,
-      19.96,
-      19.96,
-      19.96
+      19.97,
+      19.98,
+      19.98,
+      19.98,
+      19.98,
+      19.98,
+      19.98
     ],
     "direction": "flat",
-    "confidence": 0.007,
+    "confidence": 0.025,
+    "data_days": 38
+  },
+  {
+    "entity_name": "#007500",
+    "last_index": 19.95,
+    "forecast_7d": [
+      19.94,
+      19.94,
+      19.93,
+      19.93,
+      19.93,
+      19.93,
+      19.93
+    ],
+    "direction": "flat",
+    "confidence": 0.025,
     "data_days": 38
   }
 ]
