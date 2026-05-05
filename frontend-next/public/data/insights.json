@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-05-04T21:13:24Z",
-  "market_temperature": 57.9,
-  "market_temperature_v2": 57.9,
-  "active_groups": 94,
+  "generated_at": "2026-05-05T21:07:57Z",
+  "market_temperature": 59.3,
+  "market_temperature_v2": 59.3,
+  "active_groups": 96,
   "formula_version": "v2-mixed-freshness",
   "data_coverage": {
-    "instagram": 0.88,
+    "instagram": 0.89,
     "threads": 0.21,
-    "social_post_dates": 0.32,
+    "social_post_dates": 0.31,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
@@ -16,14 +16,14 @@
     "top_group": "時空Astria",
     "social_king": "鬼塚 湊",
     "social_focus": "鬼塚 湊",
-    "market_temperature": 57.9
+    "market_temperature": 59.3
   },
   "rising_stars": [
+    "姫川乃愛",
+    "紺霜骷と音",
+    "瑠冥青璃",
     "鹿森雲羽",
-    "空花茉穗",
-    "雪見夢楽",
-    "兎實ふぃん",
-    "夢良咲夜眠"
+    "空花茉穗"
   ],
   "heat_drop": [],
   "top_members": [
@@ -31,9 +31,9 @@
     "天国 せいや",
     "骼実 百瀬",
     "天琴 ドウナ",
-    "御金 寧々花",
     "綿琉羽音",
     "姫野 あいる",
+    "御金 寧々花",
     "天唯陽奈",
     "君宣苺香",
     "魂音ちよ"
