@@ -339,15 +339,16 @@ export default function HomePage() {
   }
 
   const { memberData, groupData, insights } = data!;
+  const isDisplayReadyGroup = (group: Group) => !group.is_external || group.member_count > 0;
   const groups = groupData
-    .filter((group) => !group.is_solo && (group.member_count > 0 || group.is_external) && (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS)
+    .filter((group) => !group.is_solo && group.member_count > 0 && isDisplayReadyGroup(group) && (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS)
     .slice(0, 10)
     .map((group, index) => ({ ...group, display_rank: index + 1 }));
   const solos = groupData
     .filter((group) => group.is_solo && (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS)
     .slice(0, 6);
   const externalGroups = groupData
-    .filter((group) => group.is_external)
+    .filter((group) => group.is_external && group.member_count > 0)
     .slice(0, 6);
   const members = memberData.slice(0, 10);
   const maxGS = Math.max(...groups.map((group) => group.temperature_index), 1);
@@ -369,7 +370,7 @@ export default function HomePage() {
               </h1>
               <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-300">
                 以台灣為起點，逐步擴展到海外地下偶像資料源。排行榜、近期活動、論壇、Agent 與新版 SEO-aware 公式都整合在同一個入口。
-                現在首頁會分開呈現正式團體、外部團體、成員與 Solo 區塊，並只顯示近 90 天內仍有更新的資料。
+                現在首頁會分開呈現正式團體、成員與 Solo 區塊；外部團體會等成員或活動資料補齊後再顯示。
               </p>
             </div>
             <div className="flex items-end gap-2">

@@ -560,11 +560,15 @@ def main() -> None:
         else 0.0
     )
 
+    display_ready_groups = [
+        group for group in group_data if not group.get("is_external") or group.get("member_count", 0) > 0
+    ]
+
     insights = {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "market_temperature": market_temperature,
         "market_temperature_v2": market_temperature,
-        "active_groups": len(group_data),
+        "active_groups": len(display_ready_groups),
         "formula_version": FORMULA_VERSION,
         "data_coverage": {
             "instagram": round(sum(1 for member in member_data if member["instagram"]) / len(member_data), 2) if member_data else 0,

@@ -30,6 +30,7 @@ export type RawGroup = {
   facebook?: string | null;
   twitter?: string | null;
   youtube?: string | null;
+  is_external?: boolean | null;
   days_since_update?: number | null;
   last_group_snapshot_at?: string | null;
   group_temperature_index_v2?: number | null;
@@ -153,6 +154,7 @@ export function buildGroupEntities(rawGroups: RawGroup[], limit = 30): V4Entity[
         },
       };
     })
+    .filter((group, index) => !rawGroups[index]?.is_external || toNumber(rawGroups[index]?.member_count) > 0)
     .filter((group) => group.freshnessDays <= 90)
     .sort((a, b) => b.score - a.score)
     .slice(0, limit);

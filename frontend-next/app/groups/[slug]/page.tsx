@@ -46,7 +46,7 @@ export default function GroupPage({ params }: { params: { slug: string } }) {
           const fallback = Array.isArray(fallbackGroups)
             ? fallbackGroups.find((item:any) => (item.display_name || item.group) === groupName)
             : null;
-          if(fallback){
+          if(fallback && (!fallback.is_external || Number(fallback.member_count || 0) > 0)){
             setGroup({
               id: `external:${fallback.group || fallback.display_name}`,
               name: fallback.display_name || fallback.group,
