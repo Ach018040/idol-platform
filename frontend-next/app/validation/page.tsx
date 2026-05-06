@@ -1,5 +1,6 @@
 import Link from "next/link";
 import dataQuality from "@/public/data/data_quality.json";
+import socialDiscovery from "@/public/data/social_link_discovery.json";
 import { FRONTEND_MATURITY_LEVELS, MVP_TEST_TASKS } from "@/lib/validation/frontend-maturity";
 
 const statusStyle = {
@@ -84,6 +85,16 @@ export default function ValidationPage() {
             </div>
 
             <div className="mt-5 grid gap-3">
+              <div className="rounded-md border border-cyan-300/20 bg-cyan-300/10 p-4">
+                <div className="font-black text-cyan-100">社群連結 Discovery</div>
+                <p className="mt-2 text-sm leading-6 text-slate-300">
+                  已執行 IG / X / Facebook / Threads 候選連結爬取，搜尋 {socialDiscovery.searched_queries} 次；
+                  目前找到 {socialDiscovery.members_with_candidates} 位成員的可審核候選。候選為 0 時不會自動寫回資料庫，避免誤植假帳號。
+                </p>
+                <p className="mt-2 text-sm leading-6 text-cyan-100">
+                  下一步：增加可信來源清單、以站內 canonical profile 解析外連，並建立管理員審核後寫回 Supabase 的流程。
+                </p>
+              </div>
               {dataQuality.known_gaps.map((gap) => (
                 <div key={gap.id} className="rounded-md border border-white/10 bg-slate-950 p-4">
                   <div className="font-black text-rose-100">{gap.label}</div>

@@ -1,0 +1,8 @@
+{
+  "generated_at": "2026-05-06T13:16:52Z",
+  "schema_version": "social-link-discovery-v1",
+  "searched_queries": 120,
+  "members_with_candidates": 0,
+  "note": "Review candidates before writing back to Supabase.",
+  "findings": []
+}

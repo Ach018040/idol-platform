@@ -558,15 +558,15 @@ export default function AgentWorkbench() {
         <section className="overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,rgba(10,14,24,0.98)_0%,rgba(16,28,54,0.94)_56%,rgba(23,32,51,0.96)_100%)] shadow-[0_30px_90px_rgba(0,0,0,0.35)]">
           <div className="grid gap-8 px-6 py-8 lg:grid-cols-[minmax(0,1.15fr)_340px] lg:px-8 lg:py-10">
             <div className="space-y-5">
-              <div className="inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-1 text-xs uppercase tracking-[0.24em] text-cyan-100">Analysis Workspace</div>
+              <div className="inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-1 text-xs uppercase tracking-[0.24em] text-cyan-100">Idol AI Guide</div>
               <div className="space-y-4">
-                <h1 className="max-w-4xl text-4xl font-black tracking-tight text-white md:text-5xl">用一個分析工作台，快速讀懂 idol-platform 的排名、公式與資料訊號</h1>
-                <p className="max-w-3xl text-sm leading-8 text-slate-200/90">這裡是給你直接使用的平台分析介面。你可以依照想了解的問題切換角色，查看成員或團體為何上榜、分數怎麼計算、資料更新是否可靠，以及每一則市場觀察背後的依據。</p>
+                <h1 className="max-w-4xl text-4xl font-black tracking-tight text-white md:text-5xl">直接問：為什麼這位偶像或團體會上榜？</h1>
+                <p className="max-w-3xl text-sm leading-8 text-slate-200/90">這是給一般使用者使用的分析入口。你不需要理解所有欄位，只要輸入想知道的成員、團體或排行榜問題，Agent 會用平台資料幫你整理排名原因、公式影響與資料可信度。</p>
               </div>
               <div className="grid gap-3 md:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">01</div><div className="mt-2 text-lg font-semibold text-white">看懂排名</div><p className="mt-2 text-sm leading-6 text-zinc-300">選一個分析角色，直接問成員或團體為什麼上榜、排名為何變動，以及哪些訊號拉高或拉低了分數。</p></div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">02</div><div className="mt-2 text-lg font-semibold text-white">拆解公式</div><p className="mt-2 text-sm leading-6 text-zinc-300">快速檢查分數是怎麼算的，包括社群覆蓋、資料新鮮度、freshness 與其他影響權重的欄位。</p></div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">03</div><div className="mt-2 text-lg font-semibold text-white">追資料訊號</div><p className="mt-2 text-sm leading-6 text-zinc-300">搭配比較、追蹤清單與提醒草稿，持續觀察哪些成員或團體最近更新、停滯，或值得再追蹤。</p></div>
+                <button type="button" onClick={() => ask("為什麼目前第一名會排在最前面？")} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-left transition hover:bg-white/10"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">範例 1</div><div className="mt-2 text-lg font-semibold text-white">為何第一名？</div><p className="mt-2 text-sm leading-6 text-zinc-300">用排名、公式與資料訊號快速解釋目前榜首。</p></button>
+                <button type="button" onClick={() => ask("哪幾位成員資料可信度比較不足？")} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-left transition hover:bg-white/10"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">範例 2</div><div className="mt-2 text-lg font-semibold text-white">資料可信嗎？</div><p className="mt-2 text-sm leading-6 text-zinc-300">檢查社群連結、更新時間與 SEO-ready profile。</p></button>
+                <button type="button" onClick={() => ask("推薦我現在可以關注的上升成員。")} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-left transition hover:bg-white/10"><div className="text-xs uppercase tracking-[0.18em] text-cyan-200">範例 3</div><div className="mt-2 text-lg font-semibold text-white">推薦關注誰？</div><p className="mt-2 text-sm leading-6 text-zinc-300">從 rising stars 與資料訊號找觀察名單。</p></button>
               </div>
               <div className="flex flex-wrap gap-3 text-sm">
                 <Link href="/" className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-zinc-200 transition hover:bg-white/10">返回首頁</Link>
@@ -576,7 +576,7 @@ export default function AgentWorkbench() {
             </div>
             <div className="grid gap-4 self-start">
               <div className="rounded-[28px] border border-white/10 bg-black/25 p-5 backdrop-blur">
-                <div className="text-xs uppercase tracking-[0.18em] text-cyan-300">工作狀態</div>
+                <div className="text-xs uppercase tracking-[0.18em] text-cyan-300">目前設定</div>
                 <div className="mt-4 space-y-3 text-sm text-zinc-300">
                   <div className="flex items-center justify-between gap-4"><span>目前角色</span><span className="font-medium text-cyan-100">{role.shortLabel}</span></div>
                   <div className="flex items-center justify-between gap-4"><span>分析模式</span><span className="font-medium text-cyan-100">{result?.mode || "standby"}</span></div>
@@ -585,26 +585,35 @@ export default function AgentWorkbench() {
                 </div>
               </div>
               <div className="rounded-[28px] border border-white/10 bg-white/5 p-5">
-                <div className="text-xs uppercase tracking-[0.18em] text-cyan-300">使用建議</div>
+                <div className="text-xs uppercase tracking-[0.18em] text-cyan-300">怎麼問最有效</div>
                 <ul className="mt-4 space-y-3 text-sm leading-6 text-zinc-300">
-                  <li>先從一個具體問題開始，例如「某位成員為何上榜」或「某個團體最近為何掉分」。</li>
-                  <li>如果想長期觀察變化，可以把成員或團體加入追蹤清單，再建立提醒草稿。</li>
-                  <li>看完答案後，往下搭配比較、證據來源與工具追蹤，能更快確認結論是否可信。</li>
+                  <li>直接輸入人名或團名，例如「KAMU 為什麼是社群焦點？」。</li>
+                  <li>想查公式就問「這個分數由哪些欄位拉高？」。</li>
+                  <li>想確認可信度就問「這個排名有沒有資料不足？」。</li>
                 </ul>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.78)] p-5">
+          <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-white">選擇分析角度</h2>
+              <p className="mt-1 text-sm text-zinc-400">不確定要選哪個也沒關係，預設角色會自動用排行榜與資料訊號回答。</p>
+            </div>
+            <span className="text-xs text-cyan-200">目前：{role.label}</span>
+          </div>
+          <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           {IDOL_AGENT_ROLES.map((item) => (
-            <button key={item.id} type="button" onClick={() => { setSelectedRole(item.id); setQuestion(item.defaultQuestions[0]); setContinuedFrom(null); setCurrentSessionId(null); }} className={`rounded-[28px] border p-5 text-left transition ${selectedRole === item.id ? "border-cyan-300/40 bg-cyan-300/10 shadow-[0_18px_40px_rgba(34,211,238,0.12)]" : "border-white/10 bg-[rgba(12,16,28,0.7)] hover:border-white/20 hover:bg-white/8"}`}>
+            <button key={item.id} type="button" onClick={() => { setSelectedRole(item.id); setQuestion(item.defaultQuestions[0]); setContinuedFrom(null); setCurrentSessionId(null); }} className={`rounded-[22px] border p-4 text-left transition ${selectedRole === item.id ? "border-cyan-300/40 bg-cyan-300/10 shadow-[0_18px_40px_rgba(34,211,238,0.12)]" : "border-white/10 bg-[rgba(12,16,28,0.7)] hover:border-white/20 hover:bg-white/8"}`}>
               <div className="flex items-start justify-between gap-3"><div className="text-xs uppercase tracking-[0.18em] text-cyan-300">{item.shortLabel}</div><span className="rounded-full border border-white/10 px-2 py-1 text-[11px] text-zinc-400">{item.sourceCategory}</span></div>
               <div className="mt-3 text-lg font-semibold text-white">{item.label}</div>
               <div className="mt-2 text-sm leading-6 text-zinc-300">{item.tagline}</div>
               <div className="mt-4 text-xs text-zinc-500">角色來源：{item.sourceAgentName}</div>
             </button>
           ))}
+          </div>
         </section>
 
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1.28fr)_minmax(330px,0.72fr)]">
@@ -638,9 +647,9 @@ export default function AgentWorkbench() {
                     </div>
                   </div>
                 ) : null}
-                <textarea value={question} onChange={(event) => setQuestion(event.target.value)} className="min-h-32 rounded-[24px] border border-white/10 bg-black/25 px-4 py-4 text-sm leading-7 text-white outline-none placeholder:text-zinc-500" placeholder="直接輸入你想查的問題，例如：某位成員為何上榜、某團體最近為何掉分、v2 公式怎麼影響 freshness。" />
+                <textarea value={question} onChange={(event) => setQuestion(event.target.value)} className="min-h-32 rounded-[24px] border border-white/10 bg-black/25 px-4 py-4 text-sm leading-7 text-white outline-none placeholder:text-zinc-500" placeholder="輸入你的問題，例如：KAMU 為什麼是社群焦點？時空Astria 為何排名第一？這個分數可信嗎？" />
                 <div className="flex flex-wrap gap-3">
-                  <button type="button" onClick={() => ask()} disabled={loading} className="rounded-2xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:opacity-50">{loading ? "分析中..." : "開始分析"}</button>
+                  <button type="button" onClick={() => ask()} disabled={loading} className="rounded-2xl bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:opacity-50">{loading ? "分析中..." : "問 Agent"}</button>
                   {role.defaultQuestions.map((preset) => <button key={preset} type="button" onClick={() => ask(preset)} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300 transition hover:bg-white/10">{preset}</button>)}
                 </div>
               </div>
@@ -747,7 +756,7 @@ export default function AgentWorkbench() {
             </section>
 
             <section className="rounded-[32px] border border-white/10 bg-[rgba(10,14,24,0.82)] p-6">
-              <h2 className="text-lg font-semibold text-white">工具追蹤</h2>
+              <h2 className="text-lg font-semibold text-white">查詢過程</h2>
               <div className="mt-4 space-y-3">{(result?.traces || []).map((trace) => <div key={`${trace.tool}-${trace.input}`} className="rounded-[24px] border border-white/10 bg-black/20 p-4"><div className="text-sm font-medium text-white">{trace.tool}</div><div className="mt-1 text-xs text-zinc-400">query: {trace.input}</div><div className="mt-2 text-sm text-cyan-300">hits: {trace.hits}</div></div>)}{!result?.traces?.length ? <p className="text-sm text-zinc-400">當分析有實際查詢排行榜、entities 或 insights 時，這裡會顯示查詢過程與命中結果。</p> : null}</div>
             </section>
 
