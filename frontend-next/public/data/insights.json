@@ -1,41 +1,42 @@
 {
-  "generated_at": "2026-05-05T21:07:57Z",
-  "market_temperature": 59.3,
-  "market_temperature_v2": 59.3,
+  "generated_at": "2026-05-06T09:00:58Z",
+  "market_temperature": 64.0,
+  "market_temperature_v2": 64.0,
   "active_groups": 96,
-  "formula_version": "v2-mixed-freshness",
+  "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.89,
     "threads": 0.21,
     "social_post_dates": 0.31,
+    "seo_ready_profiles": 0.79,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
   },
   "weekly_highlights": {
     "top_group": "時空Astria",
-    "social_king": "鬼塚 湊",
-    "social_focus": "鬼塚 湊",
-    "market_temperature": 59.3
+    "social_king": "桜羽 初季",
+    "social_focus": "桜羽 初季",
+    "market_temperature": 64.0
   },
   "rising_stars": [
-    "姫川乃愛",
-    "紺霜骷と音",
-    "瑠冥青璃",
-    "鹿森雲羽",
-    "空花茉穗"
+    "有栖栗",
+    "呪飼久露猫",
+    "天羽きな",
+    "紫暮幽霊",
+    "花瀬未桜"
   ],
   "heat_drop": [],
   "top_members": [
-    "鬼塚 湊",
-    "天国 せいや",
-    "骼実 百瀬",
+    "桜羽 初季",
     "天琴 ドウナ",
-    "綿琉羽音",
-    "姫野 あいる",
+    "Nya にゃあ",
+    "澪乃千尋",
+    "綿空もり",
+    "せいら",
+    "いのり",
     "御金 寧々花",
     "天唯陽奈",
-    "君宣苺香",
-    "魂音ちよ"
+    "君宣苺香"
   ]
 }

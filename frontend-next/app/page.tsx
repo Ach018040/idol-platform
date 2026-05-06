@@ -29,6 +29,7 @@ type Member = {
   engagement_score?: number | null;
   view_quality_score?: number | null;
   content_consistency_score?: number | null;
+  seo_discoverability_score?: number | null;
   data_confidence?: number | null;
 };
 
@@ -75,6 +76,7 @@ type Insights = {
     audience_insights?: number;
     commercial_insights?: number;
     views?: number;
+    seo_ready_profiles?: number;
   };
   weekly_highlights: {
     top_group: string;
@@ -453,7 +455,7 @@ export default function HomePage() {
             </div>
             <div className="space-y-2 text-sm text-zinc-300">
               <p>
-                市場溫度指數 <span className="font-bold text-pink-300">{fmt(insights.market_temperature)}</span>，目前以 `temperature_index_v2` 為排序依據。
+                市場溫度指數 <span className="font-bold text-pink-300">{fmt(insights.market_temperature)}</span>，目前以 SEO-aware `temperature_index_v2` 為排序依據。
               </p>
               <p>
                 本週焦點團體 <span className="font-semibold text-amber-300">{insights.weekly_highlights.top_group}</span>，
@@ -462,6 +464,7 @@ export default function HomePage() {
               <p>
                 資料覆蓋率：Instagram <span className="font-semibold text-cyan-300">{fmt((insights.data_coverage?.instagram ?? 0) * 100, 0)}%</span>、
                 Threads <span className="font-semibold text-cyan-300">{fmt((insights.data_coverage?.threads ?? 0) * 100, 0)}%</span>。
+                SEO-ready profile <span className="font-semibold text-emerald-300">{fmt((insights.data_coverage?.seo_ready_profiles ?? 0) * 100, 0)}%</span>。
               </p>
             </div>
           </div>
@@ -557,6 +560,7 @@ export default function HomePage() {
                       <div className="flex items-center gap-2">
                         <span>社群覆蓋 {fmt(member.social_activity, 0)}</span>
                         <span className={status.cls}>● {status.text}</span>
+                        {member.seo_discoverability_score != null ? <span>SEO {fmt(member.seo_discoverability_score, 0)}</span> : null}
                         {member.data_confidence != null ? <span>可信度 {fmt(member.data_confidence * 100, 0)}%</span> : null}
                       </div>
                       <SocialLinks instagram={member.instagram} twitter={member.twitter} facebook={member.facebook} threads={member.threads} />

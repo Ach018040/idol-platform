@@ -15,6 +15,7 @@ type MemberRanking = {
   twitter?: string;
   temperature_index_v2?: number;
   data_confidence?: number;
+  seo_discoverability_score?: number;
   last_social_signal_at?: string | null;
   days_since_social_signal?: number | null;
 };
@@ -30,6 +31,7 @@ type GroupRanking = {
   twitter?: string;
   youtube?: string;
   group_temperature_index_v2?: number;
+  group_seo_discoverability_score?: number;
   active_member_count?: number;
   days_since_update?: number;
 };
@@ -77,7 +79,7 @@ export default function FeedPage() {
                 快速讀懂今天的偶像市場訊號
               </h1>
               <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300">
-                這裡把成員排行、團體排行、資料可信度與活動 discovery 放在同一個工作台。先看誰正在升溫，再檢查分數是否由真實社群更新、資料完整度與團體關聯支撐。
+                這裡把成員排行、團體排行、資料可信度、SEO 可搜尋性與活動 discovery 放在同一個工作台。先看誰正在升溫，再檢查分數是否由真實社群更新、資料完整度與可索引來源支撐。
               </p>
             </div>
             <div className="rounded-3xl border border-cyan-300/20 bg-cyan-300/10 p-5">
@@ -144,7 +146,7 @@ export default function FeedPage() {
                         <Link href={`/members/${encodeURIComponent(member.name)}`} className="font-black text-white hover:text-cyan-200">
                           {member.name}
                         </Link>
-                        <div className="truncate text-sm text-slate-400">{member.group || "獨立活動"} / {daysLabel(member.days_since_social_signal)}</div>
+                <div className="truncate text-sm text-slate-400">{member.group || "獨立活動"} / SEO {score(member.seo_discoverability_score)} / {daysLabel(member.days_since_social_signal)}</div>
                       </div>
                       <div className="text-right">
                         <div className="text-xl font-black text-cyan-200">{score(member.temperature_index_v2)}</div>
@@ -188,7 +190,7 @@ export default function FeedPage() {
                       </div>
                       <div className="text-right">
                         <div className="text-xl font-black text-pink-200">{score(group.group_temperature_index_v2)}</div>
-                        <div className="text-xs text-slate-500">{Math.round(group.days_since_update ?? 999)} 天內更新</div>
+                        <div className="text-xs text-slate-500">SEO {score(group.group_seo_discoverability_score)}</div>
                       </div>
                     </div>
                     <div className="mt-3 flex flex-wrap gap-2 text-xs font-black">

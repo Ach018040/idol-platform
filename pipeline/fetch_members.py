@@ -2,7 +2,7 @@
 """
 Fetch idolmaps data from Supabase and generate the structured ranking JSON files
 used by the frontend. The schema keeps legacy fields for compatibility while
-adding v2-ready analytics fields for future formula upgrades.
+adding SEO-aware analytics fields for future formula upgrades.
 """
 
 from __future__ import annotations
@@ -26,7 +26,7 @@ OUT_MEMBERS = DATA_DIR / "member_rankings.json"
 OUT_GROUPS = DATA_DIR / "v7_rankings.json"
 OUT_INSIGHTS = DATA_DIR / "insights.json"
 OUT_DATA_QUALITY = DATA_DIR / "data_quality.json"
-FORMULA_VERSION = "v2-mixed-freshness"
+FORMULA_VERSION = "v3-seo-discoverability"
 
 
 def sb(path: str, params: dict[str, Any]) -> list[dict[str, Any]]:
@@ -80,18 +80,24 @@ def infer_content_type_mix(member: dict[str, Any]) -> list[str]:
     return content_types
 
 
+def has_public_url(row: dict[str, Any], key: str) -> bool:
+    return bool((row.get(key) or "").startswith("http"))
+
+
 def score_member(member: dict[str, Any], has_group: bool) -> dict[str, Any]:
-    has_ig = bool((member.get("instagram") or "").startswith("http"))
-    has_fb = bool((member.get("facebook") or "").startswith("http"))
-    has_tw = bool((member.get("x") or "").startswith("http"))
-    has_photo = bool((member.get("photo_url") or "").startswith("http"))
+    has_ig = has_public_url(member, "instagram")
+    has_fb = has_public_url(member, "facebook")
+    has_tw = has_public_url(member, "x")
+    has_photo = has_public_url(member, "photo_url")
     has_profile = bool(member.get("id"))
+    has_name = bool(member.get("name"))
+    has_alias = bool(member.get("name_roman") or member.get("nickname"))
     platform_count = int(has_ig) + int(has_fb) + int(has_tw)
 
     social_presence = clamp_score(
-        has_ig * 14 + has_tw * 12 + has_fb * 8 + max(0, platform_count - 1) * 3
+        has_ig * 12 + has_tw * 9 + has_fb * 6 + max(0, platform_count - 1) * 3
     )
-    profile_completeness = clamp_score(has_photo * 14 + has_profile * 6)
+    profile_completeness = clamp_score(has_photo * 10 + has_profile * 4 + has_alias * 2)
 
     updated_dt = safe_iso_to_datetime(member.get("updated_at"))
     # Reserved for future ingestion from real Instagram / Threads / Facebook post metadata.
@@ -107,19 +113,49 @@ def score_member(member: dict[str, Any], has_group: bool) -> dict[str, Any]:
     days_since_social_signal = days_since(social_signal_dt, fallback=days_since_update)
 
     data_refresh_score = clamp_score(8 * math.exp(-days_since_update / 45))
-    social_post_score_raw = 12 * math.exp(-days_since_social_signal / 21)
+    social_post_score_raw = 14 * math.exp(-days_since_social_signal / 21)
     social_post_score = clamp_score(
         social_post_score_raw if social_signal_dt else social_post_score_raw * 0.55
     )
     freshness_score = clamp_score(data_refresh_score + social_post_score)
-    group_affinity_score = 6.0 if has_group else 0.0
-    raw_total = social_presence + profile_completeness + freshness_score + group_affinity_score
-    temperature_index = clamp_score(raw_total * (100 / 86))
+    search_visibility_score = clamp_score(
+        has_name * 3
+        + has_alias * 3
+        + has_group * 2
+        + min(2, platform_count)
+    )
+    indexability_score = clamp_score(
+        has_photo * 3
+        + has_profile * 2
+        + min(2, platform_count)
+        + (1 if updated_dt else 0)
+    )
+    content_authority_score = clamp_score(
+        min(3, platform_count)
+        + (2 if has_group else 0)
+        + (1 if social_signal_dt else 0)
+    )
+    seo_discoverability_score = clamp_score(
+        search_visibility_score + indexability_score + content_authority_score
+    )
+    group_affinity_score = 8.0 if has_group else 0.0
+    raw_total = (
+        social_presence
+        + profile_completeness
+        + freshness_score
+        + seo_discoverability_score
+        + group_affinity_score
+    )
+    temperature_index = clamp_score(raw_total * (100 / 103))
     content_consistency_score = clamp_score(freshness_score * 0.7 + profile_completeness * 0.3)
     data_confidence = round(
         min(
-            0.85,
-            0.2 + platform_count * 0.12 + (0.15 if has_photo else 0.0) + (0.1 if updated_dt else 0.0),
+            0.9,
+            0.2
+            + platform_count * 0.1
+            + (0.12 if has_photo else 0.0)
+            + (0.1 if updated_dt else 0.0)
+            + (seo_discoverability_score / 100),
         ),
         2,
     )
@@ -172,6 +208,10 @@ def score_member(member: dict[str, Any], has_group: bool) -> dict[str, Any]:
         "engagement_score": None,
         "view_quality_score": None,
         "content_consistency_score": content_consistency_score,
+        "search_visibility_score": search_visibility_score,
+        "indexability_score": indexability_score,
+        "content_authority_score": content_authority_score,
+        "seo_discoverability_score": seo_discoverability_score,
         "commercial_health_score": None,
         "audience_fit_score": None,
         "social_activity": social_presence,
@@ -194,14 +234,39 @@ def score_group(group: dict[str, Any], members: list[dict[str, Any]]) -> dict[st
     top_member = max((member["temperature_index_v2"] for member in members), default=0.0)
     member_depth = min(9.0, 3.0 * math.log2(count + 1)) if count else 0.0
     social_coverage = clamp_score(
-        ((group.get("instagram") or "").startswith("http")) * 6
-        + ((group.get("x") or "").startswith("http")) * 5
-        + ((group.get("facebook") or "").startswith("http")) * 3
-        + ((group.get("youtube") or "").startswith("http")) * 4
+        has_public_url(group, "instagram") * 6
+        + has_public_url(group, "x") * 5
+        + has_public_url(group, "facebook") * 3
+        + has_public_url(group, "youtube") * 4
     )
-    temperature_index = clamp_score(
-        member_average * 0.45 + top_member * 0.25 + member_depth + social_coverage
+    group_search_visibility_score = clamp_score(
+        bool(group.get("name")) * 4
+        + min(
+            4,
+            int(has_public_url(group, "instagram"))
+            + int(has_public_url(group, "x"))
+            + int(has_public_url(group, "facebook"))
+            + int(has_public_url(group, "youtube")),
+        )
+        + (2 if count else 0)
     )
+    group_indexability_score = clamp_score(
+        (2 if count else 0)
+        + min(3, count)
+        + (2 if has_public_url(group, "youtube") else 0)
+        + (1 if social_coverage else 0)
+    )
+    group_seo_discoverability_score = clamp_score(
+        group_search_visibility_score + group_indexability_score
+    )
+    group_raw_total = (
+        member_average * 0.38
+        + top_member * 0.20
+        + member_depth
+        + social_coverage
+        + group_seo_discoverability_score
+    )
+    temperature_index = clamp_score(group_raw_total * (100 / 103))
     social_activity = (
         round(sum(member["social_activity"] for member in members) / count, 1) if count else 0.0
     )
@@ -224,6 +289,9 @@ def score_group(group: dict[str, Any], members: list[dict[str, Any]]) -> dict[st
         "member_top_temperature_v2": round(top_member, 1),
         "group_social_coverage_score": social_coverage,
         "group_content_diversity_score": group_content_diversity_score,
+        "group_search_visibility_score": group_search_visibility_score,
+        "group_indexability_score": group_indexability_score,
+        "group_seo_discoverability_score": group_seo_discoverability_score,
         "group_temperature_index_v2": temperature_index,
         "group_conversion_score_v2": conversion_score,
         "active_member_count": count,
@@ -246,6 +314,18 @@ def build_data_quality(member_data: list[dict[str, Any]], group_data: list[dict[
     member_total = len(member_data)
     group_total = len(group_data)
     members_with_social_dates = sum(1 for member in member_data if member.get("last_social_signal_at"))
+    members_with_seo_ready_profile = sum(
+        1
+        for member in member_data
+        if member.get("name")
+        and member.get("photo_url")
+        and (member.get("instagram") or member.get("twitter") or member.get("facebook"))
+    )
+    groups_with_seo_ready_profile = sum(
+        1
+        for group in group_data
+        if group.get("display_name") and group.get("member_names") and (group.get("instagram") or group.get("youtube"))
+    )
     members_missing_core = [
         member["name"]
         for member in member_data
@@ -274,6 +354,7 @@ def build_data_quality(member_data: list[dict[str, Any]], group_data: list[dict[
             "photo_url": ratio(member_data, "photo_url"),
             "group": ratio(member_data, "group"),
             "last_social_signal_at": round(members_with_social_dates / member_total, 3) if member_total else 0.0,
+            "seo_ready_profile": round(members_with_seo_ready_profile / member_total, 3) if member_total else 0.0,
             "missing_core_examples": members_missing_core,
         },
         "group_coverage": {
@@ -283,9 +364,16 @@ def build_data_quality(member_data: list[dict[str, Any]], group_data: list[dict[
             "youtube": ratio(group_data, "youtube"),
             "member_names": ratio(group_data, "member_names"),
             "last_group_snapshot_at": ratio(group_data, "last_group_snapshot_at"),
+            "seo_ready_profile": round(groups_with_seo_ready_profile / group_total, 3) if group_total else 0.0,
             "missing_core_examples": groups_missing_core,
         },
         "known_gaps": [
+            {
+                "id": "seo_entity_pages",
+                "label": "SEO entity profile 尚未完全覆蓋",
+                "impact": "搜尋可見度需要穩定名稱、別名、照片、社群來源與團體關聯；缺欄位會降低 search_visibility 與 indexability。",
+                "next_action": "優先補齊成員別名、團體關聯、canonical URL、社群連結與照片，並為成員/團體頁加入結構化資料。",
+            },
             {
                 "id": "social_last_post",
                 "label": "真實社群最後發文時間覆蓋不足",
@@ -443,6 +531,9 @@ def main() -> None:
             "threads": round(sum(1 for member in member_data if member["threads"]) / len(member_data), 2) if member_data else 0,
             "social_post_dates": round(
                 sum(1 for member in member_data if member["last_social_signal_at"]) / len(member_data), 2
+            ) if member_data else 0,
+            "seo_ready_profiles": round(
+                sum(1 for member in member_data if member.get("seo_discoverability_score", 0) >= 18) / len(member_data), 2
             ) if member_data else 0,
             "audience_insights": 0.0,
             "commercial_insights": 0.0,

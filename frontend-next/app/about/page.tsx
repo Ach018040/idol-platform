@@ -27,10 +27,11 @@ const FEATURES = [
 ];
 
 const FORMULA_POINTS = [
-  "成員分數由 social presence、profile completeness、mixed freshness 與 group affinity 組成。",
-  "團體分數綜合 member average、top member、group social coverage 與團體活躍深度。",
-  "freshness v2 會同時參考資料更新時間與 best-effort 的社群更新訊號，不再只依賴靜態存在分數。",
-  "若缺少部分欄位，系統會保留 fallback，但會透過 data coverage 與 confidence 提醒可信度差異。",
+  "新版 v3 以 SEO discoverability 為核心，把「是否容易被搜尋、被索引、被來源驗證」納入溫度分數。",
+  "成員分數由 social presence、profile completeness、mixed freshness、SEO discoverability 與 group affinity 組成。",
+  "SEO discoverability 拆成 search visibility、indexability 與 content authority：分別對應名稱/別名、canonical profile/照片/社群連結，以及多平台與團體來源背書。",
+  "團體分數綜合 member average、top member、group social coverage、團體活躍深度與 group SEO discoverability。",
+  "若缺少部分欄位，系統會保留 fallback，但會透過 data coverage、SEO-ready profile 與 confidence 提醒可信度差異。",
 ];
 
 export default async function AboutPage() {
@@ -76,7 +77,7 @@ export default async function AboutPage() {
         </section>
 
         <section className="space-y-5">
-          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold">溫度公式 v2</h2>
+          <h2 className="border-b border-white/10 pb-3 text-2xl font-bold">溫度公式 v3：SEO 可搜尋性模型</h2>
           <div className="surface-panel p-6">
             <div className="space-y-3 text-sm leading-7 text-zinc-300">
               {FORMULA_POINTS.map((point) => (
@@ -84,7 +85,7 @@ export default async function AboutPage() {
               ))}
             </div>
             <div className="mt-5 rounded-xl border border-emerald-400/20 bg-emerald-400/10 p-4 text-xs leading-7 text-zinc-200">
-              目前 v2 已經開始切入 followers、engagement、views、audience 等更細緻欄位設計，
+              目前 v3 先用平台可取得資料建立 SEO-ready entity profile，並保留 followers、engagement、views、audience 等更細緻欄位設計，
               但依資料來源可得性不同，部分欄位仍處於逐步補齊階段。平台會保留可實作欄位與資料可信度說明，
               避免把估計值偽裝成完整真實數據。
             </div>
