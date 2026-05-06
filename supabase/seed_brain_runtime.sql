@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-05-05T21:07:57Z',
-  'Weekly idol market digest generated on 2026-05-05T21:07:57Z. Top group: 時空Astria. Top member: 鬼塚 湊. Market temperature: 59.3. Rising stars: 姫川乃愛, 紺霜骷と音, 瑠冥青璃, 鹿森雲羽, 空花茉穗. Heat drop watch: none.',
-  '- 2026-05-05T21:07:57Z: weekly market digest generated
+  'Weekly Market Digest 2026-05-06T21:15:18Z',
+  'Weekly idol market digest generated on 2026-05-06T21:15:18Z. Top group: 時空Astria. Top member: KAMU. Market temperature: 64.7. Rising stars: 星野 さかな, 有栖栗, 呪飼久露猫, 天羽きな, 紫暮幽霊. Heat drop watch: none.',
+  '- 2026-05-06T21:15:18Z: weekly market digest generated
 - Highlight top group: 時空Astria
-- Highlight top member: 鬼塚 湊
-- Rising stars: 姫川乃愛, 紺霜骷と音, 瑠冥青璃, 鹿森雲羽, 空花茉穗',
+- Highlight top member: KAMU
+- Rising stars: 星野 さかな, 有栖栗, 呪飼久露猫, 天羽きな, 紫暮幽霊',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-05-05T21:07:57Z", "top_group": "時空Astria", "top_member": "鬼塚 湊", "market_temperature": "59.3", "rising_stars": ["姫川乃愛", "紺霜骷と音", "瑠冥青璃", "鹿森雲羽", "空花茉穗"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-05-06T21:15:18Z", "top_group": "時空Astria", "top_member": "KAMU", "market_temperature": "64.7", "rising_stars": ["星野 さかな", "有栖栗", "呪飼久露猫", "天羽きな", "紫暮幽霊"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-05-05T21:07:57Z',
-  'Weekly digest refreshed: 2026-05-05T21:07:57Z',
-  'Weekly idol market digest generated on 2026-05-05T21:07:57Z. Top group: 時空Astria. Top member: 鬼塚 湊. Market temperature: 59.3. Rising stars: 姫川乃愛, 紺霜骷と音, 瑠冥青璃, 鹿森雲羽, 空花茉穗. Heat drop watch: none.',
+  '2026-05-06T21:15:18Z',
+  'Weekly digest refreshed: 2026-05-06T21:15:18Z',
+  'Weekly idol market digest generated on 2026-05-06T21:15:18Z. Top group: 時空Astria. Top member: KAMU. Market temperature: 64.7. Rising stars: 星野 さかな, 有栖栗, 呪飼久露猫, 天羽きな, 紫暮幽霊. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
