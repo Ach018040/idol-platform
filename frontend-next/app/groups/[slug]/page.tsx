@@ -9,7 +9,20 @@ const SB_KEY = "sb_publishable_PtKb4LIJeJN3cECUJllW7w_UFRVTbTv";
 const SB_H = { apikey: SB_KEY, Accept: "application/json", "Accept-Profile": "public" };
 
 type Member = { id: string; name: string; photo_url?: string; instagram?: string; facebook?: string; x?: string; maid_url?: string; birthdate?: string; };
-type Group  = { id: string; name: string; color?: string; instagram?: string; facebook?: string; x?: string; youtube?: string; };
+type Group  = {
+  id: string;
+  name: string;
+  color?: string;
+  instagram?: string;
+  facebook?: string;
+  x?: string;
+  youtube?: string;
+  is_external?: boolean;
+  source_url?: string;
+  source_scope?: string;
+  source_region?: string;
+  source_note?: string;
+};
 
 function fmt(v: number, d=1){ return Number.isFinite(v)?v.toFixed(d):"—"; }
 function clamp(v:number){return Math.max(0,Math.min(100,v));}
@@ -28,7 +41,30 @@ export default function GroupPage({ params }: { params: { slug: string } }) {
           `${SB_URL}/rest/v1/groups?name=eq.${encodeURIComponent(groupName)}&select=*&limit=1`,
           {headers:SB_H}
         ).then(r=>r.json());
-        if(!gr?.length){setLoading(false);return;}
+        if(!gr?.length){
+          const fallbackGroups = await fetch("/data/v7_rankings.json", { cache: "no-store" }).then(r=>r.json());
+          const fallback = Array.isArray(fallbackGroups)
+            ? fallbackGroups.find((item:any) => (item.display_name || item.group) === groupName)
+            : null;
+          if(fallback){
+            setGroup({
+              id: `external:${fallback.group || fallback.display_name}`,
+              name: fallback.display_name || fallback.group,
+              color: fallback.color,
+              instagram: fallback.instagram,
+              facebook: fallback.facebook,
+              x: fallback.twitter,
+              youtube: fallback.youtube,
+              is_external: Boolean(fallback.is_external),
+              source_url: fallback.source_url,
+              source_scope: fallback.source_scope,
+              source_region: fallback.source_region,
+              source_note: fallback.source_note,
+            });
+          }
+          setLoading(false);
+          return;
+        }
         setGroup(gr[0]);
 
         // 找成員（透過 history）
@@ -84,8 +120,13 @@ export default function GroupPage({ params }: { params: { slug: string } }) {
               <h1 className="text-3xl font-black text-white">{group.name}</h1>
               <div className="flex items-center gap-2 mt-2 flex-wrap">
                 <span className="text-xs text-zinc-400 bg-white/5 border border-white/10 rounded-full px-3 py-1">
-                  {members.length} 名成員
+                  {group.is_external ? "外部團體資料" : `${members.length} 名成員`}
                 </span>
+                {group.source_scope === "international" && (
+                  <span className="text-xs text-cyan-200 bg-cyan-400/10 border border-cyan-400/20 rounded-full px-3 py-1">
+                    International source
+                  </span>
+                )}
                 {hasSocial && (
                   <div className="flex items-center gap-2">
                     {group.instagram && <a href={group.instagram} target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 text-xs font-bold border border-pink-400/20 bg-pink-400/10 rounded-full px-3 py-1 transition-colors">IG</a>}
@@ -104,7 +145,7 @@ export default function GroupPage({ params }: { params: { slug: string } }) {
           <h2 className="text-xl font-bold text-white mb-4">團體成員 ({members.length})</h2>
           {members.length === 0 ? (
             <div className="rounded-2xl border border-white/10 bg-white/5 p-8 text-center text-zinc-400 text-sm">
-              尚無成員資料
+              {group.is_external ? "此外部團體已加入平台索引，成員名單仍待 crawler 或人工審核補齊。" : "尚無成員資料"}
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -135,6 +176,13 @@ export default function GroupPage({ params }: { params: { slug: string } }) {
         {/* Back */}
         <div className="flex gap-3 flex-wrap">
           <Link href="/" className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-zinc-300 hover:bg-white/10 transition-colors">← 返回排行榜</Link>
+          {group.source_url && (
+            <a href={group.source_url}
+              target="_blank" rel="noopener noreferrer"
+              className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2.5 text-sm text-cyan-200 hover:bg-cyan-400/20 transition-colors">
+              外部資料來源 ↗
+            </a>
+          )}
           {(group.instagram||group.x) && (
             <a href={`https://idolinfohub.com/performers/${(group.instagram||group.x||'').replace(/.*\/([^/]+)\/?$/, '$1').replace('@','')}`}
               target="_blank" rel="noopener noreferrer"

@@ -26,6 +26,7 @@ OUT_MEMBERS = DATA_DIR / "member_rankings.json"
 OUT_GROUPS = DATA_DIR / "v7_rankings.json"
 OUT_INSIGHTS = DATA_DIR / "insights.json"
 OUT_DATA_QUALITY = DATA_DIR / "data_quality.json"
+MANUAL_EXTERNAL_GROUPS = REPO_ROOT / "pipeline" / "manual_external_groups.json"
 FORMULA_VERSION = "v3-seo-discoverability"
 
 
@@ -82,6 +83,16 @@ def infer_content_type_mix(member: dict[str, Any]) -> list[str]:
 
 def has_public_url(row: dict[str, Any], key: str) -> bool:
     return bool((row.get(key) or "").startswith("http"))
+
+
+def load_manual_external_groups() -> list[dict[str, Any]]:
+    if not MANUAL_EXTERNAL_GROUPS.exists():
+        return []
+    try:
+        payload = json.loads(MANUAL_EXTERNAL_GROUPS.read_text(encoding="utf-8"))
+        return payload if isinstance(payload, list) else []
+    except Exception:
+        return []
 
 
 def score_member(member: dict[str, Any], has_group: bool) -> dict[str, Any]:
@@ -276,9 +287,10 @@ def score_group(group: dict[str, Any], members: list[dict[str, Any]]) -> dict[st
         for content_type in member.get("content_type_mix", [])
     }
     group_content_diversity_score = clamp_score(min(15.0, len(content_type_pool) * 4.0))
+    group_snapshot = safe_iso_to_datetime(group.get("last_group_snapshot_at") or group.get("updated_at"))
     latest_snapshot = max(
         (safe_iso_to_datetime(member.get("last_social_snapshot_at")) for member in members),
-        default=None,
+        default=group_snapshot,
         key=lambda dt: dt or datetime.min.replace(tzinfo=timezone.utc),
     )
     days_since_group_update = days_since(latest_snapshot)
@@ -414,6 +426,28 @@ def main() -> None:
             "limit": 300,
         },
     )
+    manual_external_groups = load_manual_external_groups()
+    now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    groups.extend(
+        {
+            "id": f"external:{group.get('group') or group.get('display_name')}",
+            "name": group.get("display_name") or group.get("group"),
+            "color": group.get("color") or "#38bdf8",
+            "instagram": group.get("instagram") or "",
+            "facebook": group.get("facebook") or "",
+            "x": group.get("x") or group.get("twitter") or "",
+            "youtube": group.get("youtube") or "",
+            "updated_at": group.get("updated_at") or now_iso,
+            "last_group_snapshot_at": group.get("last_group_snapshot_at") or now_iso,
+            "is_external": True,
+            "source_url": group.get("source_url") or "",
+            "source_scope": group.get("source_scope") or "international",
+            "source_region": group.get("source_region") or "overseas",
+            "source_note": group.get("source_note") or "",
+        }
+        for group in manual_external_groups
+        if group.get("group") or group.get("display_name")
+    )
     history = sb(
         "history",
         {
@@ -505,11 +539,16 @@ def main() -> None:
                 "twitter": group.get("x") or "",
                 "threads": "",
                 "youtube": group.get("youtube") or "",
+                "is_external": bool(group.get("is_external")),
+                "source_url": group.get("source_url") or "",
+                "source_scope": group.get("source_scope") or "taiwan",
+                "source_region": group.get("source_region") or "taiwan",
+                "source_note": group.get("source_note") or "",
                 **scores,
             }
         )
 
-    group_data = [group for group in group_data if group["member_count"] > 0]
+    group_data = [group for group in group_data if group["member_count"] > 0 or group.get("is_external")]
     group_data.sort(key=lambda item: item["group_temperature_index_v2"], reverse=True)
     for index, group in enumerate(group_data):
         group["rank"] = index + 1

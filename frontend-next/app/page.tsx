@@ -61,6 +61,9 @@ type Group = {
   last_group_snapshot_at?: string | null;
   group_temperature_index_v2?: number;
   group_conversion_score_v2?: number;
+  is_external?: boolean;
+  source_scope?: string;
+  source_region?: string;
 };
 
 type CalEvent = { date: string; time: string; summary: string; dtRaw: Date };
@@ -214,7 +217,10 @@ async function loadData() {
   }));
 
   const activeRankableGroups = groupData.filter(
-    (group) => !group.is_solo && group.member_count > 0 && (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS,
+    (group) =>
+      !group.is_solo &&
+      (group.member_count > 0 || group.is_external) &&
+      (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS,
   );
 
   const socialKing = pickSocialKing(memberData);
@@ -334,11 +340,14 @@ export default function HomePage() {
 
   const { memberData, groupData, insights } = data!;
   const groups = groupData
-    .filter((group) => !group.is_solo && group.member_count > 0 && (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS)
+    .filter((group) => !group.is_solo && (group.member_count > 0 || group.is_external) && (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS)
     .slice(0, 10)
     .map((group, index) => ({ ...group, display_rank: index + 1 }));
   const solos = groupData
     .filter((group) => group.is_solo && (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS)
+    .slice(0, 6);
+  const externalGroups = groupData
+    .filter((group) => group.is_external)
     .slice(0, 6);
   const members = memberData.slice(0, 10);
   const maxGS = Math.max(...groups.map((group) => group.temperature_index), 1);
@@ -353,14 +362,14 @@ export default function HomePage() {
             <div>
               <div className="eyebrow-chip mb-2 px-3 py-1 text-xs">Idol Temperature Platform v3.8</div>
               <h1 className="text-3xl font-black text-white md:text-5xl">
-                台灣地下偶像
+                地下偶像
                 <span className="block bg-gradient-to-r from-pink-400 via-violet-300 to-cyan-300 bg-clip-text text-transparent">
                   市場情報平台
                 </span>
               </h1>
               <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-300">
-                排行榜、近期活動、論壇、Agent 與新版 v2 公式都整合在同一個入口。
-                現在首頁會分開呈現正式團體、成員與 Solo 區塊，並只顯示近 90 天內仍有更新的資料。
+                以台灣為起點，逐步擴展到海外地下偶像資料源。排行榜、近期活動、論壇、Agent 與新版 SEO-aware 公式都整合在同一個入口。
+                現在首頁會分開呈現正式團體、外部團體、成員與 Solo 區塊，並只顯示近 90 天內仍有更新的資料。
               </p>
             </div>
             <div className="flex items-end gap-2">
@@ -496,7 +505,7 @@ export default function HomePage() {
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-base font-semibold text-white">{group.display_name}</div>
                         <div className="truncate text-xs text-zinc-400">
-                          {group.member_count} 人
+                          {group.is_external ? "外部資料源" : `${group.member_count} 人`}
                           {group.member_names ? `・${group.member_names.split(" / ").slice(0, 4).join(" / ")}` : ""}
                         </div>
                       </div>
@@ -570,6 +579,49 @@ export default function HomePage() {
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        <section className="mt-6">
+          <div className="surface-panel p-5 md:p-6">
+            <div className="mb-5 flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-white">外部團體資料源</h2>
+                <p className="mt-1 text-sm text-zinc-400">非台灣來源會先以外部 seed 加入索引，待 crawler 補齊成員、活動與社群訊號後再進一步提升可信度。</p>
+              </div>
+              <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200">International</span>
+            </div>
+            {externalGroups.length > 0 ? (
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+                {externalGroups.map((group) => (
+                  <Link
+                    key={`external-${group.group}`}
+                    href={`/groups/${encodeURIComponent(group.display_name)}`}
+                    className="surface-card block p-4 transition-colors hover:border-cyan-400/30 hover:bg-white/10"
+                  >
+                    <div className="mb-3 flex items-center gap-3">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-400/10 text-sm font-bold text-cyan-200">
+                        {getInitial(group.display_name)}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate text-base font-semibold text-white">{group.display_name}</div>
+                        <div className="truncate text-xs text-zinc-400">{group.source_region || "overseas"}・外部資料源</div>
+                      </div>
+                      <div className="flex-shrink-0 text-right">
+                        <div className="text-lg font-extrabold text-cyan-300">{fmt(group.temperature_index)}</div>
+                        <div className="text-[11px] text-zinc-400">初始分數</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between text-xs text-zinc-400">
+                      <span>待補成員與活動資料</span>
+                      <SocialLinks instagram={group.instagram} twitter={group.twitter} facebook={group.facebook} youtube={group.youtube} />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-zinc-400">目前尚無外部團體資料源。</p>
+            )}
           </div>
         </section>
 

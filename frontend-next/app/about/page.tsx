@@ -10,7 +10,7 @@ export const metadata = {
 const FEATURES = [
   {
     title: "即時排行榜",
-    desc: "整合成員與團體資料，使用新版 v2 指標顯示目前排行榜、社群覆蓋與更新狀態。",
+    desc: "整合成員、團體與外部資料源，使用新版 v3 SEO-aware 指標顯示排行榜、社群覆蓋與更新狀態。",
   },
   {
     title: "近期活動",
@@ -47,7 +47,7 @@ export default async function AboutPage() {
           </div>
           <h1 className="text-4xl font-black md:text-5xl">關於本平台</h1>
           <p className="mx-auto max-w-3xl text-sm leading-8 text-zinc-300">
-            idol-platform 是以台灣地下偶像為核心的市場情報平台。
+            idol-platform 是以台灣地下偶像為起點、逐步擴展到海外地下偶像資料源的市場情報平台。
             我們把排行榜、活動、論壇、知識層與分析工作台放在同一個產品裡，
             讓使用者不只看到分數，也能理解分數從哪裡來、目前可信到什麼程度。
           </p>
