@@ -64,7 +64,7 @@ export default function ValidationPage() {
                 <div className="mt-3 grid grid-cols-2 gap-2 text-sm text-slate-300">
                   <span>Instagram</span><strong>{pct(memberCoverage.instagram)}</strong>
                   <span>Facebook</span><strong>{pct(memberCoverage.facebook)}</strong>
-                  <span>X / Threads</span><strong>{pct(memberCoverage.twitter)}</strong>
+                  <span>X</span><strong>{pct(memberCoverage.twitter)}</strong>
                   <span>照片</span><strong>{pct(memberCoverage.photo_url)}</strong>
                   <span>團體關聯</span><strong>{pct(memberCoverage.group)}</strong>
                   <span>真實社群更新</span><strong>{pct(memberCoverage.last_social_signal_at)}</strong>

@@ -434,9 +434,10 @@ def main() -> None:
     members_with_social_urls: list[dict[str, Any]] = []
     for member in members:
         twitter = member.get("x") or ""
+        threads = member.get("threads") or ""
         member_with_urls = {
             **member,
-            "threads": twitter if "threads.com" in twitter else "",
+            "threads": threads if str(threads).startswith("http") else "",
         }
         members_with_social_urls.append(member_with_urls)
 
@@ -469,7 +470,7 @@ def main() -> None:
                 "instagram": instagram if instagram.startswith("http") else "",
                 "facebook": facebook if facebook.startswith("http") else "",
                 "twitter": twitter if twitter.startswith("http") else "",
-                "threads": twitter if twitter.startswith("http") else "",
+                "threads": member.get("threads") if str(member.get("threads") or "").startswith("http") else "",
                 "photo_url": photo_url if photo_url.startswith("http") else "",
                 "member_url": f"https://idolmaps.com/member/{member.get('id', '')}",
                 **scores,
@@ -528,6 +529,7 @@ def main() -> None:
         "formula_version": FORMULA_VERSION,
         "data_coverage": {
             "instagram": round(sum(1 for member in member_data if member["instagram"]) / len(member_data), 2) if member_data else 0,
+            "x": round(sum(1 for member in member_data if member["twitter"]) / len(member_data), 2) if member_data else 0,
             "threads": round(sum(1 for member in member_data if member["threads"]) / len(member_data), 2) if member_data else 0,
             "social_post_dates": round(
                 sum(1 for member in member_data if member["last_social_signal_at"]) / len(member_data), 2

@@ -1,13 +1,14 @@
 {
-  "generated_at": "2026-05-06T09:00:58Z",
-  "market_temperature": 64.0,
-  "market_temperature_v2": 64.0,
+  "generated_at": "2026-05-06T13:04:42Z",
+  "market_temperature": 64.2,
+  "market_temperature_v2": 64.2,
   "active_groups": 96,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.89,
-    "threads": 0.21,
-    "social_post_dates": 0.31,
+    "x": 0.21,
+    "threads": 0.0,
+    "social_post_dates": 0.35,
     "seo_ready_profiles": 0.79,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
@@ -15,9 +16,9 @@
   },
   "weekly_highlights": {
     "top_group": "時空Astria",
-    "social_king": "桜羽 初季",
-    "social_focus": "桜羽 初季",
-    "market_temperature": 64.0
+    "social_king": "KAMU",
+    "social_focus": "KAMU",
+    "market_temperature": 64.2
   },
   "rising_stars": [
     "有栖栗",
@@ -28,6 +29,7 @@
   ],
   "heat_drop": [],
   "top_members": [
+    "KAMU",
     "桜羽 初季",
     "天琴 ドウナ",
     "Nya にゃあ",
@@ -36,7 +38,6 @@
     "せいら",
     "いのり",
     "御金 寧々花",
-    "天唯陽奈",
-    "君宣苺香"
+    "天唯陽奈"
   ]
 }

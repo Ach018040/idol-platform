@@ -72,6 +72,7 @@ type Insights = {
   formula_version?: string;
   data_coverage?: {
     instagram?: number;
+    x?: number;
     threads?: number;
     audience_insights?: number;
     commercial_insights?: number;
@@ -463,7 +464,7 @@ export default function HomePage() {
               </p>
               <p>
                 資料覆蓋率：Instagram <span className="font-semibold text-cyan-300">{fmt((insights.data_coverage?.instagram ?? 0) * 100, 0)}%</span>、
-                Threads <span className="font-semibold text-cyan-300">{fmt((insights.data_coverage?.threads ?? 0) * 100, 0)}%</span>。
+                X <span className="font-semibold text-cyan-300">{fmt((insights.data_coverage?.x ?? insights.data_coverage?.threads ?? 0) * 100, 0)}%</span>。
                 SEO-ready profile <span className="font-semibold text-emerald-300">{fmt((insights.data_coverage?.seo_ready_profiles ?? 0) * 100, 0)}%</span>。
               </p>
             </div>
