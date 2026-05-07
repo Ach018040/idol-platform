@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-05-06T21:15:18Z",
-  "market_temperature": 64.7,
-  "market_temperature_v2": 64.7,
+  "generated_at": "2026-05-07T21:08:22Z",
+  "market_temperature": 64.8,
+  "market_temperature_v2": 64.8,
   "active_groups": 97,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
-    "instagram": 0.89,
+    "instagram": 0.9,
     "x": 0.22,
     "threads": 0.0,
     "social_post_dates": 0.35,
-    "seo_ready_profiles": 0.79,
+    "seo_ready_profiles": 0.8,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
@@ -18,7 +18,7 @@
     "top_group": "時空Astria",
     "social_king": "KAMU",
     "social_focus": "KAMU",
-    "market_temperature": 64.7
+    "market_temperature": 64.8
   },
   "rising_stars": [
     "星野 さかな",

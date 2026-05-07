@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-06T21:15:18Z",
+  "generated_at": "2026-05-07T21:08:23Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 413,
@@ -8,14 +8,14 @@
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
-    "instagram": 0.893,
+    "instagram": 0.896,
     "facebook": 0.375,
-    "twitter": 0.215,
+    "twitter": 0.218,
     "threads": 0.0,
-    "photo_url": 0.91,
+    "photo_url": 0.913,
     "group": 0.891,
     "last_social_signal_at": 0.354,
-    "seo_ready_profile": 0.884,
+    "seo_ready_profile": 0.886,
     "missing_core_examples": [
       "台湾人の永琳",
       "桜音みゆぃ♪",
@@ -31,10 +31,10 @@
       "aka Collection",
       "ナヒミコ",
       "米粒R ミリア",
+      "音転 心夕",
       "京谷星蘭",
       "青空歩夢",
       "四四よし",
-      "音転 心夕",
       "Ui",
       "亞寧",
       "桃沢花梨",
