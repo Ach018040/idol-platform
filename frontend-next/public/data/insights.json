@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-05-07T21:08:22Z",
-  "market_temperature": 64.8,
-  "market_temperature_v2": 64.8,
-  "active_groups": 97,
+  "generated_at": "2026-05-08T21:07:44Z",
+  "market_temperature": 64.9,
+  "market_temperature_v2": 64.9,
+  "active_groups": 98,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.9,
     "x": 0.22,
     "threads": 0.0,
     "social_post_dates": 0.35,
-    "seo_ready_profiles": 0.8,
+    "seo_ready_profiles": 0.81,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
@@ -18,26 +18,26 @@
     "top_group": "時空Astria",
     "social_king": "KAMU",
     "social_focus": "KAMU",
-    "market_temperature": 64.8
+    "market_temperature": 64.9
   },
   "rising_stars": [
+    "甘崎紗音",
+    "矢島愛久",
     "星野 さかな",
     "有栖栗",
-    "呪飼久露猫",
-    "天羽きな",
-    "紫暮幽霊"
+    "呪飼久露猫"
   ],
   "heat_drop": [],
   "top_members": [
     "KAMU",
+    "マル",
     "桜羽 初季",
     "天琴 ドウナ",
     "藤乃瑠花",
     "Nya にゃあ",
-    "澪乃千尋",
     "綿空もり",
-    "せいら",
-    "いのり",
-    "御金 寧々花"
+    "澪乃千尋",
+    "つつ子",
+    "せいら"
   ]
 }
