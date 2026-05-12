@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-05-11T21:21:47Z',
-  'Weekly idol market digest generated on 2026-05-11T21:21:47Z. Top group: 時空Astria. Top member: KAMU. Market temperature: 65.8. Rising stars: 星野 さかな, 有栖栗, 呪飼久露猫, 天羽きな, 紫暮幽霊. Heat drop watch: none.',
-  '- 2026-05-11T21:21:47Z: weekly market digest generated
+  'Weekly Market Digest 2026-05-12T21:23:33Z',
+  'Weekly idol market digest generated on 2026-05-12T21:23:33Z. Top group: 時空Astria. Top member: KAMU. Market temperature: 66.1. Rising stars: 甘崎紗音, 矢島愛久, 星野 さかな, 有栖栗, 呪飼久露猫. Heat drop watch: none.',
+  '- 2026-05-12T21:23:33Z: weekly market digest generated
 - Highlight top group: 時空Astria
 - Highlight top member: KAMU
-- Rising stars: 星野 さかな, 有栖栗, 呪飼久露猫, 天羽きな, 紫暮幽霊',
+- Rising stars: 甘崎紗音, 矢島愛久, 星野 さかな, 有栖栗, 呪飼久露猫',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-05-11T21:21:47Z", "top_group": "時空Astria", "top_member": "KAMU", "market_temperature": "65.8", "rising_stars": ["星野 さかな", "有栖栗", "呪飼久露猫", "天羽きな", "紫暮幽霊"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-05-12T21:23:33Z", "top_group": "時空Astria", "top_member": "KAMU", "market_temperature": "66.1", "rising_stars": ["甘崎紗音", "矢島愛久", "星野 さかな", "有栖栗", "呪飼久露猫"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-05-11T21:21:47Z',
-  'Weekly digest refreshed: 2026-05-11T21:21:47Z',
-  'Weekly idol market digest generated on 2026-05-11T21:21:47Z. Top group: 時空Astria. Top member: KAMU. Market temperature: 65.8. Rising stars: 星野 さかな, 有栖栗, 呪飼久露猫, 天羽きな, 紫暮幽霊. Heat drop watch: none.',
+  '2026-05-12T21:23:33Z',
+  'Weekly digest refreshed: 2026-05-12T21:23:33Z',
+  'Weekly idol market digest generated on 2026-05-12T21:23:33Z. Top group: 時空Astria. Top member: KAMU. Market temperature: 66.1. Rising stars: 甘崎紗音, 矢島愛久, 星野 さかな, 有栖栗, 呪飼久露猫. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
