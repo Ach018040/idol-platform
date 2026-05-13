@@ -1,0 +1,186 @@
+[
+  {
+    "id": "sig_001",
+    "platform": "threads",
+    "source_url": "https://www.threads.net/",
+    "entity_type": "group",
+    "entity_name": "溟海オシアナス",
+    "member_name": "桜野杏理",
+    "author_name": "fan_a",
+    "author_username": "fan_a",
+    "text": "下次現場一定去，想拍チェキ！",
+    "created_at": "2026-05-11T20:30:00+08:00",
+    "like_count": 12,
+    "reply_count": 2,
+    "repost_count": 1,
+    "quote_count": 0,
+    "hashtags": [
+      "溟海オシアナス"
+    ],
+    "mentions": [],
+    "category": "merch_intent",
+    "sentiment": "positive",
+    "conversion_stage": "purchase_intent",
+    "tags": [
+      "attendance_intent",
+      "merch_intent"
+    ],
+    "quality_score": 90.3,
+    "conversion_score": 90,
+    "risk_score": 5
+  },
+  {
+    "id": "sig_002",
+    "platform": "instagram",
+    "source_url": "https://www.instagram.com/",
+    "entity_type": "group",
+    "entity_name": "#FFFFFF",
+    "member_name": "",
+    "author_name": "new_fan_01",
+    "author_username": "new_fan_01",
+    "text": "第一次看就被圈粉，想認識大家，今天的表演好棒！",
+    "created_at": "2026-05-11T22:10:00+08:00",
+    "like_count": 36,
+    "reply_count": 4,
+    "repost_count": 2,
+    "quote_count": 0,
+    "hashtags": [
+      "FFFFFF",
+      "地下偶像"
+    ],
+    "mentions": [],
+    "category": "new_fan_signal",
+    "sentiment": "positive",
+    "conversion_stage": "interest",
+    "tags": [
+      "new_fan_signal",
+      "support"
+    ],
+    "quality_score": 77.6,
+    "conversion_score": 55,
+    "risk_score": 5
+  },
+  {
+    "id": "sig_003",
+    "platform": "x",
+    "source_url": "https://x.com/",
+    "entity_type": "group",
+    "entity_name": "#FFFFFF",
+    "member_name": "",
+    "author_name": "fan_b",
+    "author_username": "fan_b",
+    "text": "票在哪預約？入場時間和場地資訊想確認一下",
+    "created_at": "2026-05-12T10:15:00+08:00",
+    "like_count": 7,
+    "reply_count": 3,
+    "repost_count": 0,
+    "quote_count": 0,
+    "hashtags": [
+      "FFFFFF"
+    ],
+    "mentions": [],
+    "category": "operation_feedback",
+    "sentiment": "neutral",
+    "conversion_stage": "inquiry",
+    "tags": [
+      "operation_feedback",
+      "ticket_question"
+    ],
+    "quality_score": 60.6,
+    "conversion_score": 20,
+    "risk_score": 30
+  },
+  {
+    "id": "sig_004",
+    "platform": "youtube",
+    "source_url": "https://www.youtube.com/",
+    "entity_type": "group",
+    "entity_name": "新增經歷",
+    "member_name": "",
+    "author_name": "repo_fan",
+    "author_username": "repo_fan",
+    "text": "昨天現場心得 repo：歌單很順，MC 很有記憶點，最後一首的call也很好跟，會想再帶朋友去看一下。",
+    "created_at": "2026-05-12T23:40:00+08:00",
+    "like_count": 28,
+    "reply_count": 5,
+    "repost_count": 4,
+    "quote_count": 1,
+    "hashtags": [
+      "新增經歷"
+    ],
+    "mentions": [
+      "friend_a"
+    ],
+    "category": "spread",
+    "sentiment": "positive",
+    "conversion_stage": "advocate",
+    "tags": [
+      "long_review",
+      "spread"
+    ],
+    "quality_score": 81.9,
+    "conversion_score": 20,
+    "risk_score": 5
+  },
+  {
+    "id": "sig_005",
+    "platform": "facebook",
+    "source_url": "https://www.facebook.com/",
+    "entity_type": "group",
+    "entity_name": "新增經歷",
+    "member_name": "",
+    "author_name": "fan_c",
+    "author_username": "fan_c",
+    "text": "希望改善排隊動線，音響今天有點不穩，但成員表演還是很讚。",
+    "created_at": "2026-05-13T00:05:00+08:00",
+    "like_count": 10,
+    "reply_count": 6,
+    "repost_count": 0,
+    "quote_count": 0,
+    "hashtags": [],
+    "mentions": [],
+    "category": "operation_feedback",
+    "sentiment": "neutral",
+    "conversion_stage": "inquiry",
+    "tags": [
+      "operation_feedback",
+      "support"
+    ],
+    "quality_score": 62.8,
+    "conversion_score": 20,
+    "risk_score": 30
+  },
+  {
+    "id": "sig_006",
+    "platform": "tiktok",
+    "source_url": "https://www.tiktok.com/",
+    "entity_type": "group",
+    "entity_name": "#0000FF",
+    "member_name": "",
+    "author_name": "spread_fan",
+    "author_username": "spread_fan",
+    "text": "@friend 推給你，大家看一下這段，太神了",
+    "created_at": "2026-05-13T09:10:00+08:00",
+    "like_count": 55,
+    "reply_count": 8,
+    "repost_count": 12,
+    "quote_count": 3,
+    "hashtags": [
+      "0000FF",
+      "地下偶像"
+    ],
+    "mentions": [
+      "friend"
+    ],
+    "category": "spread",
+    "sentiment": "positive",
+    "conversion_stage": "advocate",
+    "tags": [
+      "spread",
+      "support"
+    ],
+    "quality_score": 85.5,
+    "conversion_score": 20,
+    "risk_score": 5
+  }
+]

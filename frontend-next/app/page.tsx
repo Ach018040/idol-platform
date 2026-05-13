@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -91,6 +91,29 @@ type Insights = {
   events: CalEvent[];
 };
 
+type SocialHeatV9 = {
+  entity_name: string;
+  rank_v9?: number;
+  social_heat_v9: number;
+  engagement_quality_score: number;
+  fan_conversion_score: number;
+  core_fan_score: number;
+  risk_score: number;
+  top_reasons?: string[];
+  suggested_actions?: string[];
+};
+
+type SocialSignalScored = {
+  id: string;
+  platform: string;
+  entity_name: string;
+  author_username?: string;
+  text: string;
+  category: string;
+  conversion_score: number;
+  risk_score: number;
+};
+
 function fmt(value: number | null | undefined, digits = 1) {
   const n = Number(value ?? 0);
   return Number.isFinite(n) ? n.toFixed(digits) : "0";
@@ -153,12 +176,22 @@ async function fetchJson<T>(path: string): Promise<T> {
   return response.json();
 }
 
+async function fetchJsonOptional<T>(path: string, fallback: T): Promise<T> {
+  try {
+    return await fetchJson<T>(path);
+  } catch {
+    return fallback;
+  }
+}
+
 async function loadData() {
-  const [membersRaw, groupsRaw, insightsRaw, icalJson] = await Promise.all([
+  const [membersRaw, groupsRaw, insightsRaw, icalJson, socialHeatRaw, socialSignalsRaw] = await Promise.all([
     fetchJson<Member[]>("/data/member_rankings.json"),
     fetchJson<Group[]>("/data/v7_rankings.json"),
     fetchJson<Omit<Insights, "events">>("/data/insights.json"),
     fetch(ICS_API).then((res) => (res.ok ? res.json() : { events: [] })).catch(() => ({ events: [] })),
+    fetchJsonOptional<SocialHeatV9[]>("/data/social_heat_v9.json", []),
+    fetchJsonOptional<SocialSignalScored[]>("/data/social_signals_scored.json", []),
   ]);
 
   const now = Date.now();
@@ -236,7 +269,15 @@ async function loadData() {
     events,
   };
 
-  return { memberData, groupData, insights };
+  const socialHeatV9 = socialHeatRaw
+    .slice()
+    .sort((a, b) => Number(b.social_heat_v9 ?? 0) - Number(a.social_heat_v9 ?? 0));
+  const highIntentSignals = socialSignalsRaw
+    .filter((signal) => Number(signal.conversion_score ?? 0) >= 75)
+    .sort((a, b) => Number(b.conversion_score ?? 0) - Number(a.conversion_score ?? 0))
+    .slice(0, 8);
+
+  return { memberData, groupData, insights, socialHeatV9, highIntentSignals };
 }
 
 function SocialLinks(props: {
@@ -274,7 +315,13 @@ function SocialLinks(props: {
 }
 
 export default function HomePage() {
-  const [data, setData] = useState<{ memberData: Member[]; groupData: Group[]; insights: Insights } | null>(null);
+  const [data, setData] = useState<{
+    memberData: Member[];
+    groupData: Group[];
+    insights: Insights;
+    socialHeatV9: SocialHeatV9[];
+    highIntentSignals: SocialSignalScored[];
+  } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
@@ -338,7 +385,7 @@ export default function HomePage() {
     );
   }
 
-  const { memberData, groupData, insights } = data!;
+  const { memberData, groupData, insights, socialHeatV9, highIntentSignals } = data!;
   const isDisplayReadyGroup = (group: Group) => !group.is_external || group.member_count > 0;
   const groups = groupData
     .filter((group) => !group.is_solo && group.member_count > 0 && isDisplayReadyGroup(group) && (group.days_since_update ?? 365) <= ACTIVE_WINDOW_DAYS)
@@ -354,6 +401,14 @@ export default function HomePage() {
   const maxGS = Math.max(...groups.map((group) => group.temperature_index), 1);
   const maxSolo = Math.max(...solos.map((group) => group.temperature_index), 1);
   const maxMS = Math.max(...members.map((member) => member.temperature_index), 1);
+  const socialHeatRows = socialHeatV9.slice(0, 8);
+  const socialHeatTop = socialHeatRows[0];
+  const socialHeatAverage = socialHeatV9.length
+    ? socialHeatV9.reduce((sum, row) => sum + Number(row.social_heat_v9 ?? 0), 0) / socialHeatV9.length
+    : 0;
+  const topConversionGroup = socialHeatV9.slice().sort((a, b) => Number(b.fan_conversion_score ?? 0) - Number(a.fan_conversion_score ?? 0))[0];
+  const riskWatch = socialHeatV9.filter((row) => Number(row.risk_score ?? 0) >= 40);
+  const maxSocialHeat = Math.max(...socialHeatRows.map((row) => Number(row.social_heat_v9 ?? 0)), 1);
 
   return (
     <main className="page-shell min-h-screen text-white">
@@ -397,6 +452,9 @@ export default function HomePage() {
                 <Link href="/agent" className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-center text-xs text-cyan-200 transition-colors hover:bg-cyan-400/20">
                   AI Agent
                 </Link>
+                <Link href="/admin/api-sources" className="rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-center text-xs text-emerald-200 transition-colors hover:bg-emerald-400/20">
+                  API Sources
+                </Link>
               </div>
             </div>
           </div>
@@ -415,6 +473,120 @@ export default function HomePage() {
             ))}
           </section>
         </header>
+
+        <section className="mb-8 surface-panel border-cyan-400/20 bg-cyan-500/10 p-5 md:p-6">
+          <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <div className="mb-2 text-xs uppercase tracking-widest text-cyan-200/80">Idol Social Heat Platform v9</div>
+              <h2 className="text-2xl font-black text-white">Social Heat v9 社群熱度分析</h2>
+              <p className="mt-2 max-w-3xl text-sm leading-7 text-zinc-300">
+                並行 Classic v7、Social Heat v9 與 Hybrid View，觀察留言品質、轉換意圖、核心粉絲、擴散與風險。
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {["Classic v7 Temperature", "Social Heat v9", "Hybrid View"].map((label) => (
+                <span key={label} className="rounded-full border border-white/10 bg-black/25 px-3 py-2 text-xs text-zinc-200">
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="surface-card p-4">
+              <div className="text-xs uppercase tracking-widest text-zinc-500">社群熱度平均</div>
+              <div className="mt-2 text-3xl font-black text-cyan-300">{fmt(socialHeatAverage)}</div>
+            </div>
+            <div className="surface-card p-4">
+              <div className="text-xs uppercase tracking-widest text-zinc-500">v9 熱度第一名</div>
+              <div className="mt-2 truncate text-2xl font-black text-pink-300">{socialHeatTop?.entity_name || "暫無資料"}</div>
+            </div>
+            <div className="surface-card p-4">
+              <div className="text-xs uppercase tracking-widest text-zinc-500">高轉換團體</div>
+              <div className="mt-2 truncate text-2xl font-black text-emerald-300">{topConversionGroup?.entity_name || "暫無資料"}</div>
+            </div>
+            <div className="surface-card p-4">
+              <div className="text-xs uppercase tracking-widest text-zinc-500">風險觀察名單</div>
+              <div className="mt-2 text-3xl font-black text-amber-300">{riskWatch.length ? `${riskWatch.length} 組` : "暫無"}</div>
+            </div>
+          </div>
+
+          <div className="grid gap-6 xl:grid-cols-[1.35fr_0.65fr]">
+            <div className="surface-card p-4">
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="text-lg font-bold text-white">Social Heat v9 Ranking</h3>
+                <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200">{socialHeatRows.length} groups</span>
+              </div>
+              <div className="space-y-3">
+                {socialHeatRows.map((row) => (
+                  <div key={row.entity_name} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                    <div className="mb-3 flex items-start gap-3">
+                      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-white/10 text-sm font-black">{row.rank_v9 ?? "-"}</div>
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate font-bold text-white">{row.entity_name}</div>
+                        <div className="mt-2 flex flex-wrap gap-1.5">
+                          {(row.top_reasons ?? []).slice(0, 3).map((reason) => (
+                            <span key={reason} className="rounded-full border border-violet-400/20 bg-violet-400/10 px-2 py-1 text-[11px] text-violet-100">
+                              {reason}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xl font-black text-cyan-300">{fmt(row.social_heat_v9)}</div>
+                        <div className="text-[11px] text-zinc-500">v9 heat</div>
+                      </div>
+                    </div>
+                    <div className="mb-2 h-2 overflow-hidden rounded-full bg-white/10">
+                      <div className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-pink-400 to-amber-300" style={{ width: `${clamp((row.social_heat_v9 / maxSocialHeat) * 100)}%` }} />
+                    </div>
+                    <div className="grid gap-2 text-xs text-zinc-300 sm:grid-cols-4">
+                      <span>轉換 {fmt(row.fan_conversion_score)}</span>
+                      <span>品質 {fmt(row.engagement_quality_score)}</span>
+                      <span>核心粉 {fmt(row.core_fan_score)}</span>
+                      <span className={row.risk_score >= 40 ? "text-amber-300" : "text-emerald-300"}>風險 {fmt(row.risk_score)}</span>
+                    </div>
+                  </div>
+                ))}
+                {!socialHeatRows.length ? <p className="py-8 text-center text-sm text-zinc-400">尚未產生 Social Heat v9 資料。</p> : null}
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="surface-card p-5">
+                <h3 className="text-lg font-bold text-white">Heat Reason Card</h3>
+                <div className="mt-3 text-2xl font-black text-pink-300">{socialHeatTop?.entity_name || "暫無資料"}</div>
+                <div className="mt-4 space-y-2">
+                  {(socialHeatTop?.top_reasons ?? ["等待社群訊號累積"]).map((reason) => (
+                    <div key={reason} className="rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-zinc-200">{reason}</div>
+                  ))}
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {(socialHeatTop?.suggested_actions ?? ["先補齊社群訊號資料"]).map((action) => (
+                    <span key={action} className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-2 text-xs text-emerald-100">{action}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="surface-card p-5">
+                <h3 className="text-lg font-bold text-white">High Intent Signals</h3>
+                <div className="mt-3 space-y-3">
+                  {highIntentSignals.map((signal) => (
+                    <div key={signal.id} className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
+                      <div className="mb-1 flex items-center justify-between gap-2 text-xs">
+                        <span className="truncate font-bold text-white">{signal.author_username || "unknown"} / {signal.entity_name}</span>
+                        <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-2 py-1 text-cyan-100">{signal.category}</span>
+                      </div>
+                      <p className="line-clamp-2 text-sm leading-6 text-zinc-300">{signal.text}</p>
+                      <div className="mt-2 text-xs font-black text-emerald-300">conversion {fmt(signal.conversion_score, 0)}</div>
+                    </div>
+                  ))}
+                  {!highIntentSignals.length ? <p className="text-sm text-zinc-400">尚無高轉換留言。</p> : null}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="mb-8 grid grid-cols-1 gap-4 xl:grid-cols-3">
           <div className="surface-panel border-emerald-400/20 bg-emerald-500/10 p-5">

@@ -82,7 +82,7 @@ def build_trend_snapshots(
     with open(snapshot_file, "w", encoding="utf-8") as f:
         json.dump(all_snaps, f, ensure_ascii=False, indent=2)
 
-    print(f"✅ trend_snapshots.json updated — {today} ({len(today_snaps)} groups, total {len(all_snaps)} records)")
+    print(f"trend_snapshots.json updated - {today} ({len(today_snaps)} groups, total {len(all_snaps)} records)")
 
 
 if __name__ == "__main__":

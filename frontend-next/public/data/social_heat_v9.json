@@ -1,0 +1,322 @@
+[
+  {
+    "entity_name": "#0000FF",
+    "entity_type": "group",
+    "engagement_quality_score": 88.5,
+    "fan_conversion_score": 11.0,
+    "momentum_score": 81.0,
+    "risk_adjustment_score": 100,
+    "risk_score": 5.0,
+    "signal_count": 1,
+    "high_intent_count": 0,
+    "core_fan_count": 1,
+    "top_categories": {
+      "spread": 1
+    },
+    "top_hashtags": [
+      "0000FF",
+      "地下偶像"
+    ],
+    "top_authors": [
+      "spread_fan"
+    ],
+    "social_volume_score": 100,
+    "core_fan_score": 42.9,
+    "content_spread_score": 100,
+    "social_heat_v9": 68.8,
+    "top_reasons": [
+      "高品質留言比例高",
+      "近期成長動能明顯",
+      "轉發、引用與提及擴散佳"
+    ],
+    "suggested_actions": [
+      "設計可轉發素材與 Hashtag 活動"
+    ],
+    "rank_v9": 1
+  },
+  {
+    "entity_name": "新增經歷",
+    "entity_type": "group",
+    "engagement_quality_score": 77.6,
+    "fan_conversion_score": 11.0,
+    "momentum_score": 92.6,
+    "risk_adjustment_score": 100,
+    "risk_score": 17.5,
+    "signal_count": 2,
+    "high_intent_count": 0,
+    "core_fan_count": 1,
+    "top_categories": {
+      "spread": 1,
+      "operation_feedback": 1
+    },
+    "top_hashtags": [
+      "新增經歷"
+    ],
+    "top_authors": [
+      "repo_fan",
+      "fan_c"
+    ],
+    "social_volume_score": 79.2,
+    "core_fan_score": 100,
+    "content_spread_score": 42.2,
+    "social_heat_v9": 65.8,
+    "top_reasons": [
+      "高品質留言比例高",
+      "近期成長動能明顯",
+      "核心粉絲重複互動穩定"
+    ],
+    "suggested_actions": [
+      "設計可轉發素材與 Hashtag 活動"
+    ],
+    "rank_v9": 2
+  },
+  {
+    "entity_name": "溟海オシアナス",
+    "entity_type": "group",
+    "engagement_quality_score": 90.6,
+    "fan_conversion_score": 57.5,
+    "momentum_score": 45,
+    "risk_adjustment_score": 100,
+    "risk_score": 5.0,
+    "signal_count": 1,
+    "high_intent_count": 1,
+    "core_fan_count": 1,
+    "top_categories": {
+      "merch_intent": 1
+    },
+    "top_hashtags": [
+      "溟海オシアナス"
+    ],
+    "top_authors": [
+      "fan_a"
+    ],
+    "social_volume_score": 25.7,
+    "core_fan_score": 57.1,
+    "content_spread_score": 5.8,
+    "social_heat_v9": 53.3,
+    "top_reasons": [
+      "高品質留言比例高"
+    ],
+    "suggested_actions": [
+      "強化チェキ、物販、特典資訊"
+    ],
+    "rank_v9": 3
+  },
+  {
+    "entity_name": "#FFFFFF",
+    "entity_type": "group",
+    "engagement_quality_score": 71.1,
+    "fan_conversion_score": 20.6,
+    "momentum_score": 100,
+    "risk_adjustment_score": 100,
+    "risk_score": 17.5,
+    "signal_count": 2,
+    "high_intent_count": 0,
+    "core_fan_count": 0,
+    "top_categories": {
+      "new_fan_signal": 1,
+      "operation_feedback": 1
+    },
+    "top_hashtags": [
+      "FFFFFF",
+      "地下偶像"
+    ],
+    "top_authors": [
+      "new_fan_01",
+      "fan_b"
+    ],
+    "social_volume_score": 68.1,
+    "core_fan_score": 0,
+    "content_spread_score": 13.7,
+    "social_heat_v9": 51.0,
+    "top_reasons": [
+      "近期成長動能明顯"
+    ],
+    "suggested_actions": [
+      "製作新粉入坑懶人包"
+    ],
+    "rank_v9": 4
+  },
+  {
+    "entity_name": "#FFFF00",
+    "entity_type": "group",
+    "engagement_quality_score": 0,
+    "fan_conversion_score": 0,
+    "momentum_score": 72.6,
+    "risk_adjustment_score": 100,
+    "risk_score": 0,
+    "signal_count": 0,
+    "high_intent_count": 0,
+    "core_fan_count": 0,
+    "top_categories": {},
+    "top_hashtags": [],
+    "top_authors": [],
+    "social_volume_score": 86.5,
+    "core_fan_score": 0,
+    "content_spread_score": 0,
+    "social_heat_v9": 31.7,
+    "top_reasons": [
+      "近期成長動能明顯"
+    ],
+    "suggested_actions": [
+      "維持內容發布節奏並累積可追蹤互動"
+    ],
+    "rank_v9": 5
+  },
+  {
+    "entity_name": "大邦奶奶",
+    "entity_type": "group",
+    "engagement_quality_score": 0,
+    "fan_conversion_score": 0,
+    "momentum_score": 63.0,
+    "risk_adjustment_score": 100,
+    "risk_score": 0,
+    "signal_count": 0,
+    "high_intent_count": 0,
+    "core_fan_count": 0,
+    "top_categories": {},
+    "top_hashtags": [],
+    "top_authors": [],
+    "social_volume_score": 65.2,
+    "core_fan_score": 0,
+    "content_spread_score": 0,
+    "social_heat_v9": 26.6,
+    "top_reasons": [
+      "社群訊號穩定，可持續觀察"
+    ],
+    "suggested_actions": [
+      "維持內容發布節奏並累積可追蹤互動"
+    ],
+    "rank_v9": 6
+  },
+  {
+    "entity_name": "宿命白",
+    "entity_type": "group",
+    "engagement_quality_score": 0,
+    "fan_conversion_score": 0,
+    "momentum_score": 63.0,
+    "risk_adjustment_score": 100,
+    "risk_score": 0,
+    "signal_count": 0,
+    "high_intent_count": 0,
+    "core_fan_count": 0,
+    "top_categories": {},
+    "top_hashtags": [],
+    "top_authors": [],
+    "social_volume_score": 65.2,
+    "core_fan_score": 0,
+    "content_spread_score": 0,
+    "social_heat_v9": 26.6,
+    "top_reasons": [
+      "社群訊號穩定，可持續觀察"
+    ],
+    "suggested_actions": [
+      "維持內容發布節奏並累積可追蹤互動"
+    ],
+    "rank_v9": 7
+  },
+  {
+    "entity_name": "紅色",
+    "entity_type": "group",
+    "engagement_quality_score": 0,
+    "fan_conversion_score": 0,
+    "momentum_score": 63.0,
+    "risk_adjustment_score": 100,
+    "risk_score": 0,
+    "signal_count": 0,
+    "high_intent_count": 0,
+    "core_fan_count": 0,
+    "top_categories": {},
+    "top_hashtags": [],
+    "top_authors": [],
+    "social_volume_score": 65.2,
+    "core_fan_score": 0,
+    "content_spread_score": 0,
+    "social_heat_v9": 26.6,
+    "top_reasons": [
+      "社群訊號穩定，可持續觀察"
+    ],
+    "suggested_actions": [
+      "維持內容發布節奏並累積可追蹤互動"
+    ],
+    "rank_v9": 8
+  },
+  {
+    "entity_name": "#800080",
+    "entity_type": "group",
+    "engagement_quality_score": 0,
+    "fan_conversion_score": 0,
+    "momentum_score": 61.0,
+    "risk_adjustment_score": 100,
+    "risk_score": 0,
+    "signal_count": 0,
+    "high_intent_count": 0,
+    "core_fan_count": 0,
+    "top_categories": {},
+    "top_hashtags": [],
+    "top_authors": [],
+    "social_volume_score": 59.3,
+    "core_fan_score": 0,
+    "content_spread_score": 0,
+    "social_heat_v9": 25.2,
+    "top_reasons": [
+      "社群訊號穩定，可持續觀察"
+    ],
+    "suggested_actions": [
+      "維持內容發布節奏並累積可追蹤互動"
+    ],
+    "rank_v9": 9
+  },
+  {
+    "entity_name": "#007500",
+    "entity_type": "group",
+    "engagement_quality_score": 0,
+    "fan_conversion_score": 0,
+    "momentum_score": 48.2,
+    "risk_adjustment_score": 100,
+    "risk_score": 0,
+    "signal_count": 0,
+    "high_intent_count": 0,
+    "core_fan_count": 0,
+    "top_categories": {},
+    "top_hashtags": [],
+    "top_authors": [],
+    "social_volume_score": 29.6,
+    "core_fan_score": 0,
+    "content_spread_score": 0,
+    "social_heat_v9": 18.1,
+    "top_reasons": [
+      "社群訊號穩定，可持續觀察"
+    ],
+    "suggested_actions": [
+      "維持內容發布節奏並累積可追蹤互動"
+    ],
+    "rank_v9": 10
+  },
+  {
+    "entity_name": "#C90000",
+    "entity_type": "group",
+    "engagement_quality_score": 0,
+    "fan_conversion_score": 0,
+    "momentum_score": 48.2,
+    "risk_adjustment_score": 100,
+    "risk_score": 0,
+    "signal_count": 0,
+    "high_intent_count": 0,
+    "core_fan_count": 0,
+    "top_categories": {},
+    "top_hashtags": [],
+    "top_authors": [],
+    "social_volume_score": 29.6,
+    "core_fan_score": 0,
+    "content_spread_score": 0,
+    "social_heat_v9": 18.1,
+    "top_reasons": [
+      "社群訊號穩定，可持續觀察"
+    ],
+    "suggested_actions": [
+      "維持內容發布節奏並累積可追蹤互動"
+    ],
+    "rank_v9": 11
+  }
+]

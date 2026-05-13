@@ -1,4 +1,4 @@
-"""
+﻿"""
 pipeline/run_pipeline.py
 主程式：按順序執行全部 Pipeline 步驟
 本機測試：  python pipeline/run_pipeline.py
@@ -12,6 +12,8 @@ PIPELINE = Path(__file__).parent
 STEPS = [
     ("Event Discovery Crawl", PIPELINE / "event_crawler.py"),
     # (描述, 腳本路徑)
+    ("Classify Social Signals v9", PIPELINE / "classify_social_signals.py"),
+    ("Build Social Heat v9",       PIPELINE / "build_social_heat_v9.py"),
     ("📸 Build Trend Snapshots", PIPELINE / "build_trend_snapshots.py"),
     ("🤖 v8 Forecast",           PIPELINE / "forecast_v8.py"),
     ("✨ Build Insights",         PIPELINE / "build_insights.py"),

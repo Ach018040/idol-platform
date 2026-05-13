@@ -108,7 +108,8 @@ def forecast_group_7d(
 
     up_count = sum(1 for r in results if r["direction"] == "up")
     down_count = sum(1 for r in results if r["direction"] == "down")
-    print(f"🚀 v8_forecast.json updated — {len(results)} groups (↑{up_count} ↓{down_count} →{len(results)-up_count-down_count})")
+    flat_count = len(results) - up_count - down_count
+    print(f"v8_forecast.json updated - {len(results)} groups (up:{up_count} down:{down_count} flat:{flat_count})")
 
 
 if __name__ == "__main__":
