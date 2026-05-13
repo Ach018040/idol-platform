@@ -404,6 +404,8 @@ export default function HomePage() {
   const socialHeatRows = socialHeatV9.slice(0, 8);
   const socialHeatTop = socialHeatRows[0];
   const hasSocialHeatData = socialHeatV9.length > 0;
+  const v9SignalWeight = hasSocialHeatData ? 30 : 0;
+  const v8BaselineWeight = 100 - v9SignalWeight;
   const socialHeatAverage = socialHeatV9.length
     ? socialHeatV9.reduce((sum, row) => sum + Number(row.social_heat_v9 ?? 0), 0) / socialHeatV9.length
     : 0;
@@ -478,44 +480,62 @@ export default function HomePage() {
         <section className="mb-8 surface-panel border-cyan-400/20 bg-cyan-500/10 p-5 md:p-6">
           <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <div className="mb-2 text-xs uppercase tracking-widest text-cyan-200/80">Idol Social Heat Platform v9</div>
-              <h2 className="text-2xl font-black text-white">Social Heat v9 社群熱度分析</h2>
+              <div className="mb-2 text-xs uppercase tracking-widest text-cyan-200/80">Hybrid v8 / v9 Model</div>
+              <h2 className="text-2xl font-black text-white">綜合熱度模型狀態</h2>
               <p className="mt-2 max-w-3xl text-sm leading-7 text-zinc-300">
-                並行 Classic v7、Social Heat v9 與 Hybrid View。正式社群訊號接入後，會顯示留言品質、轉換意圖、核心粉絲、擴散與風險。
+                目前主排行以 v8/v7 的團體與成員基準分為準；v9 不是另一套獨立判斷，而是社群留言、轉換意圖與風險訊號接入後的加權層。
+                尚未接入正式社群訊號時，v9 權重維持 0%，避免測試資料影響 production 判斷。
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
-              {["Classic v7 Temperature", "Social Heat v9", "Hybrid View"].map((label) => (
-                <span key={label} className="rounded-full border border-white/10 bg-black/25 px-3 py-2 text-xs text-zinc-200">
-                  {label}
-                </span>
-              ))}
+              <span className="rounded-full border border-pink-400/20 bg-pink-400/10 px-3 py-2 text-xs text-pink-100">v8/v7 baseline {v8BaselineWeight}%</span>
+              <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-2 text-xs text-cyan-100">v9 social overlay {v9SignalWeight}%</span>
+              <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-2 text-xs text-emerald-100">Hybrid View</span>
             </div>
           </div>
 
           <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <div className="surface-card p-4">
-              <div className="text-xs uppercase tracking-widest text-zinc-500">社群熱度平均</div>
-              <div className="mt-2 text-3xl font-black text-cyan-300">{hasSocialHeatData ? fmt(socialHeatAverage) : "待接入"}</div>
+              <div className="text-xs uppercase tracking-widest text-zinc-500">Hybrid 使用基準</div>
+              <div className="mt-2 text-3xl font-black text-cyan-300">v8/v7</div>
             </div>
             <div className="surface-card p-4">
-              <div className="text-xs uppercase tracking-widest text-zinc-500">v9 熱度第一名</div>
-              <div className="mt-2 truncate text-2xl font-black text-pink-300">{socialHeatTop?.entity_name || "暫無資料"}</div>
+              <div className="text-xs uppercase tracking-widest text-zinc-500">v9 社群訊號</div>
+              <div className="mt-2 truncate text-2xl font-black text-pink-300">{hasSocialHeatData ? fmt(socialHeatAverage) : "未接入"}</div>
             </div>
             <div className="surface-card p-4">
-              <div className="text-xs uppercase tracking-widest text-zinc-500">高轉換團體</div>
-              <div className="mt-2 truncate text-2xl font-black text-emerald-300">{topConversionGroup?.entity_name || "暫無資料"}</div>
+              <div className="text-xs uppercase tracking-widest text-zinc-500">最高轉換觀察</div>
+              <div className="mt-2 truncate text-2xl font-black text-emerald-300">{topConversionGroup?.entity_name || "等待資料"}</div>
             </div>
             <div className="surface-card p-4">
-              <div className="text-xs uppercase tracking-widest text-zinc-500">風險觀察名單</div>
-              <div className="mt-2 text-3xl font-black text-amber-300">{hasSocialHeatData ? (riskWatch.length ? `${riskWatch.length} 組` : "暫無") : "待接入"}</div>
+              <div className="text-xs uppercase tracking-widest text-zinc-500">風險覆蓋</div>
+              <div className="mt-2 text-3xl font-black text-amber-300">{hasSocialHeatData ? (riskWatch.length ? `${riskWatch.length} 組` : "0 組") : "未啟用"}</div>
             </div>
           </div>
 
+          {!hasSocialHeatData ? (
+            <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+              <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
+                <div>
+                  <h3 className="text-lg font-bold text-white">目前採用單一正式判斷</h3>
+                  <p className="mt-2 text-sm leading-7 text-zinc-300">
+                    首頁上方 KPI、團體排行與成員排行就是目前 production 的正式熱度判斷。
+                    v9 已併入架構，但在正式社群訊號進來前不參與加權，也不產生假排行。
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 p-4">
+                  <div className="mb-2 text-xs uppercase tracking-widest text-cyan-200/80">Activation rule</div>
+                  <p className="text-sm leading-7 text-cyan-50/90">
+                    當 `social_signals_scored.json` 有正式來源資料時，v9 overlay 會自動展開 ranking、high intent signals、risk watch，並進入 Hybrid 權重。
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
           <div className="grid gap-6 xl:grid-cols-[1.35fr_0.65fr]">
             <div className="surface-card p-4">
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-lg font-bold text-white">Social Heat v9 Ranking</h3>
+                <h3 className="text-lg font-bold text-white">v9 Overlay Ranking</h3>
                 <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200">{socialHeatRows.length} groups</span>
               </div>
               <div className="space-y-3">
@@ -587,6 +607,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+          )}
         </section>
 
         <section className="mb-8 grid grid-cols-1 gap-4 xl:grid-cols-3">
