@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-12T21:23:33Z",
-  "market_temperature": 66.1,
-  "market_temperature_v2": 66.1,
+  "generated_at": "2026-05-13T21:39:53Z",
+  "market_temperature": 65.8,
+  "market_temperature_v2": 65.8,
   "active_groups": 102,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,7 +18,7 @@
     "top_group": "時空Astria",
     "social_king": "KAMU",
     "social_focus": "KAMU",
-    "market_temperature": 66.1
+    "market_temperature": 65.8
   },
   "rising_stars": [
     "甘崎紗音",
@@ -37,7 +37,7 @@
     "天琴 ドウナ",
     "藤乃瑠花",
     "Nya にゃあ",
-    "綿空もり",
-    "澪乃千尋"
+    "つつ子",
+    "綿空もり"
   ]
 }
