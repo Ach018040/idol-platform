@@ -134,7 +134,7 @@ def build() -> None:
         if name:
             signals_by_entity[str(name)].append(signal)
 
-    entity_names = sorted(set(v7_by_name) | set(signals_by_entity))
+    entity_names = sorted(signals_by_entity)
     trend_changes = trend_change_scores(snapshots)
 
     raw_volume: dict[str, float] = {}

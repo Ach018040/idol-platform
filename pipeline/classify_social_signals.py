@@ -2,12 +2,13 @@
 Classify raw social signals for Idol Social Heat Platform v9.
 
 Reads public/data/social_signals.json and writes
-public/data/social_signals_scored.json. If no raw file exists, a small mock
-dataset is created so the pipeline can run end-to-end in a fresh checkout.
+public/data/social_signals_scored.json. If no raw file exists, an empty dataset
+is created so production does not publish test social data.
 """
 from __future__ import annotations
 
 import json
+import os
 import re
 import unicodedata
 from pathlib import Path
@@ -314,7 +315,7 @@ def ensure_raw_signals() -> list[dict[str, Any]]:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     signals = load_json(RAW, None)
     if not isinstance(signals, list):
-        signals = MOCK_SIGNALS
+        signals = MOCK_SIGNALS if os.getenv("IDOL_ALLOW_MOCK_SOCIAL_SIGNALS") == "1" else []
         RAW.write_text(json.dumps(signals, ensure_ascii=False, indent=2), encoding="utf-8")
     return signals
 

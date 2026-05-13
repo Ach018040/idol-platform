@@ -403,6 +403,7 @@ export default function HomePage() {
   const maxMS = Math.max(...members.map((member) => member.temperature_index), 1);
   const socialHeatRows = socialHeatV9.slice(0, 8);
   const socialHeatTop = socialHeatRows[0];
+  const hasSocialHeatData = socialHeatV9.length > 0;
   const socialHeatAverage = socialHeatV9.length
     ? socialHeatV9.reduce((sum, row) => sum + Number(row.social_heat_v9 ?? 0), 0) / socialHeatV9.length
     : 0;
@@ -480,7 +481,7 @@ export default function HomePage() {
               <div className="mb-2 text-xs uppercase tracking-widest text-cyan-200/80">Idol Social Heat Platform v9</div>
               <h2 className="text-2xl font-black text-white">Social Heat v9 社群熱度分析</h2>
               <p className="mt-2 max-w-3xl text-sm leading-7 text-zinc-300">
-                並行 Classic v7、Social Heat v9 與 Hybrid View，觀察留言品質、轉換意圖、核心粉絲、擴散與風險。
+                並行 Classic v7、Social Heat v9 與 Hybrid View。正式社群訊號接入後，會顯示留言品質、轉換意圖、核心粉絲、擴散與風險。
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -495,7 +496,7 @@ export default function HomePage() {
           <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <div className="surface-card p-4">
               <div className="text-xs uppercase tracking-widest text-zinc-500">社群熱度平均</div>
-              <div className="mt-2 text-3xl font-black text-cyan-300">{fmt(socialHeatAverage)}</div>
+              <div className="mt-2 text-3xl font-black text-cyan-300">{hasSocialHeatData ? fmt(socialHeatAverage) : "待接入"}</div>
             </div>
             <div className="surface-card p-4">
               <div className="text-xs uppercase tracking-widest text-zinc-500">v9 熱度第一名</div>
@@ -507,7 +508,7 @@ export default function HomePage() {
             </div>
             <div className="surface-card p-4">
               <div className="text-xs uppercase tracking-widest text-zinc-500">風險觀察名單</div>
-              <div className="mt-2 text-3xl font-black text-amber-300">{riskWatch.length ? `${riskWatch.length} 組` : "暫無"}</div>
+              <div className="mt-2 text-3xl font-black text-amber-300">{hasSocialHeatData ? (riskWatch.length ? `${riskWatch.length} 組` : "暫無") : "待接入"}</div>
             </div>
           </div>
 
@@ -548,7 +549,7 @@ export default function HomePage() {
                     </div>
                   </div>
                 ))}
-                {!socialHeatRows.length ? <p className="py-8 text-center text-sm text-zinc-400">尚未產生 Social Heat v9 資料。</p> : null}
+                {!socialHeatRows.length ? <p className="py-8 text-center text-sm text-zinc-400">尚未接入正式社群訊號，已清除測試排行資料。</p> : null}
               </div>
             </div>
 
@@ -581,7 +582,7 @@ export default function HomePage() {
                       <div className="mt-2 text-xs font-black text-emerald-300">conversion {fmt(signal.conversion_score, 0)}</div>
                     </div>
                   ))}
-                  {!highIntentSignals.length ? <p className="text-sm text-zinc-400">尚無高轉換留言。</p> : null}
+                  {!highIntentSignals.length ? <p className="text-sm text-zinc-400">尚無正式高轉換留言資料。</p> : null}
                 </div>
               </div>
             </div>
