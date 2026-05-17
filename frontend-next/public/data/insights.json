@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-05-16T20:55:47Z",
-  "market_temperature": 65.2,
-  "market_temperature_v2": 65.2,
-  "active_groups": 103,
+  "generated_at": "2026-05-17T20:59:36Z",
+  "market_temperature": 65.1,
+  "market_temperature_v2": 65.1,
+  "active_groups": 104,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.92,
@@ -16,9 +16,9 @@
   },
   "weekly_highlights": {
     "top_group": "時空Astria",
-    "social_king": "KAMU",
-    "social_focus": "KAMU",
-    "market_temperature": 65.2
+    "social_king": "綿空もり",
+    "social_focus": "綿空もり",
+    "market_temperature": 65.1
   },
   "rising_stars": [
     "甘崎紗音",
@@ -29,6 +29,7 @@
   ],
   "heat_drop": [],
   "top_members": [
+    "綿空もり",
     "KAMU",
     "マル",
     "小嗨花花HimiKo",
@@ -36,8 +37,7 @@
     "belia",
     "鹿森雲羽",
     "天琴 ドウナ",
-    "藤乃瑠花",
     "つつ子",
-    "綿空もり"
+    "藤乃瑠花"
   ]
 }
