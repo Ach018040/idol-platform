@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-05-17T20:59:36Z',
-  'Weekly idol market digest generated on 2026-05-17T20:59:36Z. Top group: 時空Astria. Top member: 綿空もり. Market temperature: 65.1. Rising stars: 甘崎紗音, 矢島愛久, 星野 さかな, 有栖栗, 呪飼久露猫. Heat drop watch: none.',
-  '- 2026-05-17T20:59:36Z: weekly market digest generated
+  'Weekly Market Digest 2026-05-18T21:16:39Z',
+  'Weekly idol market digest generated on 2026-05-18T21:16:39Z. Top group: 時空Astria. Top member: 綿空もり. Market temperature: 64.9. Rising stars: 甘崎紗音, 矢島愛久, 星野 さかな, 有栖栗, 呪飼久露猫. Heat drop watch: none.',
+  '- 2026-05-18T21:16:39Z: weekly market digest generated
 - Highlight top group: 時空Astria
 - Highlight top member: 綿空もり
 - Rising stars: 甘崎紗音, 矢島愛久, 星野 さかな, 有栖栗, 呪飼久露猫',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-05-17T20:59:36Z", "top_group": "時空Astria", "top_member": "綿空もり", "market_temperature": "65.1", "rising_stars": ["甘崎紗音", "矢島愛久", "星野 さかな", "有栖栗", "呪飼久露猫"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-05-18T21:16:39Z", "top_group": "時空Astria", "top_member": "綿空もり", "market_temperature": "64.9", "rising_stars": ["甘崎紗音", "矢島愛久", "星野 さかな", "有栖栗", "呪飼久露猫"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-05-17T20:59:36Z',
-  'Weekly digest refreshed: 2026-05-17T20:59:36Z',
-  'Weekly idol market digest generated on 2026-05-17T20:59:36Z. Top group: 時空Astria. Top member: 綿空もり. Market temperature: 65.1. Rising stars: 甘崎紗音, 矢島愛久, 星野 さかな, 有栖栗, 呪飼久露猫. Heat drop watch: none.',
+  '2026-05-18T21:16:39Z',
+  'Weekly digest refreshed: 2026-05-18T21:16:39Z',
+  'Weekly idol market digest generated on 2026-05-18T21:16:39Z. Top group: 時空Astria. Top member: 綿空もり. Market temperature: 64.9. Rising stars: 甘崎紗音, 矢島愛久, 星野 さかな, 有栖栗, 呪飼久露猫. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
