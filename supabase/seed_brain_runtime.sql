@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-05-20T22:00:51Z',
-  'Weekly idol market digest generated on 2026-05-20T22:00:51Z. Top group: 存在証明 NO FACE NO REaLiTY. Top member: Ruka Banana. Market temperature: 64.7. Rising stars: 宮月 かみ, 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ. Heat drop watch: none.',
-  '- 2026-05-20T22:00:51Z: weekly market digest generated
+  'Weekly Market Digest 2026-05-21T21:40:05Z',
+  'Weekly idol market digest generated on 2026-05-21T21:40:05Z. Top group: 存在証明 NO FACE NO REaLiTY. Top member: Ruka Banana. Market temperature: 64.6. Rising stars: 宮月 かみ, 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ. Heat drop watch: none.',
+  '- 2026-05-21T21:40:05Z: weekly market digest generated
 - Highlight top group: 存在証明 NO FACE NO REaLiTY
 - Highlight top member: Ruka Banana
 - Rising stars: 宮月 かみ, 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-05-20T22:00:51Z", "top_group": "存在証明 NO FACE NO REaLiTY", "top_member": "Ruka Banana", "market_temperature": "64.7", "rising_stars": ["宮月 かみ", "小森結菜", "眠森りん", "藍井心咲", "花京院ゆあ"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-05-21T21:40:05Z", "top_group": "存在証明 NO FACE NO REaLiTY", "top_member": "Ruka Banana", "market_temperature": "64.6", "rising_stars": ["宮月 かみ", "小森結菜", "眠森りん", "藍井心咲", "花京院ゆあ"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-05-20T22:00:51Z',
-  'Weekly digest refreshed: 2026-05-20T22:00:51Z',
-  'Weekly idol market digest generated on 2026-05-20T22:00:51Z. Top group: 存在証明 NO FACE NO REaLiTY. Top member: Ruka Banana. Market temperature: 64.7. Rising stars: 宮月 かみ, 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ. Heat drop watch: none.',
+  '2026-05-21T21:40:05Z',
+  'Weekly digest refreshed: 2026-05-21T21:40:05Z',
+  'Weekly idol market digest generated on 2026-05-21T21:40:05Z. Top group: 存在証明 NO FACE NO REaLiTY. Top member: Ruka Banana. Market temperature: 64.6. Rising stars: 宮月 かみ, 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;

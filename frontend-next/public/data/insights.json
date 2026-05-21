@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-05-20T22:00:51Z",
-  "market_temperature": 64.7,
-  "market_temperature_v2": 64.7,
-  "active_groups": 104,
+  "generated_at": "2026-05-21T21:40:05Z",
+  "market_temperature": 64.6,
+  "market_temperature_v2": 64.6,
+  "active_groups": 105,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.92,
     "x": 0.24,
     "threads": 0.0,
-    "social_post_dates": 0.35,
-    "seo_ready_profiles": 0.84,
+    "social_post_dates": 0.34,
+    "seo_ready_profiles": 0.85,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
@@ -18,7 +18,7 @@
     "top_group": "存在証明 NO FACE NO REaLiTY",
     "social_king": "Ruka Banana",
     "social_focus": "Ruka Banana",
-    "market_temperature": 64.7
+    "market_temperature": 64.6
   },
   "rising_stars": [
     "宮月 かみ",
@@ -32,8 +32,8 @@
     "Ruka Banana",
     "冥月 Runa",
     "小豆 Azuki",
-    "夢月夕夜",
     "綿空もり",
+    "夢月夕夜",
     "KAMU",
     "マル",
     "小嗨花花HimiKo",
