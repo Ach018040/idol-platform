@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-05-24T21:02:42Z",
-  "market_temperature": 64.1,
-  "market_temperature_v2": 64.1,
-  "active_groups": 105,
+  "generated_at": "2026-05-25T21:15:43Z",
+  "market_temperature": 64.0,
+  "market_temperature_v2": 64.0,
+  "active_groups": 106,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.92,
@@ -15,29 +15,29 @@
     "views": 0.0
   },
   "weekly_highlights": {
-    "top_group": "存在証明 NO FACE NO REaLiTY",
-    "social_king": "Ruka Banana",
-    "social_focus": "Ruka Banana",
-    "market_temperature": 64.1
+    "top_group": "幻獣",
+    "social_king": "花瀬未桜",
+    "social_focus": "花瀬未桜",
+    "market_temperature": 64.0
   },
   "rising_stars": [
+    "眠森りん",
     "藍井心咲",
     "花京院ゆあ",
     "七瀬円香",
-    "甘崎紗音",
-    "矢島愛久"
+    "甘崎紗音"
   ],
   "heat_drop": [],
   "top_members": [
-    "Ruka Banana",
+    "花瀬未桜",
     "綿空もり",
+    "Ruka Banana",
     "冥月 Runa",
     "小豆 Azuki",
     "夢月夕夜",
     "KAMU",
     "マル",
     "小嗨花花HimiKo",
-    "桜羽 初季",
-    "雪薇 Yukibi"
+    "桜羽 初季"
   ]
 }
