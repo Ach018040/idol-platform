@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-05-25T21:15:43Z",
+  "generated_at": "2026-05-26T21:49:33Z",
   "market_temperature": 64.0,
   "market_temperature_v2": 64.0,
-  "active_groups": 106,
+  "active_groups": 105,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.92,
@@ -16,28 +16,28 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "花瀬未桜",
-    "social_focus": "花瀬未桜",
+    "social_king": "七瀬円香",
+    "social_focus": "七瀬円香",
     "market_temperature": 64.0
   },
   "rising_stars": [
+    "小森結菜",
     "眠森りん",
     "藍井心咲",
     "花京院ゆあ",
-    "七瀬円香",
     "甘崎紗音"
   ],
   "heat_drop": [],
   "top_members": [
+    "七瀬円香",
     "花瀬未桜",
     "綿空もり",
     "Ruka Banana",
     "冥月 Runa",
     "小豆 Azuki",
     "夢月夕夜",
+    "君宣苺香",
     "KAMU",
-    "マル",
-    "小嗨花花HimiKo",
-    "桜羽 初季"
+    "夢笛きむ"
   ]
 }

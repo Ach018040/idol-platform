@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-05-25T21:15:43Z",
+  "generated_at": "2026-05-26T21:49:33Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
-    "member_total": 428,
-    "group_total": 108,
+    "member_total": 426,
+    "group_total": 107,
     "current_maturity": "L1",
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
-    "instagram": 0.921,
-    "facebook": 0.425,
-    "twitter": 0.236,
+    "instagram": 0.923,
+    "facebook": 0.427,
+    "twitter": 0.237,
     "threads": 0.0,
-    "photo_url": 0.937,
-    "group": 0.914,
-    "last_social_signal_at": 0.339,
-    "seo_ready_profile": 0.916,
+    "photo_url": 0.939,
+    "group": 0.915,
+    "last_social_signal_at": 0.338,
+    "seo_ready_profile": 0.918,
     "missing_core_examples": [
       "Key a.k.a SOXI",
       "台湾人の永琳",
@@ -32,8 +32,8 @@
       "悠洛 YoLo",
       "aka Collection",
       "米粒R ミリア",
-      "百合ステラ",
       "音転 心夕",
+      "百合ステラ",
       "艾莉塔",
       "しか",
       "亞寧",
@@ -45,13 +45,13 @@
     ]
   },
   "group_coverage": {
-    "instagram": 0.898,
-    "facebook": 0.833,
-    "twitter": 0.25,
-    "youtube": 0.491,
+    "instagram": 0.907,
+    "facebook": 0.841,
+    "twitter": 0.252,
+    "youtube": 0.495,
     "member_names": 0.981,
     "last_group_snapshot_at": 1.0,
-    "seo_ready_profile": 0.898,
+    "seo_ready_profile": 0.907,
     "missing_core_examples": [
       "未完成プロローグ",
       "Re:TurN-Capture-",
@@ -77,7 +77,7 @@
       "MORINAGA",
       "花びラブ",
       "冥恋セレナーデ",
-      "Kalmia カルミア"
+      "魔藥商會\"21-ᴘᴏxxɪᴏɴ"
     ]
   },
   "known_gaps": [
