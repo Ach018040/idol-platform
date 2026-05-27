@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-05-26T21:49:33Z',
-  'Weekly idol market digest generated on 2026-05-26T21:49:33Z. Top group: 幻獣. Top member: 七瀬円香. Market temperature: 64.0. Rising stars: 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ, 甘崎紗音. Heat drop watch: none.',
-  '- 2026-05-26T21:49:33Z: weekly market digest generated
+  'Weekly Market Digest 2026-05-27T22:01:06Z',
+  'Weekly idol market digest generated on 2026-05-27T22:01:06Z. Top group: 幻獣. Top member: 兎實ふぃん. Market temperature: 64.0. Rising stars: 宮月 かみ, 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ. Heat drop watch: none.',
+  '- 2026-05-27T22:01:06Z: weekly market digest generated
 - Highlight top group: 幻獣
-- Highlight top member: 七瀬円香
-- Rising stars: 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ, 甘崎紗音',
+- Highlight top member: 兎實ふぃん
+- Rising stars: 宮月 かみ, 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-05-26T21:49:33Z", "top_group": "幻獣", "top_member": "七瀬円香", "market_temperature": "64.0", "rising_stars": ["小森結菜", "眠森りん", "藍井心咲", "花京院ゆあ", "甘崎紗音"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-05-27T22:01:06Z", "top_group": "幻獣", "top_member": "兎實ふぃん", "market_temperature": "64.0", "rising_stars": ["宮月 かみ", "小森結菜", "眠森りん", "藍井心咲", "花京院ゆあ"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-05-26T21:49:33Z',
-  'Weekly digest refreshed: 2026-05-26T21:49:33Z',
-  'Weekly idol market digest generated on 2026-05-26T21:49:33Z. Top group: 幻獣. Top member: 七瀬円香. Market temperature: 64.0. Rising stars: 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ, 甘崎紗音. Heat drop watch: none.',
+  '2026-05-27T22:01:06Z',
+  'Weekly digest refreshed: 2026-05-27T22:01:06Z',
+  'Weekly idol market digest generated on 2026-05-27T22:01:06Z. Top group: 幻獣. Top member: 兎實ふぃん. Market temperature: 64.0. Rising stars: 宮月 かみ, 小森結菜, 眠森りん, 藍井心咲, 花京院ゆあ. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;

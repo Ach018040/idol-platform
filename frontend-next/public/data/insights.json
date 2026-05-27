@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-05-26T21:49:33Z",
+  "generated_at": "2026-05-27T22:01:06Z",
   "market_temperature": 64.0,
   "market_temperature_v2": 64.0,
-  "active_groups": 105,
+  "active_groups": 106,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.92,
     "x": 0.24,
     "threads": 0.0,
-    "social_post_dates": 0.34,
+    "social_post_dates": 0.33,
     "seo_ready_profiles": 0.85,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "七瀬円香",
-    "social_focus": "七瀬円香",
+    "social_king": "兎實ふぃん",
+    "social_focus": "兎實ふぃん",
     "market_temperature": 64.0
   },
   "rising_stars": [
+    "宮月 かみ",
     "小森結菜",
     "眠森りん",
     "藍井心咲",
-    "花京院ゆあ",
-    "甘崎紗音"
+    "花京院ゆあ"
   ],
   "heat_drop": [],
   "top_members": [
+    "兎實ふぃん",
     "七瀬円香",
     "花瀬未桜",
     "綿空もり",
@@ -37,7 +38,6 @@
     "小豆 Azuki",
     "夢月夕夜",
     "君宣苺香",
-    "KAMU",
-    "夢笛きむ"
+    "KAMU"
   ]
 }
