@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-27T22:01:06Z",
-  "market_temperature": 64.0,
-  "market_temperature_v2": 64.0,
+  "generated_at": "2026-05-28T21:59:04Z",
+  "market_temperature": 63.9,
+  "market_temperature_v2": 63.9,
   "active_groups": 106,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -16,28 +16,28 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "兎實ふぃん",
-    "social_focus": "兎實ふぃん",
-    "market_temperature": 64.0
+    "social_king": "空花茉穗",
+    "social_focus": "空花茉穗",
+    "market_temperature": 63.9
   },
   "rising_stars": [
+    "桜野杏理",
     "宮月 かみ",
     "小森結菜",
     "眠森りん",
-    "藍井心咲",
-    "花京院ゆあ"
+    "藍井心咲"
   ],
   "heat_drop": [],
   "top_members": [
+    "空花茉穗",
     "兎實ふぃん",
     "七瀬円香",
     "花瀬未桜",
     "綿空もり",
+    "君宣苺香",
     "Ruka Banana",
     "冥月 Runa",
     "小豆 Azuki",
-    "夢月夕夜",
-    "君宣苺香",
-    "KAMU"
+    "夢月夕夜"
   ]
 }
