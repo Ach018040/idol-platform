@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-05-28T21:59:04Z",
+  "generated_at": "2026-05-29T21:55:48Z",
   "market_temperature": 63.9,
   "market_temperature_v2": 63.9,
-  "active_groups": 106,
+  "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.92,
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "空花茉穗",
-    "social_focus": "空花茉穗",
+    "social_king": "雪見夢楽",
+    "social_focus": "雪見夢楽",
     "market_temperature": 63.9
   },
   "rising_stars": [
+    "真白 レモン",
     "桜野杏理",
     "宮月 かみ",
     "小森結菜",
-    "眠森りん",
-    "藍井心咲"
+    "眠森りん"
   ],
   "heat_drop": [],
   "top_members": [
+    "雪見夢楽",
     "空花茉穗",
     "兎實ふぃん",
     "七瀬円香",
@@ -37,7 +38,6 @@
     "君宣苺香",
     "Ruka Banana",
     "冥月 Runa",
-    "小豆 Azuki",
-    "夢月夕夜"
+    "小豆 Azuki"
   ]
 }

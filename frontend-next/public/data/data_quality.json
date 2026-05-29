@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-05-28T21:59:04Z",
+  "generated_at": "2026-05-29T21:55:48Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
-    "member_total": 429,
-    "group_total": 108,
+    "member_total": 432,
+    "group_total": 109,
     "current_maturity": "L1",
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
-    "instagram": 0.923,
-    "facebook": 0.431,
-    "twitter": 0.238,
+    "instagram": 0.921,
+    "facebook": 0.433,
+    "twitter": 0.236,
     "threads": 0.0,
-    "photo_url": 0.939,
-    "group": 0.916,
-    "last_social_signal_at": 0.333,
-    "seo_ready_profile": 0.918,
+    "photo_url": 0.938,
+    "group": 0.917,
+    "last_social_signal_at": 0.331,
+    "seo_ready_profile": 0.917,
     "missing_core_examples": [
       "しか",
       "Key a.k.a SOXI",
@@ -40,18 +40,18 @@
       "桃沢花梨",
       "ようた",
       "京谷星蘭",
-      "四四よし",
-      "呆紫 アホコ"
+      "呆紫 アホコ",
+      "四四よし"
     ]
   },
   "group_coverage": {
-    "instagram": 0.907,
-    "facebook": 0.843,
-    "twitter": 0.25,
-    "youtube": 0.5,
-    "member_names": 0.981,
+    "instagram": 0.899,
+    "facebook": 0.835,
+    "twitter": 0.248,
+    "youtube": 0.495,
+    "member_names": 0.982,
     "last_group_snapshot_at": 1.0,
-    "seo_ready_profile": 0.907,
+    "seo_ready_profile": 0.899,
     "missing_core_examples": [
       "未完成プロローグ",
       "Re:TurN-Capture-",
@@ -59,8 +59,9 @@
       "xEnomoRph",
       "Flora・Fiore",
       "幻波SYNC",
-      "終焉Rebirth",
+      "無我夢中",
       "♡xDoLL",
+      "終焉Rebirth",
       "Happy Holiday!!",
       "未灯＊ミラクル",
       "花咲＊Chloris",
@@ -70,14 +71,13 @@
       "𝗥𝗔𝗕𝗕𝗶𝗧 & 𝗕𝗘𝗔𝗥",
       "Pure makeR",
       "佐藤飛工作室研究生",
+      "銀河パルス〆",
       "LuvRush",
       "i<3",
       "天国地獄",
       "VEZALiA",
       "ZETTA",
-      "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
-      "MORINAGA",
-      "花びラブ"
+      "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀"
     ]
   },
   "known_gaps": [
