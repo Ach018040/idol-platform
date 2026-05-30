@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-29T21:55:48Z",
-  "market_temperature": 63.9,
-  "market_temperature_v2": 63.9,
+  "generated_at": "2026-05-30T21:05:05Z",
+  "market_temperature": 64.0,
+  "market_temperature_v2": 64.0,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -16,28 +16,28 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "雪見夢楽",
-    "social_focus": "雪見夢楽",
-    "market_temperature": 63.9
+    "social_king": "梨理 𝚁𝚒𝚛𝚒",
+    "social_focus": "梨理 𝚁𝚒𝚛𝚒",
+    "market_temperature": 64.0
   },
   "rising_stars": [
+    "Neko",
     "真白 レモン",
     "桜野杏理",
     "宮月 かみ",
-    "小森結菜",
-    "眠森りん"
+    "小森結菜"
   ],
   "heat_drop": [],
   "top_members": [
+    "梨理 𝚁𝚒𝚛𝚒",
     "雪見夢楽",
     "空花茉穗",
     "兎實ふぃん",
     "七瀬円香",
+    "Nya",
     "花瀬未桜",
     "綿空もり",
     "君宣苺香",
-    "Ruka Banana",
-    "冥月 Runa",
-    "小豆 Azuki"
+    "Ruka Banana"
   ]
 }
