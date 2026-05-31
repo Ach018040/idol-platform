@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-05-30T21:05:05Z',
-  'Weekly idol market digest generated on 2026-05-30T21:05:05Z. Top group: 幻獣. Top member: 梨理 𝚁𝚒𝚛𝚒. Market temperature: 64.0. Rising stars: Neko, 真白 レモン, 桜野杏理, 宮月 かみ, 小森結菜. Heat drop watch: none.',
-  '- 2026-05-30T21:05:05Z: weekly market digest generated
+  'Weekly Market Digest 2026-05-31T21:05:48Z',
+  'Weekly idol market digest generated on 2026-05-31T21:05:48Z. Top group: 幻獣. Top member: 梨理 𝚁𝚒𝚛𝚒. Market temperature: 63.9. Rising stars: Neko, 真白 レモン, 桜野杏理, 宮月 かみ, 小森結菜. Heat drop watch: none.',
+  '- 2026-05-31T21:05:48Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: 梨理 𝚁𝚒𝚛𝚒
 - Rising stars: Neko, 真白 レモン, 桜野杏理, 宮月 かみ, 小森結菜',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-05-30T21:05:05Z", "top_group": "幻獣", "top_member": "梨理 𝚁𝚒𝚛𝚒", "market_temperature": "64.0", "rising_stars": ["Neko", "真白 レモン", "桜野杏理", "宮月 かみ", "小森結菜"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-05-31T21:05:48Z", "top_group": "幻獣", "top_member": "梨理 𝚁𝚒𝚛𝚒", "market_temperature": "63.9", "rising_stars": ["Neko", "真白 レモン", "桜野杏理", "宮月 かみ", "小森結菜"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-05-30T21:05:05Z',
-  'Weekly digest refreshed: 2026-05-30T21:05:05Z',
-  'Weekly idol market digest generated on 2026-05-30T21:05:05Z. Top group: 幻獣. Top member: 梨理 𝚁𝚒𝚛𝚒. Market temperature: 64.0. Rising stars: Neko, 真白 レモン, 桜野杏理, 宮月 かみ, 小森結菜. Heat drop watch: none.',
+  '2026-05-31T21:05:48Z',
+  'Weekly digest refreshed: 2026-05-31T21:05:48Z',
+  'Weekly idol market digest generated on 2026-05-31T21:05:48Z. Top group: 幻獣. Top member: 梨理 𝚁𝚒𝚛𝚒. Market temperature: 63.9. Rising stars: Neko, 真白 レモン, 桜野杏理, 宮月 かみ, 小森結菜. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;

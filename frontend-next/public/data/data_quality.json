@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-30T21:05:05Z",
+  "generated_at": "2026-05-31T21:05:48Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 435,
@@ -8,7 +8,7 @@
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
-    "instagram": 0.924,
+    "instagram": 0.926,
     "facebook": 0.43,
     "twitter": 0.237,
     "threads": 0.0,
@@ -21,6 +21,7 @@
       "Key a.k.a SOXI",
       "台湾人の永琳",
       "桜音みゆぃ♪",
+      "AMA",
       "結城朋子",
       "月見はりゅみ",
       "OMOCHIおもち",
@@ -40,8 +41,7 @@
       "桃沢花梨",
       "ようた",
       "呆紫 アホコ",
-      "京谷星蘭",
-      "四四よし"
+      "京谷星蘭"
     ]
   },
   "group_coverage": {
