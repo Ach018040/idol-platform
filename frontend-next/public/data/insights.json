@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-02T22:25:16Z",
-  "market_temperature": 63.9,
-  "market_temperature_v2": 63.9,
+  "generated_at": "2026-06-03T22:29:49Z",
+  "market_temperature": 63.7,
+  "market_temperature_v2": 63.7,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,7 +18,7 @@
     "top_group": "幻獣",
     "social_king": "Ruka Banana",
     "social_focus": "Ruka Banana",
-    "market_temperature": 63.9
+    "market_temperature": 63.7
   },
   "rising_stars": [
     "Meya",
