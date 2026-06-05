@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-04T21:45:23Z",
-  "market_temperature": 63.6,
-  "market_temperature_v2": 63.6,
+  "generated_at": "2026-06-05T21:38:12Z",
+  "market_temperature": 63.4,
+  "market_temperature_v2": 63.4,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,7 +18,7 @@
     "top_group": "幻獣",
     "social_king": "Ruka Banana",
     "social_focus": "Ruka Banana",
-    "market_temperature": 63.6
+    "market_temperature": 63.4
   },
   "rising_stars": [
     "Meya",
@@ -34,10 +34,10 @@
     "梨理 𝚁𝚒𝚛𝚒",
     "雪見夢楽",
     "空花茉穗",
+    "Nya",
     "兎實ふぃん",
     "七瀬円香",
-    "Nya",
     "花瀬未桜",
-    "君宣苺香"
+    "夢笛きむ"
   ]
 }

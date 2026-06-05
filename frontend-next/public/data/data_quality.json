@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-04T21:45:23Z",
+  "generated_at": "2026-06-05T21:38:12Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 435,
@@ -28,20 +28,20 @@
       "花葉",
       "天川未來",
       "八尋",
-      "失溫少女_suya",
       "氧氣みどり",
+      "失溫少女_suya",
       "サキsaki",
       "悠洛 YoLo",
       "aka Collection",
       "米粒R ミリア",
       "音転 心夕",
       "百合ステラ",
-      "艾莉塔",
       "亞寧",
+      "艾莉塔",
       "桃沢花梨",
       "ようた",
       "呆紫 アホコ",
-      "京谷星蘭"
+      "月海 晴"
     ]
   },
   "group_coverage": {
@@ -77,7 +77,7 @@
       "銀河パルス〆",
       "VEZALiA",
       "天国地獄",
-      "Kalmia カルミア"
+      "LUNARIS"
     ]
   },
   "known_gaps": [
