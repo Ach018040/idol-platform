@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-06-05T21:38:12Z',
-  'Weekly idol market digest generated on 2026-06-05T21:38:12Z. Top group: 幻獣. Top member: Ruka Banana. Market temperature: 63.4. Rising stars: Meya, Neko, 真白 レモン, 桜野杏理, 宮月 かみ. Heat drop watch: none.',
-  '- 2026-06-05T21:38:12Z: weekly market digest generated
+  'Weekly Market Digest 2026-06-06T21:09:49Z',
+  'Weekly idol market digest generated on 2026-06-06T21:09:49Z. Top group: 幻獣. Top member: Ruka Banana. Market temperature: 63.4. Rising stars: Meya, Neko, 真白 レモン, 桜野杏理, 宮月 かみ. Heat drop watch: none.',
+  '- 2026-06-06T21:09:49Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: Ruka Banana
 - Rising stars: Meya, Neko, 真白 レモン, 桜野杏理, 宮月 かみ',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-06-05T21:38:12Z", "top_group": "幻獣", "top_member": "Ruka Banana", "market_temperature": "63.4", "rising_stars": ["Meya", "Neko", "真白 レモン", "桜野杏理", "宮月 かみ"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-06-06T21:09:49Z", "top_group": "幻獣", "top_member": "Ruka Banana", "market_temperature": "63.4", "rising_stars": ["Meya", "Neko", "真白 レモン", "桜野杏理", "宮月 かみ"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-06-05T21:38:12Z',
-  'Weekly digest refreshed: 2026-06-05T21:38:12Z',
-  'Weekly idol market digest generated on 2026-06-05T21:38:12Z. Top group: 幻獣. Top member: Ruka Banana. Market temperature: 63.4. Rising stars: Meya, Neko, 真白 レモン, 桜野杏理, 宮月 かみ. Heat drop watch: none.',
+  '2026-06-06T21:09:49Z',
+  'Weekly digest refreshed: 2026-06-06T21:09:49Z',
+  'Weekly idol market digest generated on 2026-06-06T21:09:49Z. Top group: 幻獣. Top member: Ruka Banana. Market temperature: 63.4. Rising stars: Meya, Neko, 真白 レモン, 桜野杏理, 宮月 かみ. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
