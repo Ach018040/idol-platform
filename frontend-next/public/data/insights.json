@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-09T21:51:04Z",
-  "market_temperature": 63.0,
-  "market_temperature_v2": 63.0,
+  "generated_at": "2026-06-10T22:08:16Z",
+  "market_temperature": 63.1,
+  "market_temperature_v2": 63.1,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -16,28 +16,28 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "姫川乃愛",
-    "social_focus": "姫川乃愛",
-    "market_temperature": 63.0
+    "social_king": "天羽きな",
+    "social_focus": "天羽きな",
+    "market_temperature": 63.1
   },
   "rising_stars": [
+    "羽黒凛香",
+    "うみ",
+    "愛栖 栗夢",
     "優芽 Yuume",
-    "瀧日灯璃",
-    "DeDe",
-    "Meya",
-    "Neko"
+    "瀧日灯璃"
   ],
   "heat_drop": [],
   "top_members": [
+    "天羽きな",
+    "花瀬未桜",
+    "紫暮幽霊",
     "姫川乃愛",
     "呪飼久露猫",
     "有栖栗",
     "稲妻莉央",
     "Ruka Banana",
     "梨理 𝚁𝚒𝚛𝚒",
-    "雪見夢楽",
-    "空花茉穗",
-    "Nya",
-    "兎實ふぃん"
+    "雪見夢楽"
   ]
 }
