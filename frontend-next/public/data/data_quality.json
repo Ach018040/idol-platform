@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-10T22:08:16Z",
+  "generated_at": "2026-06-11T22:05:24Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 435,
@@ -9,7 +9,7 @@
   },
   "member_coverage": {
     "instagram": 0.926,
-    "facebook": 0.432,
+    "facebook": 0.434,
     "twitter": 0.239,
     "threads": 0.0,
     "photo_url": 0.94,
@@ -55,9 +55,9 @@
     "missing_core_examples": [
       "未完成プロローグ",
       "Re:TurN-Capture-",
+      "おれ。",
       "Happy Holiday!!",
       "xEnomoRph",
-      "おれ。",
       "幻色プリンセス",
       "Flora・Fiore",
       "幻波SYNC",
@@ -69,15 +69,15 @@
       "少女ガチャポン",
       "未灯＊ミラクル",
       "Immerse",
+      "天国地獄",
       "Pure makeR",
       "𝗥𝗔𝗕𝗕𝗶𝗧 & 𝗕𝗘𝗔𝗥",
-      "天国地獄",
       "佐藤飛工作室研究生",
       "Nevaris",
       "i<3",
       "LuvRush",
       "VEZALiA",
-      "銀河パルス〆"
+      "LUNARIS"
     ]
   },
   "known_gaps": [
