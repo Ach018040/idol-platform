@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-12T21:52:51Z",
-  "market_temperature": 62.9,
-  "market_temperature_v2": 62.9,
+  "generated_at": "2026-06-13T21:21:07Z",
+  "market_temperature": 62.8,
+  "market_temperature_v2": 62.8,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,12 +18,12 @@
     "top_group": "幻獣",
     "social_king": "天羽きな",
     "social_focus": "天羽きな",
-    "market_temperature": 62.9
+    "market_temperature": 62.8
   },
   "rising_stars": [
+    "うみ",
     "羽黒凛香",
     "愛栖 栗夢",
-    "うみ",
     "優芽 Yuume",
     "瀧日灯璃"
   ],
@@ -35,8 +35,8 @@
     "姫川乃愛",
     "呪飼久露猫",
     "有栖栗",
-    "Ruka Banana",
     "稲妻莉央",
+    "Ruka Banana",
     "梨理 𝚁𝚒𝚛𝚒",
     "雪見夢楽"
   ]
