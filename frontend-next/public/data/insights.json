@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-14T21:18:14Z",
-  "market_temperature": 63.0,
-  "market_temperature_v2": 63.0,
+  "generated_at": "2026-06-15T22:22:51Z",
+  "market_temperature": 62.9,
+  "market_temperature_v2": 62.9,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,7 +18,7 @@
     "top_group": "幻獣",
     "social_king": "天羽きな",
     "social_focus": "天羽きな",
-    "market_temperature": 63.0
+    "market_temperature": 62.9
   },
   "rising_stars": [
     "羽黒凛香",
@@ -38,6 +38,6 @@
     "Ruka Banana",
     "稲妻莉央",
     "梨理 𝚁𝚒𝚛𝚒",
-    "雪見夢楽"
+    "鳳凰院レア"
   ]
 }
