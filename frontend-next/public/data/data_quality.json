@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-06-15T22:22:51Z",
+  "generated_at": "2026-06-16T22:17:10Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
-    "member_total": 435,
+    "member_total": 436,
     "group_total": 109,
     "current_maturity": "L1",
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
-    "instagram": 0.926,
-    "facebook": 0.441,
-    "twitter": 0.239,
+    "instagram": 0.927,
+    "facebook": 0.443,
+    "twitter": 0.241,
     "threads": 0.0,
     "photo_url": 0.94,
     "group": 0.917,
-    "last_social_signal_at": 0.329,
+    "last_social_signal_at": 0.328,
     "seo_ready_profile": 0.92,
     "missing_core_examples": [
       "しか",
@@ -31,6 +31,7 @@
       "八尋",
       "失溫少女_suya",
       "サキsaki",
+      "悠人☆",
       "悠洛 YoLo",
       "aka Collection",
       "米粒R ミリア",
@@ -40,8 +41,7 @@
       "ようた",
       "百合ステラ",
       "艾莉塔",
-      "呆紫 アホコ",
-      "月海 晴"
+      "呆紫 アホコ"
     ]
   },
   "group_coverage": {
@@ -64,8 +64,8 @@
       "幻波SYNC",
       "♡xDoLL",
       "花咲＊Chloris",
-      "魔法♡ドリーム",
       "無我夢中",
+      "魔法♡ドリーム",
       "少女ガチャポン",
       "終焉Rebirth",
       "未灯＊ミラクル",
