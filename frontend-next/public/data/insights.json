@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T22:17:10Z",
+  "generated_at": "2026-06-17T22:06:00Z",
   "market_temperature": 62.9,
   "market_temperature_v2": 62.9,
   "active_groups": 107,
@@ -8,7 +8,7 @@
     "instagram": 0.93,
     "x": 0.24,
     "threads": 0.0,
-    "social_post_dates": 0.33,
+    "social_post_dates": 0.32,
     "seo_ready_profiles": 0.86,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "六角のえり",
-    "social_focus": "六角のえり",
+    "social_king": "鳳凰院レア",
+    "social_focus": "鳳凰院レア",
     "market_temperature": 62.9
   },
   "rising_stars": [
+    "姫野 あいる",
     "羽黒凛香",
-    "恋乃 もも",
     "うみ",
     "愛栖 栗夢",
     "優芽 Yuume"
   ],
   "heat_drop": [],
   "top_members": [
+    "鳳凰院レア",
     "六角のえり",
     "小豆 Azuki",
     "冥月 Runa",
@@ -37,7 +38,6 @@
     "紫暮幽霊",
     "姫川乃愛",
     "呪飼久露猫",
-    "有栖栗",
-    "雪薇 Yukibi"
+    "有栖栗"
   ]
 }
