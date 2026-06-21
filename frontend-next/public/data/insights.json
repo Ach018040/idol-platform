@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-20T21:22:39Z",
-  "market_temperature": 62.7,
-  "market_temperature_v2": 62.7,
+  "generated_at": "2026-06-21T21:20:03Z",
+  "market_temperature": 62.6,
+  "market_temperature_v2": 62.6,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "鳳凰院レア",
     "social_focus": "鳳凰院レア",
-    "market_temperature": 62.7
+    "market_temperature": 62.6
   },
   "rising_stars": [
     "鬼塚 湊",
     "姫野 あいる",
-    "羽黒凛香",
     "愛栖 栗夢",
-    "瀧日灯璃"
+    "うみ",
+    "優芽 Yuume"
   ],
   "heat_drop": [],
   "top_members": [
