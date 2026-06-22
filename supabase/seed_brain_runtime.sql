@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-06-21T21:20:03Z',
-  'Weekly idol market digest generated on 2026-06-21T21:20:03Z. Top group: 幻獣. Top member: 鳳凰院レア. Market temperature: 62.6. Rising stars: 鬼塚 湊, 姫野 あいる, 愛栖 栗夢, うみ, 優芽 Yuume. Heat drop watch: none.',
-  '- 2026-06-21T21:20:03Z: weekly market digest generated
+  'Weekly Market Digest 2026-06-22T22:08:16Z',
+  'Weekly idol market digest generated on 2026-06-22T22:08:16Z. Top group: 幻獣. Top member: 瑠冥青璃. Market temperature: 62.5. Rising stars: 天国 せいや, 骼実 百瀬, 鬼塚 湊, 姫野 あいる, 愛栖 栗夢. Heat drop watch: none.',
+  '- 2026-06-22T22:08:16Z: weekly market digest generated
 - Highlight top group: 幻獣
-- Highlight top member: 鳳凰院レア
-- Rising stars: 鬼塚 湊, 姫野 あいる, 愛栖 栗夢, うみ, 優芽 Yuume',
+- Highlight top member: 瑠冥青璃
+- Rising stars: 天国 せいや, 骼実 百瀬, 鬼塚 湊, 姫野 あいる, 愛栖 栗夢',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-06-21T21:20:03Z", "top_group": "幻獣", "top_member": "鳳凰院レア", "market_temperature": "62.6", "rising_stars": ["鬼塚 湊", "姫野 あいる", "愛栖 栗夢", "うみ", "優芽 Yuume"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-06-22T22:08:16Z", "top_group": "幻獣", "top_member": "瑠冥青璃", "market_temperature": "62.5", "rising_stars": ["天国 せいや", "骼実 百瀬", "鬼塚 湊", "姫野 あいる", "愛栖 栗夢"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-06-21T21:20:03Z',
-  'Weekly digest refreshed: 2026-06-21T21:20:03Z',
-  'Weekly idol market digest generated on 2026-06-21T21:20:03Z. Top group: 幻獣. Top member: 鳳凰院レア. Market temperature: 62.6. Rising stars: 鬼塚 湊, 姫野 あいる, 愛栖 栗夢, うみ, 優芽 Yuume. Heat drop watch: none.',
+  '2026-06-22T22:08:16Z',
+  'Weekly digest refreshed: 2026-06-22T22:08:16Z',
+  'Weekly idol market digest generated on 2026-06-22T22:08:16Z. Top group: 幻獣. Top member: 瑠冥青璃. Market temperature: 62.5. Rising stars: 天国 せいや, 骼実 百瀬, 鬼塚 湊, 姫野 あいる, 愛栖 栗夢. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;

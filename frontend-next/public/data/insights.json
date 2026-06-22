@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-21T21:20:03Z",
-  "market_temperature": 62.6,
-  "market_temperature_v2": 62.6,
+  "generated_at": "2026-06-22T22:08:16Z",
+  "market_temperature": 62.5,
+  "market_temperature_v2": 62.5,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "鳳凰院レア",
-    "social_focus": "鳳凰院レア",
-    "market_temperature": 62.6
+    "social_king": "瑠冥青璃",
+    "social_focus": "瑠冥青璃",
+    "market_temperature": 62.5
   },
   "rising_stars": [
+    "天国 せいや",
+    "骼実 百瀬",
     "鬼塚 湊",
     "姫野 あいる",
-    "愛栖 栗夢",
-    "うみ",
-    "優芽 Yuume"
+    "愛栖 栗夢"
   ],
   "heat_drop": [],
   "top_members": [
+    "瑠冥青璃",
     "鳳凰院レア",
     "六角のえり",
     "小豆 Azuki",
@@ -37,7 +38,6 @@
     "花瀬未桜",
     "紫暮幽霊",
     "姫川乃愛",
-    "呪飼久露猫",
-    "有栖栗"
+    "呪飼久露猫"
   ]
 }
