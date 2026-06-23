@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-22T22:08:16Z",
-  "market_temperature": 62.5,
-  "market_temperature_v2": 62.5,
+  "generated_at": "2026-06-23T21:45:59Z",
+  "market_temperature": 62.4,
+  "market_temperature_v2": 62.4,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "瑠冥青璃",
     "social_focus": "瑠冥青璃",
-    "market_temperature": 62.5
+    "market_temperature": 62.4
   },
   "rising_stars": [
+    "綿琉羽音",
     "天国 せいや",
     "骼実 百瀬",
     "鬼塚 湊",
-    "姫野 あいる",
-    "愛栖 栗夢"
+    "姫野 あいる"
   ],
   "heat_drop": [],
   "top_members": [
