@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-06-24T21:26:24Z',
-  'Weekly idol market digest generated on 2026-06-24T21:26:24Z. Top group: 幻獣. Top member: 有栖栗. Market temperature: 62.3. Rising stars: 鬼塚 湊, 姫野 あいる, 恋乃 もも, うみ, 愛栖 栗夢. Heat drop watch: none.',
-  '- 2026-06-24T21:26:24Z: weekly market digest generated
+  'Weekly Market Digest 2026-06-25T21:48:13Z',
+  'Weekly idol market digest generated on 2026-06-25T21:48:13Z. Top group: 幻獣. Top member: 有栖栗. Market temperature: 62.2. Rising stars: 綿琉羽音, 天国 せいや, 骼実 百瀬, 鬼塚 湊, 姫野 あいる. Heat drop watch: none.',
+  '- 2026-06-25T21:48:13Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: 有栖栗
-- Rising stars: 鬼塚 湊, 姫野 あいる, 恋乃 もも, うみ, 愛栖 栗夢',
+- Rising stars: 綿琉羽音, 天国 せいや, 骼実 百瀬, 鬼塚 湊, 姫野 あいる',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-06-24T21:26:24Z", "top_group": "幻獣", "top_member": "有栖栗", "market_temperature": "62.3", "rising_stars": ["鬼塚 湊", "姫野 あいる", "恋乃 もも", "うみ", "愛栖 栗夢"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-06-25T21:48:13Z", "top_group": "幻獣", "top_member": "有栖栗", "market_temperature": "62.2", "rising_stars": ["綿琉羽音", "天国 せいや", "骼実 百瀬", "鬼塚 湊", "姫野 あいる"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-06-24T21:26:24Z',
-  'Weekly digest refreshed: 2026-06-24T21:26:24Z',
-  'Weekly idol market digest generated on 2026-06-24T21:26:24Z. Top group: 幻獣. Top member: 有栖栗. Market temperature: 62.3. Rising stars: 鬼塚 湊, 姫野 あいる, 恋乃 もも, うみ, 愛栖 栗夢. Heat drop watch: none.',
+  '2026-06-25T21:48:13Z',
+  'Weekly digest refreshed: 2026-06-25T21:48:13Z',
+  'Weekly idol market digest generated on 2026-06-25T21:48:13Z. Top group: 幻獣. Top member: 有栖栗. Market temperature: 62.2. Rising stars: 綿琉羽音, 天国 せいや, 骼実 百瀬, 鬼塚 湊, 姫野 あいる. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
