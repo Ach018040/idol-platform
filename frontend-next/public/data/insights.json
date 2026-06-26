@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-25T21:48:13Z",
-  "market_temperature": 62.2,
-  "market_temperature_v2": 62.2,
+  "generated_at": "2026-06-26T21:23:56Z",
+  "market_temperature": 62.3,
+  "market_temperature_v2": 62.3,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -16,28 +16,28 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "有栖栗",
-    "social_focus": "有栖栗",
-    "market_temperature": 62.2
+    "social_king": "雪見夢楽",
+    "social_focus": "雪見夢楽",
+    "market_temperature": 62.3
   },
   "rising_stars": [
+    "恋乃 もも",
+    "うみ",
+    "愛栖 栗夢",
     "綿琉羽音",
-    "天国 せいや",
-    "骼実 百瀬",
-    "鬼塚 湊",
-    "姫野 あいる"
+    "天国 せいや"
   ],
   "heat_drop": [],
   "top_members": [
+    "雪見夢楽",
+    "鹿森雲羽",
+    "御雨",
     "有栖栗",
     "鳳凰院レア",
     "瑠冥青璃",
     "六角のえり",
     "小豆 Azuki",
     "冥月 Runa",
-    "天羽きな",
-    "花瀬未桜",
-    "紫暮幽霊",
-    "姫川乃愛"
+    "瀧日灯璃"
   ]
 }
