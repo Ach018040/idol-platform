@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T21:10:24Z",
+  "generated_at": "2026-06-28T21:07:53Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 442,
@@ -9,7 +9,7 @@
   },
   "member_coverage": {
     "instagram": 0.93,
-    "facebook": 0.437,
+    "facebook": 0.439,
     "twitter": 0.244,
     "threads": 0.0,
     "photo_url": 0.941,
@@ -21,8 +21,8 @@
       "Key a.k.a SOXI",
       "台湾人の永琳",
       "桜音みゆぃ♪",
-      "悠人☆",
       "結城朋子",
+      "悠人☆",
       "天川未來",
       "氧氣みどり",
       "OMOCHIおもち",
@@ -30,8 +30,8 @@
       "花葉",
       "月見はりゅみ",
       "八尋",
-      "失溫少女_suya",
       "サキsaki",
+      "失溫少女_suya",
       "悠洛 YoLo",
       "aka Collection",
       "米粒R ミリア",
@@ -39,8 +39,8 @@
       "亞寧",
       "桃沢花梨",
       "ようた",
-      "艾莉塔",
       "百合ステラ",
+      "艾莉塔",
       "呆紫 アホコ"
     ]
   },
@@ -62,8 +62,8 @@
       "♡xDoLL",
       "幻波SYNC",
       "幻色プリンセス",
-      "花咲＊Chloris",
       "AXIA",
+      "花咲＊Chloris",
       "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
       "Immerse",
       "少女ガチャポン",
@@ -76,8 +76,8 @@
       "𝗥𝗔𝗕𝗕𝗶𝗧 & 𝗕𝗘𝗔𝗥",
       "佐藤飛工作室研究生",
       "i<3",
-      "VEZALiA",
-      "LuvRush"
+      "LuvRush",
+      "VEZALiA"
     ]
   },
   "known_gaps": [
