@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-01T21:41:03Z",
-  "market_temperature": 62.1,
-  "market_temperature_v2": 62.1,
+  "generated_at": "2026-07-02T21:13:46Z",
+  "market_temperature": 62.0,
+  "market_temperature_v2": 62.0,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "瑠冥青璃",
     "social_focus": "瑠冥青璃",
-    "market_temperature": 62.1
+    "market_temperature": 62.0
   },
   "rising_stars": [
-    "御金 寧々花",
-    "恋乃 もも",
     "愛栖 栗夢",
+    "恋乃 もも",
     "うみ",
-    "綿琉羽音"
+    "優芽 Yuume",
+    "森川月海"
   ],
   "heat_drop": [],
   "top_members": [
