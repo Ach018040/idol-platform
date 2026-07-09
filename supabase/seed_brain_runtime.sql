@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-07-08T21:12:48Z',
-  'Weekly idol market digest generated on 2026-07-08T21:12:48Z. Top group: 幻獣. Top member: 瑠冥青璃. Market temperature: 61.8. Rising stars: 梓, 愛栖 栗夢, うみ, 優芽 Yuume, 綿琉羽音. Heat drop watch: none.',
-  '- 2026-07-08T21:12:48Z: weekly market digest generated
+  'Weekly Market Digest 2026-07-09T21:26:22Z',
+  'Weekly idol market digest generated on 2026-07-09T21:26:22Z. Top group: 幻獣. Top member: 瑠冥青璃. Market temperature: 61.7. Rising stars: 愛栖 栗夢, 恋乃 もも, うみ, 優芽 Yuume, 綿琉羽音. Heat drop watch: none.',
+  '- 2026-07-09T21:26:22Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: 瑠冥青璃
-- Rising stars: 梓, 愛栖 栗夢, うみ, 優芽 Yuume, 綿琉羽音',
+- Rising stars: 愛栖 栗夢, 恋乃 もも, うみ, 優芽 Yuume, 綿琉羽音',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-07-08T21:12:48Z", "top_group": "幻獣", "top_member": "瑠冥青璃", "market_temperature": "61.8", "rising_stars": ["梓", "愛栖 栗夢", "うみ", "優芽 Yuume", "綿琉羽音"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-07-09T21:26:22Z", "top_group": "幻獣", "top_member": "瑠冥青璃", "market_temperature": "61.7", "rising_stars": ["愛栖 栗夢", "恋乃 もも", "うみ", "優芽 Yuume", "綿琉羽音"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-07-08T21:12:48Z',
-  'Weekly digest refreshed: 2026-07-08T21:12:48Z',
-  'Weekly idol market digest generated on 2026-07-08T21:12:48Z. Top group: 幻獣. Top member: 瑠冥青璃. Market temperature: 61.8. Rising stars: 梓, 愛栖 栗夢, うみ, 優芽 Yuume, 綿琉羽音. Heat drop watch: none.',
+  '2026-07-09T21:26:22Z',
+  'Weekly digest refreshed: 2026-07-09T21:26:22Z',
+  'Weekly idol market digest generated on 2026-07-09T21:26:22Z. Top group: 幻獣. Top member: 瑠冥青璃. Market temperature: 61.7. Rising stars: 愛栖 栗夢, 恋乃 もも, うみ, 優芽 Yuume, 綿琉羽音. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
