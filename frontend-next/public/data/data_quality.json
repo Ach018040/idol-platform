@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-07-10T21:09:58Z",
+  "generated_at": "2026-07-11T20:56:09Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
-    "member_total": 446,
+    "member_total": 445,
     "group_total": 109,
     "current_maturity": "L1",
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
     "instagram": 0.93,
-    "facebook": 0.439,
-    "twitter": 0.242,
+    "facebook": 0.452,
+    "twitter": 0.243,
     "threads": 0.0,
     "photo_url": 0.942,
     "group": 0.919,
-    "last_social_signal_at": 0.318,
+    "last_social_signal_at": 0.319,
     "seo_ready_profile": 0.924,
     "missing_core_examples": [
       "しか",
@@ -63,21 +63,21 @@
       "Flora・Fiore",
       "♡xDoLL",
       "幻波SYNC",
+      "星瞳⭐︎グレア",
       "幻色プリンセス",
       "花咲＊Chloris",
       "Immerse",
-      "AXIA",
       "Pure makeR",
       "少女ガチャポン",
       "未灯＊ミラクル",
+      "AXIA",
       "無我夢中",
-      "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
       "佐藤飛工作室研究生",
+      "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
       "𝗥𝗔𝗕𝗕𝗶𝗧 & 𝗕𝗘𝗔𝗥",
       "魔法♡ドリーム",
       "i<3",
-      "VEZALiA",
-      "LuvRush"
+      "VEZALiA"
     ]
   },
   "known_gaps": [
