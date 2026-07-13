@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-12T20:56:01Z",
+  "generated_at": "2026-07-13T21:01:37Z",
   "market_temperature": 61.8,
   "market_temperature_v2": 61.8,
   "active_groups": 107,
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "姫宮まい",
-    "social_focus": "姫宮まい",
+    "social_king": "甘崎紗音",
+    "social_focus": "甘崎紗音",
     "market_temperature": 61.8
   },
   "rising_stars": [
-    "恋乃 もも",
+    "いのり",
     "うみ",
+    "愛栖 栗夢",
     "夏川千晴",
-    "梓",
-    "優芽 Yuume"
+    "梓"
   ],
   "heat_drop": [],
   "top_members": [
+    "甘崎紗音",
     "姫宮まい",
     "瑠冥青璃",
     "星野 さかな",
@@ -37,7 +38,6 @@
     "鹿森雲羽",
     "御雨",
     "有栖栗",
-    "鳳凰院レア",
-    "瀧日灯璃"
+    "鳳凰院レア"
   ]
 }

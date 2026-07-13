@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-07-12T20:56:01Z',
-  'Weekly idol market digest generated on 2026-07-12T20:56:01Z. Top group: 幻獣. Top member: 姫宮まい. Market temperature: 61.8. Rising stars: 恋乃 もも, うみ, 夏川千晴, 梓, 優芽 Yuume. Heat drop watch: none.',
-  '- 2026-07-12T20:56:01Z: weekly market digest generated
+  'Weekly Market Digest 2026-07-13T21:01:37Z',
+  'Weekly idol market digest generated on 2026-07-13T21:01:37Z. Top group: 幻獣. Top member: 甘崎紗音. Market temperature: 61.8. Rising stars: いのり, うみ, 愛栖 栗夢, 夏川千晴, 梓. Heat drop watch: none.',
+  '- 2026-07-13T21:01:37Z: weekly market digest generated
 - Highlight top group: 幻獣
-- Highlight top member: 姫宮まい
-- Rising stars: 恋乃 もも, うみ, 夏川千晴, 梓, 優芽 Yuume',
+- Highlight top member: 甘崎紗音
+- Rising stars: いのり, うみ, 愛栖 栗夢, 夏川千晴, 梓',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-07-12T20:56:01Z", "top_group": "幻獣", "top_member": "姫宮まい", "market_temperature": "61.8", "rising_stars": ["恋乃 もも", "うみ", "夏川千晴", "梓", "優芽 Yuume"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-07-13T21:01:37Z", "top_group": "幻獣", "top_member": "甘崎紗音", "market_temperature": "61.8", "rising_stars": ["いのり", "うみ", "愛栖 栗夢", "夏川千晴", "梓"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-07-12T20:56:01Z',
-  'Weekly digest refreshed: 2026-07-12T20:56:01Z',
-  'Weekly idol market digest generated on 2026-07-12T20:56:01Z. Top group: 幻獣. Top member: 姫宮まい. Market temperature: 61.8. Rising stars: 恋乃 もも, うみ, 夏川千晴, 梓, 優芽 Yuume. Heat drop watch: none.',
+  '2026-07-13T21:01:37Z',
+  'Weekly digest refreshed: 2026-07-13T21:01:37Z',
+  'Weekly idol market digest generated on 2026-07-13T21:01:37Z. Top group: 幻獣. Top member: 甘崎紗音. Market temperature: 61.8. Rising stars: いのり, うみ, 愛栖 栗夢, 夏川千晴, 梓. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
