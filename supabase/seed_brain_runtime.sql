@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-07-13T21:01:37Z',
-  'Weekly idol market digest generated on 2026-07-13T21:01:37Z. Top group: 幻獣. Top member: 甘崎紗音. Market temperature: 61.8. Rising stars: いのり, うみ, 愛栖 栗夢, 夏川千晴, 梓. Heat drop watch: none.',
-  '- 2026-07-13T21:01:37Z: weekly market digest generated
+  'Weekly Market Digest 2026-07-14T21:04:12Z',
+  'Weekly idol market digest generated on 2026-07-14T21:04:12Z. Top group: 幻獣. Top member: 甘崎紗音. Market temperature: 61.8. Rising stars: いのり, せいら, 愛栖 栗夢, うみ, 夏川千晴. Heat drop watch: none.',
+  '- 2026-07-14T21:04:12Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: 甘崎紗音
-- Rising stars: いのり, うみ, 愛栖 栗夢, 夏川千晴, 梓',
+- Rising stars: いのり, せいら, 愛栖 栗夢, うみ, 夏川千晴',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-07-13T21:01:37Z", "top_group": "幻獣", "top_member": "甘崎紗音", "market_temperature": "61.8", "rising_stars": ["いのり", "うみ", "愛栖 栗夢", "夏川千晴", "梓"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-07-14T21:04:12Z", "top_group": "幻獣", "top_member": "甘崎紗音", "market_temperature": "61.8", "rising_stars": ["いのり", "せいら", "愛栖 栗夢", "うみ", "夏川千晴"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-07-13T21:01:37Z',
-  'Weekly digest refreshed: 2026-07-13T21:01:37Z',
-  'Weekly idol market digest generated on 2026-07-13T21:01:37Z. Top group: 幻獣. Top member: 甘崎紗音. Market temperature: 61.8. Rising stars: いのり, うみ, 愛栖 栗夢, 夏川千晴, 梓. Heat drop watch: none.',
+  '2026-07-14T21:04:12Z',
+  'Weekly digest refreshed: 2026-07-14T21:04:12Z',
+  'Weekly idol market digest generated on 2026-07-14T21:04:12Z. Top group: 幻獣. Top member: 甘崎紗音. Market temperature: 61.8. Rising stars: いのり, せいら, 愛栖 栗夢, うみ, 夏川千晴. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
