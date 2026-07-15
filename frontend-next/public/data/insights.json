@@ -1,43 +1,43 @@
 {
-  "generated_at": "2026-07-14T21:04:12Z",
-  "market_temperature": 61.8,
-  "market_temperature_v2": 61.8,
+  "generated_at": "2026-07-15T21:04:32Z",
+  "market_temperature": 61.6,
+  "market_temperature_v2": 61.6,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
-    "instagram": 0.93,
+    "instagram": 0.91,
     "x": 0.24,
     "threads": 0.0,
-    "social_post_dates": 0.32,
-    "seo_ready_profiles": 0.87,
+    "social_post_dates": 0.31,
+    "seo_ready_profiles": 0.85,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "甘崎紗音",
-    "social_focus": "甘崎紗音",
-    "market_temperature": 61.8
+    "social_king": "瑠冥青璃",
+    "social_focus": "瑠冥青璃",
+    "market_temperature": 61.6
   },
   "rising_stars": [
-    "いのり",
-    "せいら",
-    "愛栖 栗夢",
-    "うみ",
-    "夏川千晴"
+    "belia",
+    "羽黒凛香",
+    "御金 寧々花",
+    "澪乃千尋",
+    "いのり"
   ],
   "heat_drop": [],
   "top_members": [
+    "瑠冥青璃",
+    "小豆 Azuki",
+    "六角のえり",
     "甘崎紗音",
     "姫宮まい",
-    "瑠冥青璃",
     "星野 さかな",
     "姫川乃愛",
     "雪見夢楽",
     "鹿森雲羽",
-    "御雨",
-    "有栖栗",
-    "鳳凰院レア"
+    "御雨"
   ]
 }
