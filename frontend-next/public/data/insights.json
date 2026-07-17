@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-16T21:06:11Z",
-  "market_temperature": 61.6,
-  "market_temperature_v2": 61.6,
+  "generated_at": "2026-07-17T21:00:47Z",
+  "market_temperature": 61.5,
+  "market_temperature_v2": 61.5,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "瑠冥青璃",
     "social_focus": "瑠冥青璃",
-    "market_temperature": 61.6
+    "market_temperature": 61.5
   },
   "rising_stars": [
-    "彩加",
-    "belia",
-    "愛栖 栗夢",
     "恋乃 もも",
-    "うみ"
+    "うみ",
+    "belia",
+    "優芽 Yuume",
+    "夏川千晴"
   ],
   "heat_drop": [],
   "top_members": [
@@ -34,9 +34,9 @@
     "六角のえり",
     "甘崎紗音",
     "姫宮まい",
+    "Nya",
     "星野 さかな",
     "姫川乃愛",
-    "Nya",
     "雪見夢楽",
     "鹿森雲羽"
   ]
