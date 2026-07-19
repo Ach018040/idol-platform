@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-18T20:55:42Z",
-  "market_temperature": 61.5,
-  "market_temperature_v2": 61.5,
+  "generated_at": "2026-07-19T20:56:16Z",
+  "market_temperature": 61.4,
+  "market_temperature_v2": 61.4,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,12 +18,12 @@
     "top_group": "幻獣",
     "social_king": "小嗨花花HimiKo",
     "social_focus": "小嗨花花HimiKo",
-    "market_temperature": 61.5
+    "market_temperature": 61.4
   },
   "rising_stars": [
-    "恋乃 もも",
-    "いのり",
+    "せいら",
     "うみ",
+    "belia",
     "優芽 Yuume",
     "夏川千晴"
   ],
