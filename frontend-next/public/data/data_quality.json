@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T21:15:28Z",
+  "generated_at": "2026-07-21T21:15:06Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 455,
@@ -48,7 +48,7 @@
     "instagram": 0.908,
     "facebook": 0.844,
     "twitter": 0.248,
-    "youtube": 0.486,
+    "youtube": 0.495,
     "member_names": 0.982,
     "last_group_snapshot_at": 1.0,
     "seo_ready_profile": 0.908,
@@ -60,13 +60,12 @@
       "Happy Holiday!!",
       "xEnomoRph",
       "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
-      "終焉Rebirth",
       "Flora・Fiore",
       "♡xDoLL",
-      "幻色プリンセス",
-      "MORINAGA",
       "Pure makeR",
+      "幻色プリンセス",
       "花咲＊Chloris",
+      "MORINAGA",
       "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
       "Immerse",
       "星瞳⭐︎グレア",
@@ -77,7 +76,8 @@
       "佐藤飛工作室研究生",
       "Re:Fuzz",
       "𝗥𝗔𝗕𝗕𝗶𝗧 & 𝗕𝗘𝗔𝗥",
-      "i<3"
+      "i<3",
+      "星願⟢Twinkle Sprinkle⟣"
     ]
   },
   "known_gaps": [
