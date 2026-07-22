@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-07-21T21:15:06Z',
-  'Weekly idol market digest generated on 2026-07-21T21:15:06Z. Top group: 初恋Eternal. Top member: 藍井心咲. Market temperature: 61.3. Rising stars: 澪乃千尋, いのり, せいら, belia, 愛栖 栗夢. Heat drop watch: none.',
-  '- 2026-07-21T21:15:06Z: weekly market digest generated
+  'Weekly Market Digest 2026-07-22T21:13:59Z',
+  'Weekly idol market digest generated on 2026-07-22T21:13:59Z. Top group: 初恋Eternal. Top member: 藍井心咲. Market temperature: 61.3. Rising stars: いのり, せいら, 愛栖 栗夢, 恋乃 もも, うみ. Heat drop watch: none.',
+  '- 2026-07-22T21:13:59Z: weekly market digest generated
 - Highlight top group: 初恋Eternal
 - Highlight top member: 藍井心咲
-- Rising stars: 澪乃千尋, いのり, せいら, belia, 愛栖 栗夢',
+- Rising stars: いのり, せいら, 愛栖 栗夢, 恋乃 もも, うみ',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-07-21T21:15:06Z", "top_group": "初恋Eternal", "top_member": "藍井心咲", "market_temperature": "61.3", "rising_stars": ["澪乃千尋", "いのり", "せいら", "belia", "愛栖 栗夢"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-07-22T21:13:59Z", "top_group": "初恋Eternal", "top_member": "藍井心咲", "market_temperature": "61.3", "rising_stars": ["いのり", "せいら", "愛栖 栗夢", "恋乃 もも", "うみ"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-07-21T21:15:06Z',
-  'Weekly digest refreshed: 2026-07-21T21:15:06Z',
-  'Weekly idol market digest generated on 2026-07-21T21:15:06Z. Top group: 初恋Eternal. Top member: 藍井心咲. Market temperature: 61.3. Rising stars: 澪乃千尋, いのり, せいら, belia, 愛栖 栗夢. Heat drop watch: none.',
+  '2026-07-22T21:13:59Z',
+  'Weekly digest refreshed: 2026-07-22T21:13:59Z',
+  'Weekly idol market digest generated on 2026-07-22T21:13:59Z. Top group: 初恋Eternal. Top member: 藍井心咲. Market temperature: 61.3. Rising stars: いのり, せいら, 愛栖 栗夢, 恋乃 もも, うみ. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
