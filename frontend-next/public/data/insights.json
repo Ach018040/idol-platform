@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-24T21:08:31Z",
-  "market_temperature": 61.1,
-  "market_temperature_v2": 61.1,
+  "generated_at": "2026-07-25T20:57:49Z",
+  "market_temperature": 61.0,
+  "market_temperature_v2": 61.0,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,13 +18,13 @@
     "top_group": "初恋Eternal",
     "social_king": "藍井心咲",
     "social_focus": "藍井心咲",
-    "market_temperature": 61.1
+    "market_temperature": 61.0
   },
   "rising_stars": [
-    "いのり",
-    "せいら",
+    "御金 寧々花",
     "愛栖 栗夢",
     "恋乃 もも",
+    "いのり",
     "うみ"
   ],
   "heat_drop": [],
