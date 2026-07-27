@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-26T21:02:49Z",
-  "market_temperature": 61.0,
-  "market_temperature_v2": 61.0,
+  "generated_at": "2026-07-27T21:15:39Z",
+  "market_temperature": 60.9,
+  "market_temperature_v2": 60.9,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -16,9 +16,9 @@
   },
   "weekly_highlights": {
     "top_group": "初恋Eternal",
-    "social_king": "藍井心咲",
-    "social_focus": "藍井心咲",
-    "market_temperature": 61.0
+    "social_king": "瑠冥青璃",
+    "social_focus": "瑠冥青璃",
+    "market_temperature": 60.9
   },
   "rising_stars": [
     "御金 寧々花",
@@ -29,11 +29,11 @@
   ],
   "heat_drop": [],
   "top_members": [
+    "瑠冥青璃",
     "藍井心咲",
     "綿琉羽音",
     "眠森りん",
     "小嗨花花HimiKo",
-    "瑠冥青璃",
     "小豆 Azuki",
     "六角のえり",
     "甘崎紗音",
