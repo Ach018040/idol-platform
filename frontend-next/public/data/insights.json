@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-27T21:15:39Z",
-  "market_temperature": 60.9,
-  "market_temperature_v2": 60.9,
+  "generated_at": "2026-07-28T21:12:51Z",
+  "market_temperature": 60.8,
+  "market_temperature_v2": 60.8,
   "active_groups": 107,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -15,17 +15,17 @@
     "views": 0.0
   },
   "weekly_highlights": {
-    "top_group": "初恋Eternal",
+    "top_group": "幻獣",
     "social_king": "瑠冥青璃",
     "social_focus": "瑠冥青璃",
-    "market_temperature": 60.9
+    "market_temperature": 60.8
   },
   "rising_stars": [
-    "御金 寧々花",
-    "愛栖 栗夢",
     "恋乃 もも",
+    "澪乃千尋",
     "いのり",
-    "せいら"
+    "せいら",
+    "うみ"
   ],
   "heat_drop": [],
   "top_members": [
