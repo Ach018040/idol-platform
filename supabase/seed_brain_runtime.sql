@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-07-30T21:16:16Z',
-  'Weekly idol market digest generated on 2026-07-30T21:16:16Z. Top group: 幻獣. Top member: 瑠冥青璃. Market temperature: 60.7. Rising stars: 澪乃千尋, いのり, せいら, うみ, 愛栖 栗夢. Heat drop watch: none.',
-  '- 2026-07-30T21:16:16Z: weekly market digest generated
+  'Weekly Market Digest 2026-07-31T21:11:17Z',
+  'Weekly idol market digest generated on 2026-07-31T21:11:17Z. Top group: 幻獣. Top member: 瑠冥青璃. Market temperature: 60.7. Rising stars: 恋乃 もも, 澪乃千尋, いのり, せいら, 愛栖 栗夢. Heat drop watch: none.',
+  '- 2026-07-31T21:11:17Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: 瑠冥青璃
-- Rising stars: 澪乃千尋, いのり, せいら, うみ, 愛栖 栗夢',
+- Rising stars: 恋乃 もも, 澪乃千尋, いのり, せいら, 愛栖 栗夢',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-07-30T21:16:16Z", "top_group": "幻獣", "top_member": "瑠冥青璃", "market_temperature": "60.7", "rising_stars": ["澪乃千尋", "いのり", "せいら", "うみ", "愛栖 栗夢"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-07-31T21:11:17Z", "top_group": "幻獣", "top_member": "瑠冥青璃", "market_temperature": "60.7", "rising_stars": ["恋乃 もも", "澪乃千尋", "いのり", "せいら", "愛栖 栗夢"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-07-30T21:16:16Z',
-  'Weekly digest refreshed: 2026-07-30T21:16:16Z',
-  'Weekly idol market digest generated on 2026-07-30T21:16:16Z. Top group: 幻獣. Top member: 瑠冥青璃. Market temperature: 60.7. Rising stars: 澪乃千尋, いのり, せいら, うみ, 愛栖 栗夢. Heat drop watch: none.',
+  '2026-07-31T21:11:17Z',
+  'Weekly digest refreshed: 2026-07-31T21:11:17Z',
+  'Weekly idol market digest generated on 2026-07-31T21:11:17Z. Top group: 幻獣. Top member: 瑠冥青璃. Market temperature: 60.7. Rising stars: 恋乃 もも, 澪乃千尋, いのり, せいら, 愛栖 栗夢. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
