@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-01T20:59:04Z",
-  "market_temperature": 60.8,
-  "market_temperature_v2": 60.8,
+  "generated_at": "2026-08-02T21:00:47Z",
+  "market_temperature": 60.9,
+  "market_temperature_v2": 60.9,
   "active_groups": 109,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.91,
-    "x": 0.24,
+    "x": 0.25,
     "threads": 0.0,
     "social_post_dates": 0.31,
     "seo_ready_profiles": 0.85,
@@ -15,29 +15,29 @@
     "views": 0.0
   },
   "weekly_highlights": {
-    "top_group": "幻獣",
-    "social_king": "瑠冥青璃",
-    "social_focus": "瑠冥青璃",
-    "market_temperature": 60.8
+    "top_group": "heart pickᰔ",
+    "social_king": "藤川恋和",
+    "social_focus": "藤川恋和",
+    "market_temperature": 60.9
   },
   "rising_stars": [
-    "羽黒凛香",
+    "天唯陽奈",
+    "魂音ちよ",
+    "霧宮蒼生",
     "天琴 ドウナ",
-    "御金 寧々花",
-    "恋乃 もも",
-    "澪乃千尋"
+    "羽黒凛香"
   ],
   "heat_drop": [],
   "top_members": [
+    "藤川恋和",
+    "立花さらら",
+    "水瀬みみ",
+    "福原小波",
+    "汐見ねおん",
+    "紺霜骷と音",
     "瑠冥青璃",
     "藍井心咲",
     "綿琉羽音",
-    "眠森りん",
-    "小嗨花花HimiKo",
-    "小豆 Azuki",
-    "六角のえり",
-    "甘崎紗音",
-    "姫宮まい",
-    "藤乃瑠花"
+    "眠森りん"
   ]
 }
