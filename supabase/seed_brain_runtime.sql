@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-08-02T21:00:47Z',
-  'Weekly idol market digest generated on 2026-08-02T21:00:47Z. Top group: heart pickᰔ. Top member: 藤川恋和. Market temperature: 60.9. Rising stars: 天唯陽奈, 魂音ちよ, 霧宮蒼生, 天琴 ドウナ, 羽黒凛香. Heat drop watch: none.',
-  '- 2026-08-02T21:00:47Z: weekly market digest generated
+  'Weekly Market Digest 2026-08-03T21:08:49Z',
+  'Weekly idol market digest generated on 2026-08-03T21:08:49Z. Top group: heart pickᰔ. Top member: 藤川恋和. Market temperature: 60.9. Rising stars: 魂音ちよ, 霧宮蒼生, 天琴 ドウナ, 灼見真知, 羽黒凛香. Heat drop watch: none.',
+  '- 2026-08-03T21:08:49Z: weekly market digest generated
 - Highlight top group: heart pickᰔ
 - Highlight top member: 藤川恋和
-- Rising stars: 天唯陽奈, 魂音ちよ, 霧宮蒼生, 天琴 ドウナ, 羽黒凛香',
+- Rising stars: 魂音ちよ, 霧宮蒼生, 天琴 ドウナ, 灼見真知, 羽黒凛香',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-08-02T21:00:47Z", "top_group": "heart pickᰔ", "top_member": "藤川恋和", "market_temperature": "60.9", "rising_stars": ["天唯陽奈", "魂音ちよ", "霧宮蒼生", "天琴 ドウナ", "羽黒凛香"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-08-03T21:08:49Z", "top_group": "heart pickᰔ", "top_member": "藤川恋和", "market_temperature": "60.9", "rising_stars": ["魂音ちよ", "霧宮蒼生", "天琴 ドウナ", "灼見真知", "羽黒凛香"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-08-02T21:00:47Z',
-  'Weekly digest refreshed: 2026-08-02T21:00:47Z',
-  'Weekly idol market digest generated on 2026-08-02T21:00:47Z. Top group: heart pickᰔ. Top member: 藤川恋和. Market temperature: 60.9. Rising stars: 天唯陽奈, 魂音ちよ, 霧宮蒼生, 天琴 ドウナ, 羽黒凛香. Heat drop watch: none.',
+  '2026-08-03T21:08:49Z',
+  'Weekly digest refreshed: 2026-08-03T21:08:49Z',
+  'Weekly idol market digest generated on 2026-08-03T21:08:49Z. Top group: heart pickᰔ. Top member: 藤川恋和. Market temperature: 60.9. Rising stars: 魂音ちよ, 霧宮蒼生, 天琴 ドウナ, 灼見真知, 羽黒凛香. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
