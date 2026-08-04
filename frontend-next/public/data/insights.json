@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T21:08:49Z",
+  "generated_at": "2026-08-04T21:17:36Z",
   "market_temperature": 60.9,
   "market_temperature_v2": 60.9,
   "active_groups": 109,
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "heart pickᰔ",
-    "social_king": "藤川恋和",
-    "social_focus": "藤川恋和",
+    "social_king": "桜野杏理",
+    "social_focus": "桜野杏理",
     "market_temperature": 60.9
   },
   "rising_stars": [
     "魂音ちよ",
     "霧宮蒼生",
+    "羽黒凛香",
     "天琴 ドウナ",
-    "灼見真知",
-    "羽黒凛香"
+    "澪乃千尋"
   ],
   "heat_drop": [],
   "top_members": [
+    "桜野杏理",
     "藤川恋和",
     "立花さらら",
     "水瀬みみ",
@@ -37,7 +38,6 @@
     "紺霜骷と音",
     "瑠冥青璃",
     "藍井心咲",
-    "綿琉羽音",
-    "眠森りん"
+    "綿琉羽音"
   ]
 }
