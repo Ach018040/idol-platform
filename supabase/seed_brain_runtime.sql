@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-08-07T20:46:28Z',
-  'Weekly idol market digest generated on 2026-08-07T20:46:28Z. Top group: heart pickᰔ. Top member: 汐見ねおん. Market temperature: 60.8. Rising stars: 魂音ちよ, 霧宮蒼生, 羽黒凛香, 天琴 ドウナ, 澪乃千尋. Heat drop watch: none.',
-  '- 2026-08-07T20:46:28Z: weekly market digest generated
+  'Weekly Market Digest 2026-08-08T20:35:32Z',
+  'Weekly idol market digest generated on 2026-08-08T20:35:32Z. Top group: heart pickᰔ. Top member: 福原小波. Market temperature: 60.7. Rising stars: 霧宮蒼生, 七瀬円香, 羽黒凛香, 天琴 ドウナ, 御金 寧々花. Heat drop watch: none.',
+  '- 2026-08-08T20:35:32Z: weekly market digest generated
 - Highlight top group: heart pickᰔ
-- Highlight top member: 汐見ねおん
-- Rising stars: 魂音ちよ, 霧宮蒼生, 羽黒凛香, 天琴 ドウナ, 澪乃千尋',
+- Highlight top member: 福原小波
+- Rising stars: 霧宮蒼生, 七瀬円香, 羽黒凛香, 天琴 ドウナ, 御金 寧々花',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-08-07T20:46:28Z", "top_group": "heart pickᰔ", "top_member": "汐見ねおん", "market_temperature": "60.8", "rising_stars": ["魂音ちよ", "霧宮蒼生", "羽黒凛香", "天琴 ドウナ", "澪乃千尋"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-08-08T20:35:32Z", "top_group": "heart pickᰔ", "top_member": "福原小波", "market_temperature": "60.7", "rising_stars": ["霧宮蒼生", "七瀬円香", "羽黒凛香", "天琴 ドウナ", "御金 寧々花"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-08-07T20:46:28Z',
-  'Weekly digest refreshed: 2026-08-07T20:46:28Z',
-  'Weekly idol market digest generated on 2026-08-07T20:46:28Z. Top group: heart pickᰔ. Top member: 汐見ねおん. Market temperature: 60.8. Rising stars: 魂音ちよ, 霧宮蒼生, 羽黒凛香, 天琴 ドウナ, 澪乃千尋. Heat drop watch: none.',
+  '2026-08-08T20:35:32Z',
+  'Weekly digest refreshed: 2026-08-08T20:35:32Z',
+  'Weekly idol market digest generated on 2026-08-08T20:35:32Z. Top group: heart pickᰔ. Top member: 福原小波. Market temperature: 60.7. Rising stars: 霧宮蒼生, 七瀬円香, 羽黒凛香, 天琴 ドウナ, 御金 寧々花. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
