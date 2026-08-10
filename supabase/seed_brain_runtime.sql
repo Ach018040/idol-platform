@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-08-09T20:37:55Z',
-  'Weekly idol market digest generated on 2026-08-09T20:37:55Z. Top group: heart pickᰔ. Top member: 福原小波. Market temperature: 60.7. Rising stars: 兎實ふぃん, 七瀬円香, 羽黒凛香, 天琴 ドウナ, 御金 寧々花. Heat drop watch: none.',
-  '- 2026-08-09T20:37:55Z: weekly market digest generated
+  'Weekly Market Digest 2026-08-10T20:48:59Z',
+  'Weekly idol market digest generated on 2026-08-10T20:48:59Z. Top group: heart pickᰔ. Top member: 福原小波. Market temperature: 60.6. Rising stars: 兎實ふぃん, 七瀬円香, 羽黒凛香, 天琴 ドウナ, 御金 寧々花. Heat drop watch: none.',
+  '- 2026-08-10T20:48:59Z: weekly market digest generated
 - Highlight top group: heart pickᰔ
 - Highlight top member: 福原小波
 - Rising stars: 兎實ふぃん, 七瀬円香, 羽黒凛香, 天琴 ドウナ, 御金 寧々花',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-08-09T20:37:55Z", "top_group": "heart pickᰔ", "top_member": "福原小波", "market_temperature": "60.7", "rising_stars": ["兎實ふぃん", "七瀬円香", "羽黒凛香", "天琴 ドウナ", "御金 寧々花"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-08-10T20:48:59Z", "top_group": "heart pickᰔ", "top_member": "福原小波", "market_temperature": "60.6", "rising_stars": ["兎實ふぃん", "七瀬円香", "羽黒凛香", "天琴 ドウナ", "御金 寧々花"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-08-09T20:37:55Z',
-  'Weekly digest refreshed: 2026-08-09T20:37:55Z',
-  'Weekly idol market digest generated on 2026-08-09T20:37:55Z. Top group: heart pickᰔ. Top member: 福原小波. Market temperature: 60.7. Rising stars: 兎實ふぃん, 七瀬円香, 羽黒凛香, 天琴 ドウナ, 御金 寧々花. Heat drop watch: none.',
+  '2026-08-10T20:48:59Z',
+  'Weekly digest refreshed: 2026-08-10T20:48:59Z',
+  'Weekly idol market digest generated on 2026-08-10T20:48:59Z. Top group: heart pickᰔ. Top member: 福原小波. Market temperature: 60.6. Rising stars: 兎實ふぃん, 七瀬円香, 羽黒凛香, 天琴 ドウナ, 御金 寧々花. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
