@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-13T20:49:00Z",
-  "market_temperature": 60.6,
-  "market_temperature_v2": 60.6,
+  "generated_at": "2026-08-14T20:35:14Z",
+  "market_temperature": 60.7,
+  "market_temperature_v2": 60.7,
   "active_groups": 109,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -16,28 +16,28 @@
   },
   "weekly_highlights": {
     "top_group": "heart pickᰔ",
-    "social_king": "汐見ねおん",
-    "social_focus": "汐見ねおん",
-    "market_temperature": 60.6
+    "social_king": "津代舞奈",
+    "social_focus": "津代舞奈",
+    "market_temperature": 60.7
   },
   "rising_stars": [
-    "羽黒凛香",
-    "兎實ふぃん",
-    "七瀬円香",
-    "天琴 ドウナ",
-    "御金 寧々花"
+    "Ruka Banana",
+    "天唯陽奈",
+    "梨理 𝚁𝚒𝚛𝚒",
+    "魂音ちよ",
+    "霧宮蒼生"
   ],
   "heat_drop": [],
   "top_members": [
+    "津代舞奈",
+    "栗羽黎奈",
+    "夢良咲夜眠",
+    "兎實ふぃん",
     "汐見ねおん",
     "福原小波",
     "藤川恋和",
     "水瀬みみ",
     "立花さらら",
-    "空花茉穗",
-    "桜野杏理",
-    "紺霜骷と音",
-    "瑠冥青璃",
-    "藍井心咲"
+    "空花茉穗"
   ]
 }
