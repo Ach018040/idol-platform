@@ -1,23 +1,24 @@
 {
-  "generated_at": "2026-08-14T20:35:14Z",
+  "generated_at": "2026-08-15T20:27:01Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
-    "member_total": 458,
+    "member_total": 459,
     "group_total": 111,
     "current_maturity": "L1",
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
     "instagram": 0.913,
-    "facebook": 0.445,
-    "twitter": 0.247,
+    "facebook": 0.447,
+    "twitter": 0.246,
     "threads": 0.0,
     "photo_url": 0.924,
-    "group": 0.921,
-    "last_social_signal_at": 0.308,
+    "group": 0.919,
+    "last_social_signal_at": 0.307,
     "seo_ready_profile": 0.906,
     "missing_core_examples": [
       "しか",
+      "ゆめyume",
       "Key a.k.a SOXI",
       "台湾人の永琳",
       "桜音みゆぃ♪",
@@ -40,8 +41,7 @@
       "亞寧",
       "桃沢花梨",
       "ようた",
-      "艾莉塔",
-      "百合ステラ"
+      "艾莉塔"
     ]
   },
   "group_coverage": {
@@ -71,13 +71,13 @@
       "少女ガチャポン",
       "未灯＊ミラクル",
       "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
-      "DUALIA",
-      "MORINAGA",
       "無我夢中",
+      "MORINAGA",
+      "DUALIA",
       "𝗥𝗔𝗕𝗕𝗶𝗧 & 𝗕𝗘𝗔𝗥",
       "星瞳⭐︎グレア",
-      "Nevaris",
-      "佐藤飛工作室研究生"
+      "花びラブ",
+      "Nevaris"
     ]
   },
   "known_gaps": [

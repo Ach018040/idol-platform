@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-08-14T20:35:14Z',
-  'Weekly idol market digest generated on 2026-08-14T20:35:14Z. Top group: heart pickᰔ. Top member: 津代舞奈. Market temperature: 60.7. Rising stars: Ruka Banana, 天唯陽奈, 梨理 𝚁𝚒𝚛𝚒, 魂音ちよ, 霧宮蒼生. Heat drop watch: none.',
-  '- 2026-08-14T20:35:14Z: weekly market digest generated
+  'Weekly Market Digest 2026-08-15T20:27:01Z',
+  'Weekly idol market digest generated on 2026-08-15T20:27:01Z. Top group: heart pickᰔ. Top member: 青璃. Market temperature: 60.7. Rising stars: 稲妻莉央, Ruka Banana, 魂音ちよ, 霧宮蒼生, 梨理 𝚁𝚒𝚛𝚒. Heat drop watch: none.',
+  '- 2026-08-15T20:27:01Z: weekly market digest generated
 - Highlight top group: heart pickᰔ
-- Highlight top member: 津代舞奈
-- Rising stars: Ruka Banana, 天唯陽奈, 梨理 𝚁𝚒𝚛𝚒, 魂音ちよ, 霧宮蒼生',
+- Highlight top member: 青璃
+- Rising stars: 稲妻莉央, Ruka Banana, 魂音ちよ, 霧宮蒼生, 梨理 𝚁𝚒𝚛𝚒',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-08-14T20:35:14Z", "top_group": "heart pickᰔ", "top_member": "津代舞奈", "market_temperature": "60.7", "rising_stars": ["Ruka Banana", "天唯陽奈", "梨理 𝚁𝚒𝚛𝚒", "魂音ちよ", "霧宮蒼生"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-08-15T20:27:01Z", "top_group": "heart pickᰔ", "top_member": "青璃", "market_temperature": "60.7", "rising_stars": ["稲妻莉央", "Ruka Banana", "魂音ちよ", "霧宮蒼生", "梨理 𝚁𝚒𝚛𝚒"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-08-14T20:35:14Z',
-  'Weekly digest refreshed: 2026-08-14T20:35:14Z',
-  'Weekly idol market digest generated on 2026-08-14T20:35:14Z. Top group: heart pickᰔ. Top member: 津代舞奈. Market temperature: 60.7. Rising stars: Ruka Banana, 天唯陽奈, 梨理 𝚁𝚒𝚛𝚒, 魂音ちよ, 霧宮蒼生. Heat drop watch: none.',
+  '2026-08-15T20:27:01Z',
+  'Weekly digest refreshed: 2026-08-15T20:27:01Z',
+  'Weekly idol market digest generated on 2026-08-15T20:27:01Z. Top group: heart pickᰔ. Top member: 青璃. Market temperature: 60.7. Rising stars: 稲妻莉央, Ruka Banana, 魂音ちよ, 霧宮蒼生, 梨理 𝚁𝚒𝚛𝚒. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
