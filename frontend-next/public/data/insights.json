@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T20:32:54Z",
+  "generated_at": "2026-08-18T20:28:57Z",
   "market_temperature": 60.6,
   "market_temperature_v2": 60.6,
   "active_groups": 109,
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "heart pickᰔ",
-    "social_king": "小豆 Azuki",
-    "social_focus": "小豆 Azuki",
+    "social_king": "鹿森雲羽",
+    "social_focus": "鹿森雲羽",
     "market_temperature": 60.6
   },
   "rising_stars": [
-    "Ruka Banana",
-    "稲妻莉央",
+    "天唯陽奈",
     "魂音ちよ",
     "霧宮蒼生",
-    "梨理 𝚁𝚒𝚛𝚒"
+    "稲妻莉央",
+    "Ruka Banana"
   ],
   "heat_drop": [],
   "top_members": [
+    "鹿森雲羽",
     "小豆 Azuki",
     "青璃",
     "津代舞奈",
@@ -37,7 +38,6 @@
     "兎實ふぃん",
     "汐見ねおん",
     "福原小波",
-    "藤川恋和",
-    "水瀬みみ"
+    "藤川恋和"
   ]
 }
