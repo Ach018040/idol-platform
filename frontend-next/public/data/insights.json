@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-08-19T20:33:24Z",
+  "generated_at": "2026-08-20T20:33:01Z",
   "market_temperature": 60.6,
   "market_temperature_v2": 60.6,
-  "active_groups": 109,
+  "active_groups": 110,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.91,
-    "x": 0.25,
+    "x": 0.24,
     "threads": 0.0,
-    "social_post_dates": 0.31,
+    "social_post_dates": 0.3,
     "seo_ready_profiles": 0.85,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
@@ -21,11 +21,11 @@
     "market_temperature": 60.6
   },
   "rising_stars": [
-    "葬シロ",
+    "Ruka Banana",
+    "稲妻莉央",
     "天唯陽奈",
     "魂音ちよ",
-    "稲妻莉央",
-    "Ruka Banana"
+    "天琴 ドウナ"
   ],
   "heat_drop": [],
   "top_members": [
