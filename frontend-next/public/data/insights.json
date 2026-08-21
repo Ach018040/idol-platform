@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-20T20:33:01Z",
-  "market_temperature": 60.6,
-  "market_temperature_v2": 60.6,
+  "generated_at": "2026-08-21T20:30:27Z",
+  "market_temperature": 60.5,
+  "market_temperature_v2": 60.5,
   "active_groups": 110,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,13 +18,13 @@
     "top_group": "heart pickᰔ",
     "social_king": "鹿森雲羽",
     "social_focus": "鹿森雲羽",
-    "market_temperature": 60.6
+    "market_temperature": 60.5
   },
   "rising_stars": [
     "Ruka Banana",
     "稲妻莉央",
-    "天唯陽奈",
     "魂音ちよ",
+    "霧宮蒼生",
     "天琴 ドウナ"
   ],
   "heat_drop": [],
