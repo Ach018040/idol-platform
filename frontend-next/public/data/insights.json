@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-22T20:27:34Z",
+  "generated_at": "2026-08-23T20:28:23Z",
   "market_temperature": 60.5,
   "market_temperature_v2": 60.5,
-  "active_groups": 110,
+  "active_groups": 111,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.91,
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "heart pickᰔ",
-    "social_king": "鹿森雲羽",
-    "social_focus": "鹿森雲羽",
+    "social_king": "梨理 𝚁𝚒𝚛𝚒",
+    "social_focus": "梨理 𝚁𝚒𝚛𝚒",
     "market_temperature": 60.5
   },
   "rising_stars": [
-    "稲妻莉央",
+    "天唯陽奈",
     "Ruka Banana",
+    "稲妻莉央",
     "魂音ちよ",
-    "霧宮蒼生",
-    "天琴 ドウナ"
+    "霧宮蒼生"
   ],
   "heat_drop": [],
   "top_members": [
+    "梨理 𝚁𝚒𝚛𝚒",
     "鹿森雲羽",
     "小豆 Azuki",
     "青璃",
@@ -37,7 +38,6 @@
     "夢良咲夜眠",
     "兎實ふぃん",
     "汐見ねおん",
-    "福原小波",
-    "藤川恋和"
+    "福原小波"
   ]
 }
