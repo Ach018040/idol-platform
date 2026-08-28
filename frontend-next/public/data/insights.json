@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-26T22:56:40Z",
-  "market_temperature": 60.4,
-  "market_temperature_v2": 60.4,
+  "generated_at": "2026-08-28T04:06:59Z",
+  "market_temperature": 60.3,
+  "market_temperature_v2": 60.3,
   "active_groups": 111,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "梨理 𝚁𝚒𝚛𝚒",
     "social_focus": "梨理 𝚁𝚒𝚛𝚒",
-    "market_temperature": 60.4
+    "market_temperature": 60.3
   },
   "rising_stars": [
     "天唯陽奈",
     "魂音ちよ",
     "霧宮蒼生",
     "天琴 ドウナ",
-    "御金 寧々花"
+    "澪乃千尋"
   ],
   "heat_drop": [],
   "top_members": [
