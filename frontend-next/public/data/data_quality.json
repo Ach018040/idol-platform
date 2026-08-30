@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T22:31:06Z",
+  "generated_at": "2026-08-30T22:33:43Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 466,
@@ -9,19 +9,20 @@
   },
   "member_coverage": {
     "instagram": 0.914,
-    "facebook": 0.442,
-    "twitter": 0.242,
+    "facebook": 0.446,
+    "twitter": 0.3,
     "threads": 0.0,
-    "photo_url": 0.925,
+    "photo_url": 0.929,
     "group": 0.918,
     "last_social_signal_at": 0.303,
-    "seo_ready_profile": 0.908,
+    "seo_ready_profile": 0.914,
     "missing_core_examples": [
       "しか",
       "Key a.k.a SOXI",
       "台湾人の永琳",
       "桜音みゆぃ♪",
       "結城朋子",
+      "Koharu",
       "ゆめyume",
       "天川未來",
       "月海 晴",
@@ -40,24 +41,27 @@
       "Yuna",
       "音転 心夕",
       "亞寧",
-      "桃沢花梨",
-      "ようた"
+      "桃沢花梨"
     ]
   },
   "group_coverage": {
     "instagram": 0.912,
     "facebook": 0.841,
-    "twitter": 0.248,
+    "twitter": 0.257,
     "youtube": 0.496,
     "member_names": 0.982,
     "last_group_snapshot_at": 1.0,
     "seo_ready_profile": 0.912,
     "missing_core_examples": [
+      "少女ガチャポン",
+      "DUALIA",
+      "Pure makeR",
+      "Happy Holiday!!",
       "未完成プロローグ",
       "Re:TurN-Capture-",
-      "Happy Holiday!!",
       "天国地獄",
       "AXIA",
+      "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
       "xEnomoRph",
       "幻波SYNC",
       "Flora・Fiore",
@@ -65,19 +69,15 @@
       "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
       "花咲＊Chloris",
       "幻色プリンセス",
-      "Pure makeR",
       "Immerse",
-      "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
-      "少女ガチャポン",
+      "曖昧な宝石",
       "未灯＊ミラクル",
       "冥恋セレナーデ",
       "無我夢中",
       "𝗥𝗔𝗕𝗕𝗶𝗧 & 𝗕𝗘𝗔𝗥",
       "Nevaris",
       "MORINAGA",
-      "i<3",
-      "星瞳⭐︎グレア",
-      "花びラブ"
+      "i<3"
     ]
   },
   "known_gaps": [

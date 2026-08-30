@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-08-29T22:31:06Z',
-  'Weekly idol market digest generated on 2026-08-29T22:31:06Z. Top group: 幻獣. Top member: 梨理 𝚁𝚒𝚛𝚒. Market temperature: 60.3. Rising stars: 呪飼久露猫, 天唯陽奈, 天琴 ドウナ, 魂音ちよ, 霧宮蒼生. Heat drop watch: none.',
-  '- 2026-08-29T22:31:06Z: weekly market digest generated
+  'Weekly Market Digest 2026-08-30T22:33:43Z',
+  'Weekly idol market digest generated on 2026-08-30T22:33:43Z. Top group: 幻獣. Top member: 七瀬ありす. Market temperature: 61.8. Rising stars: 御雨, 夢笛きむ, 有栖栗, 鳳凰院レア, 君宣苺香. Heat drop watch: none.',
+  '- 2026-08-30T22:33:43Z: weekly market digest generated
 - Highlight top group: 幻獣
-- Highlight top member: 梨理 𝚁𝚒𝚛𝚒
-- Rising stars: 呪飼久露猫, 天唯陽奈, 天琴 ドウナ, 魂音ちよ, 霧宮蒼生',
+- Highlight top member: 七瀬ありす
+- Rising stars: 御雨, 夢笛きむ, 有栖栗, 鳳凰院レア, 君宣苺香',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-08-29T22:31:06Z", "top_group": "幻獣", "top_member": "梨理 𝚁𝚒𝚛𝚒", "market_temperature": "60.3", "rising_stars": ["呪飼久露猫", "天唯陽奈", "天琴 ドウナ", "魂音ちよ", "霧宮蒼生"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-08-30T22:33:43Z", "top_group": "幻獣", "top_member": "七瀬ありす", "market_temperature": "61.8", "rising_stars": ["御雨", "夢笛きむ", "有栖栗", "鳳凰院レア", "君宣苺香"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-08-29T22:31:06Z',
-  'Weekly digest refreshed: 2026-08-29T22:31:06Z',
-  'Weekly idol market digest generated on 2026-08-29T22:31:06Z. Top group: 幻獣. Top member: 梨理 𝚁𝚒𝚛𝚒. Market temperature: 60.3. Rising stars: 呪飼久露猫, 天唯陽奈, 天琴 ドウナ, 魂音ちよ, 霧宮蒼生. Heat drop watch: none.',
+  '2026-08-30T22:33:43Z',
+  'Weekly digest refreshed: 2026-08-30T22:33:43Z',
+  'Weekly idol market digest generated on 2026-08-30T22:33:43Z. Top group: 幻獣. Top member: 七瀬ありす. Market temperature: 61.8. Rising stars: 御雨, 夢笛きむ, 有栖栗, 鳳凰院レア, 君宣苺香. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
