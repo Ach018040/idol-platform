@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T22:33:43Z",
+  "generated_at": "2026-08-31T23:40:26Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 466,
@@ -8,14 +8,14 @@
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
-    "instagram": 0.914,
+    "instagram": 0.916,
     "facebook": 0.446,
-    "twitter": 0.3,
+    "twitter": 0.313,
     "threads": 0.0,
-    "photo_url": 0.929,
+    "photo_url": 0.931,
     "group": 0.918,
     "last_social_signal_at": 0.303,
-    "seo_ready_profile": 0.914,
+    "seo_ready_profile": 0.916,
     "missing_core_examples": [
       "しか",
       "Key a.k.a SOXI",
@@ -56,11 +56,12 @@
       "少女ガチャポン",
       "DUALIA",
       "Pure makeR",
-      "Happy Holiday!!",
       "未完成プロローグ",
-      "Re:TurN-Capture-",
+      "Happy Holiday!!",
       "天国地獄",
+      "Re:TurN-Capture-",
       "AXIA",
+      "Nevaris",
       "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
       "xEnomoRph",
       "幻波SYNC",
@@ -69,15 +70,14 @@
       "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
       "花咲＊Chloris",
       "幻色プリンセス",
+      "星願⟢Twinkle Sprinkle⟣",
       "Immerse",
-      "曖昧な宝石",
       "未灯＊ミラクル",
+      "曖昧な宝石",
       "冥恋セレナーデ",
       "無我夢中",
       "𝗥𝗔𝗕𝗕𝗶𝗧 & 𝗕𝗘𝗔𝗥",
-      "Nevaris",
-      "MORINAGA",
-      "i<3"
+      "MORINAGA"
     ]
   },
   "known_gaps": [
