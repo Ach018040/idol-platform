@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-09-01T22:29:45Z',
-  'Weekly idol market digest generated on 2026-09-01T22:29:45Z. Top group: 幻獣. Top member: 津代舞奈. Market temperature: 62.1. Rising stars: 星野 さかな, 姫川乃愛, 雛菜 Hina, 雪薇 Yukibi, 雪見夢楽. Heat drop watch: none.',
-  '- 2026-09-01T22:29:45Z: weekly market digest generated
+  'Weekly Market Digest 2026-09-02T22:28:29Z',
+  'Weekly idol market digest generated on 2026-09-02T22:28:29Z. Top group: 幻獣. Top member: 津代舞奈. Market temperature: 62.0. Rising stars: 星野 さかな, 姫川乃愛, 雛菜 Hina, 雪薇 Yukibi, 夢笛きむ. Heat drop watch: none.',
+  '- 2026-09-02T22:28:29Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: 津代舞奈
-- Rising stars: 星野 さかな, 姫川乃愛, 雛菜 Hina, 雪薇 Yukibi, 雪見夢楽',
+- Rising stars: 星野 さかな, 姫川乃愛, 雛菜 Hina, 雪薇 Yukibi, 夢笛きむ',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-09-01T22:29:45Z", "top_group": "幻獣", "top_member": "津代舞奈", "market_temperature": "62.1", "rising_stars": ["星野 さかな", "姫川乃愛", "雛菜 Hina", "雪薇 Yukibi", "雪見夢楽"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-09-02T22:28:29Z", "top_group": "幻獣", "top_member": "津代舞奈", "market_temperature": "62.0", "rising_stars": ["星野 さかな", "姫川乃愛", "雛菜 Hina", "雪薇 Yukibi", "夢笛きむ"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-09-01T22:29:45Z',
-  'Weekly digest refreshed: 2026-09-01T22:29:45Z',
-  'Weekly idol market digest generated on 2026-09-01T22:29:45Z. Top group: 幻獣. Top member: 津代舞奈. Market temperature: 62.1. Rising stars: 星野 さかな, 姫川乃愛, 雛菜 Hina, 雪薇 Yukibi, 雪見夢楽. Heat drop watch: none.',
+  '2026-09-02T22:28:29Z',
+  'Weekly digest refreshed: 2026-09-02T22:28:29Z',
+  'Weekly idol market digest generated on 2026-09-02T22:28:29Z. Top group: 幻獣. Top member: 津代舞奈. Market temperature: 62.0. Rising stars: 星野 さかな, 姫川乃愛, 雛菜 Hina, 雪薇 Yukibi, 夢笛きむ. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;

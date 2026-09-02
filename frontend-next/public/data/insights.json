@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-01T22:29:45Z",
-  "market_temperature": 62.1,
-  "market_temperature_v2": 62.1,
+  "generated_at": "2026-09-02T22:28:29Z",
+  "market_temperature": 62.0,
+  "market_temperature_v2": 62.0,
   "active_groups": 111,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "津代舞奈",
     "social_focus": "津代舞奈",
-    "market_temperature": 62.1
+    "market_temperature": 62.0
   },
   "rising_stars": [
     "星野 さかな",
     "姫川乃愛",
     "雛菜 Hina",
     "雪薇 Yukibi",
-    "雪見夢楽"
+    "夢笛きむ"
   ],
   "heat_drop": [],
   "top_members": [
