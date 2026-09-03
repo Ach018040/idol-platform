@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-02T22:28:29Z",
-  "market_temperature": 62.0,
-  "market_temperature_v2": 62.0,
+  "generated_at": "2026-09-03T22:26:06Z",
+  "market_temperature": 62.2,
+  "market_temperature_v2": 62.2,
   "active_groups": 111,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -9,35 +9,35 @@
     "x": 0.31,
     "threads": 0.0,
     "social_post_dates": 0.3,
-    "seo_ready_profiles": 0.86,
+    "seo_ready_profiles": 0.87,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "津代舞奈",
-    "social_focus": "津代舞奈",
-    "market_temperature": 62.0
+    "social_king": "眠森りん",
+    "social_focus": "眠森りん",
+    "market_temperature": 62.2
   },
   "rising_stars": [
-    "星野 さかな",
-    "姫川乃愛",
+    "瀧日灯璃",
     "雛菜 Hina",
     "雪薇 Yukibi",
-    "夢笛きむ"
+    "星野 さかな",
+    "姫川乃愛"
   ],
   "heat_drop": [],
   "top_members": [
+    "眠森りん",
+    "藍井心咲",
+    "綿琉羽音",
     "津代舞奈",
     "伊嚕咪",
     "兎羅亜華ノ草",
     "七瀬ありす",
     "劉璦黎 IRENE あいり 유애려",
     "姫路芙羽奈",
-    "羽咲やわら",
-    "天乃絵空",
-    "AKANE",
-    "Rei"
+    "羽咲やわら"
   ]
 }

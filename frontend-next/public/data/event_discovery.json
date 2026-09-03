@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T22:28:29Z",
+  "generated_at": "2026-09-03T22:26:07Z",
   "schema_version": "event-discovery-v1",
   "events": [
     {
@@ -19,7 +19,7 @@
       "detail_url": "https://idolinfohub.com/events/jacks-studio-moe-vol108-20260904",
       "image_url": null,
       "raw_text": "萌次元教師節 Vol.108 — 2026-09-04",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -40,7 +40,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-jiemei-mazari-20260904",
       "image_url": null,
       "raw_text": "ジエメイ x マザリ 2MAN in TAIWAN — 2026-09-04",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -63,7 +63,7 @@
       "detail_url": "https://idolinfohub.com/events/heartpick-debut-live-20260904",
       "image_url": null,
       "raw_text": "heart pickᰔ Debut Live『 First Heart Beat💖 』 — 2026-09-04",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -84,7 +84,7 @@
       "detail_url": "https://idolinfohub.com/events/aina-birth-live-drift-20260905",
       "image_url": null,
       "raw_text": "AINA 2026 BIRTHDAY LIVE《Drift》 — 2026-09-05",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -105,7 +105,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-festival-2026-summer-end-day1-20260905",
       "image_url": null,
       "raw_text": "MAGIC IDOL FESTIVAL 2026 SUMMER END DAY1 — 2026-09-05",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -126,7 +126,7 @@
       "detail_url": "https://idolinfohub.com/events/jiemei-oneman-20260905",
       "image_url": null,
       "raw_text": "ジエメイ 新体制初ONEMAN LIVE in TAIWAN — 2026-09-05",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -147,7 +147,7 @@
       "detail_url": "https://idolinfohub.com/events/floriseed-idol-project-vol2-20260905",
       "image_url": null,
       "raw_text": "綻不絕口vol.2 — 2026-09-05",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -168,7 +168,7 @@
       "detail_url": "https://idolinfohub.com/events/mah-20260906-night",
       "image_url": null,
       "raw_text": "MAH 20260906 NIGHT — 2026-09-06",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -189,7 +189,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-festival-2026-summer-end-day2-20260906",
       "image_url": null,
       "raw_text": "MAGIC IDOL FESTIVAL 2026 SUMMER END DAY2 — 2026-09-06",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -212,7 +212,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-narukami-3manlive-20260906",
       "image_url": null,
       "raw_text": "AZ-ON THEΔRAREz 鳴ル神 3MANLIVE in TAIWAN — 2026-09-06",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -233,7 +233,7 @@
       "detail_url": "https://idolinfohub.com/events/han-now-vol4-amakuchi-20260906",
       "image_url": null,
       "raw_text": "HAN鬧 vol.4 甘口 — 2026-09-06",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -254,7 +254,7 @@
       "detail_url": "https://idolinfohub.com/events/han-now-vol4-karakuchi-20260906",
       "image_url": null,
       "raw_text": "HAN鬧 vol.4 辛口 — 2026-09-06",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -275,7 +275,7 @@
       "detail_url": "https://idolinfohub.com/events/zizootaipei-anching-graduation-20260906",
       "image_url": null,
       "raw_text": "林安晴2026畢業公演 ~ This Summer ~ — 2026-09-06",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -296,7 +296,7 @@
       "detail_url": "https://idolinfohub.com/events/poxxion21-nvwu-yishi-vol11-20260906",
       "image_url": null,
       "raw_text": "POXXION\"21女巫儀式vol.11 — 2026-09-06",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -317,7 +317,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol35",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.35 — 2026-09-12",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -338,7 +338,7 @@
       "detail_url": "https://idolinfohub.com/events/mah-20260920-day",
       "image_url": null,
       "raw_text": "MAH 20260920 DAY — 2026-09-20",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -359,7 +359,7 @@
       "detail_url": "https://idolinfohub.com/events/mah-20260920-night",
       "image_url": null,
       "raw_text": "MAH 20260920 NIGHT — 2026-09-20",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -380,7 +380,7 @@
       "detail_url": "https://idolinfohub.com/events/flofio-5th-anniv-20260920",
       "image_url": null,
       "raw_text": "FloFio五週年ONEMAN LIVE「吾時吾刻」 — 2026-09-20",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -401,7 +401,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-kim-fes-20260924",
       "image_url": null,
       "raw_text": "金FES — 2026-09-24",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -422,7 +422,7 @@
       "detail_url": "https://idolinfohub.com/events/miracle-shine-vol2-2026-noon",
       "image_url": null,
       "raw_text": "奇蹟閃光 第二屆 日光篇 — 2026-10-11",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -443,7 +443,7 @@
       "detail_url": "https://idolinfohub.com/events/miracle-shine-vol2-2026-night",
       "image_url": null,
       "raw_text": "奇蹟閃光 第二屆 星光篇 — 2026-10-11",
-      "scraped_at": "2026-09-02T22:28:29Z",
+      "scraped_at": "2026-09-03T22:26:07Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     }
