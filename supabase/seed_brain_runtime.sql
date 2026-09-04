@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-09-03T22:26:06Z',
-  'Weekly idol market digest generated on 2026-09-03T22:26:06Z. Top group: 幻獣. Top member: 眠森りん. Market temperature: 62.2. Rising stars: 瀧日灯璃, 雛菜 Hina, 雪薇 Yukibi, 星野 さかな, 姫川乃愛. Heat drop watch: none.',
-  '- 2026-09-03T22:26:06Z: weekly market digest generated
+  'Weekly Market Digest 2026-09-04T22:15:15Z',
+  'Weekly idol market digest generated on 2026-09-04T22:15:15Z. Top group: 幻獣. Top member: AKANE. Market temperature: 62.3. Rising stars: 瀧日灯璃, 綾鹿希, 剎那 / SETXUNA, 紅紅, 雛菜 Hina. Heat drop watch: none.',
+  '- 2026-09-04T22:15:15Z: weekly market digest generated
 - Highlight top group: 幻獣
-- Highlight top member: 眠森りん
-- Rising stars: 瀧日灯璃, 雛菜 Hina, 雪薇 Yukibi, 星野 さかな, 姫川乃愛',
+- Highlight top member: AKANE
+- Rising stars: 瀧日灯璃, 綾鹿希, 剎那 / SETXUNA, 紅紅, 雛菜 Hina',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-09-03T22:26:06Z", "top_group": "幻獣", "top_member": "眠森りん", "market_temperature": "62.2", "rising_stars": ["瀧日灯璃", "雛菜 Hina", "雪薇 Yukibi", "星野 さかな", "姫川乃愛"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-09-04T22:15:15Z", "top_group": "幻獣", "top_member": "AKANE", "market_temperature": "62.3", "rising_stars": ["瀧日灯璃", "綾鹿希", "剎那 / SETXUNA", "紅紅", "雛菜 Hina"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-09-03T22:26:06Z',
-  'Weekly digest refreshed: 2026-09-03T22:26:06Z',
-  'Weekly idol market digest generated on 2026-09-03T22:26:06Z. Top group: 幻獣. Top member: 眠森りん. Market temperature: 62.2. Rising stars: 瀧日灯璃, 雛菜 Hina, 雪薇 Yukibi, 星野 さかな, 姫川乃愛. Heat drop watch: none.',
+  '2026-09-04T22:15:15Z',
+  'Weekly digest refreshed: 2026-09-04T22:15:15Z',
+  'Weekly idol market digest generated on 2026-09-04T22:15:15Z. Top group: 幻獣. Top member: AKANE. Market temperature: 62.3. Rising stars: 瀧日灯璃, 綾鹿希, 剎那 / SETXUNA, 紅紅, 雛菜 Hina. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;

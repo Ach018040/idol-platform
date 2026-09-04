@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-03T22:26:06Z",
-  "market_temperature": 62.2,
-  "market_temperature_v2": 62.2,
+  "generated_at": "2026-09-04T22:15:15Z",
+  "market_temperature": 62.3,
+  "market_temperature_v2": 62.3,
   "active_groups": 111,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "眠森りん",
-    "social_focus": "眠森りん",
-    "market_temperature": 62.2
+    "social_king": "AKANE",
+    "social_focus": "AKANE",
+    "market_temperature": 62.3
   },
   "rising_stars": [
     "瀧日灯璃",
-    "雛菜 Hina",
-    "雪薇 Yukibi",
-    "星野 さかな",
-    "姫川乃愛"
+    "綾鹿希",
+    "剎那 / SETXUNA",
+    "紅紅",
+    "雛菜 Hina"
   ],
   "heat_drop": [],
   "top_members": [
+    "AKANE",
     "眠森りん",
     "藍井心咲",
     "綿琉羽音",
@@ -37,7 +38,6 @@
     "兎羅亜華ノ草",
     "七瀬ありす",
     "劉璦黎 IRENE あいり 유애려",
-    "姫路芙羽奈",
-    "羽咲やわら"
+    "姫路芙羽奈"
   ]
 }
