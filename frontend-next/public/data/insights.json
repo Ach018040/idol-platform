@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-08T22:28:54Z",
-  "market_temperature": 62.6,
-  "market_temperature_v2": 62.6,
+  "generated_at": "2026-09-09T22:23:47Z",
+  "market_temperature": 62.5,
+  "market_temperature_v2": 62.5,
   "active_groups": 111,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "澄罪クア",
     "social_focus": "澄罪クア",
-    "market_temperature": 62.6
+    "market_temperature": 62.5
   },
   "rising_stars": [
-    "雛菜 Hina",
-    "雪薇 Yukibi",
-    "郁熙 𝚄𝙲",
-    "星野 さかな",
-    "姫川乃愛"
+    "姫川乃愛",
+    "夢笛きむ",
+    "唄霊",
+    "本白水雪苗",
+    "EMOKO"
   ],
   "heat_drop": [],
   "top_members": [
