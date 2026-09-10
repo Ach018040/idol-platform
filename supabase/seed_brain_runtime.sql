@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-09-09T22:23:47Z',
-  'Weekly idol market digest generated on 2026-09-09T22:23:47Z. Top group: 幻獣. Top member: 澄罪クア. Market temperature: 62.5. Rising stars: 姫川乃愛, 夢笛きむ, 唄霊, 本白水雪苗, EMOKO. Heat drop watch: none.',
-  '- 2026-09-09T22:23:47Z: weekly market digest generated
+  'Weekly Market Digest 2026-09-10T22:22:18Z',
+  'Weekly idol market digest generated on 2026-09-10T22:22:18Z. Top group: 幻獣. Top member: 澄罪クア. Market temperature: 62.6. Rising stars: 雪薇 Yukibi, 星野 さかな, 姫川乃愛, 夢笛きむ, 雪見夢楽. Heat drop watch: none.',
+  '- 2026-09-10T22:22:18Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: 澄罪クア
-- Rising stars: 姫川乃愛, 夢笛きむ, 唄霊, 本白水雪苗, EMOKO',
+- Rising stars: 雪薇 Yukibi, 星野 さかな, 姫川乃愛, 夢笛きむ, 雪見夢楽',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-09-09T22:23:47Z", "top_group": "幻獣", "top_member": "澄罪クア", "market_temperature": "62.5", "rising_stars": ["姫川乃愛", "夢笛きむ", "唄霊", "本白水雪苗", "EMOKO"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-09-10T22:22:18Z", "top_group": "幻獣", "top_member": "澄罪クア", "market_temperature": "62.6", "rising_stars": ["雪薇 Yukibi", "星野 さかな", "姫川乃愛", "夢笛きむ", "雪見夢楽"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-09-09T22:23:47Z',
-  'Weekly digest refreshed: 2026-09-09T22:23:47Z',
-  'Weekly idol market digest generated on 2026-09-09T22:23:47Z. Top group: 幻獣. Top member: 澄罪クア. Market temperature: 62.5. Rising stars: 姫川乃愛, 夢笛きむ, 唄霊, 本白水雪苗, EMOKO. Heat drop watch: none.',
+  '2026-09-10T22:22:18Z',
+  'Weekly digest refreshed: 2026-09-10T22:22:18Z',
+  'Weekly idol market digest generated on 2026-09-10T22:22:18Z. Top group: 幻獣. Top member: 澄罪クア. Market temperature: 62.6. Rising stars: 雪薇 Yukibi, 星野 さかな, 姫川乃愛, 夢笛きむ, 雪見夢楽. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
