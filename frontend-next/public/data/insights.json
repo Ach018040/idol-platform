@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-11T22:22:09Z",
-  "market_temperature": 62.5,
-  "market_temperature_v2": 62.5,
+  "generated_at": "2026-09-12T22:03:57Z",
+  "market_temperature": 62.4,
+  "market_temperature_v2": 62.4,
   "active_groups": 112,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "澄罪クア",
     "social_focus": "澄罪クア",
-    "market_temperature": 62.5
+    "market_temperature": 62.4
   },
   "rising_stars": [
-    "夢笛きむ",
-    "水羽綺世花",
     "星野 さかな",
     "姫川乃愛",
-    "君宣苺香"
+    "君宣苺香",
+    "雪見夢楽",
+    "御雨"
   ],
   "heat_drop": [],
   "top_members": [
