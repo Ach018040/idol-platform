@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-12T22:03:57Z",
+  "generated_at": "2026-09-13T22:15:04Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 472,
@@ -54,10 +54,10 @@
     "seo_ready_profile": 0.912,
     "missing_core_examples": [
       "少女ガチャポン",
+      "DUALIA",
       "未完成プロローグ",
       "Pure makeR",
       "Happy Holiday!!",
-      "DUALIA",
       "天国地獄",
       "Re:TurN-Capture-",
       "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
@@ -67,8 +67,8 @@
       "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
       "Flora・Fiore",
       "♡xDoLL",
-      "無我夢中",
       "Nevaris",
+      "無我夢中",
       "花咲＊Chloris",
       "幻色プリンセス",
       "Immerse",
