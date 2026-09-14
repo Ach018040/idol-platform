@@ -1,34 +1,35 @@
 {
-  "generated_at": "2026-09-13T22:15:04Z",
-  "market_temperature": 62.4,
-  "market_temperature_v2": 62.4,
+  "generated_at": "2026-09-14T23:01:32Z",
+  "market_temperature": 62.8,
+  "market_temperature_v2": 62.8,
   "active_groups": 112,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
-    "instagram": 0.92,
+    "instagram": 0.93,
     "x": 0.31,
     "threads": 0.0,
     "social_post_dates": 0.3,
-    "seo_ready_profiles": 0.86,
+    "seo_ready_profiles": 0.87,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "羽咲やわら",
-    "social_focus": "羽咲やわら",
-    "market_temperature": 62.4
+    "social_king": "みゆき",
+    "social_focus": "みゆき",
+    "market_temperature": 62.8
   },
   "rising_stars": [
+    "星野 さかな",
     "姫川乃愛",
     "君宣苺香",
-    "雪見夢楽",
-    "御雨",
-    "夢乃 漓雪"
+    "夢乃 漓雪",
+    "綿空もり"
   ],
   "heat_drop": [],
   "top_members": [
+    "みゆき",
     "羽咲やわら",
     "澄罪クア",
     "真白 レモン",
@@ -37,7 +38,6 @@
     "眠森りん",
     "藍井心咲",
     "綿琉羽音",
-    "津代舞奈",
-    "伊嚕咪"
+    "津代舞奈"
   ]
 }
