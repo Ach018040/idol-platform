@@ -1,28 +1,7 @@
 {
-  "generated_at": "2026-09-15T22:46:51Z",
+  "generated_at": "2026-09-16T22:46:57Z",
   "schema_version": "event-discovery-v1",
   "events": [
-    {
-      "source_id": "idolinfohub",
-      "source_name": "Idol Info Hub Events",
-      "source_url": "https://idolinfohub.com/events",
-      "title": "彼星SP.17 吼《ロックに咲く少女たち》",
-      "starts_at": "2026-09-16T00:00:00+08:00",
-      "ends_at": null,
-      "timezone": "Asia/Taipei",
-      "venue_name": "",
-      "venue_address": "",
-      "city": "",
-      "group_names": [],
-      "member_names": [],
-      "ticket_url": "https://idolinfohub.com/events/bethestar-sp17-20260916",
-      "detail_url": "https://idolinfohub.com/events/bethestar-sp17-20260916",
-      "image_url": null,
-      "raw_text": "彼星SP.17 吼《ロックに咲く少女たち》 — 2026-09-16",
-      "scraped_at": "2026-09-15T22:46:51Z",
-      "confidence": 0.65,
-      "extraction_method": "scrapling"
-    },
     {
       "source_id": "idolinfohub",
       "source_name": "Idol Info Hub Events",
@@ -40,8 +19,75 @@
       "detail_url": "https://idolinfohub.com/events/ssr-vol72-day1-20260918",
       "image_url": null,
       "raw_text": "SSr Vol.72 DAY1 — 2026-09-18",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
+      "extraction_method": "scrapling"
+    },
+    {
+      "source_id": "idolinfohub",
+      "source_name": "Idol Info Hub Events",
+      "source_url": "https://idolinfohub.com/events",
+      "title": "未確認感情体單獨公演「観測ログ #03」",
+      "starts_at": "2026-09-18T00:00:00+08:00",
+      "ends_at": null,
+      "timezone": "Asia/Taipei",
+      "venue_name": "",
+      "venue_address": "",
+      "city": "",
+      "group_names": [
+        "未確認感情体"
+      ],
+      "member_names": [],
+      "ticket_url": "https://idolinfohub.com/events/mikantai-official-kouen-vol03-20260918",
+      "detail_url": "https://idolinfohub.com/events/mikantai-official-kouen-vol03-20260918",
+      "image_url": null,
+      "raw_text": "未確認感情体單獨公演「観測ログ #03」 — 2026-09-18",
+      "scraped_at": "2026-09-16T22:46:57Z",
+      "confidence": 0.85,
+      "extraction_method": "scrapling"
+    },
+    {
+      "source_id": "idolinfohub",
+      "source_name": "Idol Info Hub Events",
+      "source_url": "https://idolinfohub.com/events",
+      "title": "2026 骼実百瀬 生誕祭",
+      "starts_at": "2026-09-18T00:00:00+08:00",
+      "ends_at": null,
+      "timezone": "Asia/Taipei",
+      "venue_name": "",
+      "venue_address": "",
+      "city": "",
+      "group_names": [],
+      "member_names": [],
+      "ticket_url": "https://idolinfohub.com/events/itazura-piero-momose-birth-20260918",
+      "detail_url": "https://idolinfohub.com/events/itazura-piero-momose-birth-20260918",
+      "image_url": null,
+      "raw_text": "2026 骼実百瀬 生誕祭 — 2026-09-18",
+      "scraped_at": "2026-09-16T22:46:57Z",
+      "confidence": 0.65,
+      "extraction_method": "scrapling"
+    },
+    {
+      "source_id": "idolinfohub",
+      "source_name": "Idol Info Hub Events",
+      "source_url": "https://idolinfohub.com/events",
+      "title": "天国地獄定期公演『ぴえん！地雷系❤️‍🩹』",
+      "starts_at": "2026-09-18T00:00:00+08:00",
+      "ends_at": null,
+      "timezone": "Asia/Taipei",
+      "venue_name": "",
+      "venue_address": "",
+      "city": "",
+      "group_names": [
+        "天国地獄"
+      ],
+      "member_names": [],
+      "ticket_url": "https://idolinfohub.com/events/paradisehell-jiraikei-20260918",
+      "detail_url": "https://idolinfohub.com/events/paradisehell-jiraikei-20260918",
+      "image_url": null,
+      "raw_text": "天国地獄定期公演『ぴえん！地雷系❤️‍🩹』 — 2026-09-18",
+      "scraped_at": "2026-09-16T22:46:57Z",
+      "confidence": 0.85,
       "extraction_method": "scrapling"
     },
     {
@@ -61,7 +107,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-vol72-day2-20260919",
       "image_url": null,
       "raw_text": "SSr Vol.72 DAY2 — 2026-09-19",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -82,7 +128,51 @@
       "detail_url": "https://idolinfohub.com/events/shining-star-project-lonlium-the-promise-20260919",
       "image_url": null,
       "raw_text": "lonlium ONEMAN LIVE in TAIWAN — 2026-09-19",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
+      "confidence": 0.65,
+      "extraction_method": "scrapling"
+    },
+    {
+      "source_id": "idolinfohub",
+      "source_name": "Idol Info Hub Events",
+      "source_url": "https://idolinfohub.com/events",
+      "title": "VEZALiA 新曲發表公演 Vol.1",
+      "starts_at": "2026-09-19T00:00:00+08:00",
+      "ends_at": null,
+      "timezone": "Asia/Taipei",
+      "venue_name": "",
+      "venue_address": "",
+      "city": "",
+      "group_names": [
+        "VEZALiA"
+      ],
+      "member_names": [],
+      "ticket_url": "https://idolinfohub.com/events/vezalia-shinkyoku-vol1-20260919",
+      "detail_url": "https://idolinfohub.com/events/vezalia-shinkyoku-vol1-20260919",
+      "image_url": null,
+      "raw_text": "VEZALiA 新曲發表公演 Vol.1 — 2026-09-19",
+      "scraped_at": "2026-09-16T22:46:57Z",
+      "confidence": 0.85,
+      "extraction_method": "scrapling"
+    },
+    {
+      "source_id": "idolinfohub",
+      "source_name": "Idol Info Hub Events",
+      "source_url": "https://idolinfohub.com/events",
+      "title": "RUMI Birthday live 2026",
+      "starts_at": "2026-09-19T00:00:00+08:00",
+      "ends_at": null,
+      "timezone": "Asia/Taipei",
+      "venue_name": "",
+      "venue_address": "",
+      "city": "",
+      "group_names": [],
+      "member_names": [],
+      "ticket_url": "https://idolinfohub.com/events/rumi-birth-20260919",
+      "detail_url": "https://idolinfohub.com/events/rumi-birth-20260919",
+      "image_url": null,
+      "raw_text": "RUMI Birthday live 2026 — 2026-09-19",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -103,7 +193,7 @@
       "detail_url": "https://idolinfohub.com/events/mah-20260920-day",
       "image_url": null,
       "raw_text": "MAH 20260920 DAY — 2026-09-20",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -124,7 +214,7 @@
       "detail_url": "https://idolinfohub.com/events/mah-20260920-night",
       "image_url": null,
       "raw_text": "MAH 20260920 NIGHT — 2026-09-20",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -145,7 +235,7 @@
       "detail_url": "https://idolinfohub.com/events/flofio-5th-anniv-20260920",
       "image_url": null,
       "raw_text": "FloFio五週年ONEMAN LIVE「吾時吾刻」 — 2026-09-20",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -166,7 +256,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-vol72-day3-20260920",
       "image_url": null,
       "raw_text": "SSr Vol.72 DAY3 — 2026-09-20",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -187,7 +277,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-kim-fes-20260924",
       "image_url": null,
       "raw_text": "金FES — 2026-09-24",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -208,7 +298,7 @@
       "detail_url": "https://idolinfohub.com/events/toypla-official-miu-birthday-20260927",
       "image_url": null,
       "raw_text": "TOYPLA presents ~ 櫻井美羽Birthday Event🍒 — 2026-09-27",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -229,7 +319,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-vol73-20260928",
       "image_url": null,
       "raw_text": "SSr Vol.73 教師節 — 2026-09-28",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -250,7 +340,7 @@
       "detail_url": "https://idolinfohub.com/events/hakuchuyume_official-ayaka-graduation-20261002",
       "image_url": null,
       "raw_text": "あやか 2026 生誕祭・卒業祭 — 2026-10-02",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -271,7 +361,7 @@
       "detail_url": "https://idolinfohub.com/events/miracle-shine-vol2-2026-noon",
       "image_url": null,
       "raw_text": "奇蹟閃光 第二屆 日光篇 — 2026-10-11",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -292,15 +382,15 @@
       "detail_url": "https://idolinfohub.com/events/miracle-shine-vol2-2026-night",
       "image_url": null,
       "raw_text": "奇蹟閃光 第二屆 星光篇 — 2026-10-11",
-      "scraped_at": "2026-09-15T22:46:51Z",
+      "scraped_at": "2026-09-16T22:46:57Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     }
   ],
   "coverage": {
-    "events": 14,
-    "with_start_time": 14,
+    "events": 18,
+    "with_start_time": 18,
     "with_venue": 0,
-    "with_group_match": 0
+    "with_group_match": 3
   }
 }
