@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-18T22:24:48Z",
-  "market_temperature": 62.6,
-  "market_temperature_v2": 62.6,
+  "generated_at": "2026-09-19T22:15:34Z",
+  "market_temperature": 62.5,
+  "market_temperature_v2": 62.5,
   "active_groups": 112,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "みゆき",
     "social_focus": "みゆき",
-    "market_temperature": 62.6
+    "market_temperature": 62.5
   },
   "rising_stars": [
-    "君宣苺香",
     "夢乃 漓雪",
     "綿空もり",
     "芯可",
-    "KAMU"
+    "KAMU",
+    "マル"
   ],
   "heat_drop": [],
   "top_members": [

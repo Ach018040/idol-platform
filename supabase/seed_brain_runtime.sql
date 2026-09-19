@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-09-18T22:24:48Z',
-  'Weekly idol market digest generated on 2026-09-18T22:24:48Z. Top group: 幻獣. Top member: みゆき. Market temperature: 62.6. Rising stars: 君宣苺香, 夢乃 漓雪, 綿空もり, 芯可, KAMU. Heat drop watch: none.',
-  '- 2026-09-18T22:24:48Z: weekly market digest generated
+  'Weekly Market Digest 2026-09-19T22:15:34Z',
+  'Weekly idol market digest generated on 2026-09-19T22:15:34Z. Top group: 幻獣. Top member: みゆき. Market temperature: 62.5. Rising stars: 夢乃 漓雪, 綿空もり, 芯可, KAMU, マル. Heat drop watch: none.',
+  '- 2026-09-19T22:15:34Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: みゆき
-- Rising stars: 君宣苺香, 夢乃 漓雪, 綿空もり, 芯可, KAMU',
+- Rising stars: 夢乃 漓雪, 綿空もり, 芯可, KAMU, マル',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-09-18T22:24:48Z", "top_group": "幻獣", "top_member": "みゆき", "market_temperature": "62.6", "rising_stars": ["君宣苺香", "夢乃 漓雪", "綿空もり", "芯可", "KAMU"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-09-19T22:15:34Z", "top_group": "幻獣", "top_member": "みゆき", "market_temperature": "62.5", "rising_stars": ["夢乃 漓雪", "綿空もり", "芯可", "KAMU", "マル"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-09-18T22:24:48Z',
-  'Weekly digest refreshed: 2026-09-18T22:24:48Z',
-  'Weekly idol market digest generated on 2026-09-18T22:24:48Z. Top group: 幻獣. Top member: みゆき. Market temperature: 62.6. Rising stars: 君宣苺香, 夢乃 漓雪, 綿空もり, 芯可, KAMU. Heat drop watch: none.',
+  '2026-09-19T22:15:34Z',
+  'Weekly digest refreshed: 2026-09-19T22:15:34Z',
+  'Weekly idol market digest generated on 2026-09-19T22:15:34Z. Top group: 幻獣. Top member: みゆき. Market temperature: 62.5. Rising stars: 夢乃 漓雪, 綿空もり, 芯可, KAMU, マル. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
