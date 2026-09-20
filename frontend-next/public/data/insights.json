@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-19T22:15:34Z",
-  "market_temperature": 62.5,
-  "market_temperature_v2": 62.5,
+  "generated_at": "2026-09-20T22:18:12Z",
+  "market_temperature": 62.4,
+  "market_temperature_v2": 62.4,
   "active_groups": 112,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -16,9 +16,9 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "みゆき",
-    "social_focus": "みゆき",
-    "market_temperature": 62.5
+    "social_king": "澄罪クア",
+    "social_focus": "澄罪クア",
+    "market_temperature": 62.4
   },
   "rising_stars": [
     "夢乃 漓雪",
@@ -29,9 +29,9 @@
   ],
   "heat_drop": [],
   "top_members": [
+    "澄罪クア",
     "みゆき",
     "羽咲やわら",
-    "澄罪クア",
     "真白 レモン",
     "劉璦黎 IRENE あいり 유애려",
     "AKANE",
