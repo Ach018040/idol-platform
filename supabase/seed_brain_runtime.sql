@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-09-20T22:18:12Z',
-  'Weekly idol market digest generated on 2026-09-20T22:18:12Z. Top group: 幻獣. Top member: 澄罪クア. Market temperature: 62.4. Rising stars: 夢乃 漓雪, 綿空もり, 芯可, KAMU, マル. Heat drop watch: none.',
-  '- 2026-09-20T22:18:12Z: weekly market digest generated
+  'Weekly Market Digest 2026-09-21T23:05:03Z',
+  'Weekly idol market digest generated on 2026-09-21T23:05:03Z. Top group: 幻獣. Top member: 澄罪クア. Market temperature: 62.4. Rising stars: 夢乃 漓雪, 綿空もり, 芯可, KAMU, マル. Heat drop watch: none.',
+  '- 2026-09-21T23:05:03Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: 澄罪クア
 - Rising stars: 夢乃 漓雪, 綿空もり, 芯可, KAMU, マル',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-09-20T22:18:12Z", "top_group": "幻獣", "top_member": "澄罪クア", "market_temperature": "62.4", "rising_stars": ["夢乃 漓雪", "綿空もり", "芯可", "KAMU", "マル"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-09-21T23:05:03Z", "top_group": "幻獣", "top_member": "澄罪クア", "market_temperature": "62.4", "rising_stars": ["夢乃 漓雪", "綿空もり", "芯可", "KAMU", "マル"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-09-20T22:18:12Z',
-  'Weekly digest refreshed: 2026-09-20T22:18:12Z',
-  'Weekly idol market digest generated on 2026-09-20T22:18:12Z. Top group: 幻獣. Top member: 澄罪クア. Market temperature: 62.4. Rising stars: 夢乃 漓雪, 綿空もり, 芯可, KAMU, マル. Heat drop watch: none.',
+  '2026-09-21T23:05:03Z',
+  'Weekly digest refreshed: 2026-09-21T23:05:03Z',
+  'Weekly idol market digest generated on 2026-09-21T23:05:03Z. Top group: 幻獣. Top member: 澄罪クア. Market temperature: 62.4. Rising stars: 夢乃 漓雪, 綿空もり, 芯可, KAMU, マル. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
