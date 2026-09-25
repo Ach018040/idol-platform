@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-09-24T23:07:04Z',
-  'Weekly idol market digest generated on 2026-09-24T23:07:04Z. Top group: 幻獣. Top member: 澄罪クア. Market temperature: 62.2. Rising stars: 芯可, KAMU, マル, つつ子, 星野 さかな. Heat drop watch: none.',
-  '- 2026-09-24T23:07:04Z: weekly market digest generated
+  'Weekly Market Digest 2026-09-25T23:11:50Z',
+  'Weekly idol market digest generated on 2026-09-25T23:11:50Z. Top group: 幻獣. Top member: 矢島愛久. Market temperature: 62.2. Rising stars: 綿空もり, 芯可, KAMU, マル, つつ子. Heat drop watch: none.',
+  '- 2026-09-25T23:11:50Z: weekly market digest generated
 - Highlight top group: 幻獣
-- Highlight top member: 澄罪クア
-- Rising stars: 芯可, KAMU, マル, つつ子, 星野 さかな',
+- Highlight top member: 矢島愛久
+- Rising stars: 綿空もり, 芯可, KAMU, マル, つつ子',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-09-24T23:07:04Z", "top_group": "幻獣", "top_member": "澄罪クア", "market_temperature": "62.2", "rising_stars": ["芯可", "KAMU", "マル", "つつ子", "星野 さかな"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-09-25T23:11:50Z", "top_group": "幻獣", "top_member": "矢島愛久", "market_temperature": "62.2", "rising_stars": ["綿空もり", "芯可", "KAMU", "マル", "つつ子"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-09-24T23:07:04Z',
-  'Weekly digest refreshed: 2026-09-24T23:07:04Z',
-  'Weekly idol market digest generated on 2026-09-24T23:07:04Z. Top group: 幻獣. Top member: 澄罪クア. Market temperature: 62.2. Rising stars: 芯可, KAMU, マル, つつ子, 星野 さかな. Heat drop watch: none.',
+  '2026-09-25T23:11:50Z',
+  'Weekly digest refreshed: 2026-09-25T23:11:50Z',
+  'Weekly idol market digest generated on 2026-09-25T23:11:50Z. Top group: 幻獣. Top member: 矢島愛久. Market temperature: 62.2. Rising stars: 綿空もり, 芯可, KAMU, マル, つつ子. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;

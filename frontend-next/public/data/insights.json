@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T23:07:04Z",
+  "generated_at": "2026-09-25T23:11:50Z",
   "market_temperature": 62.2,
   "market_temperature_v2": 62.2,
   "active_groups": 112,
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "澄罪クア",
-    "social_focus": "澄罪クア",
+    "social_king": "矢島愛久",
+    "social_focus": "矢島愛久",
     "market_temperature": 62.2
   },
   "rising_stars": [
+    "綿空もり",
     "芯可",
     "KAMU",
     "マル",
-    "つつ子",
-    "星野 さかな"
+    "つつ子"
   ],
   "heat_drop": [],
   "top_members": [
+    "矢島愛久",
     "澄罪クア",
     "みゆき",
     "羽咲やわら",
@@ -37,7 +38,6 @@
     "AKANE",
     "眠森りん",
     "藍井心咲",
-    "綿琉羽音",
-    "津代舞奈"
+    "綿琉羽音"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T23:07:04Z",
+  "generated_at": "2026-09-25T23:11:51Z",
   "schema_version": "event-discovery-v1",
   "events": [
     {
@@ -19,7 +19,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-kim-fes-20260924",
       "image_url": null,
       "raw_text": "金FES — 2026-09-24",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -40,7 +40,7 @@
       "detail_url": "https://idolinfohub.com/events/lucid-dream-vol16-20260924",
       "image_url": null,
       "raw_text": "if IDOL Project聯合公演『Lucid Dream Vol.16』 — 2026-09-24",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -61,7 +61,7 @@
       "detail_url": "https://idolinfohub.com/events/jacks-studio-idol-mooncake-20260925",
       "image_url": null,
       "raw_text": "萌次元SP《偶像 × 月餅》 — 2026-09-25",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -84,7 +84,7 @@
       "detail_url": "https://idolinfohub.com/events/dualia-rebirth-20260925",
       "image_url": null,
       "raw_text": "DUALIA專場 — 2026-09-25",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -105,7 +105,7 @@
       "detail_url": "https://idolinfohub.com/events/lacrimaeffim-haru-birth-20260925",
       "image_url": null,
       "raw_text": "【Haru】欲張り -61秒目以降- 【生誕祭】 — 2026-09-25",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -126,7 +126,7 @@
       "detail_url": "https://idolinfohub.com/events/idolisland-vol20-noon-20260926",
       "image_url": null,
       "raw_text": "IDOL ISLAND Vol.20｜閃曜綺彩樂園 — 2026-09-26",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -147,7 +147,7 @@
       "detail_url": "https://idolinfohub.com/events/cmip-vol5-20260926",
       "image_url": null,
       "raw_text": "CMIP主催ライブ「電奏破界Vol.5」 — 2026-09-26",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -168,7 +168,7 @@
       "detail_url": "https://idolinfohub.com/events/seidou-hika-birth-20260926",
       "image_url": null,
       "raw_text": "朱音日華 2026 生誕祭 — 2026-09-26",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -189,7 +189,7 @@
       "detail_url": "https://idolinfohub.com/events/toypla-official-miu-birthday-20260927",
       "image_url": null,
       "raw_text": "TOYPLA presents ~ 櫻井美羽Birthday Event🍒 — 2026-09-27",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -210,7 +210,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-vol73-20260928",
       "image_url": null,
       "raw_text": "SSr Vol.73 教師節 — 2026-09-28",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -231,7 +231,7 @@
       "detail_url": "https://idolinfohub.com/events/hakuchuyume_official-ayaka-graduation-20261002",
       "image_url": null,
       "raw_text": "あやか 2026 生誕祭・卒業祭 — 2026-10-02",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -252,7 +252,7 @@
       "detail_url": "https://idolinfohub.com/events/jam-taipei-pop-vol2-20261003",
       "image_url": null,
       "raw_text": "@ JAM TAIPEI POP vol.2 — 2026-10-03",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -273,7 +273,7 @@
       "detail_url": "https://idolinfohub.com/events/jam-taipei-pop-vol2-20261004",
       "image_url": null,
       "raw_text": "@ JAM TAIPEI POP vol.2 — 2026-10-04",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -294,7 +294,7 @@
       "detail_url": "https://idolinfohub.com/events/miracle-shine-vol2-2026-noon",
       "image_url": null,
       "raw_text": "奇蹟閃光 第二屆 日光篇 — 2026-10-11",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -315,7 +315,7 @@
       "detail_url": "https://idolinfohub.com/events/miracle-shine-vol2-2026-night",
       "image_url": null,
       "raw_text": "奇蹟閃光 第二屆 星光篇 — 2026-10-11",
-      "scraped_at": "2026-09-24T23:07:04Z",
+      "scraped_at": "2026-09-25T23:11:51Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T23:07:04Z",
+  "generated_at": "2026-09-25T23:11:50Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 473,
@@ -18,6 +18,7 @@
     "seo_ready_profile": 0.926,
     "missing_core_examples": [
       "Mai舞 小喵喵不講舞德",
+      "aka Collection",
       "しか",
       "Key a.k.a SOXI",
       "台湾人の永琳",
@@ -31,13 +32,12 @@
       "悠人☆",
       "Koharu",
       "氧氣みどり",
-      "花葉",
       "OMOCHIおもち",
+      "花葉",
       "サキsaki",
       "AMA",
       "八尋",
       "失溫少女_suya",
-      "aka Collection",
       "月見はりゅみ",
       "桃恋心愛",
       "Yuna",
@@ -69,15 +69,15 @@
       "花咲＊Chloris",
       "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
       "幻色プリンセス",
-      "Nevaris",
       "無我夢中",
+      "Nevaris",
       "Immerse",
       "未灯＊ミラクル",
       "MORINAGA",
       "星願⟢Twinkle Sprinkle⟣",
       "𝗥𝗔𝗕𝗕𝗶𝗧 & 𝗕𝗘𝗔𝗥",
       "曖昧な宝石",
-      "冥恋セレナーデ"
+      "RAISE -きっと、らいせ-"
     ]
   },
   "known_gaps": [
