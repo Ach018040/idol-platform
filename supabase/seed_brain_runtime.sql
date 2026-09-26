@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-09-25T23:11:50Z',
-  'Weekly idol market digest generated on 2026-09-25T23:11:50Z. Top group: 幻獣. Top member: 矢島愛久. Market temperature: 62.2. Rising stars: 綿空もり, 芯可, KAMU, マル, つつ子. Heat drop watch: none.',
-  '- 2026-09-25T23:11:50Z: weekly market digest generated
-- Highlight top group: 幻獣
-- Highlight top member: 矢島愛久
-- Rising stars: 綿空もり, 芯可, KAMU, マル, つつ子',
+  'Weekly Market Digest 2026-09-26T22:33:57Z',
+  'Weekly idol market digest generated on 2026-09-26T22:33:57Z. Top group: 木苺FRUCTOSE. Top member: 矢吹幽. Market temperature: 63.2. Rising stars: 唄霊, 澪玲希, 小嗨花花HimiKo, 瀧日灯璃, 雛菜 Hina. Heat drop watch: none.',
+  '- 2026-09-26T22:33:57Z: weekly market digest generated
+- Highlight top group: 木苺FRUCTOSE
+- Highlight top member: 矢吹幽
+- Rising stars: 唄霊, 澪玲希, 小嗨花花HimiKo, 瀧日灯璃, 雛菜 Hina',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-09-25T23:11:50Z", "top_group": "幻獣", "top_member": "矢島愛久", "market_temperature": "62.2", "rising_stars": ["綿空もり", "芯可", "KAMU", "マル", "つつ子"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-09-26T22:33:57Z", "top_group": "木苺FRUCTOSE", "top_member": "矢吹幽", "market_temperature": "63.2", "rising_stars": ["唄霊", "澪玲希", "小嗨花花HimiKo", "瀧日灯璃", "雛菜 Hina"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-09-25T23:11:50Z',
-  'Weekly digest refreshed: 2026-09-25T23:11:50Z',
-  'Weekly idol market digest generated on 2026-09-25T23:11:50Z. Top group: 幻獣. Top member: 矢島愛久. Market temperature: 62.2. Rising stars: 綿空もり, 芯可, KAMU, マル, つつ子. Heat drop watch: none.',
+  '2026-09-26T22:33:57Z',
+  'Weekly digest refreshed: 2026-09-26T22:33:57Z',
+  'Weekly idol market digest generated on 2026-09-26T22:33:57Z. Top group: 木苺FRUCTOSE. Top member: 矢吹幽. Market temperature: 63.2. Rising stars: 唄霊, 澪玲希, 小嗨花花HimiKo, 瀧日灯璃, 雛菜 Hina. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
