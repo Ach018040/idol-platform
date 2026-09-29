@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-27T22:54:02Z",
-  "market_temperature": 63.3,
-  "market_temperature_v2": 63.3,
+  "generated_at": "2026-09-29T00:16:56Z",
+  "market_temperature": 63.5,
+  "market_temperature_v2": 63.5,
   "active_groups": 112,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -9,35 +9,35 @@
     "x": 0.31,
     "threads": 0.0,
     "social_post_dates": 0.29,
-    "seo_ready_profiles": 0.88,
+    "seo_ready_profiles": 0.87,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
     "views": 0.0
   },
   "weekly_highlights": {
-    "top_group": "木苺FRUCTOSE",
-    "social_king": "稲妻莉央",
-    "social_focus": "稲妻莉央",
-    "market_temperature": 63.3
+    "top_group": "Re:TurN-Capture-",
+    "social_king": "Meya",
+    "social_focus": "Meya",
+    "market_temperature": 63.5
   },
   "rising_stars": [
-    "Nya",
-    "剎那 / SETXUNA",
-    "二十一願楽",
-    "佐伯なな",
-    "瀧日灯璃"
+    "空花茉穗",
+    "桜野杏理",
+    "紺霜骷と音",
+    "伊波花怜",
+    "Nya"
   ],
   "heat_drop": [],
   "top_members": [
+    "Meya",
+    "DeDe",
+    "捏口",
+    "剎那 / SETXUNA",
     "稲妻莉央",
     "姫路芙羽奈",
     "羽咲やわら",
     "矢吹幽",
     "天乃絵空",
-    "青璃",
-    "澄罪クア",
-    "甘崎紗音",
-    "花京院ゆあ",
-    "七瀬円香"
+    "青璃"
   ]
 }

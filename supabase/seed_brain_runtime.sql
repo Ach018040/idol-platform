@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-09-27T22:54:02Z',
-  'Weekly idol market digest generated on 2026-09-27T22:54:02Z. Top group: 木苺FRUCTOSE. Top member: 稲妻莉央. Market temperature: 63.3. Rising stars: Nya, 剎那 / SETXUNA, 二十一願楽, 佐伯なな, 瀧日灯璃. Heat drop watch: none.',
-  '- 2026-09-27T22:54:02Z: weekly market digest generated
-- Highlight top group: 木苺FRUCTOSE
-- Highlight top member: 稲妻莉央
-- Rising stars: Nya, 剎那 / SETXUNA, 二十一願楽, 佐伯なな, 瀧日灯璃',
+  'Weekly Market Digest 2026-09-29T00:16:56Z',
+  'Weekly idol market digest generated on 2026-09-29T00:16:56Z. Top group: Re:TurN-Capture-. Top member: Meya. Market temperature: 63.5. Rising stars: 空花茉穗, 桜野杏理, 紺霜骷と音, 伊波花怜, Nya. Heat drop watch: none.',
+  '- 2026-09-29T00:16:56Z: weekly market digest generated
+- Highlight top group: Re:TurN-Capture-
+- Highlight top member: Meya
+- Rising stars: 空花茉穗, 桜野杏理, 紺霜骷と音, 伊波花怜, Nya',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-09-27T22:54:02Z", "top_group": "木苺FRUCTOSE", "top_member": "稲妻莉央", "market_temperature": "63.3", "rising_stars": ["Nya", "剎那 / SETXUNA", "二十一願楽", "佐伯なな", "瀧日灯璃"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-09-29T00:16:56Z", "top_group": "Re:TurN-Capture-", "top_member": "Meya", "market_temperature": "63.5", "rising_stars": ["空花茉穗", "桜野杏理", "紺霜骷と音", "伊波花怜", "Nya"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-09-27T22:54:02Z',
-  'Weekly digest refreshed: 2026-09-27T22:54:02Z',
-  'Weekly idol market digest generated on 2026-09-27T22:54:02Z. Top group: 木苺FRUCTOSE. Top member: 稲妻莉央. Market temperature: 63.3. Rising stars: Nya, 剎那 / SETXUNA, 二十一願楽, 佐伯なな, 瀧日灯璃. Heat drop watch: none.',
+  '2026-09-29T00:16:56Z',
+  'Weekly digest refreshed: 2026-09-29T00:16:56Z',
+  'Weekly idol market digest generated on 2026-09-29T00:16:56Z. Top group: Re:TurN-Capture-. Top member: Meya. Market temperature: 63.5. Rising stars: 空花茉穗, 桜野杏理, 紺霜骷と音, 伊波花怜, Nya. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
