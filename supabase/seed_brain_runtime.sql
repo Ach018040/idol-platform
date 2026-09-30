@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-09-29T23:33:56Z',
-  'Weekly idol market digest generated on 2026-09-29T23:33:56Z. Top group: Re:TurN-Capture-. Top member: 青璃. Market temperature: 63.5. Rising stars: 桜野杏理, 紺霜骷と音, 伊波花怜, 結城朋子, Nya. Heat drop watch: none.',
-  '- 2026-09-29T23:33:56Z: weekly market digest generated
+  'Weekly Market Digest 2026-09-30T23:35:34Z',
+  'Weekly idol market digest generated on 2026-09-30T23:35:34Z. Top group: Re:TurN-Capture-. Top member: 青璃. Market temperature: 63.5. Rising stars: 桜野杏理, 伊波花怜, 紺霜骷と音, Nya, 結城朋子. Heat drop watch: none.',
+  '- 2026-09-30T23:35:34Z: weekly market digest generated
 - Highlight top group: Re:TurN-Capture-
 - Highlight top member: 青璃
-- Rising stars: 桜野杏理, 紺霜骷と音, 伊波花怜, 結城朋子, Nya',
+- Rising stars: 桜野杏理, 伊波花怜, 紺霜骷と音, Nya, 結城朋子',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-09-29T23:33:56Z", "top_group": "Re:TurN-Capture-", "top_member": "青璃", "market_temperature": "63.5", "rising_stars": ["桜野杏理", "紺霜骷と音", "伊波花怜", "結城朋子", "Nya"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-09-30T23:35:34Z", "top_group": "Re:TurN-Capture-", "top_member": "青璃", "market_temperature": "63.5", "rising_stars": ["桜野杏理", "伊波花怜", "紺霜骷と音", "Nya", "結城朋子"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-09-29T23:33:56Z',
-  'Weekly digest refreshed: 2026-09-29T23:33:56Z',
-  'Weekly idol market digest generated on 2026-09-29T23:33:56Z. Top group: Re:TurN-Capture-. Top member: 青璃. Market temperature: 63.5. Rising stars: 桜野杏理, 紺霜骷と音, 伊波花怜, 結城朋子, Nya. Heat drop watch: none.',
+  '2026-09-30T23:35:34Z',
+  'Weekly digest refreshed: 2026-09-30T23:35:34Z',
+  'Weekly idol market digest generated on 2026-09-30T23:35:34Z. Top group: Re:TurN-Capture-. Top member: 青璃. Market temperature: 63.5. Rising stars: 桜野杏理, 伊波花怜, 紺霜骷と音, Nya, 結城朋子. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
