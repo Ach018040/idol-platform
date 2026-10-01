@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-30T23:35:34Z",
-  "market_temperature": 63.5,
-  "market_temperature_v2": 63.5,
+  "generated_at": "2026-10-01T23:47:34Z",
+  "market_temperature": 63.4,
+  "market_temperature_v2": 63.4,
   "active_groups": 114,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "Re:TurN-Capture-",
     "social_king": "青璃",
     "social_focus": "青璃",
-    "market_temperature": 63.5
+    "market_temperature": 63.4
   },
   "rising_stars": [
     "桜野杏理",
     "伊波花怜",
     "紺霜骷と音",
-    "Nya",
-    "結城朋子"
+    "みより",
+    "Nya"
   ],
   "heat_drop": [],
   "top_members": [
