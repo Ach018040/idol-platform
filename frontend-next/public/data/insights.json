@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-02T23:38:34Z",
-  "market_temperature": 63.4,
-  "market_temperature_v2": 63.4,
+  "generated_at": "2026-10-03T22:46:38Z",
+  "market_temperature": 63.3,
+  "market_temperature_v2": 63.3,
   "active_groups": 114,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "Re:TurN-Capture-",
     "social_king": "羽咲やわら",
     "social_focus": "羽咲やわら",
-    "market_temperature": 63.4
+    "market_temperature": 63.3
   },
   "rising_stars": [
     "桜野杏理",
-    "彩加",
     "伊波花怜",
-    "桃心愛琉",
-    "紺霜骷と音"
+    "紺霜骷と音",
+    "Nya",
+    "彩加"
   ],
   "heat_drop": [],
   "top_members": [

@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-10-02T23:38:34Z",
+  "generated_at": "2026-10-03T22:46:38Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
-    "member_total": 489,
+    "member_total": 490,
     "group_total": 116,
     "current_maturity": "L1",
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
-    "instagram": 0.928,
-    "facebook": 0.448,
-    "twitter": 0.313,
+    "instagram": 0.929,
+    "facebook": 0.447,
+    "twitter": 0.312,
     "threads": 0.0,
     "photo_url": 0.945,
     "group": 0.914,
     "last_social_signal_at": 0.286,
-    "seo_ready_profile": 0.928,
+    "seo_ready_profile": 0.929,
     "missing_core_examples": [
       "結城朋子",
       "Mai舞 小喵喵不講舞德",
@@ -23,10 +23,10 @@
       "しか",
       "婷婷",
       "筱喵",
-      "輝月毬可",
       "Key a.k.a SOXI",
       "台湾人の永琳",
       "桜音みゆぃ♪",
+      "輝月毬可",
       "AMA",
       "aka Collection",
       "悠洛 YoLo",
@@ -36,12 +36,12 @@
       "ようた",
       "天川未來",
       "悠人☆",
-      "ゆめyume",
       "月海 晴",
+      "ゆめyume",
       "Koharu",
-      "くもり",
       "氧氣みどり",
-      "桃恋心愛"
+      "サキsaki",
+      "くもり"
     ]
   },
   "group_coverage": {

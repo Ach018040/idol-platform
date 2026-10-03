@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T23:38:35Z",
+  "generated_at": "2026-10-03T22:46:39Z",
   "schema_version": "event-discovery-v1",
   "events": [
     {
@@ -19,7 +19,7 @@
       "detail_url": "https://idolinfohub.com/events/jam-taipei-pop-vol2-20261003",
       "image_url": null,
       "raw_text": "@ JAM TAIPEI POP vol.2 — 2026-10-03",
-      "scraped_at": "2026-10-02T23:38:35Z",
+      "scraped_at": "2026-10-03T22:46:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -40,7 +40,7 @@
       "detail_url": "https://idolinfohub.com/events/perfume-prod-tebasaki-oneman-20261003",
       "image_url": null,
       "raw_text": "手羽先センセーション ONEMAN LIVE IN TAIPEI — 2026-10-03",
-      "scraped_at": "2026-10-02T23:38:35Z",
+      "scraped_at": "2026-10-03T22:46:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -61,7 +61,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol36-20261003",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.36 — 2026-10-03",
-      "scraped_at": "2026-10-02T23:38:35Z",
+      "scraped_at": "2026-10-03T22:46:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -82,7 +82,7 @@
       "detail_url": "https://idolinfohub.com/events/jam-taipei-pop-vol2-20261004",
       "image_url": null,
       "raw_text": "@ JAM TAIPEI POP vol.2 — 2026-10-04",
-      "scraped_at": "2026-10-02T23:38:35Z",
+      "scraped_at": "2026-10-03T22:46:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -103,7 +103,7 @@
       "detail_url": "https://idolinfohub.com/events/miracle-shine-vol2-2026-noon",
       "image_url": null,
       "raw_text": "奇蹟閃光 第二屆 日光篇 — 2026-10-11",
-      "scraped_at": "2026-10-02T23:38:35Z",
+      "scraped_at": "2026-10-03T22:46:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -124,7 +124,7 @@
       "detail_url": "https://idolinfohub.com/events/miracle-shine-vol2-2026-night",
       "image_url": null,
       "raw_text": "奇蹟閃光 第二屆 星光篇 — 2026-10-11",
-      "scraped_at": "2026-10-02T23:38:35Z",
+      "scraped_at": "2026-10-03T22:46:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     }
