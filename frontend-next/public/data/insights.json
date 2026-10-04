@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-03T22:46:38Z",
-  "market_temperature": 63.3,
-  "market_temperature_v2": 63.3,
+  "generated_at": "2026-10-04T22:54:40Z",
+  "market_temperature": 63.4,
+  "market_temperature_v2": 63.4,
   "active_groups": 114,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -15,20 +15,22 @@
     "views": 0.0
   },
   "weekly_highlights": {
-    "top_group": "Re:TurN-Capture-",
-    "social_king": "羽咲やわら",
-    "social_focus": "羽咲やわら",
-    "market_temperature": 63.3
+    "top_group": "悪戯ピエロ",
+    "social_king": "真髄クロエ",
+    "social_focus": "真髄クロエ",
+    "market_temperature": 63.4
   },
   "rising_stars": [
-    "桜野杏理",
-    "伊波花怜",
-    "紺霜骷と音",
-    "Nya",
-    "彩加"
+    "福原小波",
+    "藤川恋和",
+    "水瀬みみ",
+    "立花さらら",
+    "空花茉穗"
   ],
   "heat_drop": [],
   "top_members": [
+    "真髄クロエ",
+    "鬼塚 湊",
     "羽咲やわら",
     "姫路芙羽奈",
     "青璃",
@@ -36,8 +38,6 @@
     "有樹",
     "Meya",
     "DeDe",
-    "捏口",
-    "剎那 / SETXUNA",
-    "矢吹幽"
+    "捏口"
   ]
 }

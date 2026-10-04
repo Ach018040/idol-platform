@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-10-03T22:46:38Z',
-  'Weekly idol market digest generated on 2026-10-03T22:46:38Z. Top group: Re:TurN-Capture-. Top member: 羽咲やわら. Market temperature: 63.3. Rising stars: 桜野杏理, 伊波花怜, 紺霜骷と音, Nya, 彩加. Heat drop watch: none.',
-  '- 2026-10-03T22:46:38Z: weekly market digest generated
-- Highlight top group: Re:TurN-Capture-
-- Highlight top member: 羽咲やわら
-- Rising stars: 桜野杏理, 伊波花怜, 紺霜骷と音, Nya, 彩加',
+  'Weekly Market Digest 2026-10-04T22:54:40Z',
+  'Weekly idol market digest generated on 2026-10-04T22:54:40Z. Top group: 悪戯ピエロ. Top member: 真髄クロエ. Market temperature: 63.4. Rising stars: 福原小波, 藤川恋和, 水瀬みみ, 立花さらら, 空花茉穗. Heat drop watch: none.',
+  '- 2026-10-04T22:54:40Z: weekly market digest generated
+- Highlight top group: 悪戯ピエロ
+- Highlight top member: 真髄クロエ
+- Rising stars: 福原小波, 藤川恋和, 水瀬みみ, 立花さらら, 空花茉穗',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-10-03T22:46:38Z", "top_group": "Re:TurN-Capture-", "top_member": "羽咲やわら", "market_temperature": "63.3", "rising_stars": ["桜野杏理", "伊波花怜", "紺霜骷と音", "Nya", "彩加"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-10-04T22:54:40Z", "top_group": "悪戯ピエロ", "top_member": "真髄クロエ", "market_temperature": "63.4", "rising_stars": ["福原小波", "藤川恋和", "水瀬みみ", "立花さらら", "空花茉穗"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-10-03T22:46:38Z',
-  'Weekly digest refreshed: 2026-10-03T22:46:38Z',
-  'Weekly idol market digest generated on 2026-10-03T22:46:38Z. Top group: Re:TurN-Capture-. Top member: 羽咲やわら. Market temperature: 63.3. Rising stars: 桜野杏理, 伊波花怜, 紺霜骷と音, Nya, 彩加. Heat drop watch: none.',
+  '2026-10-04T22:54:40Z',
+  'Weekly digest refreshed: 2026-10-04T22:54:40Z',
+  'Weekly idol market digest generated on 2026-10-04T22:54:40Z. Top group: 悪戯ピエロ. Top member: 真髄クロエ. Market temperature: 63.4. Rising stars: 福原小波, 藤川恋和, 水瀬みみ, 立花さらら, 空花茉穗. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
