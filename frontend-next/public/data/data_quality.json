@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-10-04T22:54:41Z",
+  "generated_at": "2026-10-06T01:13:32Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
-    "member_total": 491,
+    "member_total": 492,
     "group_total": 116,
     "current_maturity": "L1",
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
     "instagram": 0.929,
-    "facebook": 0.448,
-    "twitter": 0.314,
+    "facebook": 0.447,
+    "twitter": 0.313,
     "threads": 0.0,
     "photo_url": 0.945,
-    "group": 0.914,
+    "group": 0.915,
     "last_social_signal_at": 0.285,
     "seo_ready_profile": 0.929,
     "missing_core_examples": [
@@ -21,11 +21,11 @@
       "Mai舞 小喵喵不講舞德",
       "桃月夢娜",
       "しか",
-      "婷婷",
-      "筱喵",
       "Key a.k.a SOXI",
       "台湾人の永琳",
       "桜音みゆぃ♪",
+      "婷婷",
+      "筱喵",
       "輝月毬可",
       "AMA",
       "aka Collection",
@@ -41,7 +41,7 @@
       "Koharu",
       "氧氣みどり",
       "サキsaki",
-      "くもり"
+      "八尋"
     ]
   },
   "group_coverage": {
@@ -65,15 +65,15 @@
       "♡xDoLL",
       "運命*ルーレット",
       "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
-      "幻波SYNC",
       "AXIA",
+      "幻波SYNC",
       "花びラブ",
       "花咲＊Chloris",
       "i<3",
       "幻色プリンセス",
       "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
-      "L'Étoile リットーエル",
       "Immerse",
+      "L'Étoile リットーエル",
       "Nevaris",
       "未灯＊ミラクル",
       "曖昧な宝石",

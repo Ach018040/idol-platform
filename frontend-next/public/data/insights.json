@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-10-04T22:54:40Z",
-  "market_temperature": 63.4,
-  "market_temperature_v2": 63.4,
+  "generated_at": "2026-10-06T01:13:32Z",
+  "market_temperature": 63.3,
+  "market_temperature_v2": 63.3,
   "active_groups": 114,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.93,
     "x": 0.31,
     "threads": 0.0,
-    "social_post_dates": 0.29,
+    "social_post_dates": 0.28,
     "seo_ready_profiles": 0.88,
     "audience_insights": 0.0,
     "commercial_insights": 0.0,
@@ -16,19 +16,21 @@
   },
   "weekly_highlights": {
     "top_group": "悪戯ピエロ",
-    "social_king": "真髄クロエ",
-    "social_focus": "真髄クロエ",
-    "market_temperature": 63.4
+    "social_king": "骼実 百瀬",
+    "social_focus": "骼実 百瀬",
+    "market_temperature": 63.3
   },
   "rising_stars": [
+    "兎實ふぃん",
+    "汐見ねおん",
     "福原小波",
     "藤川恋和",
-    "水瀬みみ",
-    "立花さらら",
-    "空花茉穗"
+    "水瀬みみ"
   ],
   "heat_drop": [],
   "top_members": [
+    "骼実 百瀬",
+    "天国 せいや",
     "真髄クロエ",
     "鬼塚 湊",
     "羽咲やわら",
@@ -36,8 +38,6 @@
     "青璃",
     "稲妻莉央",
     "有樹",
-    "Meya",
-    "DeDe",
-    "捏口"
+    "Meya"
   ]
 }
