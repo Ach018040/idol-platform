@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-10-06T01:13:32Z',
-  'Weekly idol market digest generated on 2026-10-06T01:13:32Z. Top group: 悪戯ピエロ. Top member: 骼実 百瀬. Market temperature: 63.3. Rising stars: 兎實ふぃん, 汐見ねおん, 福原小波, 藤川恋和, 水瀬みみ. Heat drop watch: none.',
-  '- 2026-10-06T01:13:32Z: weekly market digest generated
+  'Weekly Market Digest 2026-10-06T23:40:57Z',
+  'Weekly idol market digest generated on 2026-10-06T23:40:57Z. Top group: 悪戯ピエロ. Top member: 天国 せいや. Market temperature: 63.3. Rising stars: 栗羽黎奈, 夢良咲夜眠, 兎實ふぃん, 汐見ねおん, 福原小波. Heat drop watch: none.',
+  '- 2026-10-06T23:40:57Z: weekly market digest generated
 - Highlight top group: 悪戯ピエロ
-- Highlight top member: 骼実 百瀬
-- Rising stars: 兎實ふぃん, 汐見ねおん, 福原小波, 藤川恋和, 水瀬みみ',
+- Highlight top member: 天国 せいや
+- Rising stars: 栗羽黎奈, 夢良咲夜眠, 兎實ふぃん, 汐見ねおん, 福原小波',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-10-06T01:13:32Z", "top_group": "悪戯ピエロ", "top_member": "骼実 百瀬", "market_temperature": "63.3", "rising_stars": ["兎實ふぃん", "汐見ねおん", "福原小波", "藤川恋和", "水瀬みみ"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-10-06T23:40:57Z", "top_group": "悪戯ピエロ", "top_member": "天国 せいや", "market_temperature": "63.3", "rising_stars": ["栗羽黎奈", "夢良咲夜眠", "兎實ふぃん", "汐見ねおん", "福原小波"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-10-06T01:13:32Z',
-  'Weekly digest refreshed: 2026-10-06T01:13:32Z',
-  'Weekly idol market digest generated on 2026-10-06T01:13:32Z. Top group: 悪戯ピエロ. Top member: 骼実 百瀬. Market temperature: 63.3. Rising stars: 兎實ふぃん, 汐見ねおん, 福原小波, 藤川恋和, 水瀬みみ. Heat drop watch: none.',
+  '2026-10-06T23:40:57Z',
+  'Weekly digest refreshed: 2026-10-06T23:40:57Z',
+  'Weekly idol market digest generated on 2026-10-06T23:40:57Z. Top group: 悪戯ピエロ. Top member: 天国 せいや. Market temperature: 63.3. Rising stars: 栗羽黎奈, 夢良咲夜眠, 兎實ふぃん, 汐見ねおん, 福原小波. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
