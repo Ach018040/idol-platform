@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T23:40:58Z",
+  "generated_at": "2026-10-08T00:05:05Z",
   "schema_version": "event-discovery-v1",
   "events": [
     {
@@ -19,7 +19,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-break-fes-splash-20261009",
       "image_url": null,
       "raw_text": "MAGIC BREAK FES -SPLASH- — 2026-10-09",
-      "scraped_at": "2026-10-06T23:40:58Z",
+      "scraped_at": "2026-10-08T00:05:05Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -40,7 +40,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-break-fes-splash-20261010",
       "image_url": null,
       "raw_text": "MAGIC BREAK FES -SPLASH- — 2026-10-10",
-      "scraped_at": "2026-10-06T23:40:58Z",
+      "scraped_at": "2026-10-08T00:05:05Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -61,7 +61,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-break-fes-splash-20261011",
       "image_url": null,
       "raw_text": "MAGIC BREAK FES -SPLASH- — 2026-10-11",
-      "scraped_at": "2026-10-06T23:40:58Z",
+      "scraped_at": "2026-10-08T00:05:05Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -82,7 +82,7 @@
       "detail_url": "https://idolinfohub.com/events/miracle-shine-vol2-2026-noon",
       "image_url": null,
       "raw_text": "奇蹟閃光 第二屆 日光篇 — 2026-10-11",
-      "scraped_at": "2026-10-06T23:40:58Z",
+      "scraped_at": "2026-10-08T00:05:05Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -103,7 +103,7 @@
       "detail_url": "https://idolinfohub.com/events/miracle-shine-vol2-2026-night",
       "image_url": null,
       "raw_text": "奇蹟閃光 第二屆 星光篇 — 2026-10-11",
-      "scraped_at": "2026-10-06T23:40:58Z",
+      "scraped_at": "2026-10-08T00:05:05Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -124,7 +124,7 @@
       "detail_url": "https://idolinfohub.com/events/mah-20261011",
       "image_url": null,
       "raw_text": "MAH #20261011 — 2026-10-11",
-      "scraped_at": "2026-10-06T23:40:58Z",
+      "scraped_at": "2026-10-08T00:05:05Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -147,7 +147,7 @@
       "detail_url": "https://idolinfohub.com/events/vezalia-wav-20261011",
       "image_url": null,
       "raw_text": "VEZALiA 主催公演 — 2026-10-11",
-      "scraped_at": "2026-10-06T23:40:58Z",
+      "scraped_at": "2026-10-08T00:05:05Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -170,14 +170,35 @@
       "detail_url": "https://idolinfohub.com/events/immerse-idol-new-single-release-live-20261025",
       "image_url": null,
       "raw_text": "Immerse New Single Release Live — 2026-10-25",
-      "scraped_at": "2026-10-06T23:40:58Z",
+      "scraped_at": "2026-10-08T00:05:05Z",
       "confidence": 0.85,
+      "extraction_method": "scrapling"
+    },
+    {
+      "source_id": "idolinfohub",
+      "source_name": "Idol Info Hub Events",
+      "source_url": "https://idolinfohub.com/events",
+      "title": "MAGIC IDOL PARTY VOL.39 Halloween SP",
+      "starts_at": "2026-10-31T00:00:00+08:00",
+      "ends_at": null,
+      "timezone": "Asia/Taipei",
+      "venue_name": "",
+      "venue_address": "",
+      "city": "",
+      "group_names": [],
+      "member_names": [],
+      "ticket_url": "https://idolinfohub.com/events/magic-idol-party-vol39-20261031",
+      "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol39-20261031",
+      "image_url": null,
+      "raw_text": "MAGIC IDOL PARTY VOL.39 Halloween SP — 2026-10-31",
+      "scraped_at": "2026-10-08T00:05:05Z",
+      "confidence": 0.65,
       "extraction_method": "scrapling"
     }
   ],
   "coverage": {
-    "events": 8,
-    "with_start_time": 8,
+    "events": 9,
+    "with_start_time": 9,
     "with_venue": 0,
     "with_group_match": 2
   }

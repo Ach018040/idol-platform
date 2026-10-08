@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-10-06T23:40:57Z",
+  "generated_at": "2026-10-08T00:05:03Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
-    "member_total": 493,
+    "member_total": 494,
     "group_total": 116,
     "current_maturity": "L1",
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
     "instagram": 0.929,
-    "facebook": 0.446,
+    "facebook": 0.445,
     "twitter": 0.314,
     "threads": 0.0,
     "photo_url": 0.945,
     "group": 0.915,
-    "last_social_signal_at": 0.284,
+    "last_social_signal_at": 0.283,
     "seo_ready_profile": 0.929,
     "missing_core_examples": [
       "結城朋子",
@@ -63,10 +63,10 @@
       "Flora・Fiore",
       "無我夢中",
       "♡xDoLL",
-      "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
-      "運命*ルーレット",
       "AXIA",
+      "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
       "幻波SYNC",
+      "運命*ルーレット",
       "花びラブ",
       "花咲＊Chloris",
       "i<3",
