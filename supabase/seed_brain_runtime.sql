@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-10-08T00:05:03Z',
-  'Weekly idol market digest generated on 2026-10-08T00:05:03Z. Top group: 悪戯ピエロ. Top member: 天国 せいや. Market temperature: 63.2. Rising stars: 栗羽黎奈, 夢良咲夜眠, 兎實ふぃん, 汐見ねおん, 福原小波. Heat drop watch: none.',
-  '- 2026-10-08T00:05:03Z: weekly market digest generated
+  'Weekly Market Digest 2026-10-09T00:13:17Z',
+  'Weekly idol market digest generated on 2026-10-09T00:13:17Z. Top group: 悪戯ピエロ. Top member: 天国 せいや. Market temperature: 63.1. Rising stars: 栗羽黎奈, 夢良咲夜眠, 兎實ふぃん, 汐見ねおん, 福原小波. Heat drop watch: none.',
+  '- 2026-10-09T00:13:17Z: weekly market digest generated
 - Highlight top group: 悪戯ピエロ
 - Highlight top member: 天国 せいや
 - Rising stars: 栗羽黎奈, 夢良咲夜眠, 兎實ふぃん, 汐見ねおん, 福原小波',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-10-08T00:05:03Z", "top_group": "悪戯ピエロ", "top_member": "天国 せいや", "market_temperature": "63.2", "rising_stars": ["栗羽黎奈", "夢良咲夜眠", "兎實ふぃん", "汐見ねおん", "福原小波"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-10-09T00:13:17Z", "top_group": "悪戯ピエロ", "top_member": "天国 せいや", "market_temperature": "63.1", "rising_stars": ["栗羽黎奈", "夢良咲夜眠", "兎實ふぃん", "汐見ねおん", "福原小波"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-10-08T00:05:03Z',
-  'Weekly digest refreshed: 2026-10-08T00:05:03Z',
-  'Weekly idol market digest generated on 2026-10-08T00:05:03Z. Top group: 悪戯ピエロ. Top member: 天国 せいや. Market temperature: 63.2. Rising stars: 栗羽黎奈, 夢良咲夜眠, 兎實ふぃん, 汐見ねおん, 福原小波. Heat drop watch: none.',
+  '2026-10-09T00:13:17Z',
+  'Weekly digest refreshed: 2026-10-09T00:13:17Z',
+  'Weekly idol market digest generated on 2026-10-09T00:13:17Z. Top group: 悪戯ピエロ. Top member: 天国 せいや. Market temperature: 63.1. Rising stars: 栗羽黎奈, 夢良咲夜眠, 兎實ふぃん, 汐見ねおん, 福原小波. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;

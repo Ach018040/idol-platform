@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T00:05:03Z",
+  "generated_at": "2026-10-09T00:13:17Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 494,
@@ -30,16 +30,16 @@
       "AMA",
       "aka Collection",
       "悠洛 YoLo",
-      "米粒R ミリア",
       "OMOCHIおもち",
+      "米粒R ミリア",
       "花葉",
-      "ようた",
       "天川未來",
+      "ようた",
       "悠人☆",
       "月海 晴",
       "ゆめyume",
-      "Koharu",
       "氧氣みどり",
+      "Koharu",
       "サキsaki",
       "八尋"
     ]
@@ -53,8 +53,8 @@
     "last_group_snapshot_at": 1.0,
     "seo_ready_profile": 0.905,
     "missing_core_examples": [
-      "DUALIA",
       "少女ガチャポン",
+      "DUALIA",
       "未完成プロローグ",
       "Pure makeR",
       "Happy Holiday!!",
