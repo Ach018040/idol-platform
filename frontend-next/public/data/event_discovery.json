@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T22:04:29Z",
+  "generated_at": "2026-10-18T22:19:14Z",
   "schema_version": "event-discovery-v1",
   "events": [
     {
@@ -19,7 +19,7 @@
       "detail_url": "https://idolinfohub.com/events/unknown-volsp-1018-noon",
       "image_url": null,
       "raw_text": "Unknown vol.SP - Pumpkin Shock 昼 — 2026-10-18",
-      "scraped_at": "2026-10-17T22:04:29Z",
+      "scraped_at": "2026-10-18T22:19:14Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -40,7 +40,7 @@
       "detail_url": "https://idolinfohub.com/events/unknown-volsp-1018-night",
       "image_url": null,
       "raw_text": "Unknown vol.SP - Pumpkin Shock 夜 — 2026-10-18",
-      "scraped_at": "2026-10-17T22:04:29Z",
+      "scraped_at": "2026-10-18T22:19:14Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -61,7 +61,7 @@
       "detail_url": "https://idolinfohub.com/events/mah-20261018",
       "image_url": null,
       "raw_text": "MAH 20261018 NIGHT — 2026-10-18",
-      "scraped_at": "2026-10-17T22:04:29Z",
+      "scraped_at": "2026-10-18T22:19:14Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -82,7 +82,7 @@
       "detail_url": "https://idolinfohub.com/events/jacks-studio-moe-vol109-20261023",
       "image_url": null,
       "raw_text": "萌次元 Vol.109 — 2026-10-23",
-      "scraped_at": "2026-10-17T22:04:29Z",
+      "scraped_at": "2026-10-18T22:19:14Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -103,7 +103,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol37-20261024",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.37 — 2026-10-24",
-      "scraped_at": "2026-10-17T22:04:29Z",
+      "scraped_at": "2026-10-18T22:19:14Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -126,7 +126,7 @@
       "detail_url": "https://idolinfohub.com/events/immerse-idol-new-single-release-live-20261025",
       "image_url": null,
       "raw_text": "Immerse New Single Release Live — 2026-10-25",
-      "scraped_at": "2026-10-17T22:04:29Z",
+      "scraped_at": "2026-10-18T22:19:14Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -147,7 +147,7 @@
       "detail_url": "https://idolinfohub.com/events/elysia-debut-live-20261025",
       "image_url": null,
       "raw_text": "ELYSIA Debut Live — 2026-10-25",
-      "scraped_at": "2026-10-17T22:04:29Z",
+      "scraped_at": "2026-10-18T22:19:14Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -168,7 +168,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol38-20261026",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.38 — 2026-10-26",
-      "scraped_at": "2026-10-17T22:04:29Z",
+      "scraped_at": "2026-10-18T22:19:14Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -189,7 +189,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol39-20261031",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.39 Halloween SP — 2026-10-31",
-      "scraped_at": "2026-10-17T22:04:29Z",
+      "scraped_at": "2026-10-18T22:19:14Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     }
