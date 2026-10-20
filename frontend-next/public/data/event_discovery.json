@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T23:29:14Z",
+  "generated_at": "2026-10-20T23:03:40Z",
   "schema_version": "event-discovery-v1",
   "events": [
     {
@@ -19,7 +19,7 @@
       "detail_url": "https://idolinfohub.com/events/tukuyomi-hoshi-vol7-20261022",
       "image_url": null,
       "raw_text": "月詠繁星 Vol.7 — 2026-10-22",
-      "scraped_at": "2026-10-19T23:29:14Z",
+      "scraped_at": "2026-10-20T23:03:40Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -40,7 +40,7 @@
       "detail_url": "https://idolinfohub.com/events/jacks-studio-moe-vol109-20261023",
       "image_url": null,
       "raw_text": "萌次元 Vol.109 — 2026-10-23",
-      "scraped_at": "2026-10-19T23:29:14Z",
+      "scraped_at": "2026-10-20T23:03:40Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -61,7 +61,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol37-20261024",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.37 — 2026-10-24",
-      "scraped_at": "2026-10-19T23:29:14Z",
+      "scraped_at": "2026-10-20T23:03:40Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -84,7 +84,7 @@
       "detail_url": "https://idolinfohub.com/events/immerse-idol-new-single-release-live-20261025",
       "image_url": null,
       "raw_text": "Immerse New Single Release Live — 2026-10-25",
-      "scraped_at": "2026-10-19T23:29:14Z",
+      "scraped_at": "2026-10-20T23:03:40Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -105,7 +105,7 @@
       "detail_url": "https://idolinfohub.com/events/elysia-debut-live-20261025",
       "image_url": null,
       "raw_text": "ELYSIA Debut Live — 2026-10-25",
-      "scraped_at": "2026-10-19T23:29:14Z",
+      "scraped_at": "2026-10-20T23:03:40Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -126,7 +126,7 @@
       "detail_url": "https://idolinfohub.com/events/idolisland-vol21-noon-20261025",
       "image_url": null,
       "raw_text": "IDOL ISLAND Vol.21｜集結！電光閃焰 — 2026-10-25",
-      "scraped_at": "2026-10-19T23:29:14Z",
+      "scraped_at": "2026-10-20T23:03:40Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -147,7 +147,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol38-20261026",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.38 — 2026-10-26",
-      "scraped_at": "2026-10-19T23:29:14Z",
+      "scraped_at": "2026-10-20T23:03:40Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -168,7 +168,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol39-20261031",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.39 Halloween SP — 2026-10-31",
-      "scraped_at": "2026-10-19T23:29:14Z",
+      "scraped_at": "2026-10-20T23:03:40Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     }
