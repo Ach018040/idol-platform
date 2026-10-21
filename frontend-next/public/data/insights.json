@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-20T23:03:40Z",
-  "market_temperature": 62.4,
-  "market_temperature_v2": 62.4,
+  "generated_at": "2026-10-21T23:06:56Z",
+  "market_temperature": 62.3,
+  "market_temperature_v2": 62.3,
   "active_groups": 114,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "悪戯ピエロ",
     "social_king": "天国 せいや",
     "social_focus": "天国 せいや",
-    "market_temperature": 62.4
+    "market_temperature": 62.3
   },
   "rising_stars": [
     "栗羽黎奈",
     "夢良咲夜眠",
     "兎實ふぃん",
-    "汐見ねおん",
-    "伊波花怜"
+    "伊波花怜",
+    "汐見ねおん"
   ],
   "heat_drop": [],
   "top_members": [
@@ -37,7 +37,7 @@
     "桜羽 初季",
     "羽咲やわら",
     "姫路芙羽奈",
-    "青璃",
-    "優芽 Yuume"
+    "優芽 Yuume",
+    "青璃"
   ]
 }
