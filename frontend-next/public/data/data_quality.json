@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T23:06:56Z",
+  "generated_at": "2026-10-22T23:06:00Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 494,
@@ -54,8 +54,8 @@
     "seo_ready_profile": 0.905,
     "missing_core_examples": [
       "少女ガチャポン",
-      "DUALIA",
       "未完成プロローグ",
+      "DUALIA",
       "Pure makeR",
       "天国地獄",
       "Happy Holiday!!",

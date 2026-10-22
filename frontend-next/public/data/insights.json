@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T23:06:56Z",
+  "generated_at": "2026-10-22T23:06:00Z",
   "market_temperature": 62.3,
   "market_temperature_v2": 62.3,
   "active_groups": 114,
@@ -16,8 +16,8 @@
   },
   "weekly_highlights": {
     "top_group": "悪戯ピエロ",
-    "social_king": "天国 せいや",
-    "social_focus": "天国 せいや",
+    "social_king": "小豆 Azuki",
+    "social_focus": "小豆 Azuki",
     "market_temperature": 62.3
   },
   "rising_stars": [
@@ -25,10 +25,11 @@
     "夢良咲夜眠",
     "兎實ふぃん",
     "伊波花怜",
-    "汐見ねおん"
+    "Nya"
   ],
   "heat_drop": [],
   "top_members": [
+    "小豆 Azuki",
     "天国 せいや",
     "姫野 あいる",
     "骼実 百瀬",
@@ -37,7 +38,6 @@
     "桜羽 初季",
     "羽咲やわら",
     "姫路芙羽奈",
-    "優芽 Yuume",
-    "青璃"
+    "優芽 Yuume"
   ]
 }
