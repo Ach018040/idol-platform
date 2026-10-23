@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-22T23:06:00Z",
-  "market_temperature": 62.3,
-  "market_temperature_v2": 62.3,
-  "active_groups": 114,
+  "generated_at": "2026-10-23T22:58:38Z",
+  "market_temperature": 62.4,
+  "market_temperature_v2": 62.4,
+  "active_groups": 115,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
     "instagram": 0.93,
@@ -15,20 +15,21 @@
     "views": 0.0
   },
   "weekly_highlights": {
-    "top_group": "悪戯ピエロ",
-    "social_king": "小豆 Azuki",
-    "social_focus": "小豆 Azuki",
-    "market_temperature": 62.3
+    "top_group": "幻獣",
+    "social_king": "姫川乃愛",
+    "social_focus": "姫川乃愛",
+    "market_temperature": 62.4
   },
   "rising_stars": [
+    "鹿森雲羽",
     "栗羽黎奈",
     "夢良咲夜眠",
     "兎實ふぃん",
-    "伊波花怜",
-    "Nya"
+    "伊波花怜"
   ],
   "heat_drop": [],
   "top_members": [
+    "姫川乃愛",
     "小豆 Azuki",
     "天国 せいや",
     "姫野 あいる",
@@ -37,7 +38,6 @@
     "鬼塚 湊",
     "桜羽 初季",
     "羽咲やわら",
-    "姫路芙羽奈",
-    "優芽 Yuume"
+    "姫路芙羽奈"
   ]
 }
