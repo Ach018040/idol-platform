@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T22:58:39Z",
+  "generated_at": "2026-10-24T22:19:09Z",
   "schema_version": "event-discovery-v1",
   "events": [
     {
@@ -19,7 +19,7 @@
       "detail_url": "https://idolinfohub.com/events/therarez-official-tsutsuko-birthday-20261024",
       "image_url": null,
       "raw_text": "《最強⚔️》2026 兔兔子生誕祭 — 2026-10-24",
-      "scraped_at": "2026-10-23T22:58:39Z",
+      "scraped_at": "2026-10-24T22:19:09Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -42,7 +42,7 @@
       "detail_url": "https://idolinfohub.com/events/immerse-idol-new-single-release-live-20261025",
       "image_url": null,
       "raw_text": "Immerse New Single Release Live — 2026-10-25",
-      "scraped_at": "2026-10-23T22:58:39Z",
+      "scraped_at": "2026-10-24T22:19:09Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -63,7 +63,7 @@
       "detail_url": "https://idolinfohub.com/events/elysia-debut-live-20261025",
       "image_url": null,
       "raw_text": "ELYSIA Debut Live — 2026-10-25",
-      "scraped_at": "2026-10-23T22:58:39Z",
+      "scraped_at": "2026-10-24T22:19:09Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -84,7 +84,7 @@
       "detail_url": "https://idolinfohub.com/events/idolisland-vol21-noon-20261025",
       "image_url": null,
       "raw_text": "IDOL ISLAND Vol.21｜集結！電光閃焰 — 2026-10-25",
-      "scraped_at": "2026-10-23T22:58:39Z",
+      "scraped_at": "2026-10-24T22:19:09Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -105,7 +105,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol38-20261026",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.38 — 2026-10-26",
-      "scraped_at": "2026-10-23T22:58:39Z",
+      "scraped_at": "2026-10-24T22:19:09Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -126,7 +126,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-kamori-birth-20261026",
       "image_url": null,
       "raw_text": "2026 鹿森雲羽生誕祭 — 2026-10-26",
-      "scraped_at": "2026-10-23T22:58:39Z",
+      "scraped_at": "2026-10-24T22:19:09Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -149,7 +149,7 @@
       "detail_url": "https://idolinfohub.com/events/floriseed-idol-project-luvrush-regular-vol4-20261029",
       "image_url": null,
       "raw_text": "LuvRush定期公演vol.4 — 2026-10-29",
-      "scraped_at": "2026-10-23T22:58:39Z",
+      "scraped_at": "2026-10-24T22:19:09Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -170,7 +170,7 @@
       "detail_url": "https://idolinfohub.com/events/flofio-riki-birthday-20261030",
       "image_url": null,
       "raw_text": "理樹 生誕祭 — 2026-10-30",
-      "scraped_at": "2026-10-23T22:58:39Z",
+      "scraped_at": "2026-10-24T22:19:09Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -191,7 +191,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol39-20261031",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.39 Halloween SP — 2026-10-31",
-      "scraped_at": "2026-10-23T22:58:39Z",
+      "scraped_at": "2026-10-24T22:19:09Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -214,7 +214,7 @@
       "detail_url": "https://idolinfohub.com/events/sheol_serenade-final-live-20261031",
       "image_url": null,
       "raw_text": "冥恋セレナーデ Final Live — 2026-10-31",
-      "scraped_at": "2026-10-23T22:58:39Z",
+      "scraped_at": "2026-10-24T22:19:09Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     }

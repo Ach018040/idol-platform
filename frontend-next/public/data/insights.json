@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-23T22:58:38Z",
-  "market_temperature": 62.4,
-  "market_temperature_v2": 62.4,
+  "generated_at": "2026-10-24T22:19:09Z",
+  "market_temperature": 62.3,
+  "market_temperature_v2": 62.3,
   "active_groups": 115,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,7 +18,7 @@
     "top_group": "幻獣",
     "social_king": "姫川乃愛",
     "social_focus": "姫川乃愛",
-    "market_temperature": 62.4
+    "market_temperature": 62.3
   },
   "rising_stars": [
     "鹿森雲羽",
@@ -34,9 +34,9 @@
     "天国 せいや",
     "姫野 あいる",
     "骼実 百瀬",
+    "桜羽 初季",
     "真髄クロエ",
     "鬼塚 湊",
-    "桜羽 初季",
     "羽咲やわら",
     "姫路芙羽奈"
   ]
