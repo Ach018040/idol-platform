@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T23:39:42Z",
+  "generated_at": "2026-10-27T23:39:11Z",
   "schema_version": "event-discovery-v1",
   "events": [
     {
@@ -21,7 +21,7 @@
       "detail_url": "https://idolinfohub.com/events/floriseed-idol-project-luvrush-regular-vol4-20261029",
       "image_url": null,
       "raw_text": "LuvRush定期公演vol.4 — 2026-10-29",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -42,7 +42,7 @@
       "detail_url": "https://idolinfohub.com/events/flofio-riki-birthday-20261030",
       "image_url": null,
       "raw_text": "理樹 生誕祭 — 2026-10-30",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -63,7 +63,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-party-vol39-20261031",
       "image_url": null,
       "raw_text": "MAGIC IDOL PARTY VOL.39 Halloween SP — 2026-10-31",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -86,7 +86,7 @@
       "detail_url": "https://idolinfohub.com/events/sheol_serenade-final-live-20261031",
       "image_url": null,
       "raw_text": "冥恋セレナーデ Final Live — 2026-10-31",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -107,7 +107,7 @@
       "detail_url": "https://idolinfohub.com/events/funfull-orchestra-tokyo-taiwan-daigassho-20261101",
       "image_url": null,
       "raw_text": "THE ORCHESTRA TOKYO単独公演『台湾大合唱』 — 2026-11-01",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -128,7 +128,7 @@
       "detail_url": "https://idolinfohub.com/events/funfull-ido-live-day-trip-to-taipei-20261101",
       "image_url": null,
       "raw_text": "IDO-LIVE!! Day trip to taipei — 2026-11-01",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -149,7 +149,7 @@
       "detail_url": "https://idolinfohub.com/events/nankini-jinjia-kaixin-asia-tour-20261106",
       "image_url": null,
       "raw_text": "なんキニ！ 진짜開心アジアツアー — 2026-11-06",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -170,7 +170,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-taipei-sonic-frontier-20261106",
       "image_url": null,
       "raw_text": "台北異音 - TAIPEI SONIC FRONTIER — 2026-11-06",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -191,7 +191,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-vol74-day1-20261107",
       "image_url": null,
       "raw_text": "SSr Vol.74 DAY1 — 2026-11-07",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -212,7 +212,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-taipei-overdrive-20261107",
       "image_url": null,
       "raw_text": "台北暴走 - TAIPEI OVERDRIVE — 2026-11-07",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -233,7 +233,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-vol74-day2-20261108",
       "image_url": null,
       "raw_text": "SSr Vol.74 DAY2 — 2026-11-08",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -254,7 +254,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-taipei-rift-20261108",
       "image_url": null,
       "raw_text": "台北烈界 - TAIPEI RIFT — 2026-11-08",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -275,7 +275,7 @@
       "detail_url": "https://idolinfohub.com/events/kimini-kyun-fes-taipei-20261108",
       "image_url": null,
       "raw_text": "KYUN FES TAIPEI — 2026-11-08",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -296,7 +296,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-vol75-20261122",
       "image_url": null,
       "raw_text": "SSr Vol.75 ツインテール — 2026-11-22",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -317,7 +317,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-festival-2026-autumn-day1-20261128",
       "image_url": null,
       "raw_text": "MAGIC IDOL FESTIVAL 2026 AUTUMN DAY1 — 2026-11-28",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -338,7 +338,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-jamscollection-oneman-20261128",
       "image_url": null,
       "raw_text": "JamsCollection ONEMAN LIVE in TAIWAN — 2026-11-28",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -359,7 +359,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-festival-2026-autumn-day2-20261129",
       "image_url": null,
       "raw_text": "MAGIC IDOL FESTIVAL 2026 AUTUMN DAY2 — 2026-11-29",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -380,7 +380,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-orchestra-tokyo-x-jiemei-20261211",
       "image_url": null,
       "raw_text": "THE ORCHESTRA TOKYO x ジエメイ 2MANLIVE in TAIWAN — 2026-12-11",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -401,7 +401,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-festival-2026-final-day1-20261212",
       "image_url": null,
       "raw_text": "MAGIC IDOL FESTIVAL 2026 FINAL DAY1 — 2026-12-12",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -422,7 +422,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-festival-2026-final-day2-20261213",
       "image_url": null,
       "raw_text": "MAGIC IDOL FESTIVAL 2026 FINAL DAY2 — 2026-12-13",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -443,7 +443,7 @@
       "detail_url": "https://idolinfohub.com/events/funfull-fun-fare-vol3-20261218",
       "image_url": null,
       "raw_text": "FUN-FARE！Vol.3 — 2026-12-18",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -464,7 +464,7 @@
       "detail_url": "https://idolinfohub.com/events/funfull-future-cider-asia-tour-chapter3-20261220",
       "image_url": null,
       "raw_text": "フューチャーサイダー 日本・亞洲巡迴【Chapter 3】台灣 — 2026-12-20",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -485,7 +485,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-shining-magic-countdown-party-20261231",
       "image_url": null,
       "raw_text": "SHINING MAGIC COUNTDOWN PARTY 2026-27 — 2026-12-31",
-      "scraped_at": "2026-10-26T23:39:42Z",
+      "scraped_at": "2026-10-27T23:39:11Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     }
