@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-27T23:39:11Z",
-  "market_temperature": 62.1,
-  "market_temperature_v2": 62.1,
+  "generated_at": "2026-10-28T23:56:50Z",
+  "market_temperature": 62.2,
+  "market_temperature_v2": 62.2,
   "active_groups": 115,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "姫川乃愛",
     "social_focus": "姫川乃愛",
-    "market_temperature": 62.1
+    "market_temperature": 62.2
   },
   "rising_stars": [
+    "桃心愛琉",
+    "田島由依",
+    "梨理 𝚁𝚒𝚛𝚒",
     "鹿森雲羽",
-    "伊波花怜",
-    "Nya",
-    "栗羽黎奈",
-    "夢良咲夜眠"
+    "伊波花怜"
   ],
   "heat_drop": [],
   "top_members": [
