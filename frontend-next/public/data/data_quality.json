@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T23:56:50Z",
+  "generated_at": "2026-10-29T23:52:07Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 499,
@@ -9,7 +9,7 @@
   },
   "member_coverage": {
     "instagram": 0.93,
-    "facebook": 0.441,
+    "facebook": 0.443,
     "twitter": 0.311,
     "threads": 0.0,
     "photo_url": 0.946,
@@ -67,8 +67,8 @@
       "Immerse",
       "幻波SYNC",
       "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
-      "花びラブ",
       "魔法♡ドリーム",
+      "花びラブ",
       "幻色プリンセス",
       "無我夢中",
       "曖昧な宝石",
@@ -77,7 +77,7 @@
       "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
       "未灯＊ミラクル",
       "Nevaris",
-      "L'Étoile リットーエル"
+      "理想鄉Elysia"
     ]
   },
   "known_gaps": [
