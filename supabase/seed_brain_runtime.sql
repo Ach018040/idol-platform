@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-10-30T23:31:43Z',
-  'Weekly idol market digest generated on 2026-10-30T23:31:43Z. Top group: 幻獣. Top member: 青璃. Market temperature: 62.1. Rising stars: 梨理 𝚁𝚒𝚛𝚒, 鹿森雲羽, 伊波花怜, 早苗萌香, Nya. Heat drop watch: none.',
-  '- 2026-10-30T23:31:43Z: weekly market digest generated
+  'Weekly Market Digest 2026-10-31T23:14:05Z',
+  'Weekly idol market digest generated on 2026-10-31T23:14:05Z. Top group: 幻獣. Top member: 紺霜骷と音. Market temperature: 62.1. Rising stars: Rei, 羽黒凛香, 梨理 𝚁𝚒𝚛𝚒, 伊波花怜, 鹿森雲羽. Heat drop watch: none.',
+  '- 2026-10-31T23:14:05Z: weekly market digest generated
 - Highlight top group: 幻獣
-- Highlight top member: 青璃
-- Rising stars: 梨理 𝚁𝚒𝚛𝚒, 鹿森雲羽, 伊波花怜, 早苗萌香, Nya',
+- Highlight top member: 紺霜骷と音
+- Rising stars: Rei, 羽黒凛香, 梨理 𝚁𝚒𝚛𝚒, 伊波花怜, 鹿森雲羽',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-10-30T23:31:43Z", "top_group": "幻獣", "top_member": "青璃", "market_temperature": "62.1", "rising_stars": ["梨理 𝚁𝚒𝚛𝚒", "鹿森雲羽", "伊波花怜", "早苗萌香", "Nya"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-10-31T23:14:05Z", "top_group": "幻獣", "top_member": "紺霜骷と音", "market_temperature": "62.1", "rising_stars": ["Rei", "羽黒凛香", "梨理 𝚁𝚒𝚛𝚒", "伊波花怜", "鹿森雲羽"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-10-30T23:31:43Z',
-  'Weekly digest refreshed: 2026-10-30T23:31:43Z',
-  'Weekly idol market digest generated on 2026-10-30T23:31:43Z. Top group: 幻獣. Top member: 青璃. Market temperature: 62.1. Rising stars: 梨理 𝚁𝚒𝚛𝚒, 鹿森雲羽, 伊波花怜, 早苗萌香, Nya. Heat drop watch: none.',
+  '2026-10-31T23:14:05Z',
+  'Weekly digest refreshed: 2026-10-31T23:14:05Z',
+  'Weekly idol market digest generated on 2026-10-31T23:14:05Z. Top group: 幻獣. Top member: 紺霜骷と音. Market temperature: 62.1. Rising stars: Rei, 羽黒凛香, 梨理 𝚁𝚒𝚛𝚒, 伊波花怜, 鹿森雲羽. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
