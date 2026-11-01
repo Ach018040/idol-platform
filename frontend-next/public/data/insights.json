@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-31T23:14:05Z",
-  "market_temperature": 62.1,
-  "market_temperature_v2": 62.1,
+  "generated_at": "2026-11-01T23:26:00Z",
+  "market_temperature": 62.4,
+  "market_temperature_v2": 62.4,
   "active_groups": 115,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,14 +18,14 @@
     "top_group": "幻獣",
     "social_king": "紺霜骷と音",
     "social_focus": "紺霜骷と音",
-    "market_temperature": 62.1
+    "market_temperature": 62.4
   },
   "rising_stars": [
-    "Rei",
-    "羽黒凛香",
-    "梨理 𝚁𝚒𝚛𝚒",
-    "伊波花怜",
-    "鹿森雲羽"
+    "みより",
+    "津代舞奈",
+    "伊嚕咪",
+    "兎羅亜華ノ草",
+    "七瀬ありす"
   ],
   "heat_drop": [],
   "top_members": [
@@ -33,11 +33,11 @@
     "青璃",
     "姫川乃愛",
     "小豆 Azuki",
+    "ひいろ",
     "桜羽 初季",
     "天国 せいや",
     "姫野 あいる",
     "骼実 百瀬",
-    "真髄クロエ",
-    "鬼塚 湊"
+    "優芽 Yuume"
   ]
 }
