@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-01T23:26:00Z",
-  "market_temperature": 62.4,
-  "market_temperature_v2": 62.4,
+  "generated_at": "2026-11-03T02:06:17Z",
+  "market_temperature": 62.3,
+  "market_temperature_v2": 62.3,
   "active_groups": 115,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -16,19 +16,20 @@
   },
   "weekly_highlights": {
     "top_group": "幻獣",
-    "social_king": "紺霜骷と音",
-    "social_focus": "紺霜骷と音",
-    "market_temperature": 62.4
+    "social_king": "劉璦黎 IRENE あいり 유애려",
+    "social_focus": "劉璦黎 IRENE あいり 유애려",
+    "market_temperature": 62.3
   },
   "rising_stars": [
-    "みより",
-    "津代舞奈",
-    "伊嚕咪",
-    "兎羅亜華ノ草",
-    "七瀬ありす"
+    "羽黒凛香",
+    "梨理 𝚁𝚒𝚛𝚒",
+    "婷婷",
+    "筱喵",
+    "花森 璃蛙"
   ],
   "heat_drop": [],
   "top_members": [
+    "劉璦黎 IRENE あいり 유애려",
     "紺霜骷と音",
     "青璃",
     "姫川乃愛",
@@ -37,7 +38,6 @@
     "桜羽 初季",
     "天国 せいや",
     "姫野 あいる",
-    "骼実 百瀬",
-    "優芽 Yuume"
+    "骼実 百瀬"
   ]
 }
