@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T00:47:31Z",
+  "generated_at": "2026-11-06T00:54:35Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 497,
@@ -55,16 +55,16 @@
     "missing_core_examples": [
       "少女ガチャポン",
       "未完成プロローグ",
-      "DUALIA",
-      "Immerse",
       "Pure makeR",
+      "DUALIA",
       "天国地獄",
+      "Immerse",
       "Happy Holiday!!",
       "Flora・Fiore",
       "xEnomoRph",
-      "冥恋セレナーデ",
       "花咲＊Chloris",
       "AXIA",
+      "冥恋セレナーデ",
       "♡xDoLL",
       "幻波SYNC",
       "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
@@ -75,8 +75,8 @@
       "無我夢中",
       "魔法♡ドリーム",
       "Nevaris",
-      "曖昧な宝石",
       "未灯＊ミラクル",
+      "曖昧な宝石",
       "運命*ルーレット"
     ]
   },
