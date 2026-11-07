@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-07T00:00:15Z",
-  "market_temperature": 62.1,
-  "market_temperature_v2": 62.1,
+  "generated_at": "2026-11-07T23:31:20Z",
+  "market_temperature": 62.0,
+  "market_temperature_v2": 62.0,
   "active_groups": 115,
   "formula_version": "v3-seo-discoverability",
   "data_coverage": {
@@ -18,7 +18,7 @@
     "top_group": "幻獣",
     "social_king": "劉璦黎 IRENE あいり 유애려",
     "social_focus": "劉璦黎 IRENE あいり 유애려",
-    "market_temperature": 62.1
+    "market_temperature": 62.0
   },
   "rising_stars": [
     "七瀬ありす",
@@ -37,7 +37,7 @@
     "霧宮蒼生",
     "ひいろ",
     "桜羽 初季",
-    "天国 せいや",
-    "姫野 あいる"
+    "優芽 Yuume",
+    "天国 せいや"
   ]
 }
