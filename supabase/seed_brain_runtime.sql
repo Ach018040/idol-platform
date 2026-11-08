@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-11-07T23:31:20Z',
-  'Weekly idol market digest generated on 2026-11-07T23:31:20Z. Top group: 幻獣. Top member: 劉璦黎 IRENE あいり 유애려. Market temperature: 62.0. Rising stars: 七瀬ありす, Rei, 梨理 𝚁𝚒𝚛𝚒, 伊波花怜, Nya. Heat drop watch: none.',
-  '- 2026-11-07T23:31:20Z: weekly market digest generated
+  'Weekly Market Digest 2026-11-08T23:30:43Z',
+  'Weekly idol market digest generated on 2026-11-08T23:30:43Z. Top group: 幻獣. Top member: 劉璦黎 IRENE あいり 유애려. Market temperature: 62.0. Rising stars: 七瀬ありす, Rei, 伊波花怜, 梨理 𝚁𝚒𝚛𝚒, Nya. Heat drop watch: none.',
+  '- 2026-11-08T23:30:43Z: weekly market digest generated
 - Highlight top group: 幻獣
 - Highlight top member: 劉璦黎 IRENE あいり 유애려
-- Rising stars: 七瀬ありす, Rei, 梨理 𝚁𝚒𝚛𝚒, 伊波花怜, Nya',
+- Rising stars: 七瀬ありす, Rei, 伊波花怜, 梨理 𝚁𝚒𝚛𝚒, Nya',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-11-07T23:31:20Z", "top_group": "幻獣", "top_member": "劉璦黎 IRENE あいり 유애려", "market_temperature": "62.0", "rising_stars": ["七瀬ありす", "Rei", "梨理 𝚁𝚒𝚛𝚒", "伊波花怜", "Nya"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-11-08T23:30:43Z", "top_group": "幻獣", "top_member": "劉璦黎 IRENE あいり 유애려", "market_temperature": "62.0", "rising_stars": ["七瀬ありす", "Rei", "伊波花怜", "梨理 𝚁𝚒𝚛𝚒", "Nya"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-11-07T23:31:20Z',
-  'Weekly digest refreshed: 2026-11-07T23:31:20Z',
-  'Weekly idol market digest generated on 2026-11-07T23:31:20Z. Top group: 幻獣. Top member: 劉璦黎 IRENE あいり 유애려. Market temperature: 62.0. Rising stars: 七瀬ありす, Rei, 梨理 𝚁𝚒𝚛𝚒, 伊波花怜, Nya. Heat drop watch: none.',
+  '2026-11-08T23:30:43Z',
+  'Weekly digest refreshed: 2026-11-08T23:30:43Z',
+  'Weekly idol market digest generated on 2026-11-08T23:30:43Z. Top group: 幻獣. Top member: 劉璦黎 IRENE あいり 유애려. Market temperature: 62.0. Rising stars: 七瀬ありす, Rei, 伊波花怜, 梨理 𝚁𝚒𝚛𝚒, Nya. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
