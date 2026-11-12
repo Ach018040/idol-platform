@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-11-11T00:29:48Z",
+  "generated_at": "2026-11-12T01:51:07Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
-    "member_total": 497,
+    "member_total": 498,
     "group_total": 117,
     "current_maturity": "L1",
     "largest_gap": "real_social_activity_and_event_discovery"
   },
   "member_coverage": {
     "instagram": 0.93,
-    "facebook": 0.445,
-    "twitter": 0.314,
+    "facebook": 0.444,
+    "twitter": 0.313,
     "threads": 0.0,
     "photo_url": 0.946,
     "group": 0.92,
-    "last_social_signal_at": 0.278,
+    "last_social_signal_at": 0.277,
     "seo_ready_profile": 0.93,
     "missing_core_examples": [
       "結城朋子",
@@ -34,8 +34,8 @@
       "米粒R ミリア",
       "天川未來",
       "月海 晴",
-      "ゆめyume",
       "氧氣みどり",
+      "ゆめyume",
       "サキsaki",
       "八尋",
       "失溫少女_suya",
