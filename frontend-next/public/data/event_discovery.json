@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T01:51:08Z",
+  "generated_at": "2026-11-13T00:57:39Z",
   "schema_version": "event-discovery-v1",
   "events": [
     {
@@ -19,7 +19,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-amaimai-birth-20261113",
       "image_url": null,
       "raw_text": "姫宮まい生誕祭2026 — 2026-11-13",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -40,7 +40,7 @@
       "detail_url": "https://idolinfohub.com/events/perfume-prod-vol8-day1-20261114",
       "image_url": null,
       "raw_text": "Perfume Vol.8 DAY1 — 2026-11-14",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -61,7 +61,7 @@
       "detail_url": "https://idolinfohub.com/events/perfume-prod-yoloz-jinks-20261114",
       "image_url": null,
       "raw_text": "JAPAN IDOL PREMIUM SESSION — 2026-11-14",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -82,7 +82,7 @@
       "detail_url": "https://idolinfohub.com/events/mah-20261114-day",
       "image_url": null,
       "raw_text": "MAH 20261114 DAY — 2026-11-14",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -103,7 +103,7 @@
       "detail_url": "https://idolinfohub.com/events/mah-20261114-night",
       "image_url": null,
       "raw_text": "MAH 20261114 NIGHT — 2026-11-14",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -124,7 +124,7 @@
       "detail_url": "https://idolinfohub.com/events/perfume-prod-vol8-day2-20261115",
       "image_url": null,
       "raw_text": "Perfume Vol.8 DAY2 — 2026-11-15",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -145,7 +145,7 @@
       "detail_url": "https://idolinfohub.com/events/zizootaipei-primulav-5th-anniversary-20261115",
       "image_url": null,
       "raw_text": "櫻草祭番外編 — 2026-11-15",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -168,7 +168,7 @@
       "detail_url": "https://idolinfohub.com/events/zizootaipei-primulav-5th-oneman-20261115",
       "image_url": null,
       "raw_text": "Primulav5週年紀念Oneman live — 2026-11-15",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -189,7 +189,7 @@
       "detail_url": "https://idolinfohub.com/events/idolisland-vol22-noon-20261115",
       "image_url": null,
       "raw_text": "IDOL ISLAND Vol.22｜星光留聲機 — 2026-11-15",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -210,7 +210,7 @@
       "detail_url": "https://idolinfohub.com/events/idolisland-vol22-night-20261115",
       "image_url": null,
       "raw_text": "星瞳グレア 日和葉乃生誕祭 — 2026-11-15",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -233,7 +233,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-genpa-sync-half-anniversary-20261115",
       "image_url": null,
       "raw_text": "幻波SYNC半周年公演 — 2026-11-15",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.85,
       "extraction_method": "scrapling"
     },
@@ -254,7 +254,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-karen-graduation-birth-20261115",
       "image_url": null,
       "raw_text": "伊波花怜卒業&生誕祭2026 — 2026-11-15",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -275,7 +275,7 @@
       "detail_url": "https://idolinfohub.com/events/ssr-vol75-20261122",
       "image_url": null,
       "raw_text": "SSr Vol.75 ツインテール — 2026-11-22",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -296,7 +296,7 @@
       "detail_url": "https://idolinfohub.com/events/mini-mah-20261124",
       "image_url": null,
       "raw_text": "MINI MAH 20261124 — 2026-11-24",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -317,7 +317,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-festival-2026-autumn-day1-20261128",
       "image_url": null,
       "raw_text": "MAGIC IDOL FESTIVAL 2026 AUTUMN DAY1 — 2026-11-28",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -338,7 +338,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-jamscollection-oneman-20261128",
       "image_url": null,
       "raw_text": "JamsCollection ONEMAN LIVE in TAIWAN — 2026-11-28",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -359,7 +359,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-festival-2026-autumn-day2-20261129",
       "image_url": null,
       "raw_text": "MAGIC IDOL FESTIVAL 2026 AUTUMN DAY2 — 2026-11-29",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -380,7 +380,7 @@
       "detail_url": "https://idolinfohub.com/events/cutiverse-moerolove-new-single-live-20261205",
       "image_url": null,
       "raw_text": "今宵、あなたがプリンス — 2026-12-05",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -401,7 +401,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-orchestra-tokyo-x-jiemei-20261211",
       "image_url": null,
       "raw_text": "THE ORCHESTRA TOKYO x ジエメイ 2MANLIVE in TAIWAN — 2026-12-11",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -422,7 +422,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-festival-2026-final-day1-20261212",
       "image_url": null,
       "raw_text": "MAGIC IDOL FESTIVAL 2026 FINAL DAY1 — 2026-12-12",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -443,7 +443,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-festival-2026-final-day2-20261213",
       "image_url": null,
       "raw_text": "MAGIC IDOL FESTIVAL 2026 FINAL DAY2 — 2026-12-13",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -464,7 +464,7 @@
       "detail_url": "https://idolinfohub.com/events/funfull-fun-fare-vol3-20261218",
       "image_url": null,
       "raw_text": "FUN-FARE！Vol.3 — 2026-12-18",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -485,7 +485,7 @@
       "detail_url": "https://idolinfohub.com/events/funfull-future-cider-asia-tour-chapter3-20261220",
       "image_url": null,
       "raw_text": "フューチャーサイダー 日本・亞洲巡迴【Chapter 3】台灣 — 2026-12-20",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     },
@@ -506,7 +506,7 @@
       "detail_url": "https://idolinfohub.com/events/magic-idol-project-shining-magic-countdown-party-20261231",
       "image_url": null,
       "raw_text": "SHINING MAGIC COUNTDOWN PARTY 2026-27 — 2026-12-31",
-      "scraped_at": "2026-11-12T01:51:08Z",
+      "scraped_at": "2026-11-13T00:57:39Z",
       "confidence": 0.65,
       "extraction_method": "scrapling"
     }
