@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T01:42:50Z",
+  "generated_at": "2026-11-21T01:13:52Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 500,
@@ -9,7 +9,7 @@
   },
   "member_coverage": {
     "instagram": 0.93,
-    "facebook": 0.442,
+    "facebook": 0.44,
     "twitter": 0.312,
     "threads": 0.0,
     "photo_url": 0.946,
@@ -30,8 +30,8 @@
       "輝月毬可",
       "AMA",
       "aka Collection",
-      "悠洛 YoLo",
       "天川未來",
+      "悠洛 YoLo",
       "米粒R ミリア",
       "月海 晴",
       "氧氣みどり",
@@ -41,7 +41,7 @@
       "失溫少女_suya",
       "月見はりゅみ",
       "Koharu",
-      "ようた"
+      "音転 心夕"
     ]
   },
   "group_coverage": {
@@ -75,8 +75,8 @@
       "未灯＊ミラクル",
       "Nevaris",
       "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
-      "原色⭐︎ふぁんたじー",
       "i<3",
+      "原色⭐︎ふぁんたじー",
       "運命*ルーレット"
     ]
   },

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T01:42:50Z",
+  "generated_at": "2026-11-21T01:13:52Z",
   "market_temperature": 61.7,
   "market_temperature_v2": 61.7,
   "active_groups": 115,
@@ -15,9 +15,9 @@
     "views": 0.0
   },
   "weekly_highlights": {
-    "top_group": "時空Astria",
-    "social_king": "霧宮蒼生",
-    "social_focus": "霧宮蒼生",
+    "top_group": "木苺FRUCTOSE",
+    "social_king": "花京院ゆあ",
+    "social_focus": "花京院ゆあ",
     "market_temperature": 61.7
   },
   "rising_stars": [
@@ -29,6 +29,7 @@
   ],
   "heat_drop": [],
   "top_members": [
+    "花京院ゆあ",
     "霧宮蒼生",
     "魂音ちよ",
     "天唯陽奈",
@@ -37,7 +38,6 @@
     "夢笛きむ",
     "伊波花怜",
     "紺霜骷と音",
-    "青璃",
-    "ひいろ"
+    "青璃"
   ]
 }
