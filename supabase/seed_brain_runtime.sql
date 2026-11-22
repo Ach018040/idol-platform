@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-11-21T01:13:52Z',
-  'Weekly idol market digest generated on 2026-11-21T01:13:52Z. Top group: 木苺FRUCTOSE. Top member: 花京院ゆあ. Market temperature: 61.7. Rising stars: AKANE, 眠森りん, 藍井心咲, 綿琉羽音, 津代舞奈. Heat drop watch: none.',
-  '- 2026-11-21T01:13:52Z: weekly market digest generated
+  'Weekly Market Digest 2026-11-22T00:11:06Z',
+  'Weekly idol market digest generated on 2026-11-22T00:11:06Z. Top group: 木苺FRUCTOSE. Top member: 花京院ゆあ. Market temperature: 61.7. Rising stars: AKANE, 眠森りん, 藍井心咲, 綿琉羽音, 津代舞奈. Heat drop watch: none.',
+  '- 2026-11-22T00:11:06Z: weekly market digest generated
 - Highlight top group: 木苺FRUCTOSE
 - Highlight top member: 花京院ゆあ
 - Rising stars: AKANE, 眠森りん, 藍井心咲, 綿琉羽音, 津代舞奈',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-11-21T01:13:52Z", "top_group": "木苺FRUCTOSE", "top_member": "花京院ゆあ", "market_temperature": "61.7", "rising_stars": ["AKANE", "眠森りん", "藍井心咲", "綿琉羽音", "津代舞奈"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-11-22T00:11:06Z", "top_group": "木苺FRUCTOSE", "top_member": "花京院ゆあ", "market_temperature": "61.7", "rising_stars": ["AKANE", "眠森りん", "藍井心咲", "綿琉羽音", "津代舞奈"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-11-21T01:13:52Z',
-  'Weekly digest refreshed: 2026-11-21T01:13:52Z',
-  'Weekly idol market digest generated on 2026-11-21T01:13:52Z. Top group: 木苺FRUCTOSE. Top member: 花京院ゆあ. Market temperature: 61.7. Rising stars: AKANE, 眠森りん, 藍井心咲, 綿琉羽音, 津代舞奈. Heat drop watch: none.',
+  '2026-11-22T00:11:06Z',
+  'Weekly digest refreshed: 2026-11-22T00:11:06Z',
+  'Weekly idol market digest generated on 2026-11-22T00:11:06Z. Top group: 木苺FRUCTOSE. Top member: 花京院ゆあ. Market temperature: 61.7. Rising stars: AKANE, 眠森りん, 藍井心咲, 綿琉羽音, 津代舞奈. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
