@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-23T00:39:04Z",
+  "generated_at": "2026-11-24T04:40:27Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 500,
-    "group_total": 117,
+    "group_total": 118,
     "current_maturity": "L1",
     "largest_gap": "real_social_activity_and_event_discovery"
   },
@@ -14,7 +14,7 @@
     "threads": 0.0,
     "photo_url": 0.946,
     "group": 0.92,
-    "last_social_signal_at": 0.276,
+    "last_social_signal_at": 0.274,
     "seo_ready_profile": 0.93,
     "missing_core_examples": [
       "結城朋子",
@@ -45,13 +45,13 @@
     ]
   },
   "group_coverage": {
-    "instagram": 0.906,
-    "facebook": 0.821,
-    "twitter": 0.248,
-    "youtube": 0.504,
+    "instagram": 0.907,
+    "facebook": 0.814,
+    "twitter": 0.246,
+    "youtube": 0.5,
     "member_names": 0.983,
     "last_group_snapshot_at": 1.0,
-    "seo_ready_profile": 0.906,
+    "seo_ready_profile": 0.907,
     "missing_core_examples": [
       "少女ガチャポン",
       "未完成プロローグ",
