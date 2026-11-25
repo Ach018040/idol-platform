@@ -3,14 +3,14 @@ insert into brain_pages (slug, type, title, compiled_truth, timeline_md, tags, f
 values (
   'reports/weekly-market-digest',
   'source',
-  'Weekly Market Digest 2026-11-24T04:40:27Z',
-  'Weekly idol market digest generated on 2026-11-24T04:40:27Z. Top group: 木苺FRUCTOSE. Top member: 伊波花怜. Market temperature: 61.6. Rising stars: 藍井心咲, 綿琉羽音, Nya, 津代舞奈, 伊嚕咪. Heat drop watch: none.',
-  '- 2026-11-24T04:40:27Z: weekly market digest generated
+  'Weekly Market Digest 2026-11-25T03:26:10Z',
+  'Weekly idol market digest generated on 2026-11-25T03:26:10Z. Top group: 木苺FRUCTOSE. Top member: 伊波花怜. Market temperature: 61.6. Rising stars: 藍井心咲, 綿琉羽音, Nya, 津代舞奈, 伊嚕咪. Heat drop watch: none.',
+  '- 2026-11-25T03:26:10Z: weekly market digest generated
 - Highlight top group: 木苺FRUCTOSE
 - Highlight top member: 伊波花怜
 - Rising stars: 藍井心咲, 綿琉羽音, Nya, 津代舞奈, 伊嚕咪',
   array['idol-platform','weekly-digest','ai-insights','secbrain'],
-  '{"generated_at": "2026-11-24T04:40:27Z", "top_group": "木苺FRUCTOSE", "top_member": "伊波花怜", "market_temperature": "61.6", "rising_stars": ["藍井心咲", "綿琉羽音", "Nya", "津代舞奈", "伊嚕咪"], "heat_drop": []}'::jsonb
+  '{"generated_at": "2026-11-25T03:26:10Z", "top_group": "木苺FRUCTOSE", "top_member": "伊波花怜", "market_temperature": "61.6", "rising_stars": ["藍井心咲", "綿琉羽音", "Nya", "津代舞奈", "伊嚕咪"], "heat_drop": []}'::jsonb
 )
 on conflict (slug) do update set
   title = excluded.title,
@@ -23,9 +23,9 @@ on conflict (slug) do update set
 insert into brain_timeline_entries (page_slug, entry_date, summary, detail, source)
 values (
   'reports/weekly-market-digest',
-  '2026-11-24T04:40:27Z',
-  'Weekly digest refreshed: 2026-11-24T04:40:27Z',
-  'Weekly idol market digest generated on 2026-11-24T04:40:27Z. Top group: 木苺FRUCTOSE. Top member: 伊波花怜. Market temperature: 61.6. Rising stars: 藍井心咲, 綿琉羽音, Nya, 津代舞奈, 伊嚕咪. Heat drop watch: none.',
+  '2026-11-25T03:26:10Z',
+  'Weekly digest refreshed: 2026-11-25T03:26:10Z',
+  'Weekly idol market digest generated on 2026-11-25T03:26:10Z. Top group: 木苺FRUCTOSE. Top member: 伊波花怜. Market temperature: 61.6. Rising stars: 藍井心咲, 綿琉羽音, Nya, 津代舞奈, 伊嚕咪. Heat drop watch: none.',
   'pipeline/sync_brain.py'
 )
 on conflict do nothing;
