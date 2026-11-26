@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T03:26:10Z",
+  "generated_at": "2026-11-26T02:42:45Z",
   "schema_version": "idol-data-quality-v1",
   "summary": {
     "member_total": 500,
@@ -13,7 +13,7 @@
     "twitter": 0.312,
     "threads": 0.0,
     "photo_url": 0.946,
-    "group": 0.92,
+    "group": 0.918,
     "last_social_signal_at": 0.274,
     "seo_ready_profile": 0.93,
     "missing_core_examples": [
@@ -24,6 +24,7 @@
       "台湾人の永琳",
       "桜音みゆぃ♪",
       "桃月夢娜",
+      "森乃みう",
       "悠人☆",
       "OMOCHIおもち",
       "花葉",
@@ -40,8 +41,7 @@
       "八尋",
       "失溫少女_suya",
       "月見はりゅみ",
-      "Koharu",
-      "音転 心夕"
+      "Koharu"
     ]
   },
   "group_coverage": {
@@ -54,6 +54,7 @@
     "seo_ready_profile": 0.907,
     "missing_core_examples": [
       "少女ガチャポン",
+      "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
       "未完成プロローグ",
       "天国地獄",
       "Pure makeR",
@@ -66,12 +67,11 @@
       "花咲＊Chloris",
       "♡xDoLL",
       "幻波SYNC",
-      "琉璃花𝐑𝐔𝐑𝐈𝐊𝐀",
       "幻色プリンセス",
       "MORINAGA",
       "花びラブ",
-      "冥恋セレナーデ",
       "未灯＊ミラクル",
+      "冥恋セレナーデ",
       "無我夢中",
       "Nevaris",
       "魔藥商會\"21-ᴘᴏxxɪᴏɴ",
